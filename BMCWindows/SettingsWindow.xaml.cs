@@ -20,9 +20,9 @@ namespace BMCWindows
     /// <summary>
     /// Interaction logic for ProfileWindow.xaml
     /// </summary>
-    public partial class ProfileWindow : Page
+    public partial class SettingsWindow : Page
     {
-        public ProfileWindow()
+        public SettingsWindow()
         {
             InitializeComponent();
             Server.PlayerDTO player = new Server.PlayerDTO();

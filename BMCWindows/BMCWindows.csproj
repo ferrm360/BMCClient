@@ -74,8 +74,8 @@
     </Compile>
     <Compile Include="Interfaces\IPage.cs" />
     <Compile Include="Patterns\Singleton\UserSessionManager.cs" />
-    <Compile Include="ProfileWindow.xaml.cs">
-      <DependentUpon>ProfileWindow.xaml</DependentUpon>
+    <Compile Include="SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Validators\FieldValidator.cs" />
     <Page Include="HomePage.xaml">
@@ -86,7 +86,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ProfileWindow.xaml">
+    <Page Include="SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -278,6 +278,15 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Options.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ButtonSettings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ButtonSearch.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

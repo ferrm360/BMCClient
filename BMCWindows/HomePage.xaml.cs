@@ -1,4 +1,5 @@
 ﻿using BMCWindows.Patterns.Singleton;
+using BMCWindows.Properties;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -43,6 +44,7 @@ namespace BMCWindows
             InstanceContext context = new InstanceContext(this);
             proxy = new ChatServer.ChatServiceClient(context);
             proxy.RegisterUser(player.Username);
+            labelUserName.Content = player.Username;
             
 
             Friends = new ObservableCollection<Friend>
@@ -90,9 +92,14 @@ namespace BMCWindows
 
         }
 
-        private void EditProfilePage(object sender, RoutedEventArgs e)
+        private void GoToSettings(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new ProfileWindow());
+            this.NavigationService.Navigate(new Settings());
+        }
+
+        public void OpenContextMenu(object sender, RoutedEventArgs e)
+        {
+            menuOptions.Visibility = menuOptions.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 

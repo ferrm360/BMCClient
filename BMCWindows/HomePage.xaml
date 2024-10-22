@@ -27,8 +27,6 @@
                 <ColumnDefinition Width="221*"/>
             </Grid.ColumnDefinitions>
 
-            <Ellipse  Stroke="Black" Grid.Column="0" Grid.Row="0"/>
-
         </Grid>
         <Grid Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
@@ -145,10 +143,10 @@
         </Grid>
         <Grid Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="13*"/>
-                <RowDefinition Height="35*"/>
+                <RowDefinition Height="27*"/>
+                <RowDefinition Height="25*"/>
 
-                <RowDefinition Height="149*"/>
+                <RowDefinition Height="173*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="190*"/>
@@ -157,12 +155,58 @@
                 <ColumnDefinition Width="135*"/>
                 <ColumnDefinition Width="135*"/>
             </Grid.ColumnDefinitions>
-            <Label x:Name="labelUserName" Content="User" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" FontFamily="Press Start 2P Regular"/>
-            <Button x:Name="buttonEditProfile" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="0,5,0,0" Background="Transparent" BorderBrush="Transparent" Grid.Column="2" Grid.Row="1" Click="EditProfilePage"/>
-            <Image Source="Images/BrownButton.png" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="1" IsHitTestVisible="False"/>
-            <TextBlock Text="Editar perfil" HorizontalAlignment="Center" VerticalAlignment="Center"  Foreground="Black" Height="8" FontFamily="Press Start 2P Normal" FontSize="7" Grid.Row="1" Grid.Column="2" IsHitTestVisible="False"/>
+            <Label x:Name="labelUserName" Content="User" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" FontFamily="Press Start 2P Regular" Grid.ColumnSpan="2" Margin="187,0,0,0"/>
+            <Button x:Name="buttonEditProfile"  Margin="213,5,133,0" Background="Transparent" BorderBrush="Transparent" Grid.Column="1" Grid.Row="1"  Grid.ColumnSpan="3"/>
+            <Image Source="Images/BrownButton.png" Grid.Column="1" Grid.Row="1" IsHitTestVisible="False" Grid.ColumnSpan="3" Margin="213,0,133,0"/>
+            <TextBlock Text="Editar perfil" HorizontalAlignment="Center" VerticalAlignment="Center"  Foreground="Black" Height="8" FontFamily="Press Start 2P Normal" FontSize="7" Grid.Row="1" Grid.Column="2" IsHitTestVisible="False" Width="84"/>
 
 
+
+        </Grid>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="83*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="56*"/>
+                <ColumnDefinition Width="625*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" Click="OpenContextMenu" Background="Transparent" BorderBrush="Transparent"/>
+            <Image Source="Images/ButtonSettings.png" Grid.Column="0" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+
+            <Menu x:Name="menuOptions" VerticalAlignment="Top" Visibility="Collapsed">
+                <MenuItem Header="Perfil" />
+                <MenuItem Header="Solicitudes" />
+                <MenuItem Header="Configuración"/>
+            </Menu>
+
+
+
+
+
+        </Grid>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="11*"/>
+                <RowDefinition Height="206*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="180*"/>
+                <ColumnDefinition Width="342*"/>
+                <ColumnDefinition Width="17*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="92*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox x:Name="textBoxSearchPlayers" Grid.Row="1" Grid.Column="1" Margin="10,3,10,5" Background="Transparent" BorderBrush="Transparent"/>
+            <Image Source="Images/LongTextbox.png" Grid.Column="1" Grid.Row="1" Stretch="Fill" IsHitTestVisible="False"/>
+            <Button x:Name="buttonSearch" Grid.Column="3" Grid.Row="1" Background="Transparent" BorderBrush="Transparent"/>
+            <Image Source="Images/ButtonSearch.png" Grid.Column="3" Grid.Row="1" Stretch="Uniform" IsHitTestVisible="False"/>
 
         </Grid>
 
@@ -172,3 +216,6 @@
 
 
 </Page>
+
+    
+    
