@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:8086/FriendshipService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Service.Results" />
+  <xs:import schemaLocation="http://localhost:8086/FriendshipService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Service.DTO" />
   <xs:element name="SendFriendRequest">
     <xs:complexType>
       <xs:sequence>
@@ -54,7 +55,7 @@
   <xs:element name="GetFriendListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Service.Results" minOccurs="0" name="GetFriendListResult" nillable="true" type="q4:OperationResult" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Service.DTO" minOccurs="0" name="GetFriendListResult" nillable="true" type="q4:ArrayOfPlayerDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -69,6 +70,18 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Service.Results" minOccurs="0" name="GetFriendRequestListResult" nillable="true" type="q5:OperationResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TestConnection">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TestConnectionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="TestConnectionResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

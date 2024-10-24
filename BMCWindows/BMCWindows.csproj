@@ -200,6 +200,9 @@
     <None Include="Connected Services\FriendServer\BMCWindows.FriendServer.OperationResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\FriendServer\BMCWindows.FriendServer.PlayerDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\FriendServer\FriendshipService.wsdl" />
     <None Include="Connected Services\FriendServer\FriendshipService.xsd">
       <SubType>Designer</SubType>
@@ -208,6 +211,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\FriendServer\FriendshipService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\FriendServer\FriendshipService3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ProfileServer\BMCWindows.ProfileServer.OperationResult.datasource">
