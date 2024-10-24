@@ -46,37 +46,7 @@ namespace BMCWindows
             proxy = new ChatServer.ChatServiceClient(context);
             proxy.RegisterUser(player.Username);
             labelUserName.Content = player.Username;
-
-            try
-            {
-                FriendServer.FriendshipServiceClient friendsProxy = new FriendServer.FriendshipServiceClient();
-                var friendList = friendsProxy.GetFriendList(player.Username);
-
-                if (friendList != null && friendList.Any())
-                {
-                    ObservableCollection<Friend> friendsList = new ObservableCollection<Friend>(
-                        friendList.Select(friendPlayer => new Friend
-                        {
-                            UserName = friendPlayer.Username,
-                        })
-                    );
-                    FriendsList.ItemsSource = friendsList;
-                    Chat.ItemsSource = friendsList;
-                }
-            }
-            catch (CommunicationException commEx)
-            {
-                MessageBox.Show($"Communication error: {commEx.Message}");
-            }
-            catch (TimeoutException timeoutEx)
-            {
-                MessageBox.Show($"Timeout error: {timeoutEx.Message}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"General error: {ex.Message}");
-            }
-
+            LoadFriendList(player.Username);
         }
 
 
@@ -125,7 +95,49 @@ namespace BMCWindows
         {
             this.NavigationService.Navigate(new SearchWindow());
         }
+
+        private void LoadFriendList(string username)
+        {
+            try
+            {
+                FriendServer.FriendshipServiceClient friendsProxy = new FriendServer.FriendshipServiceClient();
+                var response = friendsProxy.GetFriendList(username);
+
+                if (response.IsSuccess)
+                {
+                    if (response.Friends != null && response.Friends.Any())
+                    {
+                        ObservableCollection<Friend> friendsList = new ObservableCollection<Friend>(
+                            response.Friends.Select(friendPlayer => new Friend
+                            {
+                                UserName = friendPlayer.Username,
+                            })
+                        );
+                        FriendsList.ItemsSource = friendsList;
+                        Chat.ItemsSource = friendsList;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show($"Error: {response?.ErrorKey ?? "Unknown error"}");
+                }
+            }
+            catch (CommunicationException commEx)
+            {
+                MessageBox.Show($"Communication error: {commEx.Message}");
+            }
+            catch (TimeoutException timeoutEx)
+            {
+                MessageBox.Show($"Timeout error: {timeoutEx.Message}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"General error: {ex.Message}");
+            }
+        }
     }
+
+
 
     public class Friend
     {

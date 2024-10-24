@@ -15,11 +15,12 @@ namespace BMCWindows.FriendServer {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OperationResult", Namespace="http://schemas.datacontract.org/2004/07/Service.Results")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OperationResponse", Namespace="http://schemas.datacontract.org/2004/07/Service.Results")]
     [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.FriendServer.FriendListResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.FriendServer.PlayerDTO[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.FriendServer.PlayerDTO))]
-    public partial class OperationResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class OperationResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -65,6 +66,83 @@ namespace BMCWindows.FriendServer {
                 if ((object.ReferenceEquals(this.ErrorKeyField, value) != true)) {
                     this.ErrorKeyField = value;
                     this.RaisePropertyChanged("ErrorKey");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsSuccess {
+            get {
+                return this.IsSuccessField;
+            }
+            set {
+                if ((this.IsSuccessField.Equals(value) != true)) {
+                    this.IsSuccessField = value;
+                    this.RaisePropertyChanged("IsSuccess");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FriendListResponse", Namespace="http://schemas.datacontract.org/2004/07/Service.Utilities.Results")]
+    [System.SerializableAttribute()]
+    public partial class FriendListResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorKeyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private BMCWindows.FriendServer.PlayerDTO[] FriendsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsSuccessField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorKey {
+            get {
+                return this.ErrorKeyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorKeyField, value) != true)) {
+                    this.ErrorKeyField = value;
+                    this.RaisePropertyChanged("ErrorKey");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public BMCWindows.FriendServer.PlayerDTO[] Friends {
+            get {
+                return this.FriendsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FriendsField, value) != true)) {
+                    this.FriendsField = value;
+                    this.RaisePropertyChanged("Friends");
                 }
             }
         }
@@ -190,34 +268,34 @@ namespace BMCWindows.FriendServer {
     public interface IFriendshipService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendshipService/SendFriendRequest", ReplyAction="http://tempuri.org/IFriendshipService/SendFriendRequestResponse")]
-        BMCWindows.FriendServer.OperationResult SendFriendRequest(string senderUsername, string reciveUsername);
+        BMCWindows.FriendServer.OperationResponse SendFriendRequest(string senderUsername, string reciveUsername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendshipService/SendFriendRequest", ReplyAction="http://tempuri.org/IFriendshipService/SendFriendRequestResponse")]
-        System.Threading.Tasks.Task<BMCWindows.FriendServer.OperationResult> SendFriendRequestAsync(string senderUsername, string reciveUsername);
+        System.Threading.Tasks.Task<BMCWindows.FriendServer.OperationResponse> SendFriendRequestAsync(string senderUsername, string reciveUsername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendshipService/AcceptFriendRequest", ReplyAction="http://tempuri.org/IFriendshipService/AcceptFriendRequestResponse")]
-        BMCWindows.FriendServer.OperationResult AcceptFriendRequest(int idRequest);
+        BMCWindows.FriendServer.OperationResponse AcceptFriendRequest(int idRequest);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendshipService/AcceptFriendRequest", ReplyAction="http://tempuri.org/IFriendshipService/AcceptFriendRequestResponse")]
-        System.Threading.Tasks.Task<BMCWindows.FriendServer.OperationResult> AcceptFriendRequestAsync(int idRequest);
+        System.Threading.Tasks.Task<BMCWindows.FriendServer.OperationResponse> AcceptFriendRequestAsync(int idRequest);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendshipService/RejectFriendResponse", ReplyAction="http://tempuri.org/IFriendshipService/RejectFriendResponseResponse")]
-        BMCWindows.FriendServer.OperationResult RejectFriendResponse(int idResponse);
+        BMCWindows.FriendServer.OperationResponse RejectFriendResponse(int idResponse);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendshipService/RejectFriendResponse", ReplyAction="http://tempuri.org/IFriendshipService/RejectFriendResponseResponse")]
-        System.Threading.Tasks.Task<BMCWindows.FriendServer.OperationResult> RejectFriendResponseAsync(int idResponse);
+        System.Threading.Tasks.Task<BMCWindows.FriendServer.OperationResponse> RejectFriendResponseAsync(int idResponse);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendshipService/GetFriendList", ReplyAction="http://tempuri.org/IFriendshipService/GetFriendListResponse")]
-        BMCWindows.FriendServer.PlayerDTO[] GetFriendList(string username);
+        BMCWindows.FriendServer.FriendListResponse GetFriendList(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendshipService/GetFriendList", ReplyAction="http://tempuri.org/IFriendshipService/GetFriendListResponse")]
-        System.Threading.Tasks.Task<BMCWindows.FriendServer.PlayerDTO[]> GetFriendListAsync(string username);
+        System.Threading.Tasks.Task<BMCWindows.FriendServer.FriendListResponse> GetFriendListAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendshipService/GetFriendRequestList", ReplyAction="http://tempuri.org/IFriendshipService/GetFriendRequestListResponse")]
-        BMCWindows.FriendServer.OperationResult GetFriendRequestList(string username);
+        BMCWindows.FriendServer.OperationResponse GetFriendRequestList(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendshipService/GetFriendRequestList", ReplyAction="http://tempuri.org/IFriendshipService/GetFriendRequestListResponse")]
-        System.Threading.Tasks.Task<BMCWindows.FriendServer.OperationResult> GetFriendRequestListAsync(string username);
+        System.Threading.Tasks.Task<BMCWindows.FriendServer.OperationResponse> GetFriendRequestListAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendshipService/TestConnection", ReplyAction="http://tempuri.org/IFriendshipService/TestConnectionResponse")]
         string TestConnection();
@@ -253,43 +331,43 @@ namespace BMCWindows.FriendServer {
                 base(binding, remoteAddress) {
         }
         
-        public BMCWindows.FriendServer.OperationResult SendFriendRequest(string senderUsername, string reciveUsername) {
+        public BMCWindows.FriendServer.OperationResponse SendFriendRequest(string senderUsername, string reciveUsername) {
             return base.Channel.SendFriendRequest(senderUsername, reciveUsername);
         }
         
-        public System.Threading.Tasks.Task<BMCWindows.FriendServer.OperationResult> SendFriendRequestAsync(string senderUsername, string reciveUsername) {
+        public System.Threading.Tasks.Task<BMCWindows.FriendServer.OperationResponse> SendFriendRequestAsync(string senderUsername, string reciveUsername) {
             return base.Channel.SendFriendRequestAsync(senderUsername, reciveUsername);
         }
         
-        public BMCWindows.FriendServer.OperationResult AcceptFriendRequest(int idRequest) {
+        public BMCWindows.FriendServer.OperationResponse AcceptFriendRequest(int idRequest) {
             return base.Channel.AcceptFriendRequest(idRequest);
         }
         
-        public System.Threading.Tasks.Task<BMCWindows.FriendServer.OperationResult> AcceptFriendRequestAsync(int idRequest) {
+        public System.Threading.Tasks.Task<BMCWindows.FriendServer.OperationResponse> AcceptFriendRequestAsync(int idRequest) {
             return base.Channel.AcceptFriendRequestAsync(idRequest);
         }
         
-        public BMCWindows.FriendServer.OperationResult RejectFriendResponse(int idResponse) {
+        public BMCWindows.FriendServer.OperationResponse RejectFriendResponse(int idResponse) {
             return base.Channel.RejectFriendResponse(idResponse);
         }
         
-        public System.Threading.Tasks.Task<BMCWindows.FriendServer.OperationResult> RejectFriendResponseAsync(int idResponse) {
+        public System.Threading.Tasks.Task<BMCWindows.FriendServer.OperationResponse> RejectFriendResponseAsync(int idResponse) {
             return base.Channel.RejectFriendResponseAsync(idResponse);
         }
         
-        public BMCWindows.FriendServer.PlayerDTO[] GetFriendList(string username) {
+        public BMCWindows.FriendServer.FriendListResponse GetFriendList(string username) {
             return base.Channel.GetFriendList(username);
         }
         
-        public System.Threading.Tasks.Task<BMCWindows.FriendServer.PlayerDTO[]> GetFriendListAsync(string username) {
+        public System.Threading.Tasks.Task<BMCWindows.FriendServer.FriendListResponse> GetFriendListAsync(string username) {
             return base.Channel.GetFriendListAsync(username);
         }
         
-        public BMCWindows.FriendServer.OperationResult GetFriendRequestList(string username) {
+        public BMCWindows.FriendServer.OperationResponse GetFriendRequestList(string username) {
             return base.Channel.GetFriendRequestList(username);
         }
         
-        public System.Threading.Tasks.Task<BMCWindows.FriendServer.OperationResult> GetFriendRequestListAsync(string username) {
+        public System.Threading.Tasks.Task<BMCWindows.FriendServer.OperationResponse> GetFriendRequestListAsync(string username) {
             return base.Channel.GetFriendRequestListAsync(username);
         }
         
