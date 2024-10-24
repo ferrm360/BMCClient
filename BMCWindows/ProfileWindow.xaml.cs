@@ -1,6 +1,8 @@
 ﻿using BMCWindows.Patterns.Singleton;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,22 +35,62 @@ namespace BMCWindows
         {
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().getPlayerUserData();
-            labelUser.Visibility = Visibility.Visible;
-            textBoxUser.Visibility = Visibility.Visible;
-            textBoxUser.Text = labelUser.ToString();
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.png)|*.jpg;*.jpeg;*.png";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                BitmapImage bitmap = new BitmapImage(new Uri(openFileDialog.FileName));
+                string urlImage = openFileDialog.FileName;
+                imageUserProfile.Source = bitmap;
+                byte[] byteImage = ConvertImageToByteArray(urlImage);
+                ProfileServer.ProfileServiceClient proxy = new ProfileServer.ProfileServiceClient();
+                var result = proxy.UpdateProfilePicture(player.Username, byteImage, urlImage);
+                if(result.IsSuccess)
+                {
+                    MessageBox.Show("Imagen de perfil actualizada exitosamente");
+                }
+                else
+                {
+                    MessageBox.Show(result.ErrorKey);
+                }
 
+
+            
+            }
+
+        }
+
+        private byte[] ConvertImageToByteArray(string imagePath)
+        {
+            byte[] imageBytes = null;
+
+            try
+            {
+                imageBytes = File.ReadAllBytes(imagePath); // Leer la imagen como arreglo de bytes
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al leer la imagen: " + ex.Message);
+            }
+
+            return imageBytes;
         }
 
         private void MakeUserEditable(object sender, RoutedEventArgs e) 
         {
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().getPlayerUserData();
-            labelUser.Visibility = Visibility.Visible;
+            labelUser.Visibility = Visibility.Hidden;
             textBoxUser.Visibility = Visibility.Visible;
-            textBoxUser.Text = labelUser.ToString();
+            textBoxUser.Text = player.Username;
             buttonAccepNewUsername.Visibility = Visibility.Visible;
+            imageButtonAcceptUsernameEdition.Visibility = Visibility.Visible;
             buttonCancelNewUsername.Visibility = Visibility.Visible;
+            textBlockAcceptEdition.Visibility = Visibility.Visible;
+            imageButtonCancelUsernameEdition.Visibility = Visibility.Visible;
+            textBlockCancelUserNameEdition.Visibility = Visibility.Visible;
             buttonEditUsername.Visibility = Visibility.Hidden;
+            imageButtonEditUsername.Visibility = Visibility.Hidden;
         }
 
         private void AcceptUsernameChange(object sender, RoutedEventArgs e) 
@@ -65,10 +107,29 @@ namespace BMCWindows
                 labelUser.Visibility= Visibility.Visible;
                 MessageBox.Show("Nombre de usuario actualizado exitosamente");
                 buttonAccepNewUsername.Visibility = Visibility.Hidden;
+                imageButtonAcceptUsernameEdition.Visibility = Visibility.Hidden;
+                textBlockAcceptEdition.Visibility = Visibility.Hidden;
                 buttonCancelNewUsername.Visibility = Visibility.Hidden;
+                textBlockCancelUserNameEdition.Visibility = Visibility.Hidden;
+                imageButtonCancelUsernameEdition.Visibility = Visibility.Hidden;
                 buttonEditUsername.Visibility = Visibility.Visible;
+                imageButtonEditUsername.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MessageBox.Show(result.ErrorKey);
             }
         }
+
+        private void CancelUsernameEdition(object sender, RoutedEventArgs e) 
+        {
+            buttonAccepNewUsername.Visibility = Visibility.Hidden;
+            textBlockAcceptEdition.Visibility = Visibility.Hidden;
+            buttonCancelNewUsername.Visibility = Visibility.Hidden;
+            textBlockCancelUserNameEdition.Visibility = Visibility.Hidden;
+            buttonEditUsername.Visibility = Visibility.Visible;
+        }
+
 
     }
 }

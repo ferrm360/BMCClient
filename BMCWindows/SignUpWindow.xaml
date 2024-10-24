@@ -82,8 +82,8 @@
                 </Grid.RowDefinitions>
                 <TextBox x:Name="textBoxUser" Grid.Row="1" Grid.Column="1"  Background="Transparent" BorderBrush="Transparent" TextAlignment="Center" />
                 <TextBox x:Name="textBoxEmail" Grid.Column="1" Grid.Row="3"  Background="Transparent" BorderBrush="Transparent" TextAlignment="Center"/>
-                <TextBox x:Name="textBoxPassword" Grid.Column="1" Grid.Row="5" Background="Transparent" BorderBrush="Transparent" PreviewTextInput="HidePassword" TextAlignment="Center"/>
-                <TextBox x:Name="textBoxConfirmPassword" Grid.Column="1" Grid.Row="7" Background="Transparent" BorderBrush="Transparent" PreviewTextInput="HidePassword" TextAlignment="Center"/>
+                <PasswordBox x:Name="passwordBoxPassword" Grid.Column="1" Grid.Row="5" Background="Transparent" BorderBrush="Transparent"/>
+                <PasswordBox x:Name="passwordBoxConfirmPassword" Grid.Column="1" Grid.Row="7" Background="Transparent" BorderBrush="Transparent"/>
 
 
             </Grid>

@@ -175,13 +175,13 @@
             </Grid.ColumnDefinitions>
 
             <Button Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" Click="OpenContextMenu" Background="Transparent" BorderBrush="Transparent"/>
-            <Image Source="Images/ButtonSettings.png" Grid.Column="0" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            <Image Source="Images/ButtonSettings.png" Grid.Column="0" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" IsHitTestVisible="False"/>
 
             <Menu x:Name="menuOptions" VerticalAlignment="Top" Visibility="Collapsed">
-                <MenuItem Header="Perfil" />
+                <MenuItem Header="Perfil" Click="GoToProfileWindow"/>
                 <MenuItem Header="Jugadores" Click="GoToSearchWindow"/>
                 <MenuItem Header="Solicitudes" />
-                <MenuItem Header="Configuración"/>
+                <MenuItem Header="Configuración" Click="GoToSettings"/>
             </Menu>
 
 

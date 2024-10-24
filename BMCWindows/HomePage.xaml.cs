@@ -47,7 +47,7 @@ namespace BMCWindows
             proxy.RegisterUser(player.Username);
             labelUserName.Content = player.Username;
 
-            FriendServer.FriendshipServiceClient friendsProxy = new FriendServer.FriendshipServiceClient();
+          /*  FriendServer.FriendshipServiceClient friendsProxy = new FriendServer.FriendshipServiceClient();
             var result = friendsProxy.GetFriendList(player.Username);
             if (result.IsSuccess)
             {
@@ -69,7 +69,7 @@ namespace BMCWindows
                     MessageBox.Show(result.ErrorKey);
                 }
 
-            }
+            }*/
         }
 
        
@@ -117,6 +117,11 @@ namespace BMCWindows
         private void GoToSearchWindow(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new SearchWindow());
+        }
+
+        private void GoToProfileWindow(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new ProfileWindow());
         }
     }
 

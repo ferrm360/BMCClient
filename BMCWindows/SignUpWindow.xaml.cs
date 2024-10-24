@@ -34,8 +34,8 @@ namespace BMCWindows
             Server.PlayerDTO player = new Server.PlayerDTO();
             player.Username = textBoxUser.Text;
             player.Email = textBoxEmail.Text;
-            player.Password = textBoxPassword.Text;
-            if(!FieldValidator.AreFieldsEmpty(textBoxUser.Text, textBoxEmail.Text, textBoxPassword.Text, textBoxConfirmPassword.Text) /*&& FieldValidator.ValidatePassword(textBoxPassword.Text) && textBoxPassword.Text == textBoxConfirmPassword.Text */)
+            player.Password = passwordBoxPassword.Password;
+            if(!FieldValidator.AreFieldsEmpty(textBoxUser.Text, textBoxEmail.Text, passwordBoxPassword.Password, passwordBoxConfirmPassword.Password) && FieldValidator.ValidatePassword(passwordBoxPassword.Password) && passwordBoxPassword.Password == passwordBoxConfirmPassword.Password )
             {
                 var result = proxy.Register(player);
                 if (result.IsSuccess) {
@@ -58,13 +58,7 @@ namespace BMCWindows
             
         }
 
-        private void HidePassword(object sender, System.Windows.Input.TextCompositionEventArgs e)
-        {
-            TextBox textBox = sender as TextBox;
-            textBox.Text += "*";
-            e.Handled = true;
-
-        }
+       
 
 
         private void Cancel(object sender, RoutedEventArgs e) 
