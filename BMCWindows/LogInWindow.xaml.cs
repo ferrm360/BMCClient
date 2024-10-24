@@ -39,12 +39,13 @@ namespace BMCWindows
         {
             Server.AccountServiceClient proxy = new Server.AccountServiceClient();
             String user = textBoxUser.Text;
-            String password = realPassword;
+            String password = passwordBoxPassword.Password.ToString();
+            
 
             if (!FieldValidator.AreFieldsEmpty(user, password))
             {
                 var result = proxy.Login(user, password);
-                if (result.Success)
+                if (result.IsSuccess)
                 {
                     Server.PlayerDTO player = new Server.PlayerDTO();
                     player.Username = user;

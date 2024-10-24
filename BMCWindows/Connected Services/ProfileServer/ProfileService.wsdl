@@ -34,46 +34,45 @@
       <xsd:import schemaLocation="http://localhost:8084/ProfileService?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:8084/ProfileService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:8084/ProfileService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Service.Results" />
-      <xsd:import schemaLocation="http://localhost:8084/ProfileService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Service.DTO" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IProfileService_updatePassword_InputMessage">
-    <wsdl:part name="parameters" element="tns:updatePassword" />
+  <wsdl:message name="IProfileService_UpdatePassword_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePassword" />
   </wsdl:message>
-  <wsdl:message name="IProfileService_updatePassword_OutputMessage">
-    <wsdl:part name="parameters" element="tns:updatePasswordResponse" />
+  <wsdl:message name="IProfileService_UpdatePassword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePasswordResponse" />
   </wsdl:message>
-  <wsdl:message name="IProfileService_updateProfilePicture_InputMessage">
-    <wsdl:part name="parameters" element="tns:updateProfilePicture" />
+  <wsdl:message name="IProfileService_UpdateProfilePicture_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateProfilePicture" />
   </wsdl:message>
-  <wsdl:message name="IProfileService_updateProfilePicture_OutputMessage">
-    <wsdl:part name="parameters" element="tns:updateProfilePictureResponse" />
+  <wsdl:message name="IProfileService_UpdateProfilePicture_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateProfilePictureResponse" />
   </wsdl:message>
-  <wsdl:message name="IProfileService_updateEmail_InputMessage">
-    <wsdl:part name="parameters" element="tns:updateEmail" />
+  <wsdl:message name="IProfileService_UpdateUsername_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUsername" />
   </wsdl:message>
-  <wsdl:message name="IProfileService_updateEmail_OutputMessage">
-    <wsdl:part name="parameters" element="tns:updateEmailResponse" />
+  <wsdl:message name="IProfileService_UpdateUsername_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUsernameResponse" />
   </wsdl:message>
   <wsdl:portType name="IProfileService">
-    <wsdl:operation name="updatePassword">
-      <wsdl:input wsaw:Action="http://tempuri.org/IProfileService/updatePassword" message="tns:IProfileService_updatePassword_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IProfileService/updatePasswordResponse" message="tns:IProfileService_updatePassword_OutputMessage" />
+    <wsdl:operation name="UpdatePassword">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfileService/UpdatePassword" message="tns:IProfileService_UpdatePassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfileService/UpdatePasswordResponse" message="tns:IProfileService_UpdatePassword_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="updateProfilePicture">
-      <wsdl:input wsaw:Action="http://tempuri.org/IProfileService/updateProfilePicture" message="tns:IProfileService_updateProfilePicture_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IProfileService/updateProfilePictureResponse" message="tns:IProfileService_updateProfilePicture_OutputMessage" />
+    <wsdl:operation name="UpdateProfilePicture">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfileService/UpdateProfilePicture" message="tns:IProfileService_UpdateProfilePicture_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfileService/UpdateProfilePictureResponse" message="tns:IProfileService_UpdateProfilePicture_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="updateEmail">
-      <wsdl:input wsaw:Action="http://tempuri.org/IProfileService/updateEmail" message="tns:IProfileService_updateEmail_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IProfileService/updateEmailResponse" message="tns:IProfileService_updateEmail_OutputMessage" />
+    <wsdl:operation name="UpdateUsername">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfileService/UpdateUsername" message="tns:IProfileService_UpdateUsername_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfileService/UpdateUsernameResponse" message="tns:IProfileService_UpdateUsername_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IProfileService" type="tns:IProfileService">
     <wsp:PolicyReference URI="#NetTcpBinding_IProfileService_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="updatePassword">
-      <soap12:operation soapAction="http://tempuri.org/IProfileService/updatePassword" style="document" />
+    <wsdl:operation name="UpdatePassword">
+      <soap12:operation soapAction="http://tempuri.org/IProfileService/UpdatePassword" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -81,8 +80,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="updateProfilePicture">
-      <soap12:operation soapAction="http://tempuri.org/IProfileService/updateProfilePicture" style="document" />
+    <wsdl:operation name="UpdateProfilePicture">
+      <soap12:operation soapAction="http://tempuri.org/IProfileService/UpdateProfilePicture" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -90,8 +89,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="updateEmail">
-      <soap12:operation soapAction="http://tempuri.org/IProfileService/updateEmail" style="document" />
+    <wsdl:operation name="UpdateUsername">
+      <soap12:operation soapAction="http://tempuri.org/IProfileService/UpdateUsername" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

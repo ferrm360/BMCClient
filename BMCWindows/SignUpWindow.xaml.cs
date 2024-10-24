@@ -38,7 +38,7 @@ namespace BMCWindows
             if(!FieldValidator.AreFieldsEmpty(textBoxUser.Text, textBoxEmail.Text, textBoxPassword.Text, textBoxConfirmPassword.Text) /*&& FieldValidator.ValidatePassword(textBoxPassword.Text) && textBoxPassword.Text == textBoxConfirmPassword.Text */)
             {
                 var result = proxy.Register(player);
-                if (result.Success) {
+                if (result.IsSuccess) {
                     UserSessionManager.getInstance().loginPlayer(player);
                     this.NavigationService.Navigate(new HomePage());
                 } else

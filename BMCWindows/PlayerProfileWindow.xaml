@@ -1,0 +1,119 @@
+﻿<Page x:Class="BMCWindows.PlayerProfileWindow"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BMCWindows"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PlayerProfileWindow"
+      Background="#FEFFDB">
+
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="22*"/>
+                <RowDefinition Height="57*"/>
+                <RowDefinition Height="146*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="91*"/>
+                <ColumnDefinition Width="126*"/>
+                <ColumnDefinition Width="583*"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Fill="Black" Grid.Column="1" Grid.Row="1"/>
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="257*"/>
+                <ColumnDefinition Width="274*"/>
+                <ColumnDefinition Width="79*"/>
+                <ColumnDefinition Width="47*"/>
+                <ColumnDefinition Width="113*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="31*"/>
+                <RowDefinition Height="40*"/>
+                <RowDefinition Height="23*"/>
+                <RowDefinition Height="131*"/>
+            </Grid.RowDefinitions>
+
+            <Label x:Name="labelUser" Grid.Column="2" Grid.Row="1" Content="User" FontFamily="Press Start 2P Regular" FontSize="60" Grid.ColumnSpan="2"/>
+
+            <ListBox x:Name="FriendsList" Grid.Column="1" Grid.Row="3" Margin="10,10,10,10" Visibility="Visible">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="#DDD" Margin="2" CornerRadius="5">
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <Image Source="{Binding ImagePath}" Width="40" Height="40" Margin="5"/>
+                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" FontSize="16" Margin="5"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="84*"/>
+                <ColumnDefinition Width="211*"/>
+                <ColumnDefinition Width="434*"/>
+                <ColumnDefinition Width="71*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="38*"/>
+                <RowDefinition Height="116*"/>
+                <RowDefinition Height="44*"/>
+                <RowDefinition Height="97*"/>
+                <RowDefinition Height="23*"/>
+                <RowDefinition Height="121*"/>
+                <RowDefinition Height="11*"/>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="textBloxBio" Grid.Column="2" Grid.Row="3" Background="Blue"/>
+            <Button x:Name="buttonCancel" Grid.Column="0" Grid.Row="0" Background="Transparent" BorderBrush="Transparent"/>
+            <Image Source="Images/BrownButton.png" IsHitTestVisible="False" Grid.Column="0" Grid.Row="0" />
+            <TextBlock Text="Cancel" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0"/>
+
+
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="91*"/>
+                <ColumnDefinition Width="128*"/>
+                <ColumnDefinition Width="453*"/>
+                <ColumnDefinition Width="46*"/>
+                <ColumnDefinition Width="82*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="130*"/>
+                <RowDefinition Height="28*"/>
+                <RowDefinition Height="113*"/>
+                <RowDefinition Height="22*"/>
+                <RowDefinition Height="157*"/>
+            </Grid.RowDefinitions>
+
+
+
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="205*"/>
+                <ColumnDefinition Width="23*"/>
+                <ColumnDefinition Width="572*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="139*"/>
+                <RowDefinition Height="23*"/>
+                <RowDefinition Height="288*"/>
+            </Grid.RowDefinitions>
+            <Ellipse x:Name="ellipsePlayerStatus" Grid.Column="1" Grid.Row="1" Fill="Green"/>
+
+        </Grid>
+
+    </Grid>
+</Page>

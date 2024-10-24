@@ -143,10 +143,10 @@
         </Grid>
         <Grid Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="27*"/>
-                <RowDefinition Height="25*"/>
+                <RowDefinition Height="43*"/>
+                <RowDefinition Height="61*"/>
 
-                <RowDefinition Height="173*"/>
+                <RowDefinition Height="346*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="190*"/>
@@ -179,6 +179,7 @@
 
             <Menu x:Name="menuOptions" VerticalAlignment="Top" Visibility="Collapsed">
                 <MenuItem Header="Perfil" />
+                <MenuItem Header="Jugadores" Click="GoToSearchWindow"/>
                 <MenuItem Header="Solicitudes" />
                 <MenuItem Header="Configuración"/>
             </Menu>
@@ -204,9 +205,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBox x:Name="textBoxSearchPlayers" Grid.Row="1" Grid.Column="1" Margin="10,3,10,5" Background="Transparent" BorderBrush="Transparent"/>
-            <Image Source="Images/LongTextbox.png" Grid.Column="1" Grid.Row="1" Stretch="Fill" IsHitTestVisible="False"/>
             <Button x:Name="buttonSearch" Grid.Column="3" Grid.Row="1" Background="Transparent" BorderBrush="Transparent"/>
-            <Image Source="Images/ButtonSearch.png" Grid.Column="3" Grid.Row="1" Stretch="Uniform" IsHitTestVisible="False"/>
 
         </Grid>
 

@@ -1,5 +1,6 @@
 ﻿using BMCWindows.Patterns.Singleton;
 using BMCWindows.Properties;
+using BMCWindows.Server;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -45,19 +46,30 @@ namespace BMCWindows
             proxy = new ChatServer.ChatServiceClient(context);
             proxy.RegisterUser(player.Username);
             labelUserName.Content = player.Username;
-            
 
-            Friends = new ObservableCollection<Friend>
+            FriendServer.FriendshipServiceClient friendsProxy = new FriendServer.FriendshipServiceClient();
+            var result = friendsProxy.GetFriendList(player.Username);
+            if (result.IsSuccess)
+            {
+                if (result.Data is List<PlayerDTO> friendPlayers)
+                {
+                    ObservableCollection<Friend> friendsList = new ObservableCollection<Friend>(
+                        friendPlayers.Select(friendPlayer => new Friend
+                        {
+                            UserName = friendPlayer.Username,
 
-        {
-            new Friend { Name = "Marla" },
-            new Friend { Name = "Tearp89" },
-            new Friend { Name = "Swizzy" },
-            new Friend { Name = "RAW" }
-        };
-            FriendsList.ItemsSource = Friends;
-            Chat.ItemsSource = Friends;
-            
+                        })
+                        );
+                    FriendsList.ItemsSource = friendsList;
+                    Chat.ItemsSource = friendsList;
+
+                }
+                else
+                {
+                    MessageBox.Show(result.ErrorKey);
+                }
+
+            }
         }
 
        
@@ -101,11 +113,16 @@ namespace BMCWindows
         {
             menuOptions.Visibility = menuOptions.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
         }
+
+        private void GoToSearchWindow(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new SearchWindow());
+        }
     }
 
     public class Friend
     {
-        public string Name { get; set; }
+        public string UserName { get; set; }
     }
 
     

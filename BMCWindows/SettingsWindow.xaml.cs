@@ -36,11 +36,12 @@ namespace BMCWindows
             player = UserSessionManager.getInstance().getPlayerUserData();
            
             ProfileServer.ProfileServiceClient proxy = new ProfileServer.ProfileServiceClient();
-            String username = player.Username;
-            String password = textBoxOldPassword.Text;
-            String newPassword = textBoxNewPassword.Text;
-            var result = proxy.updatePassword(username, password, newPassword);
-            if (result.Success)
+            String username = player.Username;         
+            String password = passwordBoxOldPassword.ToString();
+            String newPassword = passwordBoxNewPassword.ToString();
+            String confirmPassword = passwordBoxPassword.ToString();
+            var result = proxy.UpdatePassword(username, password, newPassword);
+            if (result.IsSuccess)
             {
                 MessageBox.Show("Contraseña actualizada exitosamente");
             } else

@@ -1,0 +1,98 @@
+﻿<Page x:Class="BMCWindows.SearchWindow"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BMCWindows"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SearchWindow"
+      Background="#FEFFDB"
+      >
+
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="19*"/>
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="191*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="103*"/>
+                <ColumnDefinition Width="101*"/>
+                <ColumnDefinition Width="341*"/>
+                <ColumnDefinition Width="58*"/>
+                <ColumnDefinition Width="78*"/>
+                <ColumnDefinition Width="119*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="buttonCancel" Grid.Column="0" Grid.Row="0" Background="Transparent" BorderBrush="Transparent" Grid.ColumnSpan="2" Margin="10,5,0,0"/>
+            <Image Source="Images/BrownButton.png" Grid.Column="0" Grid.Row="0" IsHitTestVisible="False" Stretch="Fill"  Margin="10,5,0,0"/>
+            <TextBlock Text="Cancel" VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False" Height="16" Width="35"/>
+            <TextBox x:Name="textboxSearch" Grid.Row="1" Grid.Column="2"/>
+            <Button x:Name="buttonSearch" Grid.Column="4" Grid.Row="1" Background="Transparent" BorderBrush="Transparent"/>
+            <Image Source="Images/ButtonSearch.png" Grid.Column="4" Grid.Row="1" Stretch="Fill" IsHitTestVisible="False"/>
+
+
+
+
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="83*"/>
+                <RowDefinition Height="367*"/>
+            </Grid.RowDefinitions>
+            <ListBox x:Name="PlayersList" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0" Background="Transparent" Grid.Row="1">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="5" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="{Binding StatusColor}" BorderThickness="1" CornerRadius="10" Padding="5" Margin="5">
+                            <StackPanel>
+                                <Image Source="{Binding PlayerImage}" Width="50" Height="50" HorizontalAlignment="Center" />
+
+                                <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Margin="5" />
+
+                                <TextBlock Text="{Binding Status}" FontSize="12" HorizontalAlignment="Center" />
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Popup x:Name="PlayerPopup" Placement="Mouse" StaysOpen="False">
+                <Border Background="#D3D3D3" Padding="10" CornerRadius="10">
+                    <StackPanel>
+                        <!-- Imagen del jugador en el popup -->
+                        <Image Source="{Binding SelectedPlayer.PlayerImage}" Width="50" Height="50" HorizontalAlignment="Center" />
+
+                        <!-- Nombre del jugador -->
+                        <TextBlock Text="{Binding SelectedPlayer.Name}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Margin="5" />
+
+                        <!-- Estadísticas del jugador -->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                            <TextBlock Text="Victorias: " FontSize="14" />
+                            <TextBlock Text="{Binding SelectedPlayer.Wins}" FontSize="14" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                            <TextBlock Text="Derrotas: " FontSize="14" />
+                            <TextBlock Text="{Binding SelectedPlayer.Losses}" FontSize="14" />
+                        </StackPanel>
+
+                        <!-- Botones -->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                            <Button Content="Mandar mensaje" Margin="5" />
+                            <Button Content="Eliminar amigo" Margin="5" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Popup>
+
+
+
+        </Grid>
+
+
+    </Grid>
+</Page>

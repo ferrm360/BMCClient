@@ -70,8 +70,8 @@
                     <RowDefinition Height="28*" />
                     <RowDefinition Height="149*" />
                 </Grid.RowDefinitions>
-                <TextBox x:Name="textBoxUser" Grid.Row="1" Grid.Column="1"  Background="Transparent" BorderBrush="Transparent" TextAlignment="Center"/>
-                <TextBox x:Name="textBoxPassword" Grid.Column="1" Grid.Row="3"  Background="Transparent" BorderBrush="Transparent" PreviewTextInput="HidePassword" TextAlignment="Center"/>
+                <TextBox x:Name="textBoxUser" Grid.Row="1" Grid.Column="1"  Background="Transparent" BorderBrush="Transparent"/>
+                <PasswordBox x:Name="passwordBoxPassword" Grid.Column="1" Grid.Row="3"  Background="Transparent" BorderBrush="Transparent" />
 
 
             </Grid>
