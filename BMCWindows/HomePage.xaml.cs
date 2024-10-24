@@ -47,34 +47,41 @@ namespace BMCWindows
             proxy.RegisterUser(player.Username);
             labelUserName.Content = player.Username;
 
-          /*  FriendServer.FriendshipServiceClient friendsProxy = new FriendServer.FriendshipServiceClient();
-            var result = friendsProxy.GetFriendList(player.Username);
-            if (result.IsSuccess)
+            try
             {
-                if (result.Data is List<PlayerDTO> friendPlayers)
+                FriendServer.FriendshipServiceClient friendsProxy = new FriendServer.FriendshipServiceClient();
+                var friendList = friendsProxy.GetFriendList(player.Username);
+
+                if (friendList != null && friendList.Any())
                 {
                     ObservableCollection<Friend> friendsList = new ObservableCollection<Friend>(
-                        friendPlayers.Select(friendPlayer => new Friend
+                        friendList.Select(friendPlayer => new Friend
                         {
                             UserName = friendPlayer.Username,
-
                         })
-                        );
+                    );
                     FriendsList.ItemsSource = friendsList;
                     Chat.ItemsSource = friendsList;
-
                 }
-                else
-                {
-                    MessageBox.Show(result.ErrorKey);
-                }
+            }
+            catch (CommunicationException commEx)
+            {
+                MessageBox.Show($"Communication error: {commEx.Message}");
+            }
+            catch (TimeoutException timeoutEx)
+            {
+                MessageBox.Show($"Timeout error: {timeoutEx.Message}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"General error: {ex.Message}");
+            }
 
-            }*/
         }
 
-       
 
-       
+
+
 
         private void SendGeneralMessage_Click(object sender, RoutedEventArgs e)
         {
