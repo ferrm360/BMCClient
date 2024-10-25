@@ -108,10 +108,10 @@ namespace BMCWindows.Server {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OperationResult", Namespace="http://schemas.datacontract.org/2004/07/Service.Results")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OperationResponse", Namespace="http://schemas.datacontract.org/2004/07/Service.Results")]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.Server.PlayerDTO))]
-    public partial class OperationResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class OperationResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -189,16 +189,16 @@ namespace BMCWindows.Server {
     public interface IAccountService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/Register", ReplyAction="http://tempuri.org/IAccountService/RegisterResponse")]
-        BMCWindows.Server.OperationResult Register(BMCWindows.Server.PlayerDTO player);
+        BMCWindows.Server.OperationResponse Register(BMCWindows.Server.PlayerDTO player);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/Register", ReplyAction="http://tempuri.org/IAccountService/RegisterResponse")]
-        System.Threading.Tasks.Task<BMCWindows.Server.OperationResult> RegisterAsync(BMCWindows.Server.PlayerDTO player);
+        System.Threading.Tasks.Task<BMCWindows.Server.OperationResponse> RegisterAsync(BMCWindows.Server.PlayerDTO player);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/Login", ReplyAction="http://tempuri.org/IAccountService/LoginResponse")]
-        BMCWindows.Server.OperationResult Login(string username, string password);
+        BMCWindows.Server.OperationResponse Login(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/Login", ReplyAction="http://tempuri.org/IAccountService/LoginResponse")]
-        System.Threading.Tasks.Task<BMCWindows.Server.OperationResult> LoginAsync(string username, string password);
+        System.Threading.Tasks.Task<BMCWindows.Server.OperationResponse> LoginAsync(string username, string password);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -228,19 +228,19 @@ namespace BMCWindows.Server {
                 base(binding, remoteAddress) {
         }
         
-        public BMCWindows.Server.OperationResult Register(BMCWindows.Server.PlayerDTO player) {
+        public BMCWindows.Server.OperationResponse Register(BMCWindows.Server.PlayerDTO player) {
             return base.Channel.Register(player);
         }
         
-        public System.Threading.Tasks.Task<BMCWindows.Server.OperationResult> RegisterAsync(BMCWindows.Server.PlayerDTO player) {
+        public System.Threading.Tasks.Task<BMCWindows.Server.OperationResponse> RegisterAsync(BMCWindows.Server.PlayerDTO player) {
             return base.Channel.RegisterAsync(player);
         }
         
-        public BMCWindows.Server.OperationResult Login(string username, string password) {
+        public BMCWindows.Server.OperationResponse Login(string username, string password) {
             return base.Channel.Login(username, password);
         }
         
-        public System.Threading.Tasks.Task<BMCWindows.Server.OperationResult> LoginAsync(string username, string password) {
+        public System.Threading.Tasks.Task<BMCWindows.Server.OperationResponse> LoginAsync(string username, string password) {
             return base.Channel.LoginAsync(username, password);
         }
     }

@@ -25,11 +25,11 @@
                 <ColumnDefinition Width="78*"/>
                 <ColumnDefinition Width="119*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="buttonCancel" Grid.Column="0" Grid.Row="0" Background="Transparent" BorderBrush="Transparent" Grid.ColumnSpan="2" Margin="10,5,0,0"/>
+            <Button x:Name="buttonCancel" Grid.Column="0" Grid.Row="0" Background="Transparent" BorderBrush="Transparent" Grid.ColumnSpan="2" Margin="10,5,0,0" Click="GoBack"/>
             <Image Source="Images/BrownButton.png" Grid.Column="0" Grid.Row="0" IsHitTestVisible="False" Stretch="Fill"  Margin="10,5,0,0"/>
             <TextBlock Text="Cancel" VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False" Height="16" Width="35"/>
             <TextBox x:Name="textboxSearch" Grid.Row="1" Grid.Column="2"/>
-            <Button x:Name="buttonSearch" Grid.Column="4" Grid.Row="1" Background="Transparent" BorderBrush="Transparent"/>
+            <Button x:Name="buttonSearch" Grid.Column="4" Grid.Row="1" Background="Transparent" BorderBrush="Transparent" Click="SearchPlayer"/>
             <Image Source="Images/ButtonSearch.png" Grid.Column="4" Grid.Row="1" Stretch="Fill" IsHitTestVisible="False"/>
 
 
@@ -41,7 +41,7 @@
                 <RowDefinition Height="83*"/>
                 <RowDefinition Height="367*"/>
             </Grid.RowDefinitions>
-            <ListBox x:Name="PlayersList" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0" Background="Transparent" Grid.Row="1">
+            <ListBox x:Name="PlayersList" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0" Background="Transparent" Grid.Row="1" MouseLeftButtonUp="SelectPlayer">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="5" />
@@ -53,7 +53,7 @@
                             <StackPanel>
                                 <Image Source="{Binding PlayerImage}" Width="50" Height="50" HorizontalAlignment="Center" />
 
-                                <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Margin="5" />
+                                <TextBlock Text="{Binding UserName}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Margin="5" />
 
                                 <TextBlock Text="{Binding Status}" FontSize="12" HorizontalAlignment="Center" />
                             </StackPanel>
@@ -68,22 +68,15 @@
                         <Image Source="{Binding SelectedPlayer.PlayerImage}" Width="50" Height="50" HorizontalAlignment="Center" />
 
                         <!-- Nombre del jugador -->
-                        <TextBlock Text="{Binding SelectedPlayer.Name}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Margin="5" />
+                        <TextBlock Text="{Binding UserName}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Margin="5" />
 
                         <!-- Estadísticas del jugador -->
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-                            <TextBlock Text="Victorias: " FontSize="14" />
-                            <TextBlock Text="{Binding SelectedPlayer.Wins}" FontSize="14" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-                            <TextBlock Text="Derrotas: " FontSize="14" />
-                            <TextBlock Text="{Binding SelectedPlayer.Losses}" FontSize="14" />
-                        </StackPanel>
+                        
 
                         <!-- Botones -->
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-                            <Button Content="Mandar mensaje" Margin="5" />
-                            <Button Content="Eliminar amigo" Margin="5" />
+                            <Button x:Name="buttonSendRequest" Content="Enviar solicitud" Margin="5" Click="SendRequest"/>
+                            
                         </StackPanel>
                     </StackPanel>
                 </Border>

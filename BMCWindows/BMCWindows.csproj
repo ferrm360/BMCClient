@@ -77,6 +77,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="FriendRequestsWindow.xaml.cs">
+      <DependentUpon>FriendRequestsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Interfaces\IPage.cs" />
     <Compile Include="Patterns\Singleton\UserSessionManager.cs" />
     <Compile Include="PlayerProfileWindow.xaml.cs">
@@ -91,7 +94,12 @@
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\RelayCommand.cs" />
     <Compile Include="Validators\FieldValidator.cs" />
+    <Page Include="FriendRequestsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="HomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -197,10 +205,16 @@
     <None Include="Connected Services\ChatServer\ChatService1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\FriendServer\BMCWindows.FriendServer.OperationResult.datasource">
+    <None Include="Connected Services\FriendServer\BMCWindows.FriendServer.FriendListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\FriendServer\BMCWindows.FriendServer.PlayerDTO.datasource">
+    <None Include="Connected Services\FriendServer\BMCWindows.FriendServer.FriendRequestListReponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FriendServer\BMCWindows.FriendServer.OperationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FriendServer\BMCWindows.FriendServer.PlayerProfileResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\FriendServer\FriendshipService.wsdl" />
@@ -216,7 +230,16 @@
     <None Include="Connected Services\FriendServer\FriendshipService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ProfileServer\BMCWindows.ProfileServer.OperationResult.datasource">
+    <None Include="Connected Services\FriendServer\FriendshipService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ProfileServer\BMCWindows.ProfileServer.ImageResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProfileServer\BMCWindows.ProfileServer.OperationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProfileServer\BMCWindows.ProfileServer.ProfileResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ProfileServer\ProfileService.wsdl" />
@@ -227,6 +250,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ProfileServer\ProfileService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ProfileServer\ProfileService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ProfileServer\ProfileService31.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\Server\AccountService.wsdl" />
@@ -242,7 +271,7 @@
     <None Include="Connected Services\Server\AccountService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\Server\BMCWindows.Server.OperationResult.datasource">
+    <None Include="Connected Services\Server\BMCWindows.Server.OperationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">

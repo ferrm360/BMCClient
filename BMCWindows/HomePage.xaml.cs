@@ -4,6 +4,7 @@ using BMCWindows.Server;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -26,7 +27,7 @@ namespace BMCWindows
     public partial class HomePage : Page, ChatServer.IChatServiceCallback
     {
 
-       
+
         public ObservableCollection<Friend> Friends { get; set; }
         public ObservableCollection<Message> Messages { get; set; }
         public ChatService chatService = new ChatService();
@@ -46,36 +47,32 @@ namespace BMCWindows
             proxy = new ChatServer.ChatServiceClient(context);
             proxy.RegisterUser(player.Username);
             labelUserName.Content = player.Username;
-
-            try
+            LoadFriendList(player.Username);
+            buttonOpenContextMenu.Visibility = Visibility.Visible;
+            ProfileServer.ProfileServiceClient proxyProfile = new ProfileServer.ProfileServiceClient();
+            var imageUrl = proxyProfile.GetProfileImage(player.Username);
+            if (imageUrl.ImageData == null || imageUrl.ImageData.Length == 0)
             {
-                FriendServer.FriendshipServiceClient friendsProxy = new FriendServer.FriendshipServiceClient();
-                var friendList = friendsProxy.GetFriendList(player.Username);
-
-                if (friendList != null && friendList.Any())
+                MessageBox.Show("No image data returned.");
+            }
+            else
+            {
+                BitmapImage image = ConvertByteArrayToImage(imageUrl.ImageData);
+                if (image == null)
                 {
-                    ObservableCollection<Friend> friendsList = new ObservableCollection<Friend>(
-                        friendList.Select(friendPlayer => new Friend
-                        {
-                            UserName = friendPlayer.Username,
-                        })
-                    );
-                    FriendsList.ItemsSource = friendsList;
-                    Chat.ItemsSource = friendsList;
+                    MessageBox.Show("Image conversion failed.");
+                }
+                else
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        imageProfilePicture.Source = image;
+                    });
+
                 }
             }
-            catch (CommunicationException commEx)
-            {
-                MessageBox.Show($"Communication error: {commEx.Message}");
-            }
-            catch (TimeoutException timeoutEx)
-            {
-                MessageBox.Show($"Timeout error: {timeoutEx.Message}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"General error: {ex.Message}");
-            }
+
+            //LoadImage(imageUrl.ImageData);
 
         }
 
@@ -92,7 +89,7 @@ namespace BMCWindows
             if (!string.IsNullOrEmpty(textboxGeneralChat.Text))
             {
                 proxy.SendMessage(player.Username, textboxGeneralChat.Text);
-                ReceiveMessage(textboxGeneralChat.Text);  
+                ReceiveMessage(textboxGeneralChat.Text);
                 textboxGeneralChat.Clear();
                 //LoadRecentMessages();
                 // Actualizar los mensajes mostrados en la interfaz
@@ -103,7 +100,6 @@ namespace BMCWindows
         {
             Server.PlayerDTO player = UserSessionManager.getInstance().getPlayerUserData();
 
-            // Asegúrate de que la colección está siendo modificada en el hilo principal
             Application.Current.Dispatcher.Invoke(() =>
             {
                 Messages.Add(new Message { Sender = player.Username, Messages = message });
@@ -113,7 +109,7 @@ namespace BMCWindows
 
         private void GoToSettings(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new Settings());
+            this.NavigationService.Navigate(new SettingsWindow());
         }
 
         public void OpenContextMenu(object sender, RoutedEventArgs e)
@@ -126,16 +122,104 @@ namespace BMCWindows
             this.NavigationService.Navigate(new SearchWindow());
         }
 
-        private void GoToProfileWindow(object sender, RoutedEventArgs e)
+        private void LoadFriendList(string username)
         {
-            this.NavigationService.Navigate(new ProfileWindow());
+            try
+            {
+                FriendServer.FriendshipServiceClient friendsProxy = new FriendServer.FriendshipServiceClient();
+                var response = friendsProxy.GetFriendList(username);
+
+                if (response.IsSuccess)
+                {
+                    if (response.Friends != null && response.Friends.Any())
+                    {
+                        ObservableCollection<Friend> friendsList = new ObservableCollection<Friend>(
+                            response.Friends.Select(friendPlayer => new Friend
+                            {
+                                UserName = friendPlayer.Username,
+                            })
+                        );
+                        FriendsList.ItemsSource = friendsList;
+                        Chat.ItemsSource = friendsList;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show($"Error: {response?.ErrorKey ?? "Unknown error"}");
+                }
+            }
+            catch (CommunicationException commEx)
+            {
+                MessageBox.Show($"Communication error: {commEx.Message}");
+            }
+            catch (TimeoutException timeoutEx)
+            {
+                MessageBox.Show($"Timeout error: {timeoutEx.Message}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"General error: {ex.Message}");
+            }
         }
+
+        private void GoToProfileWindow(object sender, RoutedEventArgs e) 
+        {
+            this.NavigationService.Navigate(new ProfileWindow());  
+        }
+
+        private void LogOut(object sender, RoutedEventArgs e)
+        {
+            
+            UserSessionManager.getInstance().logoutPlayer();   
+            this.NavigationService.Navigate(new StartPage());
+
+        }
+
+
+        private void LoadImage(byte[] imageData)
+        {
+            
+            BitmapImage image = ConvertByteArrayToImage(imageData);
+            imageProfilePicture.Source = image;
+
+        }
+
+        // TODO: Pasar a utilities
+        public BitmapImage ConvertByteArrayToImage(byte[] imageData)
+        {
+            if (imageData == null || imageData.Length == 0)
+                return null;
+
+            using (var ms = new MemoryStream(imageData))
+            {
+                BitmapImage image = new BitmapImage();
+                image.BeginInit();
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.StreamSource = ms;
+                image.EndInit();
+                image.Freeze(); 
+                return image;
+            }
+        }
+
+        private void GoToFriendRequestsWindow(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new FriendRequestsWindow());    
+        }
+
     }
+
+
+
+
 
     public class Friend
     {
         public string UserName { get; set; }
+        public DateTime lastVisit {  get; set; }
+        public Byte[] profileImage { get; set; }
     }
 
-    
+
 }
+

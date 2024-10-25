@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Service.DTO" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Service.DTO" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfPlayerDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PlayerDTO" nillable="true" type="tns:PlayerDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPlayerDTO" nillable="true" type="tns:ArrayOfPlayerDTO" />
+  <xs:complexType name="PlayerDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PlayerID" type="xs:int" />
+      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PlayerDTO" nillable="true" type="tns:PlayerDTO" />
+  <xs:complexType name="ArrayOfFriendRequestDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FriendRequestDTO" nillable="true" type="tns:FriendRequestDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFriendRequestDTO" nillable="true" type="tns:ArrayOfFriendRequestDTO" />
+  <xs:complexType name="FriendRequestDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ReceiverUsername" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RequestID" type="xs:int" />
+      <xs:element minOccurs="0" name="SenderUsername" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FriendRequestDTO" nillable="true" type="tns:FriendRequestDTO" />
+  <xs:complexType name="ArrayOfPlayerProfileDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PlayerProfileDTO" nillable="true" type="tns:PlayerProfileDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPlayerProfileDTO" nillable="true" type="tns:ArrayOfPlayerProfileDTO" />
+  <xs:complexType name="PlayerProfileDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Bio" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FullName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="JoinDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LastVisit" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ProfileImage" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="SingUpDate" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PlayerProfileDTO" nillable="true" type="tns:PlayerProfileDTO" />
+</xs:schema>

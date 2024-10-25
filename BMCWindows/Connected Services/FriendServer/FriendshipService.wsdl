@@ -34,7 +34,8 @@
       <xsd:import schemaLocation="http://localhost:8086/FriendshipService?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:8086/FriendshipService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:8086/FriendshipService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Service.Results" />
-      <xsd:import schemaLocation="http://localhost:8086/FriendshipService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Service.DTO" />
+      <xsd:import schemaLocation="http://localhost:8086/FriendshipService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Service.Utilities.Results" />
+      <xsd:import schemaLocation="http://localhost:8086/FriendshipService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Service.DTO" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IFriendshipService_SendFriendRequest_InputMessage">
@@ -67,6 +68,18 @@
   <wsdl:message name="IFriendshipService_GetFriendRequestList_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetFriendRequestListResponse" />
   </wsdl:message>
+  <wsdl:message name="IFriendshipService_GetPlayersList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayersList" />
+  </wsdl:message>
+  <wsdl:message name="IFriendshipService_GetPlayersList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayersListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFriendshipService_GetPlayersListByUsername_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayersListByUsername" />
+  </wsdl:message>
+  <wsdl:message name="IFriendshipService_GetPlayersListByUsername_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayersListByUsernameResponse" />
+  </wsdl:message>
   <wsdl:message name="IFriendshipService_TestConnection_InputMessage">
     <wsdl:part name="parameters" element="tns:TestConnection" />
   </wsdl:message>
@@ -93,6 +106,14 @@
     <wsdl:operation name="GetFriendRequestList">
       <wsdl:input wsaw:Action="http://tempuri.org/IFriendshipService/GetFriendRequestList" message="tns:IFriendshipService_GetFriendRequestList_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFriendshipService/GetFriendRequestListResponse" message="tns:IFriendshipService_GetFriendRequestList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayersList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFriendshipService/GetPlayersList" message="tns:IFriendshipService_GetPlayersList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFriendshipService/GetPlayersListResponse" message="tns:IFriendshipService_GetPlayersList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayersListByUsername">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFriendshipService/GetPlayersListByUsername" message="tns:IFriendshipService_GetPlayersListByUsername_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFriendshipService/GetPlayersListByUsernameResponse" message="tns:IFriendshipService_GetPlayersListByUsername_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="TestConnection">
       <wsdl:input wsaw:Action="http://tempuri.org/IFriendshipService/TestConnection" message="tns:IFriendshipService_TestConnection_InputMessage" />
@@ -147,6 +168,24 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetPlayersList">
+      <soap12:operation soapAction="http://tempuri.org/IFriendshipService/GetPlayersList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayersListByUsername">
+      <soap12:operation soapAction="http://tempuri.org/IFriendshipService/GetPlayersListByUsername" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="TestConnection">
       <soap12:operation soapAction="http://tempuri.org/IFriendshipService/TestConnection" style="document" />
       <wsdl:input>
@@ -163,7 +202,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8087/</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>FERLAP\neco3</Upn>
+          <Upn>MARLA\marla</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

@@ -15,9 +15,12 @@ namespace BMCWindows.ProfileServer {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OperationResult", Namespace="http://schemas.datacontract.org/2004/07/Service.Results")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OperationResponse", Namespace="http://schemas.datacontract.org/2004/07/Service.Results")]
     [System.SerializableAttribute()]
-    public partial class OperationResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.ProfileServer.ImageResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.ProfileServer.PlayerProfileDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.ProfileServer.ProfileResponse))]
+    public partial class OperationResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -90,27 +93,356 @@ namespace BMCWindows.ProfileServer {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ImageResponse", Namespace="http://schemas.datacontract.org/2004/07/Service.Results")]
+    [System.SerializableAttribute()]
+    public partial class ImageResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorKeyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FileNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] ImageDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsSuccessField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MimeTypeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorKey {
+            get {
+                return this.ErrorKeyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorKeyField, value) != true)) {
+                    this.ErrorKeyField = value;
+                    this.RaisePropertyChanged("ErrorKey");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FileName {
+            get {
+                return this.FileNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FileNameField, value) != true)) {
+                    this.FileNameField = value;
+                    this.RaisePropertyChanged("FileName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] ImageData {
+            get {
+                return this.ImageDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ImageDataField, value) != true)) {
+                    this.ImageDataField = value;
+                    this.RaisePropertyChanged("ImageData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsSuccess {
+            get {
+                return this.IsSuccessField;
+            }
+            set {
+                if ((this.IsSuccessField.Equals(value) != true)) {
+                    this.IsSuccessField = value;
+                    this.RaisePropertyChanged("IsSuccess");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string MimeType {
+            get {
+                return this.MimeTypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MimeTypeField, value) != true)) {
+                    this.MimeTypeField = value;
+                    this.RaisePropertyChanged("MimeType");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PlayerProfileDTO", Namespace="http://schemas.datacontract.org/2004/07/Service.DTO")]
+    [System.SerializableAttribute()]
+    public partial class PlayerProfileDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string BioField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FullNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime JoinDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime LastVisitField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] ProfileImageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime SingUpDateField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Bio {
+            get {
+                return this.BioField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BioField, value) != true)) {
+                    this.BioField = value;
+                    this.RaisePropertyChanged("Bio");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FullName {
+            get {
+                return this.FullNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FullNameField, value) != true)) {
+                    this.FullNameField = value;
+                    this.RaisePropertyChanged("FullName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime JoinDate {
+            get {
+                return this.JoinDateField;
+            }
+            set {
+                if ((this.JoinDateField.Equals(value) != true)) {
+                    this.JoinDateField = value;
+                    this.RaisePropertyChanged("JoinDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime LastVisit {
+            get {
+                return this.LastVisitField;
+            }
+            set {
+                if ((this.LastVisitField.Equals(value) != true)) {
+                    this.LastVisitField = value;
+                    this.RaisePropertyChanged("LastVisit");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] ProfileImage {
+            get {
+                return this.ProfileImageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProfileImageField, value) != true)) {
+                    this.ProfileImageField = value;
+                    this.RaisePropertyChanged("ProfileImage");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime SingUpDate {
+            get {
+                return this.SingUpDateField;
+            }
+            set {
+                if ((this.SingUpDateField.Equals(value) != true)) {
+                    this.SingUpDateField = value;
+                    this.RaisePropertyChanged("SingUpDate");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ProfileResponse", Namespace="http://schemas.datacontract.org/2004/07/Service.Utilities.Results")]
+    [System.SerializableAttribute()]
+    public partial class ProfileResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorKeyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsSuccessField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private BMCWindows.ProfileServer.PlayerProfileDTO ProfileField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorKey {
+            get {
+                return this.ErrorKeyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorKeyField, value) != true)) {
+                    this.ErrorKeyField = value;
+                    this.RaisePropertyChanged("ErrorKey");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsSuccess {
+            get {
+                return this.IsSuccessField;
+            }
+            set {
+                if ((this.IsSuccessField.Equals(value) != true)) {
+                    this.IsSuccessField = value;
+                    this.RaisePropertyChanged("IsSuccess");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public BMCWindows.ProfileServer.PlayerProfileDTO Profile {
+            get {
+                return this.ProfileField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProfileField, value) != true)) {
+                    this.ProfileField = value;
+                    this.RaisePropertyChanged("Profile");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ProfileServer.IProfileService")]
     public interface IProfileService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileService/UpdatePassword", ReplyAction="http://tempuri.org/IProfileService/UpdatePasswordResponse")]
-        BMCWindows.ProfileServer.OperationResult UpdatePassword(string username, string newPassword, string oldPassword);
+        BMCWindows.ProfileServer.OperationResponse UpdatePassword(string username, string newPassword, string oldPassword);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileService/UpdatePassword", ReplyAction="http://tempuri.org/IProfileService/UpdatePasswordResponse")]
-        System.Threading.Tasks.Task<BMCWindows.ProfileServer.OperationResult> UpdatePasswordAsync(string username, string newPassword, string oldPassword);
+        System.Threading.Tasks.Task<BMCWindows.ProfileServer.OperationResponse> UpdatePasswordAsync(string username, string newPassword, string oldPassword);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileService/UpdateProfilePicture", ReplyAction="http://tempuri.org/IProfileService/UpdateProfilePictureResponse")]
-        BMCWindows.ProfileServer.OperationResult UpdateProfilePicture(string username, byte[] imageBytes, string fileName);
+        BMCWindows.ProfileServer.OperationResponse UpdateProfilePicture(string username, byte[] imageBytes, string fileName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileService/UpdateProfilePicture", ReplyAction="http://tempuri.org/IProfileService/UpdateProfilePictureResponse")]
-        System.Threading.Tasks.Task<BMCWindows.ProfileServer.OperationResult> UpdateProfilePictureAsync(string username, byte[] imageBytes, string fileName);
+        System.Threading.Tasks.Task<BMCWindows.ProfileServer.OperationResponse> UpdateProfilePictureAsync(string username, byte[] imageBytes, string fileName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileService/UpdateUsername", ReplyAction="http://tempuri.org/IProfileService/UpdateUsernameResponse")]
-        BMCWindows.ProfileServer.OperationResult UpdateUsername(string currentUsername, string newUsername);
+        BMCWindows.ProfileServer.OperationResponse UpdateUsername(string currentUsername, string newUsername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileService/UpdateUsername", ReplyAction="http://tempuri.org/IProfileService/UpdateUsernameResponse")]
-        System.Threading.Tasks.Task<BMCWindows.ProfileServer.OperationResult> UpdateUsernameAsync(string currentUsername, string newUsername);
+        System.Threading.Tasks.Task<BMCWindows.ProfileServer.OperationResponse> UpdateUsernameAsync(string currentUsername, string newUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileService/UpdateBio", ReplyAction="http://tempuri.org/IProfileService/UpdateBioResponse")]
+        BMCWindows.ProfileServer.OperationResponse UpdateBio(string bio, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileService/UpdateBio", ReplyAction="http://tempuri.org/IProfileService/UpdateBioResponse")]
+        System.Threading.Tasks.Task<BMCWindows.ProfileServer.OperationResponse> UpdateBioAsync(string bio, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileService/GetProfileByUsername", ReplyAction="http://tempuri.org/IProfileService/GetProfileByUsernameResponse")]
+        BMCWindows.ProfileServer.ProfileResponse GetProfileByUsername(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileService/GetProfileByUsername", ReplyAction="http://tempuri.org/IProfileService/GetProfileByUsernameResponse")]
+        System.Threading.Tasks.Task<BMCWindows.ProfileServer.ProfileResponse> GetProfileByUsernameAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileService/GetProfileImage", ReplyAction="http://tempuri.org/IProfileService/GetProfileImageResponse")]
+        BMCWindows.ProfileServer.ImageResponse GetProfileImage(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileService/GetProfileImage", ReplyAction="http://tempuri.org/IProfileService/GetProfileImageResponse")]
+        System.Threading.Tasks.Task<BMCWindows.ProfileServer.ImageResponse> GetProfileImageAsync(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -140,28 +472,52 @@ namespace BMCWindows.ProfileServer {
                 base(binding, remoteAddress) {
         }
         
-        public BMCWindows.ProfileServer.OperationResult UpdatePassword(string username, string newPassword, string oldPassword) {
+        public BMCWindows.ProfileServer.OperationResponse UpdatePassword(string username, string newPassword, string oldPassword) {
             return base.Channel.UpdatePassword(username, newPassword, oldPassword);
         }
         
-        public System.Threading.Tasks.Task<BMCWindows.ProfileServer.OperationResult> UpdatePasswordAsync(string username, string newPassword, string oldPassword) {
+        public System.Threading.Tasks.Task<BMCWindows.ProfileServer.OperationResponse> UpdatePasswordAsync(string username, string newPassword, string oldPassword) {
             return base.Channel.UpdatePasswordAsync(username, newPassword, oldPassword);
         }
         
-        public BMCWindows.ProfileServer.OperationResult UpdateProfilePicture(string username, byte[] imageBytes, string fileName) {
+        public BMCWindows.ProfileServer.OperationResponse UpdateProfilePicture(string username, byte[] imageBytes, string fileName) {
             return base.Channel.UpdateProfilePicture(username, imageBytes, fileName);
         }
         
-        public System.Threading.Tasks.Task<BMCWindows.ProfileServer.OperationResult> UpdateProfilePictureAsync(string username, byte[] imageBytes, string fileName) {
+        public System.Threading.Tasks.Task<BMCWindows.ProfileServer.OperationResponse> UpdateProfilePictureAsync(string username, byte[] imageBytes, string fileName) {
             return base.Channel.UpdateProfilePictureAsync(username, imageBytes, fileName);
         }
         
-        public BMCWindows.ProfileServer.OperationResult UpdateUsername(string currentUsername, string newUsername) {
+        public BMCWindows.ProfileServer.OperationResponse UpdateUsername(string currentUsername, string newUsername) {
             return base.Channel.UpdateUsername(currentUsername, newUsername);
         }
         
-        public System.Threading.Tasks.Task<BMCWindows.ProfileServer.OperationResult> UpdateUsernameAsync(string currentUsername, string newUsername) {
+        public System.Threading.Tasks.Task<BMCWindows.ProfileServer.OperationResponse> UpdateUsernameAsync(string currentUsername, string newUsername) {
             return base.Channel.UpdateUsernameAsync(currentUsername, newUsername);
+        }
+        
+        public BMCWindows.ProfileServer.OperationResponse UpdateBio(string bio, string username) {
+            return base.Channel.UpdateBio(bio, username);
+        }
+        
+        public System.Threading.Tasks.Task<BMCWindows.ProfileServer.OperationResponse> UpdateBioAsync(string bio, string username) {
+            return base.Channel.UpdateBioAsync(bio, username);
+        }
+        
+        public BMCWindows.ProfileServer.ProfileResponse GetProfileByUsername(string username) {
+            return base.Channel.GetProfileByUsername(username);
+        }
+        
+        public System.Threading.Tasks.Task<BMCWindows.ProfileServer.ProfileResponse> GetProfileByUsernameAsync(string username) {
+            return base.Channel.GetProfileByUsernameAsync(username);
+        }
+        
+        public BMCWindows.ProfileServer.ImageResponse GetProfileImage(string username) {
+            return base.Channel.GetProfileImage(username);
+        }
+        
+        public System.Threading.Tasks.Task<BMCWindows.ProfileServer.ImageResponse> GetProfileImageAsync(string username) {
+            return base.Channel.GetProfileImageAsync(username);
         }
     }
 }

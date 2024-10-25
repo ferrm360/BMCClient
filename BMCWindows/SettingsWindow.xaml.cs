@@ -1,4 +1,5 @@
 ﻿using BMCWindows.Patterns.Singleton;
+using BMCWindows.Validators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,17 +38,26 @@ namespace BMCWindows
            
             ProfileServer.ProfileServiceClient proxy = new ProfileServer.ProfileServiceClient();
             String username = player.Username;         
-            String password = passwordBoxOldPassword.ToString();
-            String newPassword = passwordBoxNewPassword.ToString();
-            String confirmPassword = passwordBoxPassword.ToString();
-            var result = proxy.UpdatePassword(username, password, newPassword);
-            if (result.IsSuccess)
+            String password = passwordBoxOldPassword.Password;
+            String newPassword = passwordBoxNewPassword.Password;
+            String confirmPassword = passwordBoxPassword.Password;
+            if(!FieldValidator.AreFieldsEmpty(password, newPassword, confirmPassword) && FieldValidator.ValidatePassword(newPassword) && newPassword == confirmPassword)
             {
-                MessageBox.Show("Contraseña actualizada exitosamente");
+                var result = proxy.UpdatePassword(username, newPassword, password);
+                if (result.IsSuccess)
+                {
+                    MessageBox.Show("Contraseña actualizada exitosamente");
+                }
+                else
+                {
+                    MessageBox.Show(result.ErrorKey);
+                }
+
             } else
             {
-                MessageBox.Show(result.ErrorKey);
+                MessageBox.Show("Hay campos vacío o incorrectos, verífiquelos");
             }
+            
             
         }
     }

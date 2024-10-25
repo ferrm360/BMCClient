@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Service.Utilities.Results" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Service.Utilities.Results" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8084/ProfileService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Service.DTO" />
+  <xs:complexType name="ProfileResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErrorKey" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsSuccess" type="xs:boolean" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Service.DTO" minOccurs="0" name="Profile" nillable="true" type="q1:PlayerProfileDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ProfileResponse" nillable="true" type="tns:ProfileResponse" />
+</xs:schema>

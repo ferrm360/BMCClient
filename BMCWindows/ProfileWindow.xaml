@@ -49,8 +49,8 @@
             <Image x:Name="imageButtonAcceptUsernameEdition" Source="Images/BrownButton.png" Grid.Column="3" Grid.Row="1" IsHitTestVisible="False" Visibility="Hidden" />
             <TextBlock x:Name="textBlockAcceptEdition" Text="Aceptar" Grid.Column="3" Grid.Row="1" IsHitTestVisible="False" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden"/>
             <Button x:Name="buttonCancelNewUsername" Grid.Column="4" Grid.Row="1" Background="Transparent" BorderBrush="Transparent" Click="CancelUsernameEdition"/>
-            <Image x:Name="imageButtonCancelUsernameEdition" Source="Images/EditButton.png" Grid.Column="4" Grid.Row="1" IsHitTestVisible="False" Visibility="Hidden"/>
-            <TextBlock x:Name="textBlockCancelUserNameEdition" Text="Cancel" Grid.Column="4" Grid.Row="1" IsHitTestVisible="False" Visibility="Hidden"/>
+            <Image x:Name="imageButtonCancelUsernameEdition" Source="Images/BrownButton.png" Grid.Column="4" Grid.Row="1" IsHitTestVisible="False" Visibility="Hidden"/>
+            <TextBlock x:Name="textBlockCancelUserNameEdition" Text="Cancel" Grid.Column="4" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False" Visibility="Hidden"/>
 
             <ListBox x:Name="FriendsList" Grid.Column="1" Grid.Row="3" Margin="10,10,10,10" Visibility="Visible">
                 <ListBox.ItemTemplate>
@@ -58,7 +58,7 @@
                         <Border Background="#DDD" Margin="2" CornerRadius="5">
                             <StackPanel Orientation="Horizontal" Margin="5">
                                 <Image Source="{Binding ImagePath}" Width="40" Height="40" Margin="5"/>
-                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" FontSize="16" Margin="5"/>
+                                <TextBlock Text="{Binding UserName}" VerticalAlignment="Center" FontSize="16" Margin="5"/>
                             </StackPanel>
                         </Border>
                     </DataTemplate>
@@ -82,8 +82,9 @@
                 <RowDefinition Height="121*"/>
                 <RowDefinition Height="11*"/>
             </Grid.RowDefinitions>
-            <TextBlock x:Name="textBloxBio" Grid.Column="2" Grid.Row="3" Background="Blue"/>
-            <Button x:Name="buttonCancel" Grid.Column="0" Grid.Row="0" Background="Transparent" BorderBrush="Transparent"/>
+            <TextBlock x:Name="textBlockBio" Grid.Column="2" Grid.Row="3" Background="White"/>
+            <TextBox x:Name="textBoxBio" Grid.Column="2" Grid.Row="3" Visibility="Hidden"/>
+            <Button x:Name="buttonCancel" Grid.Column="0" Grid.Row="0" Background="Transparent" BorderBrush="Transparent" Click="GoBack"/>
             <Image Source="Images/BrownButton.png" IsHitTestVisible="False" Grid.Column="0" Grid.Row="0" />
             <TextBlock Text="Cancel" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" IsHitTestVisible="False"/>
 
@@ -94,7 +95,8 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="91*"/>
                 <ColumnDefinition Width="128*"/>
-                <ColumnDefinition Width="453*"/>
+                <ColumnDefinition Width="401*"/>
+                <ColumnDefinition Width="52*"/>
                 <ColumnDefinition Width="46*"/>
                 <ColumnDefinition Width="82*"/>
             </Grid.ColumnDefinitions>
@@ -107,8 +109,18 @@
             </Grid.RowDefinitions>
 
             <Button x:Name="buttonChangeProfilePicture" Grid.Column="1" Grid.Row="1" Click="UploadProfilePicture" />
-            <Button x:Name="buttonChangeBio" Grid.Column="3" Grid.Row="3" Background="Transparent" BorderBrush="Transparent"/>
-            <Image Source="Images/EditButton.png" Grid.Column="3" Grid.Row="3"/>
+            <Button x:Name="buttonChangeBio" Grid.Column="4" Grid.Row="3" Background="Transparent" BorderBrush="Transparent" Click="MakeBioEditable"/>
+            <Image Source="Images/EditButton.png" Grid.Column="4" Grid.Row="3" IsHitTestVisible="False"/>
+            
+            <Button x:Name="buttonAcceptNewBio" Grid.Column="3" Grid.Row="3" Background="Transparent" BorderBrush="Transparent" Visibility="Hidden" Click="AcceptBioUpdate"/>
+            <Image x:Name="imageAcceptBio" Source="Images/BrownButton.png" Grid.Column="3" Grid.Row="3" Visibility="Hidden" IsHitTestVisible="False"/>
+            <TextBlock x:Name="textBlockAcceptBio" Text="Accept" Grid.Column="3" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="10" Visibility="Hidden" IsHitTestVisible="False"/>
+
+
+
+            <Button x:Name="buttonCancelNewBio" Grid.Column="4" Grid.Row="3" Background="Transparent" BorderBrush="Transparent" Visibility="Hidden" Click="CancelBioUpdate"/>
+            <Image x:Name="imageCancelBio" Source="Images/BrownButton.png" Grid.Column="4" Grid.Row="3" Visibility="Hidden" IsHitTestVisible="False"/>
+            <TextBlock x:Name="textBlockCancelBio" Text="Accept" Grid.Column="4" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="10" Visibility="Hidden" IsHitTestVisible="False"/>
 
         </Grid>
 

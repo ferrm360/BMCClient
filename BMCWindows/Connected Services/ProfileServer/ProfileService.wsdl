@@ -34,6 +34,8 @@
       <xsd:import schemaLocation="http://localhost:8084/ProfileService?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:8084/ProfileService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:8084/ProfileService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Service.Results" />
+      <xsd:import schemaLocation="http://localhost:8084/ProfileService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Service.Utilities.Results" />
+      <xsd:import schemaLocation="http://localhost:8084/ProfileService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Service.DTO" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IProfileService_UpdatePassword_InputMessage">
@@ -54,6 +56,24 @@
   <wsdl:message name="IProfileService_UpdateUsername_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateUsernameResponse" />
   </wsdl:message>
+  <wsdl:message name="IProfileService_UpdateBio_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateBio" />
+  </wsdl:message>
+  <wsdl:message name="IProfileService_UpdateBio_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateBioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProfileService_GetProfileByUsername_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProfileByUsername" />
+  </wsdl:message>
+  <wsdl:message name="IProfileService_GetProfileByUsername_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProfileByUsernameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProfileService_GetProfileImage_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProfileImage" />
+  </wsdl:message>
+  <wsdl:message name="IProfileService_GetProfileImage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProfileImageResponse" />
+  </wsdl:message>
   <wsdl:portType name="IProfileService">
     <wsdl:operation name="UpdatePassword">
       <wsdl:input wsaw:Action="http://tempuri.org/IProfileService/UpdatePassword" message="tns:IProfileService_UpdatePassword_InputMessage" />
@@ -66,6 +86,18 @@
     <wsdl:operation name="UpdateUsername">
       <wsdl:input wsaw:Action="http://tempuri.org/IProfileService/UpdateUsername" message="tns:IProfileService_UpdateUsername_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProfileService/UpdateUsernameResponse" message="tns:IProfileService_UpdateUsername_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBio">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfileService/UpdateBio" message="tns:IProfileService_UpdateBio_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfileService/UpdateBioResponse" message="tns:IProfileService_UpdateBio_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProfileByUsername">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfileService/GetProfileByUsername" message="tns:IProfileService_GetProfileByUsername_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfileService/GetProfileByUsernameResponse" message="tns:IProfileService_GetProfileByUsername_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProfileImage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfileService/GetProfileImage" message="tns:IProfileService_GetProfileImage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfileService/GetProfileImageResponse" message="tns:IProfileService_GetProfileImage_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IProfileService" type="tns:IProfileService">
@@ -91,6 +123,33 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateUsername">
       <soap12:operation soapAction="http://tempuri.org/IProfileService/UpdateUsername" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBio">
+      <soap12:operation soapAction="http://tempuri.org/IProfileService/UpdateBio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProfileByUsername">
+      <soap12:operation soapAction="http://tempuri.org/IProfileService/GetProfileByUsername" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProfileImage">
+      <soap12:operation soapAction="http://tempuri.org/IProfileService/GetProfileImage" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

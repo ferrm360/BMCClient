@@ -22,10 +22,12 @@
                 <RowDefinition Height="277*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="166*"/>
-                <ColumnDefinition Width="413*"/>
+                <ColumnDefinition Width="70*"/>
+                <ColumnDefinition Width="122*"/>
+                <ColumnDefinition Width="387*"/>
                 <ColumnDefinition Width="221*"/>
             </Grid.ColumnDefinitions>
+            <Image x:Name="imageProfilePicture" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
         </Grid>
         <Grid Grid.ColumnSpan="2">
@@ -46,8 +48,8 @@
                     <DataTemplate>
                         <Border Background="#DDD" Margin="2" CornerRadius="5">
                             <StackPanel Orientation="Horizontal" Margin="5">
-                                <Image Source="{Binding ImagePath}" Width="40" Height="40" Margin="5"/>
-                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" FontSize="16" Margin="5"/>
+                                <Image x:Name="myImageControl" Width="40" Height="40" Margin="5"/>
+                                <TextBlock Text="{Binding UserName}" VerticalAlignment="Center" FontSize="16" Margin="5"/>
                             </StackPanel>
                         </Border>
                     </DataTemplate>
@@ -109,7 +111,7 @@
                 <TextBox x:Name="MessageTextBox" Width="200" Margin="0,0,5,0"/>
                 <Button Content="Enviar" />
             </StackPanel>
-            <Button Content="{x:Static p:Resources.GloblalButtonCancel}"  Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,15,20,0"/>
+            <Button Content="Cancel"  Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,15,20,0"/>
 
         </Grid>
 
@@ -166,29 +168,31 @@
 
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="7*"/>
-                <RowDefinition Height="83*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="23*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="56*"/>
                 <ColumnDefinition Width="625*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" Click="OpenContextMenu" Background="Transparent" BorderBrush="Transparent"/>
-            <Image Source="Images/ButtonSettings.png" Grid.Column="0" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" IsHitTestVisible="False"/>
+            <Button x:Name="buttonOpenContextMenu" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Stretch" Margin="0,5,0,0" Click="OpenContextMenu"  />
+            <Image Source="Images/ButtonSettings.png" Grid.Column="0" Grid.Row="0" IsHitTestVisible="False" VerticalAlignment="Top" Margin="0,5,0,0"/>
 
-            <Menu x:Name="menuOptions" VerticalAlignment="Top" Visibility="Collapsed">
-                <MenuItem Header="Perfil" Click="GoToProfileWindow"/>
-                <MenuItem Header="Jugadores" Click="GoToSearchWindow"/>
-                <MenuItem Header="Solicitudes" />
-                <MenuItem Header="Configuración" Click="GoToSettings"/>
-            </Menu>
+
 
 
 
 
 
         </Grid>
+        <Menu x:Name="menuOptions" VerticalAlignment="Top" Visibility="Hidden"  HorizontalAlignment="Left">
+            <MenuItem Header="Perfil" Click="GoToProfileWindow"/>
+            <MenuItem Header="Jugadores" Click="GoToSearchWindow"/>
+            <MenuItem Header="Solicitudes" Click="GoToFriendRequestsWindow"/>
+            <MenuItem Header="Configuración" Click="GoToSettings"/>
+            <MenuItem Header="Salir" Click="LogOut"/>
+        </Menu>
 
         <Grid>
             <Grid.RowDefinitions>
@@ -203,8 +207,6 @@
                 <ColumnDefinition Width="50*"/>
                 <ColumnDefinition Width="92*"/>
             </Grid.ColumnDefinitions>
-
-            <TextBox x:Name="textBoxSearchPlayers" Grid.Row="1" Grid.Column="1" Margin="10,3,10,5" Background="Transparent" BorderBrush="Transparent"/>
             <Button x:Name="buttonSearch" Grid.Column="3" Grid.Row="1" Background="Transparent" BorderBrush="Transparent"/>
 
         </Grid>
