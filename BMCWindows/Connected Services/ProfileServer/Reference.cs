@@ -443,6 +443,12 @@ namespace BMCWindows.ProfileServer {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileService/GetProfileImage", ReplyAction="http://tempuri.org/IProfileService/GetProfileImageResponse")]
         System.Threading.Tasks.Task<BMCWindows.ProfileServer.ImageResponse> GetProfileImageAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileService/GetBioByUsername", ReplyAction="http://tempuri.org/IProfileService/GetBioByUsernameResponse")]
+        string GetBioByUsername(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfileService/GetBioByUsername", ReplyAction="http://tempuri.org/IProfileService/GetBioByUsernameResponse")]
+        System.Threading.Tasks.Task<string> GetBioByUsernameAsync(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -518,6 +524,14 @@ namespace BMCWindows.ProfileServer {
         
         public System.Threading.Tasks.Task<BMCWindows.ProfileServer.ImageResponse> GetProfileImageAsync(string username) {
             return base.Channel.GetProfileImageAsync(username);
+        }
+        
+        public string GetBioByUsername(string username) {
+            return base.Channel.GetBioByUsername(username);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetBioByUsernameAsync(string username) {
+            return base.Channel.GetBioByUsernameAsync(username);
         }
     }
 }

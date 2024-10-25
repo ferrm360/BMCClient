@@ -21,7 +21,8 @@
                 <ColumnDefinition Width="126*"/>
                 <ColumnDefinition Width="583*"/>
             </Grid.ColumnDefinitions>
-            <Rectangle Fill="Black" Grid.Column="1" Grid.Row="1"/>
+            
+            <Image x:Name="imagePlayerProfilePicture" Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
         </Grid>
 
         <Grid>
@@ -45,10 +46,10 @@
             <ListBox x:Name="FriendsList" Grid.Column="1" Grid.Row="3" Margin="10,10,10,10" Visibility="Visible">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Border Background="#DDD" Margin="2" CornerRadius="5">
+                        <Border Background="#DDD" Margin="2" CornerRadius="5" >
                             <StackPanel Orientation="Horizontal" Margin="5">
                                 <Image Source="{Binding ImagePath}" Width="40" Height="40" Margin="5"/>
-                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" FontSize="16" Margin="5"/>
+                                <TextBlock Text="{Binding UserName}" VerticalAlignment="Center" FontSize="16" Margin="5"/>
                             </StackPanel>
                         </Border>
                     </DataTemplate>
@@ -72,7 +73,7 @@
                 <RowDefinition Height="121*"/>
                 <RowDefinition Height="11*"/>
             </Grid.RowDefinitions>
-            <TextBlock x:Name="textBloxBio" Grid.Column="2" Grid.Row="3" Background="Blue"/>
+            <TextBlock x:Name="textBlockBio" Grid.Column="2" Grid.Row="3" Background="White"/>
             <Button x:Name="buttonCancel" Grid.Column="0" Grid.Row="0" Background="Transparent" BorderBrush="Transparent"/>
             <Image Source="Images/BrownButton.png" IsHitTestVisible="False" Grid.Column="0" Grid.Row="0" />
             <TextBlock Text="Cancel" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0"/>
@@ -104,14 +105,18 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="205*"/>
                 <ColumnDefinition Width="23*"/>
-                <ColumnDefinition Width="572*"/>
+                <ColumnDefinition Width="392*"/>
+                <ColumnDefinition Width="134*"/>
+                <ColumnDefinition Width="46*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="139*"/>
+                <RowDefinition Height="82*"/>
+                <RowDefinition Height="57*"/>
                 <RowDefinition Height="23*"/>
                 <RowDefinition Height="288*"/>
             </Grid.RowDefinitions>
-            <Ellipse x:Name="ellipsePlayerStatus" Grid.Column="1" Grid.Row="1" Fill="Green"/>
+            <Ellipse x:Name="ellipsePlayerStatus" Grid.Column="1" Grid.Row="2" Fill="White"/>
+            
 
         </Grid>
 

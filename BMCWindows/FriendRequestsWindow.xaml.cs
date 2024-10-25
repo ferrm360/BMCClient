@@ -46,6 +46,7 @@ namespace BMCWindows
                             response.FriendRequests.Select(friendPlayer => new Friend
                             {
                                 UserName = friendPlayer.ReceiverUsername,
+                                 requestId = friendPlayer.RequestID,
 
                             })
                         );
@@ -79,12 +80,47 @@ namespace BMCWindows
 
         private void AcceptFriend(object sender, EventArgs e)
         {
+            var button = sender as Button;
+            var selectedPlayer = button.DataContext as Friend;
+
+            if (selectedPlayer != null)
+            {
+                FriendServer.FriendshipServiceClient proxy = new FriendServer.FriendshipServiceClient();
+                var result = proxy.AcceptFriendRequest(selectedPlayer.requestId);
+                if (result.IsSuccess)
+                {
+                    MessageBox.Show("Solicitud rechazada exitosamente");
+                }
+                else
+                {
+                    MessageBox.Show(result.ErrorKey);
+                }
+
+            }
 
         }
 
         private void RejectFriend(object sender, EventArgs e)
         {
+            var button = sender as Button;
+            var selectedPlayer = button.DataContext as Friend;
 
+            if (selectedPlayer != null)
+            {
+                FriendServer.FriendshipServiceClient proxy = new FriendServer.FriendshipServiceClient();
+                var result = proxy.RejectFriendResponse(selectedPlayer.requestId);
+                if (result.IsSuccess)
+                {
+                    MessageBox.Show("Solicitud rechazada exitosamente");
+                }
+                else 
+                {
+                    MessageBox.Show(result.ErrorKey);
+                }
+
+            }
+                
+    
         }
     }
 }

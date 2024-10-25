@@ -33,6 +33,9 @@ namespace BMCWindows
             labelUser.Content = player.Username;
             ProfileServer.ProfileServiceClient proxy = new ProfileServer.ProfileServiceClient();
             LoadFriendList(player.Username);
+            string bio = proxy.GetBioByUsername(player.Username);
+            textBlockBio.Text = bio;
+            
         }
 
         private void UploadProfilePicture(object sender, RoutedEventArgs e)

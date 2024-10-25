@@ -74,6 +74,12 @@
   <wsdl:message name="IProfileService_GetProfileImage_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetProfileImageResponse" />
   </wsdl:message>
+  <wsdl:message name="IProfileService_GetBioByUsername_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBioByUsername" />
+  </wsdl:message>
+  <wsdl:message name="IProfileService_GetBioByUsername_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBioByUsernameResponse" />
+  </wsdl:message>
   <wsdl:portType name="IProfileService">
     <wsdl:operation name="UpdatePassword">
       <wsdl:input wsaw:Action="http://tempuri.org/IProfileService/UpdatePassword" message="tns:IProfileService_UpdatePassword_InputMessage" />
@@ -98,6 +104,10 @@
     <wsdl:operation name="GetProfileImage">
       <wsdl:input wsaw:Action="http://tempuri.org/IProfileService/GetProfileImage" message="tns:IProfileService_GetProfileImage_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProfileService/GetProfileImageResponse" message="tns:IProfileService_GetProfileImage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBioByUsername">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfileService/GetBioByUsername" message="tns:IProfileService_GetBioByUsername_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfileService/GetBioByUsernameResponse" message="tns:IProfileService_GetBioByUsername_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IProfileService" type="tns:IProfileService">
@@ -150,6 +160,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetProfileImage">
       <soap12:operation soapAction="http://tempuri.org/IProfileService/GetProfileImage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBioByUsername">
+      <soap12:operation soapAction="http://tempuri.org/IProfileService/GetBioByUsername" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

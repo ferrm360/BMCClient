@@ -207,6 +207,24 @@ namespace BMCWindows
             this.NavigationService.Navigate(new FriendRequestsWindow());    
         }
 
+        private void SelectFriend(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedFriend = (Friend)FriendsList.SelectedItem;
+
+            if (selectedFriend != null)
+            {
+                OpenPlayerProfileWindow(selectedFriend.UserName);
+                Console.WriteLine($"Username enviado: {selectedFriend.UserName}");
+            }
+        }
+
+        private void OpenPlayerProfileWindow(string username)
+        {
+            PlayerProfileWindow playerProfileWindow = new PlayerProfileWindow(username);
+
+            this.NavigationService.Navigate(new PlayerProfileWindow(username));
+        }
+
     }
 
 
@@ -218,6 +236,7 @@ namespace BMCWindows
         public string UserName { get; set; }
         public DateTime lastVisit {  get; set; }
         public Byte[] profileImage { get; set; }
+        public int requestId { get; set; }
     }
 
 
