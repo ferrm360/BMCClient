@@ -1,0 +1,79 @@
+﻿<Page x:Class="BMCWindows.LobbyWindow"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BMCWindows"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="LobbyWindow"
+      Background="#FEFFDB">
+
+
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="39*"/>
+                <RowDefinition Height="58*"/>
+                <RowDefinition Height="200*"/>
+                <RowDefinition Height="48*"/>
+                <RowDefinition Height="105*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="53*"/>
+                <ColumnDefinition Width="200*"/>
+                <ColumnDefinition Width="329*"/>
+                <ColumnDefinition Width="200*"/>
+                <ColumnDefinition Width="53*"/>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="imagePlayer1Background" Source="Images/GreenRectangle.png" Grid.Column="1" Grid.Row="2" Stretch="Fill"/>
+            <StackPanel Grid.Column="1" Grid.Row="2">
+                <TextBlock x:Name="textBlockCurrentPlayerUsername" FontSize="20" />
+                <TextBlock Text="Victorias: {Binding Players[0].Wins}" />
+                <TextBlock Text="Derrotas: {Binding Players[0].Losses}" />
+                <TextBlock Text="Nivel: {Binding Players[0].Level}" />
+            </StackPanel>
+
+            <Image x:Name="imagePlayer2Background" Source="Images/GreenRectangle.png" Grid.Column="3" Grid.Row="2" Stretch="Fill"/>
+            <ListView x:Name="listViewJoinedPlayer" Grid.Column="3" Grid.Row="2" ItemsSource="{Binding FilteredPlayers}" Margin="10" Background="Transparent">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="#D0EAB4" Margin="5" Padding="10">
+                            <StackPanel>
+                                <TextBlock Text="{Binding }" FontSize="16" FontWeight="Bold"/>
+                                <TextBlock Text="Victorias: {Binding Wins}" />
+                                <TextBlock Text="Derrotas: {Binding Losses}" />
+                                <TextBlock Text="Nivel: {Binding Level}" />
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Button x:Name="buttonStartGame" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="3" Margin="0,0,0,0" Background="Transparent" BorderBrush="Transparent"/>
+            <Image x:Name="imageButtonStartGame" Source="Images/BrownGreenButton.png" Stretch="Fill" Grid.Column="2" Grid.Row="3" IsHitTestVisible="False"/>
+            <TextBlock x:Name="textBlock" Text="Start game" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,15" IsHitTestVisible="False"/>
+        </Grid>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="47*"/>
+                <RowDefinition Height="403*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="13*"/>
+                <ColumnDefinition Width="140*"/>
+                <ColumnDefinition Width="422*"/>
+                <ColumnDefinition Width="225*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="buttonCancelGame" Grid.Column="1" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            <Image x:Name="imageButtonCancel" Source="Images/BrownButton.png" Grid.Column="1" Grid.Row="0" Stretch="Fill" IsHitTestVisible="False"/>
+            <TextBlock x:Name="textBlockCancel" Text="Cancel" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False"/>
+            <Label x:Name="labelLobbyName"/>
+        </Grid>
+
+
+
+
+    </Grid>
+</Page>

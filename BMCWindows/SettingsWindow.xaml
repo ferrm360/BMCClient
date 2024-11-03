@@ -57,7 +57,7 @@
                 <LineBreak/>
                 Contraseña
             </TextBlock>
-            <Button x:Name="buttonCancel" Grid.Column="6" Grid.Row="4" Background="Transparent" BorderBrush="Transparent"  Margin="0,0,18,0"/>
+            <Button x:Name="buttonCancel" Grid.Column="6" Grid.Row="4" Background="Transparent" BorderBrush="Transparent"  Margin="0,0,18,0" Click="GoBack"/>
             <Image Source="Images/BrownButton.png" Grid.Column="6" Grid.Row="4" IsHitTestVisible="False" Stretch="Fill" Margin="0,0,18,0"/>
             <TextBlock Text="Cancelar" Grid.Column="6" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False"/>
 
@@ -88,6 +88,22 @@
             <PasswordBox x:Name="passwordBoxPassword" Grid.Column="2" Grid.Row="3"/>
             <Label x:Name="labelConfirmPassword" Content="Confirmar contraseña:" Grid.Column="1" Grid.Row="5"/>
             <PasswordBox x:Name="passwordBoxNewPassword" Grid.Column="2" Grid.Row="5"/>
+
+        </Grid>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="72*"/>
+                <RowDefinition Height="49*"/>
+                <RowDefinition Height="104*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="127*"/>
+                <ColumnDefinition Width="119*"/>
+                <ColumnDefinition Width="554*"/>
+            </Grid.ColumnDefinitions>
+
+            <Image x:Name="imageUserProfilePicture" Grid.Row="1" Grid.Column="1" Stretch="Fill"/>
 
         </Grid>
 

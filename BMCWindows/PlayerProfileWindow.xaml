@@ -74,7 +74,7 @@
                 <RowDefinition Height="11*"/>
             </Grid.RowDefinitions>
             <TextBlock x:Name="textBlockBio" Grid.Column="2" Grid.Row="3" Background="White"/>
-            <Button x:Name="buttonCancel" Grid.Column="0" Grid.Row="0" Background="Transparent" BorderBrush="Transparent"/>
+            <Button x:Name="buttonCancel" Grid.Column="0" Grid.Row="0" Background="Transparent" BorderBrush="Transparent" Click="GoBack"/>
             <Image Source="Images/BrownButton.png" IsHitTestVisible="False" Grid.Column="0" Grid.Row="0" />
             <TextBlock Text="Cancel" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0"/>
 

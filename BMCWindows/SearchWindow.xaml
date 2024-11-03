@@ -66,14 +66,7 @@
                     <StackPanel>
                         <!-- Imagen del jugador en el popup -->
                         <Image Source="{Binding SelectedPlayer.PlayerImage}" Width="50" Height="50" HorizontalAlignment="Center" />
-
-                        <!-- Nombre del jugador -->
                         <TextBlock Text="{Binding UserName}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Margin="5" />
-
-                        <!-- Estadísticas del jugador -->
-                        
-
-                        <!-- Botones -->
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                             <Button x:Name="buttonSendRequest" Content="Enviar solicitud" Margin="5" Click="SendRequest"/>
                             

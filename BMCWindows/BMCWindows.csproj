@@ -53,6 +53,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Fonts\PressStart2P-Regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -67,6 +70,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\LobbyServer\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ProfileServer\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -77,10 +85,24 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="DTOs\Lobby.cs" />
+    <Compile Include="DTOs\Player.cs" />
     <Compile Include="FriendRequestsWindow.xaml.cs">
       <DependentUpon>FriendRequestsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameOptionsWindow.xaml.cs">
+      <DependentUpon>GameOptionsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Interfaces\IPage.cs" />
+    <Compile Include="LobbiesWindow.xaml.cs">
+      <DependentUpon>LobbiesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LobbyCreationWindow.xaml.cs">
+      <DependentUpon>LobbyCreationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LobbyWindow.xaml.cs">
+      <DependentUpon>LobbyWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Patterns\Singleton\UserSessionManager.cs" />
     <Compile Include="PlayerProfileWindow.xaml.cs">
       <DependentUpon>PlayerProfileWindow.xaml</DependentUpon>
@@ -94,13 +116,33 @@
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\EventMediator.cs" />
+    <Compile Include="Utilities\ImageConvertor.cs" />
+    <Compile Include="Utilities\LobbyViewModel.cs" />
     <Compile Include="Utilities\RelayCommand.cs" />
+    <Compile Include="Utilities\ToggleToColorConverter.cs" />
     <Compile Include="Validators\FieldValidator.cs" />
     <Page Include="FriendRequestsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GameOptionsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LobbiesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LobbyCreationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LobbyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -197,7 +239,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Resource Include="Fonts\PressStart2P-Regular.ttf" />
     <None Include="Connected Services\ChatServer\ChatService.wsdl" />
     <None Include="Connected Services\ChatServer\ChatService.xsd">
       <SubType>Designer</SubType>
@@ -231,6 +272,28 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\FriendServer\FriendshipService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LobbyServer\BMCWindows.LobbyServer.LobbyDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\LobbyServer\BMCWindows.LobbyServer.LobbyResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\LobbyServer\LobbyService.wsdl" />
+    <None Include="Connected Services\LobbyServer\LobbyService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LobbyServer\LobbyService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LobbyServer\LobbyService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LobbyServer\LobbyService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LobbyServer\LobbyService4.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ProfileServer\BMCWindows.ProfileServer.ImageResponse.datasource">
@@ -309,6 +372,7 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ChatServer\" />
     <WCFMetadataStorage Include="Connected Services\FriendServer\" />
+    <WCFMetadataStorage Include="Connected Services\LobbyServer\" />
     <WCFMetadataStorage Include="Connected Services\ProfileServer\" />
     <WCFMetadataStorage Include="Connected Services\Server\" />
   </ItemGroup>
@@ -368,6 +432,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\FriendServer\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\UnderConstruction.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\LobbyServer\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\LobbyServer\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\LobbyServer\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

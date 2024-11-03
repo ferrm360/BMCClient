@@ -53,7 +53,7 @@ namespace BMCWindows
             var imageUrl = proxyProfile.GetProfileImage(player.Username);
             if (imageUrl.ImageData == null || imageUrl.ImageData.Length == 0)
             {
-                MessageBox.Show("No image data returned.");
+                Console.WriteLine("No image data returned.");
             }
             else
             {
@@ -80,7 +80,7 @@ namespace BMCWindows
 
 
 
-        private void SendGeneralMessage_Click(object sender, RoutedEventArgs e)
+        private void SendGeneralMessage(object sender, RoutedEventArgs e)
         {
 
             Server.PlayerDTO player = new Server.PlayerDTO();
@@ -128,15 +128,26 @@ namespace BMCWindows
             {
                 FriendServer.FriendshipServiceClient friendsProxy = new FriendServer.FriendshipServiceClient();
                 var response = friendsProxy.GetFriendList(username);
+                ProfileServer.ProfileServiceClient profileProxy = new ProfileServer.ProfileServiceClient();
 
                 if (response.IsSuccess)
                 {
                     if (response.Friends != null && response.Friends.Any())
                     {
                         ObservableCollection<Friend> friendsList = new ObservableCollection<Friend>(
-                            response.Friends.Select(friendPlayer => new Friend
+                            response.Friends.Select(friendPlayer => 
                             {
-                                UserName = friendPlayer.Username,
+                                var friendProfilePicture = profileProxy.GetProfileImage(friendPlayer.Username);
+                                BitmapImage image = ConvertByteArrayToImage(friendProfilePicture.ImageData);
+
+                                return new Friend
+                                {
+                                    UserName = friendPlayer.Username,
+                                    friendPicture = image,
+                                };
+
+
+                                
                             })
                         );
                         FriendsList.ItemsSource = friendsList;
@@ -225,6 +236,11 @@ namespace BMCWindows
             this.NavigationService.Navigate(new PlayerProfileWindow(username));
         }
 
+        private void GoToGames(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new GameOptionsWindow());
+        }
+
     }
 
 
@@ -237,6 +253,7 @@ namespace BMCWindows
         public DateTime lastVisit {  get; set; }
         public Byte[] profileImage { get; set; }
         public int requestId { get; set; }
+        public BitmapImage friendPicture { get; set; }
     }
 
 

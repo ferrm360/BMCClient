@@ -40,14 +40,14 @@ namespace BMCWindows
             var imageUrl = proxyProfile.GetProfileImage(_username);
             if (imageUrl.ImageData == null || imageUrl.ImageData.Length == 0)
             {
-                MessageBox.Show("No image data returned.");
+                Console.WriteLine("No image data returned.");
             }
             else
             {
                 BitmapImage image = ConvertByteArrayToImage(imageUrl.ImageData);
                 if (image == null)
                 {
-                    MessageBox.Show("Image conversion failed.");
+                    Console.WriteLine("Image conversion failed.");
                 }
                 else
                 {
@@ -128,6 +128,11 @@ namespace BMCWindows
                 image.Freeze();
                 return image;
             }
+        }
+
+        private void GoBack(object sender, EventArgs e)
+        {
+            this.NavigationService.Navigate(new HomePage());
         }
     }
 }

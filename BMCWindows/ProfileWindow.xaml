@@ -21,8 +21,14 @@
                 <ColumnDefinition Width="126*"/>
                 <ColumnDefinition Width="583*"/>
             </Grid.ColumnDefinitions>
-            <Rectangle Fill="Black" Grid.Column="1" Grid.Row="1"/>
-            <Image x:Name="imageUserProfile" Grid.Column="1" Grid.Row="1"/>
+            <!--<Rectangle Fill="Black" Grid.Column="1" Grid.Row="1"/>
+            <Image x:Name="imageUserProfile" Grid.Column="1" Grid.Row="1" Stretch="Fill"/>-->
+            <Ellipse VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="1">
+                <Ellipse.Fill>
+                    <ImageBrush x:Name="ProfileImageBrush" Stretch="UniformToFill"/>
+                </Ellipse.Fill>
+            </Ellipse>
+
         </Grid>
 
         <Grid>
@@ -108,7 +114,9 @@
                 <RowDefinition Height="157*"/>
             </Grid.RowDefinitions>
 
-            <Button x:Name="buttonChangeProfilePicture" Grid.Column="1" Grid.Row="1" Click="UploadProfilePicture" />
+            <Button x:Name="buttonChangeProfilePicture" Grid.Column="1" Grid.Row="1" Click="UploadProfilePicture" Content="Change picture" Background="Transparent" BorderBrush="Transparent"/>
+            <Image x:Name="imageButton" Source="Images/BrownButton.png" Grid.Column="1" Grid.Row="1" Stretch="Fill" IsHitTestVisible="False"/>
+            <TextBlock Text="Change picture" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False" FontSize="8"/>
             <Button x:Name="buttonChangeBio" Grid.Column="4" Grid.Row="3" Background="Transparent" BorderBrush="Transparent" Click="MakeBioEditable"/>
             <Image Source="Images/EditButton.png" Grid.Column="4" Grid.Row="3" IsHitTestVisible="False"/>
             

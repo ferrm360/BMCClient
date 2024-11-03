@@ -1,4 +1,5 @@
 ﻿using BMCWindows.Patterns.Singleton;
+using BMCWindows.Utilities;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -35,9 +36,33 @@ namespace BMCWindows
             LoadFriendList(player.Username);
             string bio = proxy.GetBioByUsername(player.Username);
             textBlockBio.Text = bio;
-            
-        }
 
+            ProfileServer.ProfileServiceClient proxyProfile = new ProfileServer.ProfileServiceClient();
+            var imageUrl = proxyProfile.GetProfileImage(player.Username);
+            if (imageUrl.ImageData == null || imageUrl.ImageData.Length == 0)
+            {
+                Console.WriteLine("No image data returned.");
+            }
+            else
+            {
+                ImageConvertor imageConvertor = new ImageConvertor();
+                BitmapImage image = imageConvertor.ConvertByteArrayToImage(imageUrl.ImageData);
+                if (image == null)
+                {
+                    Console.WriteLine("Image conversion failed.");
+                }
+                else
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        //imageUserProfile.Source = image;
+                        ProfileImageBrush.ImageSource = image;
+                    });
+
+                }
+
+            }
+        }
         private void UploadProfilePicture(object sender, RoutedEventArgs e)
         {
             Server.PlayerDTO player = new Server.PlayerDTO();
@@ -48,7 +73,7 @@ namespace BMCWindows
             {
                 BitmapImage bitmap = new BitmapImage(new Uri(openFileDialog.FileName));
                 string urlImage = openFileDialog.FileName;
-                imageUserProfile.Source = bitmap;
+                ProfileImageBrush.ImageSource = bitmap;
                 byte[] byteImage = ConvertImageToByteArray(urlImage);
                 ProfileServer.ProfileServiceClient proxy = new ProfileServer.ProfileServiceClient();
                 var result = proxy.UpdateProfilePicture(player.Username, byteImage, urlImage);
@@ -73,7 +98,7 @@ namespace BMCWindows
 
             try
             {
-                imageBytes = File.ReadAllBytes(imagePath); // Leer la imagen como arreglo de bytes
+                imageBytes = File.ReadAllBytes(imagePath); 
             }
             catch (Exception ex)
             {
@@ -201,7 +226,7 @@ namespace BMCWindows
 
         private void GoBack(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+            this.NavigationService.Navigate(new HomePage());
         }
 
         private void LoadFriendList(string username)
@@ -211,14 +236,27 @@ namespace BMCWindows
                 FriendServer.FriendshipServiceClient friendsProxy = new FriendServer.FriendshipServiceClient();
                 var response = friendsProxy.GetFriendList(username);
 
+                ProfileServer.ProfileServiceClient profileProxy = new ProfileServer.ProfileServiceClient();
+                ImageConvertor imageConvertor = new ImageConvertor();
+
                 if (response.IsSuccess)
                 {
                     if (response.Friends != null && response.Friends.Any())
                     {
                         ObservableCollection<Friend> friendsList = new ObservableCollection<Friend>(
-                            response.Friends.Select(friendPlayer => new Friend
+                            response.Friends.Select(friendPlayer =>
                             {
-                                UserName = friendPlayer.Username,
+                                var friendProfilePicture = profileProxy.GetProfileImage(friendPlayer.Username);
+                                BitmapImage image = imageConvertor.ConvertByteArrayToImage(friendProfilePicture.ImageData);
+
+                                return new Friend
+                                {
+                                    UserName = friendPlayer.Username,
+                                    friendPicture = image,
+                                };
+
+
+
                             })
                         );
                         FriendsList.ItemsSource = friendsList;

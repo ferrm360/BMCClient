@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BMCWindows.Utilities;
 
 namespace BMCWindows
 {
@@ -27,7 +28,30 @@ namespace BMCWindows
         {
             InitializeComponent();
             Server.PlayerDTO player = new Server.PlayerDTO();
-            player = UserSessionManager.getInstance().getPlayerUserData();
+            player = UserSessionManager.getInstance().getPlayerUserData(); 
+            ProfileServer.ProfileServiceClient proxyProfile = new ProfileServer.ProfileServiceClient();
+            var imageUrl = proxyProfile.GetProfileImage(player.Username);
+            if (imageUrl.ImageData == null || imageUrl.ImageData.Length == 0)
+            {
+                MessageBox.Show("No image data returned.");
+            }
+            else
+            {
+                ImageConvertor imageConvertor = new ImageConvertor();
+                BitmapImage image = imageConvertor.ConvertByteArrayToImage(imageUrl.ImageData);
+                if (image == null)
+                {
+                    MessageBox.Show("Image conversion failed.");
+                }
+                else
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        imageUserProfilePicture.Source = image;
+                    });
+
+                }
+            }
 
         }
 
@@ -59,6 +83,11 @@ namespace BMCWindows
             }
             
             
+        }
+
+        private void GoBack(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
         }
     }
 }

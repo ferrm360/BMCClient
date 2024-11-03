@@ -27,7 +27,8 @@
                 <ColumnDefinition Width="387*"/>
                 <ColumnDefinition Width="221*"/>
             </Grid.ColumnDefinitions>
-            <Image x:Name="imageProfilePicture" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+            <Image x:Name="imageProfilePicture" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Fill"/>
 
         </Grid>
         <Grid Grid.ColumnSpan="2">
@@ -42,13 +43,13 @@
                 <ColumnDefinition Width="117*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBox x:Name="textBoxSearchFriends" Grid.Row="1" Margin="5,5,5,5" Padding="3"/>
+            <Label x:Name="labelFriends" Grid.Row="1" Margin="5,5,5,5" Padding="3" Content="Friends" HorizontalAlignment="Center" FontFamily="Press Start 2P Regular" FontSize="19"/>
             <ListBox x:Name="FriendsList" Grid.Row="2" Margin="10,10,10,10" Visibility="Visible" SelectionChanged="SelectFriend">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border Background="#DDD" Margin="2" CornerRadius="5" >
                             <StackPanel Orientation="Horizontal" Margin="5" >
-                                <Image x:Name="myImageControl" Width="40" Height="40" Margin="5"/>
+                                <Image x:Name="myImageControl" Source="{Binding friendPicture}"  Width="40" Height="40" Margin="5"/>
                                 <TextBlock Text="{Binding UserName}" VerticalAlignment="Center" FontSize="16" Margin="5" />
                             </StackPanel>
                         </Border>
@@ -139,7 +140,7 @@
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10,10,10,10">
                 <TextBox x:Name="textboxGeneralChat" Width="200" Margin="0,0,5,0"/>
-                <Button Content="Enviar" Click="SendGeneralMessage_Click"/>
+                <Button Content="Enviar" Click="SendGeneralMessage"/>
             </StackPanel>
 
         </Grid>
@@ -157,10 +158,10 @@
                 <ColumnDefinition Width="135*"/>
                 <ColumnDefinition Width="135*"/>
             </Grid.ColumnDefinitions>
-            <Label x:Name="labelUserName" Content="User" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" FontFamily="Press Start 2P Regular" Grid.ColumnSpan="2" Margin="187,0,0,0"/>
-            <Button x:Name="buttonEditProfile"  Margin="213,5,133,0" Background="Transparent" BorderBrush="Transparent" Grid.Column="1" Grid.Row="1"  Grid.ColumnSpan="3"/>
+            <Label x:Name="labelUserName" Content="User" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" FontFamily="Press Start 2P Regular"  Margin="0,0,0,0"/>
+            <Button x:Name="buttonGames"  Margin="213,5,133,0" Background="Transparent" BorderBrush="Transparent" Grid.Column="1" Grid.Row="1"  Grid.ColumnSpan="3" Click="GoToGames"/>
             <Image Source="Images/BrownButton.png" Grid.Column="1" Grid.Row="1" IsHitTestVisible="False" Grid.ColumnSpan="3" Margin="213,0,133,0"/>
-            <TextBlock Text="Editar perfil" HorizontalAlignment="Center" VerticalAlignment="Center"  Foreground="Black" Height="8" FontFamily="Press Start 2P Normal" FontSize="7" Grid.Row="1" Grid.Column="2" IsHitTestVisible="False" Width="84"/>
+            <TextBlock Text="Games" HorizontalAlignment="Center" VerticalAlignment="Center"  Foreground="Black" Height="8" FontFamily="Press Start 2P Normal" FontSize="7" Grid.Row="1" Grid.Column="2" IsHitTestVisible="False" Width="84"/>
 
 
 
