@@ -53,7 +53,7 @@
                             <TextBlock Text="{Binding CurrentPlayers}" Width="100" />
                             <TextBlock Text="/ {Binding MaxPlayers}" Width="50" />
                             <!-- Muestra el máximo de jugadores -->
-                            <Button Content="Unirse"  Margin="5,0,0,0" Click="OpenJoinWindow"/>
+                            <Button Content="Unirse"  Margin="5,0,0,0" Click="JoinLobby"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -64,7 +64,7 @@
                     <StackPanel>
                         <Label Content="Ingrese la contraseña:"/>
                         <PasswordBox x:Name="passwordBox" Margin="0,5,0,10"/>
-                        <Button Content="Aceptar" Click="AcceptPassword" />
+                        <Button Content="Aceptar"  />
                     </StackPanel>
                 </Border>
             </Popup>

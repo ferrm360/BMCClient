@@ -39,7 +39,7 @@ namespace BMCWindows
         {
             InitializeComponent();
             Messages = new ObservableCollection<Message>();
-            generalMessages.ItemsSource = Messages; // Enlazamos solo una vez aquí
+            generalMessages.ItemsSource = Messages; 
             //generalMessages.ItemsSource = Messages; 
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().getPlayerUserData();

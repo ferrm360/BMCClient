@@ -66,11 +66,50 @@
                 <ColumnDefinition Width="422*"/>
                 <ColumnDefinition Width="225*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="buttonCancelGame" Grid.Column="1" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            <Button x:Name="buttonCancelGame" Grid.Column="1" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Transparent" BorderBrush="Transparent"/>
             <Image x:Name="imageButtonCancel" Source="Images/BrownButton.png" Grid.Column="1" Grid.Row="0" Stretch="Fill" IsHitTestVisible="False"/>
             <TextBlock x:Name="textBlockCancel" Text="Cancel" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False"/>
             <Label x:Name="labelLobbyName"/>
         </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="309*"/>
+                <ColumnDefinition Width="91*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="355*"/>
+                <RowDefinition Height="64*"/>
+                <RowDefinition Height="31*"/>
+            </Grid.RowDefinitions>
+
+            <ListBox x:Name="generalMessages" Grid.Row="1" Margin="10,2,10,10">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <!--<TextBlock Text="{Binding Sender}" FontWeight="Bold"/>-->
+                            <TextBlock Text="{Binding Messages}" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBox x:Name="textboxGeneralChat" Width="200" Margin="0,0,5,0"/>
+                <Button Content="Enviar" Click="SendGeneralMessage"/>
+            </StackPanel>
+
+        </Grid>
+
+        <Popup x:Name="passwordPopup" StaysOpen="False" Placement="Mouse" AllowsTransparency="True" PopupAnimation="Slide">
+            <Border Background="White" BorderBrush="Gray" BorderThickness="1" Padding="10">
+                <StackPanel>
+                    <Label Content="Ingrese la contraseña:"/>
+                    <PasswordBox x:Name="passwordBox" Margin="0,5,0,10"/>
+                    <Button Content="Aceptar" Click="AcceptPassword" />
+                </StackPanel>
+            </Border>
+        </Popup>
 
 
 
