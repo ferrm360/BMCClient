@@ -93,6 +93,9 @@
     <Compile Include="GameOptionsWindow.xaml.cs">
       <DependentUpon>GameOptionsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameplayWindow.xaml.cs">
+      <DependentUpon>GameplayWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Interfaces\IPage.cs" />
     <Compile Include="LobbiesWindow.xaml.cs">
       <DependentUpon>LobbiesWindow.xaml</DependentUpon>
@@ -127,6 +130,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GameOptionsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GameplayWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -450,6 +457,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Battlefield.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

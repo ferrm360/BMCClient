@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BMCWindows.Patterns.Singleton;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,8 @@ namespace BMCWindows
     {
         public GameOptionsWindow()
         {
+            Server.PlayerDTO player = new Server.PlayerDTO();
+            player = UserSessionManager.getInstance().getPlayerUserData();
             InitializeComponent();
         }
 

@@ -55,7 +55,7 @@ namespace BMCWindows
             EventMediator.Instance.PlayerLeft += OnPlayerLeft;
 
             textBlockCurrentPlayerUsername.Text = player.Username;
-            //LoadPlayers();
+            LoadPlayers();
             if(_lobby.Host == player.Username)
             {
                 FilteredPlayers.Add(player.Username);
@@ -88,7 +88,7 @@ namespace BMCWindows
 
         private void LoadPlayers()
         {
-            /*Console.WriteLine("LoadPlayers");
+            Console.WriteLine("LoadPlayers");
             Application.Current.Dispatcher.Invoke(() =>
             {
                 FilteredPlayers.Clear(); // Limpia la colección antes de agregar
@@ -97,7 +97,7 @@ namespace BMCWindows
 
                 foreach (var player in _lobby.Players)
                 {
-                    
+                    Console.WriteLine(player);
                             Console.WriteLine("Entra");
 
                             FilteredPlayers.Add(player); // Agrega los jugadores excepto el actual
@@ -113,13 +113,8 @@ namespace BMCWindows
                     
                     
                 }
-            }); */
-            Server.PlayerDTO player = UserSessionManager.getInstance().getPlayerUserData();
-
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                FilteredPlayers.Add(player.Username);
-            });
+            }); 
+            
 
         }
 
@@ -219,8 +214,9 @@ namespace BMCWindows
                 if (response.IsSuccess)
                 {
                     _lobby = lobby;
-                    EventMediator.Instance.NotifyPlayerJoined(player.Username);
                     LoadPlayers();
+                    EventMediator.Instance.NotifyPlayerJoined(player.Username);
+                    
 
 
                 }
@@ -253,6 +249,14 @@ namespace BMCWindows
             JoinGame(_lobby, password);
 
             passwordPopup.IsOpen = false;
+        }
+
+        private void StartGame(object sender, RoutedEventArgs e)
+        {
+            if(_lobby.Players.Length == 2)
+            {
+                this.NavigationService.Navigate(new GameplayWindow(_lobby));
+            }
         }
 
     }

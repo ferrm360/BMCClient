@@ -50,7 +50,7 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Button x:Name="buttonStartGame" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="3" Margin="0,0,0,0" Background="Transparent" BorderBrush="Transparent"/>
+            <Button x:Name="buttonStartGame" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="3" Margin="0,0,0,0" Background="Transparent" BorderBrush="Transparent" Click="StartGame"/>
             <Image x:Name="imageButtonStartGame" Source="Images/BrownGreenButton.png" Stretch="Fill" Grid.Column="2" Grid.Row="3" IsHitTestVisible="False"/>
             <TextBlock x:Name="textBlock" Text="Start game" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,15" IsHitTestVisible="False"/>
         </Grid>
