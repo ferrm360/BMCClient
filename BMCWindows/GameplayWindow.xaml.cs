@@ -34,8 +34,6 @@ namespace BMCWindows
         {
             InitializeComponent();
             _lobby = lobby;
-
-            // Cargar las listas de jugadores al inicio
             Player1Cards.ItemsSource = LoadPlayer1List();
             Player2Cards.ItemsSource = LoadCurrentPlayerList();
             textBlockGameName.Text = _lobby.Name;
@@ -102,9 +100,15 @@ namespace BMCWindows
                 bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
                 bitmapImage.StreamSource = stream;
                 bitmapImage.EndInit();
-                bitmapImage.Freeze(); // Para poder usar la imagen en otros hilos
+                bitmapImage.Freeze(); 
                 return bitmapImage;
             }
+        }
+
+        private void LeaveGame(object sender, EventArgs e)
+        {
+            this.NavigationService.GoBack();
+
         }
     }
 

@@ -9,15 +9,8 @@
       Title="GameplayWindow"
       Background="#FEFFDB">
     <Grid>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="17*"/>
-                <RowDefinition Height="133*"/>
-            </Grid.RowDefinitions>
-            <Image Source="Images/Battlefield.jpg" Grid.Column="0" Grid.Row="1" Stretch="Fill"/>
 
 
-        </Grid>
 
 
 
@@ -119,6 +112,37 @@
                 <TextBlock Text="Jugadores en el lobby:" FontSize="16" Margin="5"/>
                 <TextBlock x:Name="TextBlockPlayerStatus" FontSize="16" Margin="5"/>
             </StackPanel>
+        </Grid>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="13*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="21*"/>
+                <ColumnDefinition Width="58*"/>
+                <ColumnDefinition Width="21*"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="Images/Battlefield.jpg" Grid.Column="1" Grid.Row="1"/>
+
+
+        </Grid>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="53*"/>
+                <RowDefinition Height="397*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="28*"/>
+                <ColumnDefinition Width="135*"/>
+                <ColumnDefinition Width="637*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="buttonLeaveGame" Grid.Column="1" Grid.Row="0" Background="Transparent" BorderBrush="Transparent" Click="LeaveGame"/>
+            <Image Source="Images/BrownButton.png" Grid.Column="1" Grid.Row="0" Stretch="Fill" IsHitTestVisible="False"/>
+            <TextBlock Text="Cancel" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False"/>
+
         </Grid>
     </Grid>
 </Page>
