@@ -27,38 +27,46 @@ namespace BMCWindows
     /// </summary>
     public partial class LobbiesWindow : Page
     {
-        public ObservableCollection<LobbyDTO> gameSessions {  get; set; }
+        public ObservableCollection<LobbyDTO> gameSessions { get; set; }
         public ObservableCollection<LobbyDTO> FilteredGameSessions { get; set; } = new ObservableCollection<LobbyDTO>();
         private LobbyDTO selectedLobby;
-        private LobbyDTO _lobby = new LobbyDTO();
-
+        private LobbyCallbackHandler _callbackHandler;
+        private LobbyServiceClient _proxy;
 
         public LobbiesWindow()
         {
             InitializeComponent();
-            Server.PlayerDTO player = new Server.PlayerDTO();
-            player = UserSessionManager.getInstance().getPlayerUserData();
+
+            // Inicializar el Callback Handler y Proxy
+            _callbackHandler = new LobbyCallbackHandler();
+            var callbackContext = new InstanceContext(_callbackHandler);
+            _proxy = new LobbyServiceClient(callbackContext);
+
             gameSessions = new ObservableCollection<LobbyDTO>();
             ApplyToggleStyle(publicToggleButton);
             ApplyToggleStyle(privateToggleButton);
+
             LoadLobbiesList();
-
-
         }
 
         private void LoadLobbiesList()
         {
             if (gameSessions == null)
             {
-                gameSessions = new ObservableCollection<LobbyDTO>(); 
+                gameSessions = new ObservableCollection<LobbyDTO>();
             }
-            using (var proxy = new LobbyServer.LobbyServiceClient())
+
+
+
+            // Crear el contexto de instancia con el callback vacío
+            var callbackContext = new InstanceContext(new EmptyLobbyCallback());
+            using (var proxy = new LobbyServer.LobbyServiceClient(callbackContext))
             {
                 try
                 {
                     var lobbies = proxy.GetAllLobbies();
 
-                    gameSessions.Clear(); 
+                    gameSessions.Clear();
 
                     foreach (var lobby in lobbies)
                     {
@@ -67,7 +75,7 @@ namespace BMCWindows
 
                     FilterLobbies();
 
-                    listBoxLobbies.ItemsSource = gameSessions; 
+                    listBoxLobbies.ItemsSource = gameSessions;
                 }
                 catch (Exception ex)
                 {
@@ -75,6 +83,7 @@ namespace BMCWindows
                 }
             }
         }
+
 
 
         private void FilterLobbies()
@@ -100,7 +109,14 @@ namespace BMCWindows
 
         private void JoinLobby(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new LobbyWindow(selectedLobby));
+            if (selectedLobby == null)
+            {
+                MessageBox.Show("Por favor, selecciona un lobby.");
+                return;
+            }
+
+            // Pasar el proxy y el callbackHandler al navegar a LobbyWindow
+            this.NavigationService.Navigate(new LobbyWindow(selectedLobby, _proxy, _callbackHandler));
         }
 
 
