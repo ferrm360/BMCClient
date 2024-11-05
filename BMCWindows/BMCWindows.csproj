@@ -119,8 +119,10 @@
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\EmptyLobbyCallback.cs" />
     <Compile Include="Utilities\EventMediator.cs" />
     <Compile Include="Utilities\ImageConvertor.cs" />
+    <Compile Include="Utilities\LobbyCallbackHandler.cs" />
     <Compile Include="Utilities\LobbyViewModel.cs" />
     <Compile Include="Utilities\RelayCommand.cs" />
     <Compile Include="Utilities\ToggleToColorConverter.cs" />

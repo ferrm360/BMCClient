@@ -1,206 +1,172 @@
-﻿using BMCWindows.ChatServer;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Windows;
+using System.Windows.Controls;
 using BMCWindows.DTOs;
 using BMCWindows.LobbyServer;
 using BMCWindows.Patterns.Singleton;
 using BMCWindows.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace BMCWindows
 {
-    /// <summary>
-    /// Lógica de interacción para LobbyWindow.xaml
-    /// </summary>
-    public partial class LobbyWindow : Page, IChatServiceCallback 
+    public partial class LobbyWindow : Page
     {
         private LobbyDTO _lobby;
-        public ObservableCollection<string> FilteredPlayers { get; set; } 
+        public ObservableCollection<string> FilteredPlayers { get; set; }
         public ObservableCollection<Message> Messages { get; set; }
-        public ChatService chatService = new ChatService();
-        public ChatServer.ChatServiceClient proxy;
-        LobbyServer.LobbyServiceClient lobbyProxy;
+        private LobbyServiceClient lobbyProxy;
 
-        public LobbyWindow(LobbyDTO lobby)
+        public LobbyWindow(LobbyDTO lobby, LobbyServiceClient proxy, LobbyCallbackHandler callbackHandler)
         {
-            Server.PlayerDTO player = new Server.PlayerDTO();
-            player = UserSessionManager.getInstance().getPlayerUserData();
             InitializeComponent();
-            
-            _lobby = lobby;
-            DataContext = this;
-            labelLobbyName.Content = _lobby.Name;
-            Messages = new ObservableCollection<Message>();
-            generalMessages.ItemsSource = Messages;
-            InstanceContext context = new InstanceContext(this);
-            proxy = new ChatServer.ChatServiceClient(context);
-            lobbyProxy = new LobbyServer.LobbyServiceClient();
-            FilteredPlayers = new ObservableCollection<string>();
-            listViewJoinedPlayer.ItemsSource = FilteredPlayers;
-            EventMediator.Instance.PlayerJoined += OnPlayerJoined;
-            EventMediator.Instance.PlayerLeft += OnPlayerLeft;
 
+            _lobby = lobby;
+            lobbyProxy = proxy;
+            DataContext = this;
+            Messages = new ObservableCollection<Message>();
+            FilteredPlayers = new ObservableCollection<string>();
+
+            generalMessages.ItemsSource = Messages;
+            listViewJoinedPlayer.ItemsSource = FilteredPlayers;
+
+            callbackHandler.PlayerJoined += (playerName, lobbyId) =>
+            {
+                if (_lobby.LobbyId == lobbyId)
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        OnPlayerJoined(playerName);
+                    });
+                }
+            };
+
+            callbackHandler.PlayerLeft += (playerName, lobbyId) =>
+            {
+                if (_lobby.LobbyId == lobbyId)
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        OnPlayerLeft(playerName);
+                    });
+                }
+            };
+
+            callbackHandler.PlayerJoinedMessage += message =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    Messages.Add(new Message { Sender = "System", Messages = message });
+                });
+            };
+
+            callbackHandler.PlayerLeftMessage += message =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    Messages.Add(new Message { Sender = "System", Messages = message });
+                });
+            };
+
+            var player = UserSessionManager.getInstance().getPlayerUserData();
             textBlockCurrentPlayerUsername.Text = player.Username;
+            labelLobbyName.Content = _lobby.Name;
             LoadPlayers();
-            if(_lobby.Host == player.Username)
+
+            if (_lobby.Host == player.Username)
             {
                 FilteredPlayers.Add(player.Username);
             }
-
-            if(_lobby.Host != player.Username)
+            else
             {
                 OpenJoinWindow();
             }
         }
 
-
-
-
-
-        private void UpdatePlayerList(List<string> updatedPlayers)
-        {
-            FilteredPlayers.Clear();
-            Server.PlayerDTO currentPlayer = new Server.PlayerDTO();
-            currentPlayer = UserSessionManager.getInstance().getPlayerUserData();
-            foreach (var player in updatedPlayers)
-            {
-                if(player != currentPlayer.Username)
-                {
-                    FilteredPlayers.Add(player);
-
-                }
-            }
-        }
-
         private void LoadPlayers()
         {
-            Console.WriteLine("LoadPlayers");
             Application.Current.Dispatcher.Invoke(() =>
             {
-                FilteredPlayers.Clear(); // Limpia la colección antes de agregar
-
-                Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().getPlayerUserData();
-
+                FilteredPlayers.Clear();
                 foreach (var player in _lobby.Players)
                 {
-                    Console.WriteLine(player);
-                            Console.WriteLine("Entra");
-
-                            FilteredPlayers.Add(player); // Agrega los jugadores excepto el actual
-
-                            foreach (var player2 in FilteredPlayers)
-                            {
-                                Console.WriteLine("Jugadores en Filtered players:" + player2);
-
-                            }
-
-                        
-
-                    
-                    
+                    FilteredPlayers.Add(player);
                 }
-            }); 
-            
-
+            });
         }
-
 
         private void OnPlayerJoined(string playerUsername)
         {
-            Application.Current.Dispatcher.Invoke(() =>
+            if (!FilteredPlayers.Contains(playerUsername))
             {
-                MessageBox.Show($"Jugador recibido en OnPlayerJoined: {playerUsername}");
-
-                // Agrega el nuevo jugador a la lista interna del lobby
-                if (!_lobby.Players.Contains(playerUsername))
-                {
-                    var playersList = new List<string>(_lobby.Players);
-                    playersList.Add(playerUsername);
-                    _lobby.Players = playersList.ToArray();
-                }
-
-                // Actualiza la ObservableCollection para reflejar el cambio en la UI
-                if (!FilteredPlayers.Contains(playerUsername))
-                {
-                    FilteredPlayers.Add(playerUsername); // Asegúrate de que también se actualice en la UI
-                }
-            });
-
-            LoadPlayers();
+                FilteredPlayers.Add(playerUsername);
+                Messages.Add(new Message { Sender = "System", Messages = $"{playerUsername} se ha unido a la lobby." });
+            }
         }
-
 
         private void OnPlayerLeft(string playerUsername)
         {
-            Server.PlayerDTO player = UserSessionManager.getInstance().getPlayerUserData();
-            if (_lobby.Players.Contains(playerUsername))
+            if (FilteredPlayers.Contains(playerUsername))
             {
-                LoadPlayers();
-                
+                FilteredPlayers.Remove(playerUsername);
+                Messages.Add(new Message { Sender = "System", Messages = $"{playerUsername} ha salido de la lobby." });
             }
         }
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
-            Server.PlayerDTO player = new Server.PlayerDTO();
-            player = UserSessionManager.getInstance().getPlayerUserData();
-           
+            var player = UserSessionManager.getInstance().getPlayerUserData();
             string lobbyId = _lobby.LobbyId;
-            lobbyProxy.LeaveLobby(lobbyId, player.Username);
+
+            try
+            {
+                lobbyProxy.LeaveLobby(lobbyId, player.Username);
+                NavigationService.GoBack();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al salir de la lobby: {ex.Message}");
+            }
         }
 
         private void SendGeneralMessage(object sender, RoutedEventArgs e)
         {
-            Server.PlayerDTO player = new Server.PlayerDTO();
-            player = UserSessionManager.getInstance().getPlayerUserData();
-
+            var player = UserSessionManager.getInstance().getPlayerUserData();
             if (!string.IsNullOrEmpty(textboxGeneralChat.Text))
             {
-                proxy.SendMessage(player.Username, textboxGeneralChat.Text);
-                ReceiveMessage(textboxGeneralChat.Text);
+                Messages.Add(new Message { Sender = player.Username, Messages = textboxGeneralChat.Text });
                 textboxGeneralChat.Clear();
-                //LoadRecentMessages();
-                // Actualizar los mensajes mostrados en la interfaz
             }
         }
 
-        public void ReceiveMessage(string message)
+        private void OpenJoinWindow()
         {
-            Server.PlayerDTO player = UserSessionManager.getInstance().getPlayerUserData();
-
-            Application.Current.Dispatcher.Invoke(() =>
+            if (_lobby.IsPrivate)
             {
-                Messages.Add(new Message { Sender = player.Username, Messages = message });
-            });
-
+                passwordPopup.IsOpen = true;
+            }
+            else
+            {
+                JoinGame(_lobby, null);
+            }
         }
 
+        private void AcceptPassword(object sender, RoutedEventArgs e)
+        {
+            string password = passwordBox.Password;
+            JoinGame(_lobby, password);
+            passwordPopup.IsOpen = false;
+        }
 
         private void JoinGame(LobbyDTO lobby, string password)
         {
-            Server.PlayerDTO player = new Server.PlayerDTO();
-            player = UserSessionManager.getInstance().getPlayerUserData();
+            var player = UserSessionManager.getInstance().getPlayerUserData();
             if (lobby == null)
             {
                 MessageBox.Show("Por favor, selecciona un lobby.");
                 return;
             }
 
-            using (lobbyProxy)
+            try
             {
                 var requestDTO = new JoinLobbyRequestDTO
                 {
@@ -214,41 +180,17 @@ namespace BMCWindows
                 if (response.IsSuccess)
                 {
                     _lobby = lobby;
-                    LoadPlayers();
-                    EventMediator.Instance.NotifyPlayerJoined(player.Username);
-                    
-
-
+                    OnPlayerJoined(player.Username);
                 }
                 else
                 {
                     MessageBox.Show(response.ErrorKey);
                 }
             }
-        }
-
-        private void OpenJoinWindow()
-        {
-            
-
-            if (_lobby.IsPrivate)
+            catch (Exception ex)
             {
-                passwordPopup.IsOpen = true;
+                MessageBox.Show($"Error al unirse a la lobby: {ex.Message}");
             }
-            else
-            {
-                JoinGame(_lobby, null);
-            }
-        }
-
-        private void AcceptPassword(object sender, RoutedEventArgs e)
-        {
-            
-            string password = passwordBox.Password;
-
-            JoinGame(_lobby, password);
-
-            passwordPopup.IsOpen = false;
         }
 
         private void StartGame(object sender, RoutedEventArgs e)
