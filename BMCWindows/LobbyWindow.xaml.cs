@@ -21,7 +21,7 @@ namespace BMCWindows
             InitializeComponent();
 
             _lobby = lobby;
-            lobbyProxy = proxy; // Usa el proxy existente
+            lobbyProxy = proxy;
             DataContext = this;
             Messages = new ObservableCollection<Message>();
             FilteredPlayers = new ObservableCollection<string>();
@@ -29,7 +29,6 @@ namespace BMCWindows
             generalMessages.ItemsSource = Messages;
             listViewJoinedPlayer.ItemsSource = FilteredPlayers;
 
-            // Vincular el callbackHandler a los eventos de UI
             callbackHandler.PlayerJoined += (playerName, lobbyId) =>
             {
                 if (_lobby.LobbyId == lobbyId)
@@ -68,13 +67,11 @@ namespace BMCWindows
                 });
             };
 
-            // Inicializar la UI y cargar los jugadores actuales en la lobby
             var player = UserSessionManager.getInstance().getPlayerUserData();
             textBlockCurrentPlayerUsername.Text = player.Username;
             labelLobbyName.Content = _lobby.Name;
             LoadPlayers();
 
-            // Añadir al host en la lista de jugadores, si es el jugador actual
             if (_lobby.Host == player.Username)
             {
                 FilteredPlayers.Add(player.Username);

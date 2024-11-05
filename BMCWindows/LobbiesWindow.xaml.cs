@@ -37,7 +37,6 @@ namespace BMCWindows
         {
             InitializeComponent();
 
-            // Inicializar el Callback Handler y Proxy
             _callbackHandler = new LobbyCallbackHandler();
             var callbackContext = new InstanceContext(_callbackHandler);
             _proxy = new LobbyServiceClient(callbackContext);
@@ -58,7 +57,6 @@ namespace BMCWindows
 
 
 
-            // Crear el contexto de instancia con el callback vacío
             var callbackContext = new InstanceContext(new EmptyLobbyCallback());
             using (var proxy = new LobbyServer.LobbyServiceClient(callbackContext))
             {
@@ -83,8 +81,6 @@ namespace BMCWindows
                 }
             }
         }
-
-
 
         private void FilterLobbies()
         {
@@ -115,7 +111,6 @@ namespace BMCWindows
                 return;
             }
 
-            // Pasar el proxy y el callbackHandler al navegar a LobbyWindow
             this.NavigationService.Navigate(new LobbyWindow(selectedLobby, _proxy, _callbackHandler));
         }
 
@@ -212,11 +207,5 @@ namespace BMCWindows
             };
             button.SetBinding(ToggleButton.ForegroundProperty, foregroundBinding);
         }
-
-
-
     }
-
-
-    
 }

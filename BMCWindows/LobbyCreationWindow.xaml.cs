@@ -89,12 +89,10 @@ namespace BMCWindows
 
         private void CreateLobby(object sender, RoutedEventArgs e)
         {
-            // Crear una instancia del callback y el contexto de instancia
             var callbackHandler = new LobbyCallbackHandler();
             var callbackContext = new InstanceContext(callbackHandler);
             var proxy = new LobbyServer.LobbyServiceClient(callbackContext);
 
-            // Configurar solicitud de creación de lobby
             var requestDTO = new LobbyServer.CreateLobbyRequestDTO
             {
                 Username = UserSessionManager.getInstance().getPlayerUserData().Username,
@@ -104,13 +102,11 @@ namespace BMCWindows
                 Password = privateToggleButton.IsChecked == true ? textBoxLobbyPassword.Text : null
             };
 
-            // Validar campos antes de intentar crear el lobby
             if ((privateToggleButton.IsChecked == false && !FieldValidator.AreFieldsEmpty(requestDTO.Name)) ||
                 (privateToggleButton.IsChecked == true && !FieldValidator.AreFieldsEmpty(requestDTO.Name, requestDTO.Password)))
             {
                 try
                 {
-                    // Llamada al servicio para crear la lobby
                     var result = proxy.CreateLobby(requestDTO);
 
                     if (result.IsSuccess)
@@ -118,7 +114,6 @@ namespace BMCWindows
                         var lobbyDto = result.Lobby;
                         Console.WriteLine("Lobbies disponibles: " + proxy.GetAllLobbies().Length);
 
-                        // Suscribir eventos para manejar notificaciones antes de navegar
                         callbackHandler.PlayerJoined += (playerName, lobbyId) =>
                         {
                             Console.WriteLine($"{playerName} se ha unido a la lobby {lobbyId}");
@@ -128,7 +123,6 @@ namespace BMCWindows
                             Console.WriteLine($"{playerName} ha salido de la lobby {lobbyId}");
                         };
 
-                        // Navegar a LobbyWindow pasando el proxy y el callbackHandler
                         this.NavigationService.Navigate(new LobbyWindow(lobbyDto, proxy, callbackHandler));
                     }
                     else
@@ -152,17 +146,9 @@ namespace BMCWindows
             }
         }
 
-
-
-
         private void CancelLobbyCreation(object sender, RoutedEventArgs e)
         {
             this.NavigationService.GoBack();
         }
-
-
     }
-
-
-
 }
