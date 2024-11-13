@@ -51,7 +51,7 @@
                         <StackPanel Orientation="Horizontal" Margin="5">
                             <TextBlock Text="{Binding Name}" Width="200"/>
                             <TextBlock Text="{Binding CurrentPlayers}" Width="100" />
-                            <TextBlock Text="/ {Binding MaxPlayers}" Width="50" />
+                            <TextBlock Text="{Binding MaxPlayers}" Width="50" />
                             <!-- Muestra el máximo de jugadores -->
                             <Button Content="Unirse"  Margin="5,0,0,0" Click="JoinLobby"/>
                         </StackPanel>
@@ -72,7 +72,20 @@
         </Grid>
 
         <Grid>
-            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="22*"/>
+                <RowDefinition Height="203*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="16*"/>
+                <ColumnDefinition Width="141*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="buttonCancel" Grid.Column="1" Grid.Row="0" Background="Transparent" BorderBrush="Transparent" Click="Cancel"/>
+            <Image Source="Images/BrownButton.png"  Grid.Column="1" Grid.Row="0" IsHitTestVisible="False"/>
+            <TextBlock Text="Cancel" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False"/>
+
+
         </Grid>
 
 

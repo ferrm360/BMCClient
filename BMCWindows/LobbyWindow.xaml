@@ -66,7 +66,7 @@
                 <ColumnDefinition Width="422*"/>
                 <ColumnDefinition Width="225*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="buttonCancelGame" Grid.Column="1" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Transparent" BorderBrush="Transparent"/>
+            <Button x:Name="buttonCancelGame" Grid.Column="1" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Transparent" BorderBrush="Transparent" Click="Cancel"/>
             <Image x:Name="imageButtonCancel" Source="Images/BrownButton.png" Grid.Column="1" Grid.Row="0" Stretch="Fill" IsHitTestVisible="False"/>
             <TextBlock x:Name="textBlockCancel" Text="Cancel" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False"/>
             <Label x:Name="labelLobbyName"/>

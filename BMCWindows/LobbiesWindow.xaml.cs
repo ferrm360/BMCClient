@@ -40,12 +40,15 @@ namespace BMCWindows
             _callbackHandler = new LobbyCallbackHandler();
             var callbackContext = new InstanceContext(_callbackHandler);
             _proxy = new LobbyServiceClient(callbackContext);
-
+            publicToggleButton.Checked += ToggleButtonsChecked;
+            privateToggleButton.Checked += ToggleButtonsChecked;
             gameSessions = new ObservableCollection<LobbyDTO>();
+            DataContext = this;
             ApplyToggleStyle(publicToggleButton);
             ApplyToggleStyle(privateToggleButton);
+           
 
-            LoadLobbiesList();
+           LoadLobbiesList();
         }
 
         private void LoadLobbiesList()
@@ -206,6 +209,42 @@ namespace BMCWindows
                 Converter = toggleToForegroundConverter
             };
             button.SetBinding(ToggleButton.ForegroundProperty, foregroundBinding);
+        }
+
+        private void ToggleButtonsChecked(object sender, RoutedEventArgs e)
+        {
+            FilteredGameSessions.Clear();
+
+            if (sender == publicToggleButton)
+            {
+                FilteredGameSessions.Clear();
+                privateToggleButton.IsChecked = false; 
+                foreach (var lobby in gameSessions)
+                {
+                    if (!lobby.IsPrivate)
+                    {
+                        FilteredGameSessions.Add(lobby);
+                    }
+                }
+            }
+            else if (sender == privateToggleButton)
+            {
+                FilteredGameSessions.Clear();
+                publicToggleButton.IsChecked = false; 
+                foreach (var lobby in gameSessions)
+                {
+                    if (lobby.IsPrivate)
+                    {
+                        FilteredGameSessions.Add(lobby);
+                    }
+                }
+            }
+        }
+
+
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
         }
     }
 }

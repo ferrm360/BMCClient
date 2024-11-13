@@ -46,6 +46,34 @@
             </Setter>
         </Style>
 
+        <!-- Estilo para cartas con efecto de clic para quedarse desplazadas -->
+        <Style x:Key="ClickableCardStyle" TargetType="Border">
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <TranslateTransform X="0" Y="0"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <!-- Desplazar la carta hacia arriba cuando el mouse pasa por encima -->
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <TranslateTransform X="0" Y="-30"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <!-- Mantener la carta desplazada al hacer clic y regresar al hacer clic de nuevo -->
+                <Trigger Property="Tag" Value="Clicked">
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <TranslateTransform X="0" Y="-80"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+
 
     </Application.Resources>
 

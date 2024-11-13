@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using BMCWindows.DTOs;
@@ -180,6 +181,9 @@ namespace BMCWindows
                 if (response.IsSuccess)
                 {
                     _lobby = lobby;
+                    var playersList = _lobby.Players.ToList(); 
+                    playersList.Add(player.Username); 
+                    _lobby.Players = playersList.ToArray();
                     OnPlayerJoined(player.Username);
                 }
                 else
@@ -195,9 +199,13 @@ namespace BMCWindows
 
         private void StartGame(object sender, RoutedEventArgs e)
         {
-            if(_lobby.Players.Length == 2)
+            foreach (var lobby in _lobby.Players)
             {
-                this.NavigationService.Navigate(new GameplayWindow(_lobby));
+                Console.WriteLine(lobby);
+            }
+            if(FilteredPlayers.Count > 1)
+            {
+                this.NavigationService.Navigate(new GameplayWindow(_lobby, FilteredPlayers));
             }
         }
 

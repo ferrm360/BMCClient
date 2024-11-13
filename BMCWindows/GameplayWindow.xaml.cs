@@ -27,16 +27,37 @@ namespace BMCWindows
     public partial class GameplayWindow : Page
     {
         private LobbyDTO _lobby;
-        public ObservableCollection<Player> Player1 { get; set; } = new ObservableCollection<Player>();
-        public ObservableCollection<Player> Player2 { get; set; } = new ObservableCollection<Player>();
+        private ObservableCollection<String> _Players { get; set; } = new ObservableCollection<String>();
+        private ObservableCollection<Player> Player1 { get; set; } = new ObservableCollection<Player>();
+        private ObservableCollection<Player> Player2 { get; set; } = new ObservableCollection<Player>();
+        private int[,] Matrix { get; set; }
 
-        public GameplayWindow(LobbyDTO lobby)
+        public GameplayWindow(LobbyDTO lobby, ObservableCollection<String> Players)
         {
             InitializeComponent();
             _lobby = lobby;
+            _Players = Players;
+            Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().getPlayerUserData();
             Player1Cards.ItemsSource = LoadPlayer1List();
-            Player2Cards.ItemsSource = LoadCurrentPlayerList();
+            if(_lobby.Host == currentPlayer.Username)
+            {
+                Player2Cards.ItemsSource = LoadHost();
+            }
+            else
+            {
+                Player2Cards.ItemsSource = LoadCurrentPlayerList();
+            }
             textBlockGameName.Text = _lobby.Name;
+
+            Matrix = new int[5, 3]
+       {
+            { 1, 2, 3 },
+            { 4, 5, 6 },
+            { 7, 8, 9 },
+            { 9, 10, 11 },
+            { 11, 12, 13 }
+       };
+
         }
 
         private ObservableCollection<Player> LoadPlayer1List()
@@ -47,7 +68,7 @@ namespace BMCWindows
 
             try
             {
-                foreach (var player in _lobby.Players)
+                foreach (var player in _Players)
                 {
                     if (currentPlayer.Username != player)
                     {
@@ -66,6 +87,36 @@ namespace BMCWindows
             }
 
             return playerList;
+        }
+
+        private ObservableCollection<Player> LoadHost()
+        {
+            Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().getPlayerUserData();
+            ProfileServer.ProfileServiceClient profileProxy = new ProfileServer.ProfileServiceClient();
+            ObservableCollection<Player> playerList = new ObservableCollection<Player>();
+
+            try
+            {
+                
+                
+                    if (currentPlayer.Username == _lobby.Host)
+                    {
+                        var playerProfilePicture = profileProxy.GetProfileImage(currentPlayer.Username);
+                        if (playerProfilePicture.ImageData != null && playerProfilePicture.ImageData.Length > 0)
+                        {
+                            BitmapImage image = ConvertByteArrayToImage(playerProfilePicture.ImageData);
+                            playerList.Add(new Player { Username = _lobby.Host, ProfilePicture = image });
+                        }
+                    }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading player 1 list: {ex.Message}");
+            }
+
+            return playerList;
+
         }
 
         private ObservableCollection<Player> LoadCurrentPlayerList()
@@ -110,6 +161,43 @@ namespace BMCWindows
             this.NavigationService.GoBack();
 
         }
-    }
 
+        public ObservableCollection<int> FlatMatrix
+        {
+            get
+            {
+                var flatList = new ObservableCollection<int>();
+                for (int i = 0; i < Matrix.GetLength(0); i++)
+                {
+                    for (int j = 0; j < Matrix.GetLength(1); j++)
+                    {
+                        flatList.Add(Matrix[i, j]);
+                    }
+                }
+                return flatList;
+            }
+        }
+
+        private void SetCard(object sender, MouseButtonEventArgs e)
+        {
+            var cell = sender as Border;
+            if (cell != null)
+            {
+                var textBlock = cell.Child as TextBlock;
+                if (textBlock != null)
+                {
+                    var value = textBlock.Text;
+                    MessageBox.Show($"Seleccionaste la celda con el valor: {value}");
+                }
+                var row = Grid.GetRow(cell);  
+                var column = Grid.GetColumn(cell);  
+
+                MessageBox.Show($"Posición de la celda seleccionada: Fila {row}, Columna {column}");
+            }
+        }
+
+
+    }
 }
+
+

@@ -46,7 +46,7 @@ namespace BMCWindows
                             response.FriendRequests.Select(friendPlayer => new Friend
                             {
                                 UserName = friendPlayer.ReceiverUsername,
-                                 requestId = friendPlayer.RequestID,
+                                 RequestId = friendPlayer.RequestID,
 
                             })
                         );
@@ -86,7 +86,7 @@ namespace BMCWindows
             if (selectedPlayer != null)
             {
                 FriendServer.FriendshipServiceClient proxy = new FriendServer.FriendshipServiceClient();
-                var result = proxy.AcceptFriendRequest(selectedPlayer.requestId);
+                var result = proxy.AcceptFriendRequest(selectedPlayer.RequestId);
                 if (result.IsSuccess)
                 {
                     MessageBox.Show("Solicitud rechazada exitosamente");
@@ -108,7 +108,7 @@ namespace BMCWindows
             if (selectedPlayer != null)
             {
                 FriendServer.FriendshipServiceClient proxy = new FriendServer.FriendshipServiceClient();
-                var result = proxy.RejectFriendResponse(selectedPlayer.requestId);
+                var result = proxy.RejectFriendResponse(selectedPlayer.RequestId);
                 if (result.IsSuccess)
                 {
                     MessageBox.Show("Solicitud rechazada exitosamente");

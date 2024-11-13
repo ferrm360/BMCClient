@@ -252,7 +252,7 @@ namespace BMCWindows
                                 return new Friend
                                 {
                                     UserName = friendPlayer.Username,
-                                    friendPicture = image,
+                                    FriendPicture = image,
                                 };
 
 

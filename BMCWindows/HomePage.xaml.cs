@@ -143,7 +143,7 @@ namespace BMCWindows
                                 return new Friend
                                 {
                                     UserName = friendPlayer.Username,
-                                    friendPicture = image,
+                                    FriendPicture = image,
                                 };
 
 
@@ -250,10 +250,10 @@ namespace BMCWindows
     public class Friend
     {
         public string UserName { get; set; }
-        public DateTime lastVisit {  get; set; }
-        public Byte[] profileImage { get; set; }
-        public int requestId { get; set; }
-        public BitmapImage friendPicture { get; set; }
+        public DateTime LastVisit {  get; set; }
+        public Byte[] ProfileImage { get; set; }
+        public int RequestId { get; set; }
+        public BitmapImage FriendPicture { get; set; }
     }
 
 
