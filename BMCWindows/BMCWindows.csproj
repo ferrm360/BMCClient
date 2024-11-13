@@ -60,6 +60,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Connected Services\ChatLobbyServer\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ChatServer\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -119,6 +124,7 @@
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\ChatCallBackHandler.cs" />
     <Compile Include="Utilities\EmptyLobbyCallback.cs" />
     <Compile Include="Utilities\EventMediator.cs" />
     <Compile Include="Utilities\ImageConvertor.cs" />
@@ -248,6 +254,13 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="Connected Services\ChatLobbyServer\ChatLobbyService.wsdl" />
+    <None Include="Connected Services\ChatLobbyServer\ChatLobbyService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ChatLobbyServer\ChatLobbyService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ChatServer\ChatService.wsdl" />
     <None Include="Connected Services\ChatServer\ChatService.xsd">
       <SubType>Designer</SubType>
@@ -379,6 +392,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ChatLobbyServer\" />
     <WCFMetadataStorage Include="Connected Services\ChatServer\" />
     <WCFMetadataStorage Include="Connected Services\FriendServer\" />
     <WCFMetadataStorage Include="Connected Services\LobbyServer\" />
@@ -465,6 +479,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\GameplayBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ChatLobbyServer\ChatLobbyService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ChatLobbyServer\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ChatLobbyServer\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ChatLobbyServer\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

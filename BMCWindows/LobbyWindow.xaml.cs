@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
+using BMCWindows.ChatLobbyServer;
 using BMCWindows.DTOs;
 using BMCWindows.LobbyServer;
 using BMCWindows.Patterns.Singleton;
@@ -15,20 +17,27 @@ namespace BMCWindows
         private LobbyDTO _lobby;
         public ObservableCollection<string> FilteredPlayers { get; set; }
         public ObservableCollection<Message> Messages { get; set; }
-        private LobbyServiceClient lobbyProxy;
+        private LobbyServiceClient _lobbyProxy;
+        private IChatLobbyService _chatService;
+        private ChatCallBackHandler _chatCallbackHandler;
 
         public LobbyWindow(LobbyDTO lobby, LobbyServiceClient proxy, LobbyCallbackHandler callbackHandler)
         {
             InitializeComponent();
 
             _lobby = lobby;
-            lobbyProxy = proxy;
+            _lobbyProxy = proxy;
             DataContext = this;
             Messages = new ObservableCollection<Message>();
             FilteredPlayers = new ObservableCollection<string>();
 
             generalMessages.ItemsSource = Messages;
             listViewJoinedPlayer.ItemsSource = FilteredPlayers;
+
+            _chatCallbackHandler = new ChatCallBackHandler();
+            _chatCallbackHandler.MessageReceived += OnMessageReceived;
+
+            InitializeChatService();
 
             callbackHandler.PlayerJoined += (playerName, lobbyId) =>
             {
@@ -73,6 +82,8 @@ namespace BMCWindows
             labelLobbyName.Content = _lobby.Name;
             LoadPlayers();
 
+            RegisterUserInChat(player.Username);
+
             if (_lobby.Host == player.Username)
             {
                 FilteredPlayers.Add(player.Username);
@@ -83,14 +94,62 @@ namespace BMCWindows
             }
         }
 
+        private void InitializeChatService()
+        {
+            try
+            {
+                var instanceContext = new InstanceContext(_chatCallbackHandler);
+                var chatFactory = new DuplexChannelFactory<IChatLobbyService>(instanceContext, "NetTcpBinding_IChatLobbyService");
+                _chatService = chatFactory.CreateChannel();
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show("Error: El servidor de chat no está disponible. Verifique su conexión o la configuración del servidor.");
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show("Error de comunicación con el servicio de chat. Por favor, inténtelo más tarde.");
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("El intento de conexión con el servicio de chat ha superado el tiempo límite.");
+            }
+        }
+
+        private void RegisterUserInChat(string username)
+        {
+            try
+            {
+                _chatService.RegisterUser(username, _lobby.LobbyId);
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show("Error: No se pudo conectar con el servicio de chat. Verifique que el servidor esté en línea.");
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show("Error en el chat de la lobby. Por favor, verifique su conexión de red.");
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("Tiempo de respuesta excedido.");
+            }
+        }
+
+
         private void LoadPlayers()
         {
+            var currentPlayer = UserSessionManager.getInstance().getPlayerUserData().Username;
+
             Application.Current.Dispatcher.Invoke(() =>
             {
                 FilteredPlayers.Clear();
                 foreach (var player in _lobby.Players)
                 {
-                    FilteredPlayers.Add(player);
+                    if (player != currentPlayer)
+                    {
+                        FilteredPlayers.Add(player);
+                    }
                 }
             });
         }
@@ -120,12 +179,20 @@ namespace BMCWindows
 
             try
             {
-                lobbyProxy.LeaveLobby(lobbyId, player.Username);
+                _lobbyProxy.LeaveLobby(lobbyId, player.Username);
                 NavigationService.GoBack();
             }
-            catch (Exception ex)
+            catch (EndpointNotFoundException)
             {
-                MessageBox.Show($"Error al salir de la lobby: {ex.Message}");
+                MessageBox.Show("No se pudo desconectar del lobby. El servidor de lobby no está disponible.");
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show("Error de comunicación al intentar salir del lobby.");
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("La operación de desconexión ha superado el tiempo límite.");
             }
         }
 
@@ -134,8 +201,24 @@ namespace BMCWindows
             var player = UserSessionManager.getInstance().getPlayerUserData();
             if (!string.IsNullOrEmpty(textboxGeneralChat.Text))
             {
-                Messages.Add(new Message { Sender = player.Username, Messages = textboxGeneralChat.Text });
-                textboxGeneralChat.Clear();
+                var formattedMessage = $"{player.Username}: {textboxGeneralChat.Text}";
+                try
+                {
+                    _chatService.SendMessage(_lobby.LobbyId, player.Username, formattedMessage);
+                    textboxGeneralChat.Clear();
+                }
+                catch (EndpointNotFoundException)
+                {
+                    MessageBox.Show("No se pudo enviar el mensaje. El servidor de chat no está disponible.");
+                }
+                catch (CommunicationException)
+                {
+                    MessageBox.Show("Error de comunicación al intentar enviar el mensaje. Por favor, verifique su conexión.");
+                }
+                catch (TimeoutException)
+                {
+                    MessageBox.Show("El envío del mensaje ha superado el tiempo límite.");
+                }
             }
         }
 
@@ -176,7 +259,7 @@ namespace BMCWindows
                     Password = password
                 };
 
-                var response = lobbyProxy.JoinLobby(requestDTO);
+                var response = _lobbyProxy.JoinLobby(requestDTO);
 
                 if (response.IsSuccess)
                 {
@@ -199,6 +282,7 @@ namespace BMCWindows
 
         private void StartGame(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show(FilteredPlayers.Count().ToString());
             foreach (var lobby in _lobby.Players)
             {
                 Console.WriteLine(lobby);
@@ -207,6 +291,14 @@ namespace BMCWindows
             {
                 this.NavigationService.Navigate(new GameplayWindow(_lobby, FilteredPlayers));
             }
+        }
+
+        private void OnMessageReceived(string username, string message)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                Messages.Add(new Message { Sender = username, Messages = message });
+            });
         }
 
     }

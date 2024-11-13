@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="2d7d5fca-4173-49ab-bbee-6a9ce0954d47" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8096/ChatLobbyService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ChatLobbyService.xsd" MetadataType="Schema" ID="34d52d79-d029-4e9c-999d-bba3f0b533f4" SourceId="1" SourceUrl="http://localhost:8096/ChatLobbyService?xsd=xsd0" />
+    <MetadataFile FileName="ChatLobbyService1.xsd" MetadataType="Schema" ID="bd801cd3-bef5-456e-9e82-7b3ea61d4e9d" SourceId="1" SourceUrl="http://localhost:8096/ChatLobbyService?xsd=xsd1" />
+    <MetadataFile FileName="ChatLobbyService.disco" MetadataType="Disco" ID="229ead95-901a-457e-9dda-f885df291fdb" SourceId="1" SourceUrl="http://localhost:8096/ChatLobbyService?disco" />
+    <MetadataFile FileName="ChatLobbyService.wsdl" MetadataType="Wsdl" ID="b2f9fc2f-8cd0-4514-a48d-b82053082746" SourceId="1" SourceUrl="http://localhost:8096/ChatLobbyService?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -4,6 +4,7 @@ using BMCWindows.Validators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -37,29 +38,38 @@ namespace BMCWindows
             player.Password = passwordBoxPassword.Password;
             if(!FieldValidator.AreFieldsEmpty(textBoxUser.Text, textBoxEmail.Text, passwordBoxPassword.Password, passwordBoxConfirmPassword.Password) && FieldValidator.ValidatePassword(passwordBoxPassword.Password) && passwordBoxPassword.Password == passwordBoxConfirmPassword.Password )
             {
-                var result = proxy.Register(player);
-                if (result.IsSuccess) {
-                    UserSessionManager.getInstance().loginPlayer(player);
-                    this.NavigationService.Navigate(new HomePage());
-                } else
+                try
                 {
-                    MessageBox.Show(result.ErrorKey);
+                    var result = proxy.Register(player);
+                    if (result.IsSuccess)
+                    {
+                        UserSessionManager.getInstance().loginPlayer(player);
+                        this.NavigationService.Navigate(new HomePage());
+                    }
+                    else
+                    {
+                        MessageBox.Show(result.ErrorKey);
+                    }
+                }
+                catch (EndpointNotFoundException)
+                {
+                    MessageBox.Show("Error en el servidor");
+                }
+                catch (CommunicationException)
+                {
+                    MessageBox.Show("Error al registrarse, verifique su configuración de red");
+                }
+                catch (TimeoutException) 
+                {
+                    MessageBox.Show("El tiempo para el registro del usuario ha experido");
                 }
             }
             else
             {
                 MessageBox.Show("Hay campos vacíos o incorrectos");
 
-            }
-
-            
-
-            
-            
+            }  
         }
-
-       
-
 
         private void Cancel(object sender, RoutedEventArgs e) 
         {

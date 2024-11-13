@@ -3,6 +3,7 @@ using BMCWindows.Validators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -44,19 +45,26 @@ namespace BMCWindows
 
             if (!FieldValidator.AreFieldsEmpty(user, password))
             {
-                var result = proxy.Login(user, password);
-                if (result.IsSuccess)
+                try
                 {
-                    Server.PlayerDTO player = new Server.PlayerDTO();
-                    player.Username = user;
-                    player.Password = password;
-                    UserSessionManager.getInstance().loginPlayer(player);
-                    this.NavigationService.Navigate(new HomePage());
+                    var result = proxy.Login(user, password);
+                    if (result.IsSuccess)
+                    {
+                        Server.PlayerDTO player = new Server.PlayerDTO();
+                        player.Username = user;
+                        player.Password = password;
+                        UserSessionManager.getInstance().loginPlayer(player);
+                        this.NavigationService.Navigate(new HomePage());
 
+                    }
+                    else
+                    {
+                        MessageBox.Show(result.ErrorKey);
+                    }
                 }
-                else 
+                catch(EndpointNotFoundException)
                 {
-                    MessageBox.Show(result.ErrorKey);
+                    MessageBox.Show("Error en el servidor");
                 }
             }
             else 
