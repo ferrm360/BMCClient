@@ -58,6 +58,8 @@ namespace BMCWindows
             { 11, 12, 13 }
        };
 
+            InitializeBoard();
+
         }
 
         private ObservableCollection<Player> LoadPlayer1List()
@@ -195,6 +197,37 @@ namespace BMCWindows
                 MessageBox.Show($"Posición de la celda seleccionada: Fila {row}, Columna {column}");
             }
         }
+
+        private void InitializeBoard()
+        {
+            int buttonCount = 0;
+
+            for (int row = 0; row < 5; row++)  // 5 rows
+            {
+                for (int col = 0; col < 3; col++)  // 3 columns
+                {
+                    Button cellButton = new Button
+                    {
+                        Background = Brushes.Transparent,
+                        Margin = new Thickness(1)
+                    };
+
+                    // Set the button in the appropriate Grid cell
+                    Grid.SetRow(cellButton, row);
+                    Grid.SetColumn(cellButton, col);
+
+                    cellButton.Click += CellButton_Click; // Event handler for click
+                    BoardGrid.Children.Add(cellButton); // Add button to the Grid
+                    buttonCount++;
+                }
+            }
+        }
+
+        private void CellButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button clickedButton = sender as Button;
+        }
+
 
 
     }
