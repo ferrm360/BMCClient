@@ -90,6 +90,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\GameplayServer\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="DTOs\Card.cs" />
     <Compile Include="DTOs\Lobby.cs" />
     <Compile Include="DTOs\Player.cs" />
     <Compile Include="FriendRequestsWindow.xaml.cs">
@@ -296,6 +302,9 @@
     <None Include="Connected Services\FriendServer\FriendshipService4.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\GameplayServer\BMCWindows.GameplayServer.OperationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\LobbyServer\BMCWindows.LobbyServer.LobbyDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -359,6 +368,19 @@
     <None Include="Connected Services\Server\BMCWindows.Server.OperationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\GameplayServer\GameService.wsdl" />
+    <None Include="Connected Services\GameplayServer\GameService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GameplayServer\GameService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GameplayServer\GameService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GameplayServer\GameService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -398,6 +420,7 @@
     <WCFMetadataStorage Include="Connected Services\LobbyServer\" />
     <WCFMetadataStorage Include="Connected Services\ProfileServer\" />
     <WCFMetadataStorage Include="Connected Services\Server\" />
+    <WCFMetadataStorage Include="Connected Services\GameplayServer\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\Server\configuration91.svcinfo" />
@@ -491,6 +514,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ChatLobbyServer\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GameplayServer\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GameplayServer\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GameplayServer\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

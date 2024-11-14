@@ -24,19 +24,28 @@ namespace BMCWindows
     /// <summary>
     /// Lógica de interacción para GameplayWindow.xaml
     /// </summary>
-    public partial class GameplayWindow : Page
+    public partial class GameplayWindow : Page, GameplayServer.IGameServiceCallback
     {
         private LobbyDTO _lobby;
         private ObservableCollection<String> _Players { get; set; } = new ObservableCollection<String>();
         private ObservableCollection<Player> Player1 { get; set; } = new ObservableCollection<Player>();
         private ObservableCollection<Player> Player2 { get; set; } = new ObservableCollection<Player>();
+        private ObservableCollection<Card> CatCards { get; set; }
+        private ObservableCollection<Card> DogCards { get; set; }
+        private string selectedCard = null;
         private int[,] Matrix { get; set; }
+        private ObservableCollection<Card> Player1GameCards { get; set; }
+        private ObservableCollection<Card> Player2GameCards { get; set; }
+        private string selectedCardName;
+        private int selectedCardLife;
+
 
         public GameplayWindow(LobbyDTO lobby, ObservableCollection<String> Players)
         {
             InitializeComponent();
             _lobby = lobby;
             _Players = Players;
+            this.DataContext = this;
             Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().getPlayerUserData();
             Player1Cards.ItemsSource = LoadPlayer1List();
             if(_lobby.Host == currentPlayer.Username)
@@ -47,18 +56,53 @@ namespace BMCWindows
             {
                 Player2Cards.ItemsSource = LoadCurrentPlayerList();
             }
-            textBlockGameName.Text = _lobby.Name;
+            textBlockGameName.Text = lobby.Name;
 
-            Matrix = new int[5, 3]
-       {
-            { 1, 2, 3 },
-            { 4, 5, 6 },
-            { 7, 8, 9 },
-            { 9, 10, 11 },
-            { 11, 12, 13 }
-       };
+            Matrix = new int[5, 3];
+       
+            Player1GameCards = new ObservableCollection<Card>();
+            Player2GameCards = new ObservableCollection<Card>();
 
             InitializeBoard();
+            //InitializeCards(currentPlayer.Username);
+
+            if (lobby.Host == currentPlayer.Username)
+            {
+                textBlockOneLifeCardName.Text = "Cat1Life";
+                textBlockOneLifeCardLife.Text = "1";
+
+                textBlockAnotherOneLifeCardName.Text = "CatAnother1Life";
+                textBlockAnotherOneLifeCardLife.Text = "1";
+
+                textBlockTwoLivesCardName.Text = "Cat2Lives";
+                textBlockTwoLivesCardLives.Text = "2";
+
+                textBlockAnotherTwoLivesCardName.Text = "CatAnother2Lives";
+                textBlockAnotherTwoLivesCardLives.Text = "2";
+
+                textBlockThreeLivesCardName.Text = "Cat3Lives";
+                textBlockThreeLivesCardLives.Text = "3";
+
+
+            }
+            else
+            {
+                textBlockOneLifeCardName.Text = "Dog1Life";
+                textBlockOneLifeCardLife.Text = "1";
+
+                textBlockAnotherOneLifeCardName.Text = "DogAnother1Life";
+                textBlockAnotherOneLifeCardLife.Text = "1";
+
+                textBlockTwoLivesCardName.Text = "Dog2Lives";
+                textBlockTwoLivesCardLives.Text = "2";
+
+                textBlockAnotherTwoLivesCardName.Text = "DogAnother2Lives";
+                textBlockAnotherTwoLivesCardLives.Text = "2";
+
+                textBlockThreeLivesCardName.Text = "Dog3Lives";
+                textBlockThreeLivesCardLives.Text = "3";
+
+            }
 
         }
 
@@ -202,9 +246,9 @@ namespace BMCWindows
         {
             int buttonCount = 0;
 
-            for (int row = 0; row < 5; row++)  // 5 rows
+            for (int row = 0; row < 5; row++)  
             {
-                for (int col = 0; col < 3; col++)  // 3 columns
+                for (int col = 0; col < 3; col++)  
                 {
                     Button cellButton = new Button
                     {
@@ -212,24 +256,268 @@ namespace BMCWindows
                         Margin = new Thickness(1)
                     };
 
-                    // Set the button in the appropriate Grid cell
                     Grid.SetRow(cellButton, row);
                     Grid.SetColumn(cellButton, col);
 
-                    cellButton.Click += CellButton_Click; // Event handler for click
-                    BoardGrid.Children.Add(cellButton); // Add button to the Grid
+                    cellButton.Click += AssignOrRemoveCard; 
+                    BoardGrid.Children.Add(cellButton); 
                     buttonCount++;
+
+                    
+                    
+
+                    
                 }
             }
         }
 
-        private void CellButton_Click(object sender, RoutedEventArgs e)
+        
+
+        
+
+
+        private void AssignCard(object sender, RoutedEventArgs e)
         {
-            Button clickedButton = sender as Button;
+            var clickedButton = sender as Button;
+            if (clickedButton != null)
+            {
+                int row = Grid.GetRow(clickedButton);
+                int col = Grid.GetColumn(clickedButton);
+
+                Console.WriteLine($"Botón clickeado en Fila {row}, Columna {col}");
+
+                UpdateCardInMatrix(row, col);
+
+                clickedButton.Content = $"{selectedCardName} - Vida: {selectedCardLife}";
+            } 
+        }
+
+        private void AssignOrRemoveCard(object sender, RoutedEventArgs e)
+        {
+            var clickedButton = sender as Button;
+
+            if (clickedButton != null)
+            {
+                var assignedCard = clickedButton.Content as Card;
+
+                if (assignedCard != null)
+                {
+                    Console.WriteLine($"Carta {assignedCard.Name} eliminada de la posición ({Grid.GetRow(clickedButton)}, {Grid.GetColumn(clickedButton)})");
+
+                    clickedButton.Content = null;
+                }
+                else
+                {
+                    if (selectedCard != null)
+                    {
+                        var cardData = GetCardData(selectedCard); 
+                        var newCard = new Card { Name = cardData.Name, Life = cardData.Life };
+
+                        RemoveCardFromOtherButtons(newCard);
+
+                        clickedButton.Content = newCard;
+
+                        Console.WriteLine($"Carta {newCard.Name} colocada en la posición ({Grid.GetRow(clickedButton)}, {Grid.GetColumn(clickedButton)})");
+                    }
+                }
+            }
+        }
+
+        private void RemoveCardFromOtherButtons(Card cardToRemove)
+        {
+            foreach (UIElement element in BoardGrid.Children)
+            {
+                if (element is Button button)
+                {
+                    var currentCard = button.Content as Card;
+
+                    if (currentCard != null && currentCard.Name == cardToRemove.Name)
+                    {
+                        button.Content = null;
+                        Console.WriteLine($"Carta {cardToRemove.Name} eliminada de la posición ({Grid.GetRow(button)}, {Grid.GetColumn(button)})");
+                    }
+                }
+            }
+        }
+
+            private void ManageCards(object sender, RoutedEventArgs e)
+        {
+            var clickedButton = sender as Button;
+
+            if (clickedButton != null)
+            {
+                var assignedCard = clickedButton.Content as Card;
+
+                if (assignedCard != null)
+                {
+                    Console.WriteLine($"Carta {assignedCard.Name} eliminada de la posición ({Grid.GetRow(clickedButton)}, {Grid.GetColumn(clickedButton)})");
+
+                    clickedButton.Content = null;
+                }
+                else
+                {
+                    if (selectedCard != null)
+                    {
+                        var cardData = GetCardData(selectedCard); 
+                        var newCard = new Card { Name = cardData.Name, Life = cardData.Life };
+
+                        clickedButton.Content = newCard;
+
+                        Console.WriteLine($"Carta {newCard.Name} colocada en la posición ({Grid.GetRow(clickedButton)}, {Grid.GetColumn(clickedButton)})");
+                    }
+                }
+            }
+        }
+
+        private void UpdateCardInMatrix(int row, int col)
+        {
+            Matrix[row, col] = selectedCardLife;  
+
+            Console.WriteLine($"Carta {selectedCardName} colocada en la posición ({row}, {col}) con vida {selectedCardLife}");
         }
 
 
 
+        private void SelectCard(object sender, MouseButtonEventArgs e)
+        {
+            var card = sender as Border;
+            if (card != null)
+            {
+                var stackPanel = card.Child as StackPanel;
+                if (stackPanel != null)
+                {
+                    var textBlock = stackPanel.Children.OfType<TextBlock>().FirstOrDefault();
+                    if (textBlock != null)
+                    {
+                        selectedCard = textBlock.Text;
+                        var cardData = GetCardData(selectedCard); 
+                        selectedCardName = cardData.Name; 
+                        selectedCardLife = cardData.Life;  
+
+                        Console.WriteLine($"Carta seleccionada: {selectedCardName}, Vida: {selectedCardLife}");
+                    }
+                }
+
+                if (card.Tag?.ToString() == "Clicked")
+                {
+                    card.Tag = null;
+                }
+                else
+                {
+                    card.Tag = "Clicked";
+                }
+            }
+        }
+
+        private (string Name, int Life) GetCardData(string cardName)
+        {
+            var cardData = new Dictionary<string, (string, int)>
+
+            {
+                { "Cat1Life", ("Cat1", 1) },
+                { "CatAnother1Life", ("Cat1", 1)},
+                { "Cat2Lives", ("Cat2", 2) },
+                {"CatAnother2Lives", ("Cat2", 2) },
+                { "Cat3Lives", ("Cat3", 3) },
+                { "Dog1Life", ("Dog1", 1) },
+                {"DogAnother1Life", ("Dog1", 1) },
+                { "Dog2Lives", ("Dog2", 2) },
+                {"DogAnother2Lives", ("Dog2", 2) },
+                { "Dog3Lives", ("Dog3", 3) } 
+            };
+
+            return cardData.ContainsKey(cardName) ? cardData[cardName] : ("", 0);
+        }
+
+        private void RemoveCardFromGrid(object sender, RoutedEventArgs e)
+        {
+            var clickedButton = sender as Button;
+            if (clickedButton.Content != null)
+            {
+                clickedButton.Content = null;
+            }
+        }
+
+        private void SendCardsPosition(string lobbyId, string player, List<int> flatMatrix)
+        {
+            int rows = 5; 
+            int cols = 3; 
+            int[][] matrix = new int[rows][];
+
+            for (int i = 0; i < rows; i++)
+            {
+                matrix[i] = flatMatrix.Skip(i * cols).Take(cols).ToArray();
+            }
+
+            foreach (var row in matrix)
+            {
+                Console.WriteLine(string.Join(", ", row));
+            }
+        }
+
+        private int CountCardsInGrid()
+        {
+            int cardCount = 0;
+
+            foreach (UIElement element in BoardGrid.Children)
+            {
+                if (element is Button button)
+                {
+                    if (button.Content != null)
+                    {
+                        cardCount++;
+                    }
+                }
+            }
+
+            return cardCount;
+        }
+
+        private bool CheckIfFiveCardsArePlaced()
+        {
+            int placedCards = CountCardsInGrid();
+
+            if (placedCards == 5)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private void AccepCardsPosition(object sender, RoutedEventArgs e)
+        {
+            List<int> flatMatrix = new List<int>();
+            if (!CheckIfFiveCardsArePlaced())             
+            {
+                MessageBox.Show("Coloque todas sus cartas en el tablero");
+            }
+            else
+            {
+                int rows = 5;
+                int cols = 3;
+                int[][] matrix = new int[rows][];
+
+                for (int i = 0; i < rows; i++)
+                {
+                    matrix[i] = flatMatrix.Skip(i * cols).Take(cols).ToArray();
+                }
+
+                Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().getPlayerUserData();
+                InstanceContext context = new InstanceContext(this);
+                GameplayServer.GameServiceClient proxy = new GameplayServer.GameServiceClient(context);
+                proxy.SubmitInitialMatrix(_lobby.LobbyId, currentPlayer.Username, matrix);
+
+            }
+        }
+
+
+
+        public void OnGameStarted()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

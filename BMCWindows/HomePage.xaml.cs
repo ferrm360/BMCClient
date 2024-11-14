@@ -88,7 +88,8 @@ namespace BMCWindows
 
             if (!string.IsNullOrEmpty(textboxGeneralChat.Text))
             {
-                proxy.SendMessage(player.Username, textboxGeneralChat.Text);
+                var formattedMessage = $"{player.Username}: {textboxGeneralChat.Text}";
+                proxy.SendMessage(player.Username, formattedMessage);
                 ReceiveMessage(textboxGeneralChat.Text);
                 textboxGeneralChat.Clear();
                 //LoadRecentMessages();
