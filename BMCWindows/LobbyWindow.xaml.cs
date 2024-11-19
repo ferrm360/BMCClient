@@ -330,6 +330,20 @@ namespace BMCWindows
         {
             if (_lobby.LobbyId == lobbyId)
             {
+                var context = new InstanceContext(new GameCallbackHandler());
+                var gameServiceClient = new GameplayServer.GameServiceClient(context);
+
+                // Aquí corregimos el selector para que simplemente use las cadenas de FilteredPlayers
+                var players = FilteredPlayers.ToList().ToArray();
+
+                var response = gameServiceClient.InitializeGame(_lobby.LobbyId, players);
+
+                if (!response.IsSuccess)
+                {
+                    MessageBox.Show($"Error al inicializar el juego: {response.ErrorKey}");
+                    return;
+                }
+
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     this.NavigationService.Navigate(new GameplayWindow(_lobby, FilteredPlayers));

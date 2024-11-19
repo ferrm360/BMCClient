@@ -1,4 +1,5 @@
 ﻿using BMCWindows.DTOs;
+using BMCWindows.GameplayServer;
 using BMCWindows.LobbyServer;
 using BMCWindows.Patterns.Singleton;
 using System;
@@ -244,6 +245,8 @@ namespace BMCWindows
 
         private void InitializeBoard()
         {
+            BoardGrid.Children.Clear();
+
             int buttonCount = 0;
 
             for (int row = 0; row < 5; row++)  
@@ -253,8 +256,11 @@ namespace BMCWindows
                     Button cellButton = new Button
                     {
                         Background = Brushes.Transparent,
+                        Content = $"{row},{col}",
                         Margin = new Thickness(1)
                     };
+
+                    cellButton.Click += TestButton_Click;
 
                     Grid.SetRow(cellButton, row);
                     Grid.SetColumn(cellButton, col);
@@ -486,31 +492,74 @@ namespace BMCWindows
                 return false;
             }
         }
-        private void AccepCardsPosition(object sender, RoutedEventArgs e)
+
+        private void AcceptCardsPosition(object sender, RoutedEventArgs e)
         {
             List<int> flatMatrix = new List<int>();
             if (!CheckIfFiveCardsArePlaced())             
             {
                 MessageBox.Show("Coloque todas sus cartas en el tablero");
+                return;
             }
-            else
-            {
-                int rows = 5;
-                int cols = 3;
-                int[][] matrix = new int[rows][];
 
-                for (int i = 0; i < rows; i++)
-                {
-                    matrix[i] = flatMatrix.Skip(i * cols).Take(cols).ToArray();
-                }
+            try
+            {
+                var board = ConvertMatrixToGameBoardDTO(Matrix);
 
                 Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().getPlayerUserData();
+
                 InstanceContext context = new InstanceContext(this);
                 GameplayServer.GameServiceClient proxy = new GameplayServer.GameServiceClient(context);
-                proxy.SubmitInitialMatrix(_lobby.LobbyId, currentPlayer.Username, matrix);
 
+                var response = proxy.SubmitInitialMatrix(_lobby.LobbyId, currentPlayer.Username, board);
+
+                if (!response.IsSuccess)
+                {
+                    MessageBox.Show($"Error al enviar el tablero: {response.ErrorKey}");
+                }
+                else
+                {
+                    MessageBox.Show("Tablero enviado exitosamente.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al enviar el tablero: {ex.Message}");
+            }
+
+
+        }
+
+        private void TestButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button clickedButton)
+            {
+                string content = clickedButton.Content.ToString();
+                MessageBox.Show($"Botón clickeado: {content}");
             }
         }
+
+        private GameplayServer.GameBoardDTO ConvertMatrixToGameBoardDTO(int[,] matrix)
+        {
+            int rows = matrix.GetLength(0);
+            int cols = matrix.GetLength(1);
+
+            List<int> data = new List<int>();
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    data.Add(matrix[i, j]);
+                }
+            }
+            return new GameplayServer.GameBoardDTO
+            {
+                Rows = rows,
+                Columns = cols,
+                Data = data.ToArray()
+            };
+        }
+
 
 
 

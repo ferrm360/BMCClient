@@ -53,10 +53,12 @@
             <!-- Game Title -->
             <TextBlock x:Name="textBlockGameName" Grid.Row="0" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,10,0,10" Grid.Column="1" Width="0"/>
 
+
             <!-- Game Grid with Cards -->
-            <Grid x:Name="BoardGrid" Grid.Row="1" Grid.Column="1" Margin="10,10,10,10" MouseLeftButtonDown="RemoveCardFromGrid">
+            <Grid x:Name="BoardGrid" Grid.Row="1" Grid.Column="1" Background="Transparent" Margin="10" ShowGridLines="false" Panel.ZIndex="10">
+
+
                 <Grid.RowDefinitions>
-                    <!-- Define 5 rows -->
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -64,14 +66,16 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <!-- Define 3 columns -->
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-
             </Grid>
+
+
+            <TextBlock Grid.Row="1" Text="Selecciona una carta para jugar" HorizontalAlignment="Center" Margin="0,10,0,10" Grid.Column="1" Width="372"/>
+
 
             <TextBlock Grid.Row="1" Text="Selecciona una carta para jugar" HorizontalAlignment="Center" Margin="0,10,0,10" Grid.Column="1" Width="372"/>
         </Grid>
@@ -194,11 +198,32 @@
                 <ColumnDefinition Width="116*"/>
                 <ColumnDefinition Width="31*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="buttonAcceptCardsPosition" Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="Transparent" Background="Transparent" Click="AcceptCardsPosition"/>
-            <Image Source="Images/BrownButton.png" Grid.Row="1" Grid.Column="1" Stretch="Fill"/>
-            <TextBlock x:Name="textblockAcceptCrdsPosition" Text="Accept" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
+            <!-- Botón completamente funcional en la celda deseada -->
+            <Button x:Name="buttonAcceptCardsPosition" 
+            Grid.Row="1" 
+            Grid.Column="1" 
+            Background="Transparent" 
+            BorderBrush="Transparent" 
+            Click="AcceptCardsPosition"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
+                <Grid>
+                    <!-- Imagen de fondo del botón -->
+                    <Image Source="Images/BrownButton.png" Stretch="Fill"/>
+
+                    <!-- Texto centrado -->
+                    <TextBlock Text="Accept" 
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Center" 
+                       FontSize="16" 
+                       FontWeight="Bold" 
+                       Foreground="Black"/>
+                </Grid>
+            </Button>
         </Grid>
+
+
 
 
     </Grid>
