@@ -138,6 +138,7 @@
                         <DropShadowEffect BlurRadius="10" ShadowDepth="5" Color="#888" />
                     </Border.Effect>
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image x:Name="imageCardOneLife" Stretch="Fill"/>
                         <TextBlock x:Name="textBlockOneLifeCardName"  FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
                         <TextBlock x:Name="textBlockOneLifeCardLife" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
                     </StackPanel>

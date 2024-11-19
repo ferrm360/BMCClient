@@ -71,6 +71,10 @@ namespace BMCWindows
             {
                 textBlockOneLifeCardName.Text = "Cat1Life";
                 textBlockOneLifeCardLife.Text = "1";
+                string imagePath = "Images/BrownButton.png"; 
+                BitmapImage image = new BitmapImage(new Uri(imagePath, UriKind.Relative));
+                imageCardOneLife.Source = image;
+
 
                 textBlockAnotherOneLifeCardName.Text = "CatAnother1Life";
                 textBlockAnotherOneLifeCardLife.Text = "1";
@@ -249,18 +253,18 @@ namespace BMCWindows
 
             int buttonCount = 0;
 
-            for (int row = 0; row < 5; row++)  
+            for (int row = 0; row < 4; row++)  
             {
                 for (int col = 0; col < 3; col++)  
                 {
                     Button cellButton = new Button
                     {
                         Background = Brushes.Transparent,
-                        Content = $"{row},{col}",
+                        //Content = $"{row},{col}",
                         Margin = new Thickness(1)
                     };
 
-                    cellButton.Click += TestButton_Click;
+                    
 
                     Grid.SetRow(cellButton, row);
                     Grid.SetColumn(cellButton, col);
@@ -421,14 +425,14 @@ namespace BMCWindows
 
             {
                 { "Cat1Life", ("Cat1", 1) },
-                { "CatAnother1Life", ("Cat1", 1)},
+                { "CatAnother1Life", ("Cat1.1", 1)},
                 { "Cat2Lives", ("Cat2", 2) },
-                {"CatAnother2Lives", ("Cat2", 2) },
+                {"CatAnother2Lives", ("Cat2.1", 2) },
                 { "Cat3Lives", ("Cat3", 3) },
                 { "Dog1Life", ("Dog1", 1) },
-                {"DogAnother1Life", ("Dog1", 1) },
+                {"DogAnother1Life", ("Dog1.1", 1) },
                 { "Dog2Lives", ("Dog2", 2) },
-                {"DogAnother2Lives", ("Dog2", 2) },
+                {"DogAnother2Lives", ("Dog2.1", 2) },
                 { "Dog3Lives", ("Dog3", 3) } 
             };
 
@@ -530,14 +534,7 @@ namespace BMCWindows
 
         }
 
-        private void TestButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender is Button clickedButton)
-            {
-                string content = clickedButton.Content.ToString();
-                MessageBox.Show($"Botón clickeado: {content}");
-            }
-        }
+        
 
         private GameplayServer.GameBoardDTO ConvertMatrixToGameBoardDTO(int[,] matrix)
         {
