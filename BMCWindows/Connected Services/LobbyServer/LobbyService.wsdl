@@ -15,6 +15,7 @@
       <xsd:import schemaLocation="http://localhost:8088/LobbyService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Service.DTO" />
       <xsd:import schemaLocation="http://localhost:8088/LobbyService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Service.Utilities.Results" />
       <xsd:import schemaLocation="http://localhost:8088/LobbyService?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:8088/LobbyService?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Service.Results" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ILobbyService_CreateLobby_InputMessage">
@@ -47,6 +48,12 @@
   <wsdl:message name="ILobbyService_KickPlayer_OutputMessage">
     <wsdl:part name="parameters" element="tns:KickPlayerResponse" />
   </wsdl:message>
+  <wsdl:message name="ILobbyService_StartGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:StartGame" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyService_StartGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StartGameResponse" />
+  </wsdl:message>
   <wsdl:message name="ILobbyService_NotifyPlayerJoined_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotifyPlayerJoined" />
   </wsdl:message>
@@ -58,6 +65,9 @@
   </wsdl:message>
   <wsdl:message name="ILobbyService_NotifyPlayerLeftMessage_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotifyPlayerLeftMessage" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyService_StartGameNotification_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:StartGameNotification" />
   </wsdl:message>
   <wsdl:portType name="ILobbyService">
     <wsdl:operation name="CreateLobby">
@@ -80,6 +90,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ILobbyService/KickPlayer" message="tns:ILobbyService_KickPlayer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILobbyService/KickPlayerResponse" message="tns:ILobbyService_KickPlayer_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="StartGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyService/StartGame" message="tns:ILobbyService_StartGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyService/StartGameResponse" message="tns:ILobbyService_StartGame_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="NotifyPlayerJoined">
       <wsdl:output wsaw:Action="http://tempuri.org/ILobbyService/NotifyPlayerJoined" message="tns:ILobbyService_NotifyPlayerJoined_OutputCallbackMessage" />
     </wsdl:operation>
@@ -91,6 +105,9 @@
     </wsdl:operation>
     <wsdl:operation name="NotifyPlayerLeftMessage">
       <wsdl:output wsaw:Action="http://tempuri.org/ILobbyService/NotifyPlayerLeftMessage" message="tns:ILobbyService_NotifyPlayerLeftMessage_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="StartGameNotification">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyService/StartGameNotification" message="tns:ILobbyService_StartGameNotification_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_ILobbyService" type="tns:ILobbyService">
@@ -141,6 +158,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="StartGame">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyService/StartGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="NotifyPlayerJoined">
       <soap12:operation soapAction="http://tempuri.org/ILobbyService/NotifyPlayerJoined" style="document" />
       <wsdl:output>
@@ -161,6 +187,12 @@
     </wsdl:operation>
     <wsdl:operation name="NotifyPlayerLeftMessage">
       <soap12:operation soapAction="http://tempuri.org/ILobbyService/NotifyPlayerLeftMessage" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartGameNotification">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyService/StartGameNotification" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

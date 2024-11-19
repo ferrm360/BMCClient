@@ -77,6 +77,18 @@ namespace BMCWindows
                 });
             };
 
+            callbackHandler.StartGame += lobbyId =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    if (_lobby.LobbyId == lobbyId)
+                    {
+                        this.NavigationService.Navigate(new GameplayWindow(_lobby, FilteredPlayers));
+                    }
+                });
+            };
+
+
             var player = UserSessionManager.getInstance().getPlayerUserData();
             textBlockCurrentPlayerUsername.Text = player.Username;
             labelLobbyName.Content = _lobby.Name;
@@ -282,14 +294,27 @@ namespace BMCWindows
 
         private void StartGame(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(FilteredPlayers.Count().ToString());
-            foreach (var lobby in _lobby.Players)
+            var player = UserSessionManager.getInstance().getPlayerUserData();
+
+            try
             {
-                Console.WriteLine(lobby);
+                var response = _lobbyProxy.StartGame(_lobby.LobbyId, player.Username);
+
+                if (!response.IsSuccess)
+                {
+                    MessageBox.Show(response.ErrorKey);
+                }
+                else
+                {
+                    if (_lobby.Host == player.Username)
+                    {
+                        this.NavigationService.Navigate(new GameplayWindow(_lobby, FilteredPlayers));
+                    }
+                }
             }
-            if(FilteredPlayers.Count > 1)
+            catch (Exception ex)
             {
-                this.NavigationService.Navigate(new GameplayWindow(_lobby, FilteredPlayers));
+                MessageBox.Show($"Error al iniciar el juego: {ex.Message}");
             }
         }
 
@@ -299,6 +324,17 @@ namespace BMCWindows
             {
                 Messages.Add(new Message { Sender = username, Messages = message });
             });
+        }
+
+        private void OnStartGameNotification(string lobbyId)
+        {
+            if (_lobby.LobbyId == lobbyId)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    this.NavigationService.Navigate(new GameplayWindow(_lobby, FilteredPlayers));
+                });
+            }
         }
 
     }

@@ -417,6 +417,89 @@ namespace BMCWindows.LobbyServer {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OperationResponse", Namespace="http://schemas.datacontract.org/2004/07/Service.Results")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.LobbyServer.LobbyResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.LobbyServer.CreateLobbyRequestDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.LobbyServer.LobbyDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.LobbyServer.JoinLobbyRequestDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.LobbyServer.LobbyDTO[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(string[]))]
+    public partial class OperationResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private object DataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorKeyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsSuccessField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public object Data {
+            get {
+                return this.DataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DataField, value) != true)) {
+                    this.DataField = value;
+                    this.RaisePropertyChanged("Data");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorKey {
+            get {
+                return this.ErrorKeyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorKeyField, value) != true)) {
+                    this.ErrorKeyField = value;
+                    this.RaisePropertyChanged("ErrorKey");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsSuccess {
+            get {
+                return this.IsSuccessField;
+            }
+            set {
+                if ((this.IsSuccessField.Equals(value) != true)) {
+                    this.IsSuccessField = value;
+                    this.RaisePropertyChanged("IsSuccess");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="LobbyServer.ILobbyService", CallbackContract=typeof(BMCWindows.LobbyServer.ILobbyServiceCallback))]
     public interface ILobbyService {
@@ -450,6 +533,12 @@ namespace BMCWindows.LobbyServer {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyService/KickPlayer", ReplyAction="http://tempuri.org/ILobbyService/KickPlayerResponse")]
         System.Threading.Tasks.Task<BMCWindows.LobbyServer.LobbyResponse> KickPlayerAsync(string lobbyId, string hostUsername, string targetUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyService/StartGame", ReplyAction="http://tempuri.org/ILobbyService/StartGameResponse")]
+        BMCWindows.LobbyServer.OperationResponse StartGame(string lobbyId, string hostUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyService/StartGame", ReplyAction="http://tempuri.org/ILobbyService/StartGameResponse")]
+        System.Threading.Tasks.Task<BMCWindows.LobbyServer.OperationResponse> StartGameAsync(string lobbyId, string hostUsername);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -466,6 +555,9 @@ namespace BMCWindows.LobbyServer {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyService/NotifyPlayerLeftMessage")]
         void NotifyPlayerLeftMessage(string message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyService/StartGameNotification")]
+        void StartGameNotification(string lobbyId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -534,6 +626,14 @@ namespace BMCWindows.LobbyServer {
         
         public System.Threading.Tasks.Task<BMCWindows.LobbyServer.LobbyResponse> KickPlayerAsync(string lobbyId, string hostUsername, string targetUsername) {
             return base.Channel.KickPlayerAsync(lobbyId, hostUsername, targetUsername);
+        }
+        
+        public BMCWindows.LobbyServer.OperationResponse StartGame(string lobbyId, string hostUsername) {
+            return base.Channel.StartGame(lobbyId, hostUsername);
+        }
+        
+        public System.Threading.Tasks.Task<BMCWindows.LobbyServer.OperationResponse> StartGameAsync(string lobbyId, string hostUsername) {
+            return base.Channel.StartGameAsync(lobbyId, hostUsername);
         }
     }
 }

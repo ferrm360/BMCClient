@@ -27,6 +27,7 @@
     <MetadataFile FileName="LobbyService1.xsd" MetadataType="Schema" ID="254ffb8a-ce0f-4495-ac6c-082dd4a8dda9" SourceId="1" SourceUrl="http://localhost:8088/LobbyService?xsd=xsd0" />
     <MetadataFile FileName="LobbyService2.xsd" MetadataType="Schema" ID="418c7cbf-ca1f-4a20-a5bd-1d54939f4364" SourceId="1" SourceUrl="http://localhost:8088/LobbyService?xsd=xsd3" />
     <MetadataFile FileName="LobbyService3.xsd" MetadataType="Schema" ID="83362599-6989-46aa-ad53-d56e41b30c7a" SourceId="1" SourceUrl="http://localhost:8088/LobbyService?xsd=xsd2" />
+    <MetadataFile FileName="LobbyService5.xsd" MetadataType="Schema" ID="1675e965-ece9-4c57-a631-5e7172984580" SourceId="1" SourceUrl="http://localhost:8088/LobbyService?xsd=xsd5" />
     <MetadataFile FileName="LobbyService4.xsd" MetadataType="Schema" ID="fca30227-0026-4b1c-922c-bfe47f3173f7" SourceId="1" SourceUrl="http://localhost:8088/LobbyService?xsd=xsd4" />
   </Metadata>
   <Extensions>

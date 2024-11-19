@@ -311,6 +311,9 @@
     <None Include="Connected Services\LobbyServer\BMCWindows.LobbyServer.LobbyResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\LobbyServer\BMCWindows.LobbyServer.OperationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\LobbyServer\LobbyService.wsdl" />
     <None Include="Connected Services\LobbyServer\LobbyService.xsd">
       <SubType>Designer</SubType>
@@ -325,6 +328,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\LobbyServer\LobbyService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LobbyServer\LobbyService5.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ProfileServer\BMCWindows.ProfileServer.ImageResponse.datasource">

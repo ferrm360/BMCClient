@@ -12,5 +12,10 @@ namespace BMCWindows.Utilities
         public void NotifyPlayerLeft(string playerName, string lobbyId) { }
         public void NotifyPlayerJoinedMessage(string message) { }
         public void NotifyPlayerLeftMessage(string message) { }
+
+        public void StartGameNotification(string lobbyId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

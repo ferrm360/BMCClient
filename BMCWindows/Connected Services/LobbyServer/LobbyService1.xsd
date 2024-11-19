@@ -2,6 +2,7 @@
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:8088/LobbyService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Service.DTO" />
   <xs:import schemaLocation="http://localhost:8088/LobbyService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Service.Utilities.Results" />
+  <xs:import schemaLocation="http://localhost:8088/LobbyService?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Service.Results" />
   <xs:element name="CreateLobby">
     <xs:complexType>
       <xs:sequence>
@@ -73,6 +74,21 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="StartGame">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="lobbyId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="hostUsername" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StartGameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Service.Results" minOccurs="0" name="StartGameResult" nillable="true" type="q8:OperationResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="NotifyPlayerJoined">
     <xs:complexType>
       <xs:sequence>
@@ -100,6 +116,13 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StartGameNotification">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="lobbyId" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -13,6 +13,8 @@ namespace BMCWindows.Utilities
         public event Action<string, string> PlayerLeft;
         public event Action<string> PlayerJoinedMessage;
         public event Action<string> PlayerLeftMessage;
+        public event Action<string> StartGame;
+
 
         public void NotifyPlayerJoined(string playerName, string lobbyId)
         {
@@ -32,6 +34,12 @@ namespace BMCWindows.Utilities
         public void NotifyPlayerLeftMessage(string message)
         {
             PlayerLeftMessage?.Invoke(message);
+        }
+
+
+        public void StartGameNotification(string lobbyId)
+        {
+            StartGame?.Invoke(lobbyId);
         }
     }
 
