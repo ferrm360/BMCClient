@@ -149,6 +149,7 @@
                         <DropShadowEffect BlurRadius="10" ShadowDepth="5" Color="#888" />
                     </Border.Effect>
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image x:Name="imageAnotherOneLifeCard" Stretch="Fill"/>
                         <TextBlock x:Name="textBlockAnotherOneLifeCardName"  FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
                         <TextBlock x:Name="textBlockAnotherOneLifeCardLife" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
                     </StackPanel>
@@ -158,6 +159,7 @@
                         <DropShadowEffect BlurRadius="10" ShadowDepth="5" Color="#888" />
                     </Border.Effect>
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image x:Name="imageTwoLivesCard" Stretch="Fill"/>
                         <TextBlock x:Name="textBlockTwoLivesCardName"  FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
                         <TextBlock x:Name="textBlockTwoLivesCardLives" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
                     </StackPanel>
@@ -167,6 +169,7 @@
                         <DropShadowEffect BlurRadius="10" ShadowDepth="5" Color="#888" />
                     </Border.Effect>
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image x:Name="imageAnotherTwoLivesCard" Stretch="Fill"/>
                         <TextBlock x:Name="textBlockAnotherTwoLivesCardName"  FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
                         <TextBlock x:Name="textBlockAnotherTwoLivesCardLives" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
                     </StackPanel>
@@ -176,6 +179,7 @@
                         <DropShadowEffect BlurRadius="10" ShadowDepth="5" Color="#888" />
                     </Border.Effect>
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image x:Name="imageThreeLivesCard" Stretch="Fill"/>
                         <TextBlock x:Name="textBlockThreeLivesCardName"  FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
                         <TextBlock x:Name="textBlockThreeLivesCardLives" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
                     </StackPanel>

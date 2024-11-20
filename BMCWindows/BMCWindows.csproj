@@ -540,5 +540,14 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\AnaSofCard.png" />
+    <Resource Include="Images\CardBack.png" />
+    <Resource Include="Images\ChilaquilCard.png" />
+    <Resource Include="Images\coca3litrosCard.png" />
+    <Resource Include="Images\Huahuacard.png" />
+    <Resource Include="Images\IñakiCard.png" />
+    <Resource Include="Images\michideltoroCard.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
