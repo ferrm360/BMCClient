@@ -306,6 +306,13 @@ namespace BMCWindows
                 }
                 else
                 {
+                    var context = new InstanceContext(new GameCallbackHandler());
+                    var gameServiceClient = new GameplayServer.GameServiceClient(context);
+
+                    var players = FilteredPlayers.ToList().ToArray();
+
+                    var response2 = gameServiceClient.InitializeGame(_lobby.LobbyId, players);
+
                     if (_lobby.Host == player.Username)
                     {
                         this.NavigationService.Navigate(new GameplayWindow(_lobby, FilteredPlayers));
