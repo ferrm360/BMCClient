@@ -75,6 +75,7 @@ namespace BMCWindows
                 imageCardOneLife.Source = imageOneLifeCard;
                 textBlockOneLifeCardName.Text = "Cat1Life";
                 textBlockOneLifeCardLife.Text = "1";
+               
 
 
                 textBlockAnotherOneLifeCardName.Text = "CatAnother1Life";
@@ -105,6 +106,8 @@ namespace BMCWindows
                 string imagePath = "Images/HuahuaCard.png";
                 BitmapImage imageOneLifeCard = new BitmapImage(new Uri(imagePath, UriKind.Relative));
                 imageCardOneLife.Source = imageOneLifeCard;
+                textBlockOneLifeCardName.Text = "Dog1Life";
+                textBlockOneLifeCardLife.Text = "1";
 
                 textBlockAnotherOneLifeCardName.Text = "DogAnother1Life";
                 textBlockAnotherOneLifeCardLife.Text = "1";
@@ -228,7 +231,7 @@ namespace BMCWindows
 
         private void LeaveGame(object sender, EventArgs e)
         {
-            this.NavigationService.GoBack();
+            this.NavigationService.Navigate(new LobbiesWindow());
 
         }
 
@@ -292,10 +295,6 @@ namespace BMCWindows
                     BoardGrid.Children.Add(cellButton); 
                     buttonCount++;
 
-                    
-                    
-
-                    
                 }
             }
         }
@@ -321,36 +320,7 @@ namespace BMCWindows
             } 
         }
 
-        private void AssignORemoveCard(object sender, RoutedEventArgs e)
-        {
-            var clickedButton = sender as Button;
-
-            if (clickedButton != null)
-            {
-                var assignedCard = clickedButton.Content as Card;
-
-                if (assignedCard != null)
-                {
-                    Console.WriteLine($"Carta {assignedCard.Name} eliminada de la posición ({Grid.GetRow(clickedButton)}, {Grid.GetColumn(clickedButton)})");
-
-                    clickedButton.Content = null;
-                }
-                else
-                {
-                    if (selectedCard != null)
-                    {
-                        var cardData = GetCardData(selectedCard); 
-                        var newCard = new Card { Name = cardData.Name, Life = cardData.Life };
-
-                        RemoveCardFromOtherButtons(newCard);
-
-                        clickedButton.Content = newCard;
-
-                        Console.WriteLine($"Carta {newCard.Name} colocada en la posición ({Grid.GetRow(clickedButton)}, {Grid.GetColumn(clickedButton)})");
-                    }
-                }
-            }
-        }
+        
 
         private void AssignOrRemoveCard(object sender, RoutedEventArgs e)
         {
@@ -358,28 +328,23 @@ namespace BMCWindows
 
             if (clickedButton != null)
             {
-                // Verificar si la carta ya está asignada a este botón
                 var assignedCard = clickedButton.Content as StackPanel;
 
                 if (assignedCard != null)
                 {
-                    // Si ya hay una carta en el botón, la eliminamos
                     Console.WriteLine($"Carta {selectedCardName} eliminada de la posición ({Grid.GetRow(clickedButton)}, {Grid.GetColumn(clickedButton)})");
 
-                    clickedButton.Content = null; // Eliminar el contenido del botón (la carta)
+                    clickedButton.Content = null; 
                 }
                 else
                 {
-                    // Si el botón está vacío, asignamos la carta seleccionada
                     if (selectedCard != null)
                     {
-                        var cardData = GetCardData(selectedCard); // Obtener los datos de la carta seleccionada
+                        var cardData = GetCardData(selectedCard); 
                         var newCard = new Card { Name = cardData.Name, Life = cardData.Life, CardImage = cardData.CardImage };
 
-                        // Verificar si la carta ya está en algún otro botón y eliminarla si es necesario
                         RemoveCardFromOtherButtons(newCard);
 
-                        // Crear un StackPanel con la imagen y el nombre de la carta
                         StackPanel cardPanel = new StackPanel
                         {
                             Orientation = Orientation.Vertical,
@@ -389,8 +354,6 @@ namespace BMCWindows
                         new TextBlock { Text = newCard.Name, HorizontalAlignment = HorizontalAlignment.Center }
                     }
                         };
-
-                        // Asignar el StackPanel al botón
                         clickedButton.Content = cardPanel;
 
                         Console.WriteLine($"Carta {newCard.Name} colocada en la posición ({Grid.GetRow(clickedButton)}, {Grid.GetColumn(clickedButton)})");
@@ -407,7 +370,6 @@ namespace BMCWindows
             {
                 if (element is Button button)
                 {
-                    // Verificar si el botón tiene una carta asignada
                     var currentCardPanel = button.Content as StackPanel;
 
                     if (currentCardPanel != null)
@@ -415,7 +377,6 @@ namespace BMCWindows
                         var textBlock = currentCardPanel.Children.OfType<TextBlock>().FirstOrDefault();
                         if (textBlock != null && textBlock.Text == cardToRemove.Name)
                         {
-                            // Si la carta en el botón coincide con la carta que estamos colocando, la eliminamos
                             button.Content = null;
                             Console.WriteLine($"Carta {cardToRemove.Name} eliminada de la posición ({Grid.GetRow(button)}, {Grid.GetColumn(button)})");
                         }
@@ -475,9 +436,9 @@ namespace BMCWindows
                     if (textBlock != null)
                     {
                         selectedCard = textBlock.Text;
-                        var cardData = GetCardData(selectedCard); // Obtener los datos de la carta
-                        selectedCardName = cardData.Name; // Nombre de la carta
-                        selectedCardLife = cardData.Life; // Vida de la carta
+                        var cardData = GetCardData(selectedCard); 
+                        selectedCardName = cardData.Name; 
+                        selectedCardLife = cardData.Life; 
 
                         Console.WriteLine($"Carta seleccionada: {selectedCardName}, Vida: {selectedCardLife}");
                     }
@@ -634,6 +595,23 @@ namespace BMCWindows
                 Data = data.ToArray()
             };
         }
+
+        private void FillGridWithImage(object sender, RoutedEventArgs e)
+        {
+            string imagePath = "Images/CardBack.png";  
+            BitmapImage image = new BitmapImage(new Uri(imagePath, UriKind.Relative));  
+
+            foreach (UIElement element in BoardGrid.Children)
+            {
+                if (element is Button button)
+                {
+                    button.Content = new Image { Source = image, Width = 60, Height = 90 };  
+                }
+            }
+
+            Console.WriteLine("Todos los botones del grid han sido llenados con la imagen.");
+        }
+
 
 
 

@@ -66,7 +66,8 @@ namespace BMCWindows
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        imageProfilePicture.Source = image;
+                        //imageProfilePicture.Source = image;
+                        ProfileImageBrush.ImageSource = image;
                     });
 
                 }
@@ -115,6 +116,7 @@ namespace BMCWindows
 
         public void OpenContextMenu(object sender, RoutedEventArgs e)
         {
+
             menuOptions.Visibility = menuOptions.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
         }
 
@@ -192,7 +194,7 @@ namespace BMCWindows
         {
             
             BitmapImage image = ConvertByteArrayToImage(imageData);
-            imageProfilePicture.Source = image;
+            ProfileImageBrush.ImageSource = image;
 
         }
 
