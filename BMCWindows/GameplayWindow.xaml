@@ -10,7 +10,6 @@
       Background="#FEFFDB">
 
     <Page.Resources>
-        <!-- Style for card hover -->
         <Style x:Key="HoverCardStyle" TargetType="Border">
             <Setter Property="RenderTransform">
                 <Setter.Value>
@@ -36,7 +35,6 @@
     </Page.Resources>
 
     <Grid>
-        <!-- Main Game Layout -->
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -50,11 +48,9 @@
                 <ColumnDefinition Width="60*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- Game Title -->
             <TextBlock x:Name="textBlockGameName" Grid.Row="0" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,10,0,10" Grid.Column="1" Width="0"/>
 
 
-            <!-- Game Grid with Cards -->
             <Grid x:Name="BoardGrid" Grid.Row="1" Grid.Column="1" Background="Transparent" Margin="10" ShowGridLines="false" Panel.ZIndex="10">
 
 
@@ -80,9 +76,6 @@
             <TextBlock Grid.Row="1" Text="Selecciona una carta para jugar" HorizontalAlignment="Center" Margin="0,10,0,10" Grid.Column="1" Width="372"/>
         </Grid>
 
-        <!-- Player Profile Sections -->
-
-        <!-- Player 1 Profile Section -->
         <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10">
             <TextBlock Text="Jugador 1:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Background="#43224D" Foreground="#FEFFDB"/>
             <ItemsControl x:Name="Player1Cards" Margin="5" Background="#43224D">
@@ -99,7 +92,7 @@
             </ItemsControl>
         </StackPanel>
 
-        <!-- Player 2 Profile Section -->
+        
         <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10">
             <TextBlock Text="Jugador 2:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Background="#43224D" Foreground="#FEFFDB"/>
             <ItemsControl x:Name="Player2Cards" Margin="5" Background="#43224D">
@@ -149,6 +142,7 @@
                         <DropShadowEffect BlurRadius="10" ShadowDepth="5" Color="#888" />
                     </Border.Effect>
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image x:Name="imageAnotherOneLifeCard" Stretch="Fill"/>
                         <TextBlock x:Name="textBlockAnotherOneLifeCardName"  FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
                         <TextBlock x:Name="textBlockAnotherOneLifeCardLife" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
                     </StackPanel>
@@ -158,6 +152,7 @@
                         <DropShadowEffect BlurRadius="10" ShadowDepth="5" Color="#888" />
                     </Border.Effect>
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image x:Name="imageTwoLivesCard" Stretch="Fill"/>
                         <TextBlock x:Name="textBlockTwoLivesCardName"  FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
                         <TextBlock x:Name="textBlockTwoLivesCardLives" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
                     </StackPanel>
@@ -167,6 +162,7 @@
                         <DropShadowEffect BlurRadius="10" ShadowDepth="5" Color="#888" />
                     </Border.Effect>
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image x:Name="imageAnotherTwoLivesCard" Stretch="Fill"/>
                         <TextBlock x:Name="textBlockAnotherTwoLivesCardName"  FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
                         <TextBlock x:Name="textBlockAnotherTwoLivesCardLives" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
                     </StackPanel>
@@ -176,6 +172,7 @@
                         <DropShadowEffect BlurRadius="10" ShadowDepth="5" Color="#888" />
                     </Border.Effect>
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image x:Name="imageThreeLivesCard" Stretch="Fill"/>
                         <TextBlock x:Name="textBlockThreeLivesCardName"  FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
                         <TextBlock x:Name="textBlockThreeLivesCardLives" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
                     </StackPanel>
@@ -200,7 +197,6 @@
                 <ColumnDefinition Width="31*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- Botón completamente funcional en la celda deseada -->
             <Button x:Name="buttonAcceptCardsPosition" 
             Grid.Row="1" 
             Grid.Column="1" 
@@ -210,10 +206,8 @@
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch">
                 <Grid>
-                    <!-- Imagen de fondo del botón -->
                     <Image Source="Images/BrownButton.png" Stretch="Fill"/>
 
-                    <!-- Texto centrado -->
                     <TextBlock Text="Accept" 
                        VerticalAlignment="Center" 
                        HorizontalAlignment="Center" 

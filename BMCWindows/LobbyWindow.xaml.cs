@@ -4,6 +4,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using BMCWindows.ChatLobbyServer;
 using BMCWindows.DTOs;
 using BMCWindows.LobbyServer;
@@ -361,6 +362,75 @@ namespace BMCWindows
                     this.NavigationService.Navigate(new GameplayWindow(_lobby, FilteredPlayers));
                 });
             }
+        }
+
+        private void LoadFriendList(string username)
+        {
+            try
+            {
+                FriendServer.FriendshipServiceClient friendsProxy = new FriendServer.FriendshipServiceClient();
+                var response = friendsProxy.GetFriendList(username);
+                ProfileServer.ProfileServiceClient profileProxy = new ProfileServer.ProfileServiceClient();
+
+                if (response.IsSuccess)
+                {
+                    if (response.Friends != null && response.Friends.Any())
+                    {
+                        ObservableCollection<Friend> friendsList = new ObservableCollection<Friend>(
+                            response.Friends.Select(friendPlayer =>
+                            {
+                                var friendProfilePicture = profileProxy.GetProfileImage(friendPlayer.Username);
+                                ImageConvertor imageConvertor = new ImageConvertor();
+                                BitmapImage image = imageConvertor.ConvertByteArrayToImage(friendProfilePicture.ImageData);
+
+                                return new Friend
+                                {
+                                    UserName = friendPlayer.Username,
+                                    FriendPicture = image,
+                                };
+
+
+
+                            })
+                        );
+                        FriendsList.ItemsSource = friendsList;
+                       
+                    }
+                }
+                else
+                {
+                    MessageBox.Show($"Error: {response?.ErrorKey ?? "Unknown error"}");
+                }
+            }
+            catch (CommunicationException commEx)
+            {
+                MessageBox.Show($"Communication error: {commEx.Message}");
+            }
+            catch (TimeoutException timeoutEx)
+            {
+                MessageBox.Show($"Timeout error: {timeoutEx.Message}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"General error: {ex.Message}");
+            }
+        }
+
+        private void LoadFriends(Object sender, RoutedEventArgs e)
+        {
+            var player = UserSessionManager.getInstance().getPlayerUserData();
+
+            FriendsList.Visibility = FriendsList.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
+
+            if (FriendsList.Visibility == Visibility.Visible)
+            {
+                LoadFriendList(player.Username);
+            }
+        }
+
+        private void SelectFriend(object sender, RoutedEventArgs e) 
+        {
+
         }
 
     }

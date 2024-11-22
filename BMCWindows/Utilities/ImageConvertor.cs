@@ -8,7 +8,7 @@ using System.Windows.Media.Imaging;
 
 namespace BMCWindows.Utilities
 {
-    internal class ImageConvertor
+    public class ImageConvertor
     {
 
         public BitmapImage ConvertByteArrayToImage(byte[] imageData)
