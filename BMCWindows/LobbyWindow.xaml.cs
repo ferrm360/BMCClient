@@ -73,9 +73,17 @@ namespace BMCWindows
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    Messages.Add(new Message { Sender = "System", Messages = message });
+                    if (!Messages.Any(m => m.Messages == message))
+                    {
+                        Messages.Add(new Message { Sender = "System", Messages = message });
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Duplicate message ignored: {message}");
+                    }
                 });
             };
+
 
             callbackHandler.StartGame += lobbyId =>
             {
@@ -171,7 +179,6 @@ namespace BMCWindows
             if (!FilteredPlayers.Contains(playerUsername))
             {
                 FilteredPlayers.Add(playerUsername);
-                Messages.Add(new Message { Sender = "System", Messages = $"{playerUsername} se ha unido a la lobby." });
             }
         }
 
@@ -180,7 +187,6 @@ namespace BMCWindows
             if (FilteredPlayers.Contains(playerUsername))
             {
                 FilteredPlayers.Remove(playerUsername);
-                Messages.Add(new Message { Sender = "System", Messages = $"{playerUsername} ha salido de la lobby." });
             }
         }
 
@@ -340,7 +346,6 @@ namespace BMCWindows
                 var context = new InstanceContext(new GameCallbackHandler());
                 var gameServiceClient = new GameplayServer.GameServiceClient(context);
 
-                // Aquí corregimos el selector para que simplemente use las cadenas de FilteredPlayers
                 var players = FilteredPlayers.ToList().ToArray();
 
                 var response = gameServiceClient.InitializeGame(_lobby.LobbyId, players);
