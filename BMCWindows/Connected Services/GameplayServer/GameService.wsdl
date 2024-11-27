@@ -14,7 +14,6 @@
       <xsd:import schemaLocation="http://localhost:8094/GameService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:8094/GameService?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
       <xsd:import schemaLocation="http://localhost:8094/GameService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Service.Results" />
-      <xsd:import schemaLocation="http://localhost:8094/GameService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Service.DTO" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IGameService_InitializeGame_InputMessage">
@@ -23,11 +22,11 @@
   <wsdl:message name="IGameService_InitializeGame_OutputMessage">
     <wsdl:part name="parameters" element="tns:InitializeGameResponse" />
   </wsdl:message>
-  <wsdl:message name="IGameService_SubmitInitialMatrix_InputMessage">
-    <wsdl:part name="parameters" element="tns:SubmitInitialMatrix" />
+  <wsdl:message name="IGameService_MarkPlayerReady_InputMessage">
+    <wsdl:part name="parameters" element="tns:MarkPlayerReady" />
   </wsdl:message>
-  <wsdl:message name="IGameService_SubmitInitialMatrix_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SubmitInitialMatrixResponse" />
+  <wsdl:message name="IGameService_MarkPlayerReady_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MarkPlayerReadyResponse" />
   </wsdl:message>
   <wsdl:message name="IGameService_StartGame_InputMessage">
     <wsdl:part name="parameters" element="tns:StartGame" />
@@ -38,14 +37,17 @@
   <wsdl:message name="IGameService_OnGameStarted_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:OnGameStarted" />
   </wsdl:message>
+  <wsdl:message name="IGameService_OnPlayerReady_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OnPlayerReady" />
+  </wsdl:message>
   <wsdl:portType name="IGameService">
     <wsdl:operation name="InitializeGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/InitializeGame" message="tns:IGameService_InitializeGame_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/InitializeGameResponse" message="tns:IGameService_InitializeGame_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="SubmitInitialMatrix">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/SubmitInitialMatrix" message="tns:IGameService_SubmitInitialMatrix_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/SubmitInitialMatrixResponse" message="tns:IGameService_SubmitInitialMatrix_OutputMessage" />
+    <wsdl:operation name="MarkPlayerReady">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/MarkPlayerReady" message="tns:IGameService_MarkPlayerReady_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/MarkPlayerReadyResponse" message="tns:IGameService_MarkPlayerReady_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="StartGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/StartGame" message="tns:IGameService_StartGame_InputMessage" />
@@ -53,6 +55,9 @@
     </wsdl:operation>
     <wsdl:operation name="OnGameStarted">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/OnGameStarted" message="tns:IGameService_OnGameStarted_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OnPlayerReady">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/OnPlayerReady" message="tns:IGameService_OnPlayerReady_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGameService" type="tns:IGameService">
@@ -67,8 +72,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SubmitInitialMatrix">
-      <soap12:operation soapAction="http://tempuri.org/IGameService/SubmitInitialMatrix" style="document" />
+    <wsdl:operation name="MarkPlayerReady">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/MarkPlayerReady" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -87,6 +92,12 @@
     </wsdl:operation>
     <wsdl:operation name="OnGameStarted">
       <soap12:operation soapAction="http://tempuri.org/IGameService/OnGameStarted" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnPlayerReady">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/OnPlayerReady" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

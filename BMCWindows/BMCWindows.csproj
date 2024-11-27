@@ -105,9 +105,21 @@
     <Compile Include="GameOptionsWindow.xaml.cs">
       <DependentUpon>GameOptionsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameplayAttack\GameplayAttackWindow.xaml.cs">
+      <DependentUpon>GameplayAttackWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GameplayBoard\CardInitializer.cs" />
+    <Compile Include="GameplayBoard\CardManager.cs" />
+    <Compile Include="GameplayBoard\CardSelector.cs" />
+    <Compile Include="GameplayBoard\ConnectionHandler.cs" />
+    <Compile Include="GameplayBoard\GameBoardManager.cs" />
+    <Compile Include="GameplayBoard\GameEventsHandler.cs" />
+    <Compile Include="GameplayBoard\PlayerLoader.cs" />
     <Compile Include="GameplayWindow.xaml.cs">
       <DependentUpon>GameplayWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameplayBoard\MatrixHandler.cs" />
+    <Compile Include="GameplayBoard\PlayerManager.cs" />
     <Compile Include="Interfaces\IPage.cs" />
     <Compile Include="LobbiesWindow.xaml.cs">
       <DependentUpon>LobbiesWindow.xaml</DependentUpon>
@@ -146,6 +158,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GameOptionsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GameplayAttack\GameplayAttackWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -306,9 +322,6 @@
     </None>
     <None Include="Connected Services\GameplayServer\BMCWindows.GameplayServer.OperationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\GameplayServer\GameService4.xsd">
-      <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\LobbyServer\BMCWindows.LobbyServer.LobbyDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
