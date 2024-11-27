@@ -120,6 +120,9 @@
     </Compile>
     <Compile Include="GameplayBoard\MatrixHandler.cs" />
     <Compile Include="GameplayBoard\PlayerManager.cs" />
+    <Compile Include="GuestPlayer\GuestPlayerLogin.xaml.cs">
+      <DependentUpon>GuestPlayerLogin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Interfaces\IPage.cs" />
     <Compile Include="LobbiesWindow.xaml.cs">
       <DependentUpon>LobbiesWindow.xaml</DependentUpon>
@@ -166,6 +169,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GameplayWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GuestPlayer\GuestPlayerLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
