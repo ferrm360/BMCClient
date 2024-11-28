@@ -183,9 +183,11 @@ namespace BMCWindows
 
         private void LogOut(object sender, RoutedEventArgs e)
         {
-            
+            Server.PlayerDTO player = new Server.PlayerDTO();
+            player = UserSessionManager.getInstance().getPlayerUserData();
             UserSessionManager.getInstance().logoutPlayer();   
             this.NavigationService.Navigate(new StartPage());
+            proxy.DisconnectUser(player.Username);
 
         }
 

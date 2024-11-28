@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BMCWindows.Test.Validators.FieldsValidators
 {
-    internal class FieldValidatorTest
+    public class FieldValidatorTest
     {
         [TestMethod]
         public void ValidateFieldsTestSuccess()
