@@ -35,7 +35,6 @@ namespace BMCWindows
             this.NavigationService.GoBack();
         }
 
-
         private void GoToHomePage(object sender, RoutedEventArgs e)
         {
             Server.AccountServiceClient proxy = new Server.AccountServiceClient();
@@ -53,7 +52,7 @@ namespace BMCWindows
                         Server.PlayerDTO player = new Server.PlayerDTO();
                         player.Username = user;
                         player.Password = password;
-                        UserSessionManager.getInstance().loginPlayer(player);
+                        UserSessionManager.getInstance().LoginPlayer(player, false);
                         this.NavigationService.Navigate(new HomePage());
 
                     }
@@ -71,9 +70,6 @@ namespace BMCWindows
             {
                 MessageBox.Show("Hay campos vacíos");
             }
-
-            
-
         }
 
         private void HidePassword(object sender, System.Windows.Input.TextCompositionEventArgs e) 
@@ -84,7 +80,6 @@ namespace BMCWindows
             textBox.Text = new string( '*', realPassword.Length);
             textBox.SelectionStart = textBox.Text.Length;
             e.Handled = true;
-
         }
     }
 }

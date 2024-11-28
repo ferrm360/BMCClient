@@ -31,7 +31,7 @@ namespace BMCWindows
         {
             InitializeComponent();
             Server.PlayerDTO player = new Server.PlayerDTO();
-            player = UserSessionManager.getInstance().getPlayerUserData();
+            player = UserSessionManager.getInstance().GetPlayerUserData();
             labelUser.Content = player.Username;
             ApplyToggleStyle(publicToggleButton);
             ApplyToggleStyle(privateToggleButton);
@@ -40,8 +40,6 @@ namespace BMCWindows
             labelLobbyPassword.Visibility = Visibility.Hidden;
             imageTextBoxLobbyPassword.Visibility = Visibility.Hidden;
             textBoxLobbyPassword.Visibility = Visibility.Hidden;
-
-
         }
 
        
@@ -81,9 +79,7 @@ namespace BMCWindows
                 textBoxLobbyPassword.Visibility = Visibility.Visible;
                 imageTextBoxLobbyPassword.Visibility = Visibility.Visible;
                 labelLobbyPassword.Visibility = Visibility.Visible;
-
             }
-
         }
 
 
@@ -95,9 +91,9 @@ namespace BMCWindows
 
             var requestDTO = new LobbyServer.CreateLobbyRequestDTO
             {
-                Username = UserSessionManager.getInstance().getPlayerUserData().Username,
+                Username = UserSessionManager.getInstance().GetPlayerUserData().Username,
                 Name = textBoxLobbyName.Text,
-                Host = UserSessionManager.getInstance().getPlayerUserData().Username,
+                Host = UserSessionManager.getInstance().GetPlayerUserData().Username,
                 IsPrivate = privateToggleButton.IsChecked == true,
                 Password = privateToggleButton.IsChecked == true ? textBoxLobbyPassword.Text : null
             };

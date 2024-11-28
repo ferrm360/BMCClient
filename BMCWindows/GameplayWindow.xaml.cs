@@ -61,7 +61,7 @@ namespace BMCWindows
             _lobby = lobby;
             _Players = Players;
             this.DataContext = this;
-            Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().getPlayerUserData();
+            Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
             Player1Cards.ItemsSource = LoadPlayer1List();
             if (_lobby.Host == currentPlayer.Username)
             {
@@ -149,7 +149,7 @@ namespace BMCWindows
 
         private ObservableCollection<Player> LoadPlayer1List()
         {
-            Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().getPlayerUserData();
+            Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
             ProfileServer.ProfileServiceClient profileProxy = new ProfileServer.ProfileServiceClient();
             ObservableCollection<Player> playerList = new ObservableCollection<Player>();
 
@@ -178,7 +178,7 @@ namespace BMCWindows
 
         private ObservableCollection<Player> LoadHost()
         {
-            Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().getPlayerUserData();
+            Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
             ProfileServer.ProfileServiceClient profileProxy = new ProfileServer.ProfileServiceClient();
             ObservableCollection<Player> playerList = new ObservableCollection<Player>();
 
@@ -204,7 +204,7 @@ namespace BMCWindows
 
         private ObservableCollection<Player> LoadCurrentPlayerList()
         {
-            Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().getPlayerUserData();
+            Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
             ProfileServer.ProfileServiceClient profileProxy = new ProfileServer.ProfileServiceClient();
             ObservableCollection<Player> playerList = new ObservableCollection<Player>();
 
@@ -549,7 +549,7 @@ namespace BMCWindows
 
             try
             {
-                Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().getPlayerUserData();
+                Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
 
                 var response = await _proxy.MarkPlayerReadyAsync(_lobby.LobbyId, currentPlayer.Username);
 

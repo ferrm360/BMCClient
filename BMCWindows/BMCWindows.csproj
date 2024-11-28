@@ -96,6 +96,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\GuestPlayerServer\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="DTOs\Card.cs" />
     <Compile Include="DTOs\Lobby.cs" />
     <Compile Include="DTOs\Player.cs" />
@@ -330,6 +335,9 @@
     <None Include="Connected Services\GameplayServer\BMCWindows.GameplayServer.OperationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\GuestPlayerServer\BMCWindows.GuestPlayerServer.OperationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\LobbyServer\BMCWindows.LobbyServer.LobbyDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -412,6 +420,16 @@
     <None Include="Connected Services\GameplayServer\GameService3.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\GuestPlayerServer\GuestPlayerService.wsdl" />
+    <None Include="Connected Services\GuestPlayerServer\GuestPlayerService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GuestPlayerServer\GuestPlayerService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GuestPlayerServer\GuestPlayerService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -452,6 +470,7 @@
     <WCFMetadataStorage Include="Connected Services\ProfileServer\" />
     <WCFMetadataStorage Include="Connected Services\Server\" />
     <WCFMetadataStorage Include="Connected Services\GameplayServer\" />
+    <WCFMetadataStorage Include="Connected Services\GuestPlayerServer\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\Server\configuration91.svcinfo" />
@@ -572,6 +591,21 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Utilities\GameRules\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GuestPlayerServer\GuestPlayerService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GuestPlayerServer\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GuestPlayerServer\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GuestPlayerServer\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

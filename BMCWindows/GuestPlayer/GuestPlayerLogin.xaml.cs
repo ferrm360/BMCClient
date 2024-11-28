@@ -1,6 +1,8 @@
-﻿using System;
+﻿using BMCWindows.Patterns.Singleton;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +25,47 @@ namespace BMCWindows.GuestPlayer
         public GuestPlayerLogin()
         {
             InitializeComponent();
+        }
+
+        private void LoginAsGuest(object sender, RoutedEventArgs e)
+        {
+            string username = textBoxUsername.Text;
+
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                MessageBox.Show("Por favor, ingresa un nombre de usuario.");
+                return;
+            }
+
+            GuestPlayerServer.GuestPlayerServiceClient proxy = new GuestPlayerServer.GuestPlayerServiceClient();
+
+            try
+            {
+               var result = proxy.RegisterGuestPlayer(username);
+                if (result.IsSuccess) {
+                    Server.PlayerDTO player = new Server.PlayerDTO
+                    {
+                        Username = username
+                    };
+
+                    UserSessionManager.getInstance().LoginPlayer(player, true);
+                    this.NavigationService.Navigate(new GameOptionsWindow());
+
+                }
+                else
+                {
+                    MessageBox.Show(result.ErrorKey);
+                }
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show("Error en el servidor");
+            }
+        }
+
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
         }
     }
 }

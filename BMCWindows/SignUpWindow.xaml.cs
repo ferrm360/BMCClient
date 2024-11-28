@@ -43,7 +43,7 @@ namespace BMCWindows
                     var result = proxy.Register(player);
                     if (result.IsSuccess)
                     {
-                        UserSessionManager.getInstance().loginPlayer(player);
+                        UserSessionManager.getInstance().LoginPlayer(player);
                         this.NavigationService.Navigate(new HomePage());
                     }
                     else

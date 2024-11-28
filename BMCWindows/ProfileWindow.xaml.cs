@@ -30,7 +30,7 @@ namespace BMCWindows
         {
             InitializeComponent();
             Server.PlayerDTO player = new Server.PlayerDTO();
-            player = UserSessionManager.getInstance().getPlayerUserData();
+            player = UserSessionManager.getInstance().GetPlayerUserData();
             labelUser.Content = player.Username;
             ProfileServer.ProfileServiceClient proxy = new ProfileServer.ProfileServiceClient();
             LoadFriendList(player.Username);
@@ -66,7 +66,7 @@ namespace BMCWindows
         private void UploadProfilePicture(object sender, RoutedEventArgs e)
         {
             Server.PlayerDTO player = new Server.PlayerDTO();
-            player = UserSessionManager.getInstance().getPlayerUserData();
+            player = UserSessionManager.getInstance().GetPlayerUserData();
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.png)|*.jpg;*.jpeg;*.png";
             if (openFileDialog.ShowDialog() == true)
@@ -111,7 +111,7 @@ namespace BMCWindows
         private void MakeUserEditable(object sender, RoutedEventArgs e) 
         {
             Server.PlayerDTO player = new Server.PlayerDTO();
-            player = UserSessionManager.getInstance().getPlayerUserData();
+            player = UserSessionManager.getInstance().GetPlayerUserData();
             labelUser.Visibility = Visibility.Hidden;
             textBoxUser.Visibility = Visibility.Visible;
             textBoxUser.Text = player.Username;
@@ -128,14 +128,14 @@ namespace BMCWindows
         private void AcceptUsernameChange(object sender, RoutedEventArgs e) 
         {
             Server.PlayerDTO player = new Server.PlayerDTO();
-            player = UserSessionManager.getInstance().getPlayerUserData();
+            player = UserSessionManager.getInstance().GetPlayerUserData();
             String newUsername = textBoxUser.Text;
             ProfileServer.ProfileServiceClient proxy = new ProfileServer.ProfileServiceClient();
             var result = proxy.UpdateUsername(player.Username, newUsername);
             if (result.IsSuccess) 
             {
                 Server.PlayerDTO playerUpdated = new Server.PlayerDTO();
-                playerUpdated = UserSessionManager.getInstance().getPlayerUserData();
+                playerUpdated = UserSessionManager.getInstance().GetPlayerUserData();
                 labelUser.Content = newUsername;
                 textBoxUser.Visibility= Visibility.Hidden;
                 labelUser.Visibility= Visibility.Visible;
@@ -169,7 +169,7 @@ namespace BMCWindows
         private void MakeBioEditable(object sender, RoutedEventArgs e)
         {
             Server.PlayerDTO player = new Server.PlayerDTO();
-            player = UserSessionManager.getInstance().getPlayerUserData();
+            player = UserSessionManager.getInstance().GetPlayerUserData();
             textBlockBio.Visibility = Visibility.Hidden;
             textBoxBio.Visibility = Visibility.Visible;
             textBoxBio.Text = textBlockBio.Text;
@@ -185,14 +185,14 @@ namespace BMCWindows
         private void AcceptBioUpdate(object sender, RoutedEventArgs e)
         {
             Server.PlayerDTO player = new Server.PlayerDTO();
-            player = UserSessionManager.getInstance().getPlayerUserData();
+            player = UserSessionManager.getInstance().GetPlayerUserData();
             String newBio = textBoxBio.Text;
             ProfileServer.ProfileServiceClient proxy = new ProfileServer.ProfileServiceClient();
             var result = proxy.UpdateBio(newBio, player.Username);
             if (result.IsSuccess)
             {
                 Server.PlayerDTO playerUpdated = new Server.PlayerDTO();
-                playerUpdated = UserSessionManager.getInstance().getPlayerUserData();
+                playerUpdated = UserSessionManager.getInstance().GetPlayerUserData();
                 textBoxBio.Visibility = Visibility.Hidden;
                 textBlockBio.Visibility = Visibility.Visible;
                 textBlockBio.Text = newBio;
