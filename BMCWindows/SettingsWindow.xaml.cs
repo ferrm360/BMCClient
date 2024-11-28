@@ -28,7 +28,7 @@ namespace BMCWindows
         {
             InitializeComponent();
             Server.PlayerDTO player = new Server.PlayerDTO();
-            player = UserSessionManager.getInstance().getPlayerUserData(); 
+            player = UserSessionManager.getInstance().GetPlayerUserData(); 
             ProfileServer.ProfileServiceClient proxyProfile = new ProfileServer.ProfileServiceClient();
             var imageUrl = proxyProfile.GetProfileImage(player.Username);
             if (imageUrl.ImageData == null || imageUrl.ImageData.Length == 0)
@@ -58,7 +58,7 @@ namespace BMCWindows
         private void UpdatePassword(object sender, RoutedEventArgs e)
         {
             Server.PlayerDTO player = new Server.PlayerDTO();
-            player = UserSessionManager.getInstance().getPlayerUserData();
+            player = UserSessionManager.getInstance().GetPlayerUserData();
            
             ProfileServer.ProfileServiceClient proxy = new ProfileServer.ProfileServiceClient();
             String username = player.Username;         

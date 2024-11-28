@@ -31,7 +31,7 @@ namespace BMCWindows
             _username = username;
             Console.WriteLine($"Username enviado: {_username}");
             Server.PlayerDTO player = new Server.PlayerDTO();
-            player = UserSessionManager.getInstance().getPlayerUserData();
+            player = UserSessionManager.getInstance().GetPlayerUserData();
             labelUser.Content = _username;
             LoadFriendList(_username);
             ProfileServer.ProfileServiceClient proxyProfile = new ProfileServer.ProfileServiceClient();

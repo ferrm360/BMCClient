@@ -74,9 +74,17 @@ namespace BMCWindows
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    Messages.Add(new Message { Sender = "System", Messages = message });
+                    if (!Messages.Any(m => m.Messages == message))
+                    {
+                        Messages.Add(new Message { Sender = "System", Messages = message });
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Duplicate message ignored: {message}");
+                    }
                 });
             };
+
 
             callbackHandler.StartGame += lobbyId =>
             {
@@ -90,7 +98,7 @@ namespace BMCWindows
             };
 
 
-            var player = UserSessionManager.getInstance().getPlayerUserData();
+            var player = UserSessionManager.getInstance().GetPlayerUserData();
             textBlockCurrentPlayerUsername.Text = player.Username;
             labelLobbyName.Content = _lobby.Name;
             LoadPlayers();
@@ -152,7 +160,7 @@ namespace BMCWindows
 
         private void LoadPlayers()
         {
-            var currentPlayer = UserSessionManager.getInstance().getPlayerUserData().Username;
+            var currentPlayer = UserSessionManager.getInstance().GetPlayerUserData().Username;
 
             Application.Current.Dispatcher.Invoke(() =>
             {
@@ -172,7 +180,6 @@ namespace BMCWindows
             if (!FilteredPlayers.Contains(playerUsername))
             {
                 FilteredPlayers.Add(playerUsername);
-                Messages.Add(new Message { Sender = "System", Messages = $"{playerUsername} se ha unido a la lobby." });
             }
         }
 
@@ -181,13 +188,12 @@ namespace BMCWindows
             if (FilteredPlayers.Contains(playerUsername))
             {
                 FilteredPlayers.Remove(playerUsername);
-                Messages.Add(new Message { Sender = "System", Messages = $"{playerUsername} ha salido de la lobby." });
             }
         }
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
-            var player = UserSessionManager.getInstance().getPlayerUserData();
+            var player = UserSessionManager.getInstance().GetPlayerUserData();
             string lobbyId = _lobby.LobbyId;
 
             try
@@ -211,7 +217,7 @@ namespace BMCWindows
 
         private void SendGeneralMessage(object sender, RoutedEventArgs e)
         {
-            var player = UserSessionManager.getInstance().getPlayerUserData();
+            var player = UserSessionManager.getInstance().GetPlayerUserData();
             if (!string.IsNullOrEmpty(textboxGeneralChat.Text))
             {
                 var formattedMessage = $"{player.Username}: {textboxGeneralChat.Text}";
@@ -256,7 +262,7 @@ namespace BMCWindows
 
         private void JoinGame(LobbyDTO lobby, string password)
         {
-            var player = UserSessionManager.getInstance().getPlayerUserData();
+            var player = UserSessionManager.getInstance().GetPlayerUserData();
             if (lobby == null)
             {
                 MessageBox.Show("Por favor, selecciona un lobby.");
@@ -295,7 +301,7 @@ namespace BMCWindows
 
         private void StartGame(object sender, RoutedEventArgs e)
         {
-            var player = UserSessionManager.getInstance().getPlayerUserData();
+            var player = UserSessionManager.getInstance().GetPlayerUserData();
 
             try
             {
@@ -412,7 +418,7 @@ namespace BMCWindows
 
         private void LoadFriends(Object sender, RoutedEventArgs e)
         {
-            var player = UserSessionManager.getInstance().getPlayerUserData();
+            var player = UserSessionManager.getInstance().GetPlayerUserData();
 
             FriendsList.Visibility = FriendsList.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
 

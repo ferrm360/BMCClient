@@ -18,8 +18,6 @@ namespace BMCWindows.GameplayServer {
     [System.Runtime.Serialization.DataContractAttribute(Name="OperationResponse", Namespace="http://schemas.datacontract.org/2004/07/Service.Results")]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(string[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(int[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.GameplayServer.GameBoardDTO))]
     public partial class OperationResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -93,83 +91,6 @@ namespace BMCWindows.GameplayServer {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GameBoardDTO", Namespace="http://schemas.datacontract.org/2004/07/Service.DTO")]
-    [System.SerializableAttribute()]
-    public partial class GameBoardDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int ColumnsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int[] DataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int RowsField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Columns {
-            get {
-                return this.ColumnsField;
-            }
-            set {
-                if ((this.ColumnsField.Equals(value) != true)) {
-                    this.ColumnsField = value;
-                    this.RaisePropertyChanged("Columns");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int[] Data {
-            get {
-                return this.DataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DataField, value) != true)) {
-                    this.DataField = value;
-                    this.RaisePropertyChanged("Data");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Rows {
-            get {
-                return this.RowsField;
-            }
-            set {
-                if ((this.RowsField.Equals(value) != true)) {
-                    this.RowsField = value;
-                    this.RaisePropertyChanged("Rows");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="GameplayServer.IGameService", CallbackContract=typeof(BMCWindows.GameplayServer.IGameServiceCallback))]
     public interface IGameService {
@@ -180,11 +101,11 @@ namespace BMCWindows.GameplayServer {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/InitializeGame", ReplyAction="http://tempuri.org/IGameService/InitializeGameResponse")]
         System.Threading.Tasks.Task<BMCWindows.GameplayServer.OperationResponse> InitializeGameAsync(string lobbyId, string[] players);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/SubmitInitialMatrix", ReplyAction="http://tempuri.org/IGameService/SubmitInitialMatrixResponse")]
-        BMCWindows.GameplayServer.OperationResponse SubmitInitialMatrix(string lobbyId, string player, BMCWindows.GameplayServer.GameBoardDTO board);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/MarkPlayerReady", ReplyAction="http://tempuri.org/IGameService/MarkPlayerReadyResponse")]
+        BMCWindows.GameplayServer.OperationResponse MarkPlayerReady(string lobbyId, string player);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/SubmitInitialMatrix", ReplyAction="http://tempuri.org/IGameService/SubmitInitialMatrixResponse")]
-        System.Threading.Tasks.Task<BMCWindows.GameplayServer.OperationResponse> SubmitInitialMatrixAsync(string lobbyId, string player, BMCWindows.GameplayServer.GameBoardDTO board);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/MarkPlayerReady", ReplyAction="http://tempuri.org/IGameService/MarkPlayerReadyResponse")]
+        System.Threading.Tasks.Task<BMCWindows.GameplayServer.OperationResponse> MarkPlayerReadyAsync(string lobbyId, string player);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/StartGame", ReplyAction="http://tempuri.org/IGameService/StartGameResponse")]
         BMCWindows.GameplayServer.OperationResponse StartGame(string lobbyId);
@@ -198,6 +119,9 @@ namespace BMCWindows.GameplayServer {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/OnGameStarted")]
         void OnGameStarted();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/OnPlayerReady")]
+        void OnPlayerReady(string player);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -236,12 +160,12 @@ namespace BMCWindows.GameplayServer {
             return base.Channel.InitializeGameAsync(lobbyId, players);
         }
         
-        public BMCWindows.GameplayServer.OperationResponse SubmitInitialMatrix(string lobbyId, string player, BMCWindows.GameplayServer.GameBoardDTO board) {
-            return base.Channel.SubmitInitialMatrix(lobbyId, player, board);
+        public BMCWindows.GameplayServer.OperationResponse MarkPlayerReady(string lobbyId, string player) {
+            return base.Channel.MarkPlayerReady(lobbyId, player);
         }
         
-        public System.Threading.Tasks.Task<BMCWindows.GameplayServer.OperationResponse> SubmitInitialMatrixAsync(string lobbyId, string player, BMCWindows.GameplayServer.GameBoardDTO board) {
-            return base.Channel.SubmitInitialMatrixAsync(lobbyId, player, board);
+        public System.Threading.Tasks.Task<BMCWindows.GameplayServer.OperationResponse> MarkPlayerReadyAsync(string lobbyId, string player) {
+            return base.Channel.MarkPlayerReadyAsync(lobbyId, player);
         }
         
         public BMCWindows.GameplayServer.OperationResponse StartGame(string lobbyId) {

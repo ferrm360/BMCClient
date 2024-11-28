@@ -1,0 +1,77 @@
+﻿<Page x:Class="BMCWindows.GameplayPage.GameplayAttackWindow"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
+      Title="GameplayAttackWindow"
+      Background="#FEFFDB">
+
+    <Grid>
+        <!-- Definición del layout principal -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Contenedor del Tablero del Jugador -->
+        <Grid Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <!-- Para el título -->
+                <RowDefinition Height="*" />
+                <!-- Para el tablero -->
+            </Grid.RowDefinitions>
+
+            <!-- Título del Tablero del Jugador -->
+            <TextBlock Text="Tu Tablero" FontSize="16" FontWeight="Bold" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10" 
+                       TextWrapping="Wrap" />
+
+            <!-- Tablero del Jugador -->
+            <Grid x:Name="PlayerBoardGrid" Grid.Row="1" Background="Transparent" 
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10"
+                  MinHeight="300" MinWidth="300">
+                <!-- Las filas y columnas serán generadas dinámicamente en el CodeBehind -->
+            </Grid>
+        </Grid>
+
+        <!-- Texto VS -->
+        <Grid Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+            <TextBlock Text="VS" FontSize="36" FontWeight="Bold" Foreground="Black" />
+        </Grid>
+
+        <!-- Contenedor del Tablero del Enemigo -->
+        <Grid Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <!-- Para el título -->
+                <RowDefinition Height="*" />
+                <!-- Para el tablero -->
+            </Grid.RowDefinitions>
+
+            <!-- Título del Tablero del Enemigo -->
+            <TextBlock Text="Tablero del Enemigo" FontSize="16" FontWeight="Bold" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10"
+                       TextWrapping="Wrap" />
+
+            <!-- Tablero del Enemigo -->
+            <Grid x:Name="EnemyBoardGrid" Grid.Row="1" Background="Transparent" 
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10"
+                  MinHeight="300" MinWidth="300">
+                <!-- Las filas y columnas serán generadas dinámicamente en el CodeBehind -->
+            </Grid>
+        </Grid>
+
+        <!-- Botones de Acción -->
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Button Content="Atrás" Click="BackButton_Click" Width="100" Margin="10" Padding="5" />
+            <Button Content="Atacar" Click="AttackButton_Click" Width="100" Margin="10" Padding="5" />
+        </StackPanel>
+    </Grid>
+</Page>

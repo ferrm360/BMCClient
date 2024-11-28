@@ -42,7 +42,7 @@ namespace BMCWindows
             generalMessages.ItemsSource = Messages; 
             //generalMessages.ItemsSource = Messages; 
             Server.PlayerDTO player = new Server.PlayerDTO();
-            player = UserSessionManager.getInstance().getPlayerUserData();
+            player = UserSessionManager.getInstance().GetPlayerUserData();
             InstanceContext context = new InstanceContext(this);
             proxy = new ChatServer.ChatServiceClient(context);
             proxy.RegisterUser(player.Username);
@@ -85,7 +85,7 @@ namespace BMCWindows
         {
 
             Server.PlayerDTO player = new Server.PlayerDTO();
-            player = UserSessionManager.getInstance().getPlayerUserData();
+            player = UserSessionManager.getInstance().GetPlayerUserData();
 
             if (!string.IsNullOrEmpty(textboxGeneralChat.Text))
             {
@@ -100,7 +100,7 @@ namespace BMCWindows
 
         public void ReceiveMessage(string message)
         {
-            Server.PlayerDTO player = UserSessionManager.getInstance().getPlayerUserData();
+            Server.PlayerDTO player = UserSessionManager.getInstance().GetPlayerUserData();
 
             Application.Current.Dispatcher.Invoke(() =>
             {
@@ -183,9 +183,8 @@ namespace BMCWindows
 
         private void LogOut(object sender, RoutedEventArgs e)
         {
-            Server.PlayerDTO player = new Server.PlayerDTO();
-            player = UserSessionManager.getInstance().getPlayerUserData();
-            UserSessionManager.getInstance().logoutPlayer();   
+            
+            UserSessionManager.getInstance().LogoutPlayer();   
             this.NavigationService.Navigate(new StartPage());
             proxy.DisconnectUser(player.Username);
 

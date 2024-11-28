@@ -1,4 +1,5 @@
-﻿using BMCWindows.Patterns.Singleton;
+﻿using BMCWindows.GuestPlayerServer;
+using BMCWindows.Patterns.Singleton;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,8 +25,19 @@ namespace BMCWindows
         public GameOptionsWindow()
         {
             Server.PlayerDTO player = new Server.PlayerDTO();
-            player = UserSessionManager.getInstance().getPlayerUserData();
+            player = UserSessionManager.getInstance().GetPlayerUserData();
             InitializeComponent();
+
+            if (UserSessionManager.getInstance().IsGuestUser())
+            {
+                buttonLogout.Visibility = Visibility.Visible;
+                buttonCancel.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                buttonCancel.Visibility = Visibility.Visible;
+                buttonLogout.Visibility = Visibility.Collapsed;
+            }
         }
 
 
@@ -42,6 +54,30 @@ namespace BMCWindows
         private void GoToJoinLobbyWindow(object sender, EventArgs e) 
         {
             this.NavigationService.Navigate(new LobbiesWindow());
+        }
+
+        private void Logout(object sender, RoutedEventArgs e)
+        {
+            GuestPlayerServer.GuestPlayerServiceClient proxy = new GuestPlayerServer.GuestPlayerServiceClient();
+            try
+            {
+                var result = proxy.LogoutGuestPlayer(UserSessionManager.getInstance().GetPlayerUserData().Username);
+
+                if (result.IsSuccess)
+                {
+                    UserSessionManager.getInstance().LogoutPlayer();
+                    MessageBox.Show("You have been logged out.");
+                    this.NavigationService.GoBack();
+
+                }
+                else
+                {
+                    MessageBox.Show($"Error: {result.ErrorKey}");
+                }
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

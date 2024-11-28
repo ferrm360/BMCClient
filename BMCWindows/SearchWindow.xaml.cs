@@ -28,7 +28,7 @@ namespace BMCWindows
         {
             InitializeComponent();
             Server.PlayerDTO player = new Server.PlayerDTO();
-            player = UserSessionManager.getInstance().getPlayerUserData();
+            player = UserSessionManager.getInstance().GetPlayerUserData();
             LoadPlayerList(player.Username);
         }
 
@@ -78,7 +78,7 @@ namespace BMCWindows
             try
             {
                 Server.PlayerDTO player = new Server.PlayerDTO();
-                player = UserSessionManager.getInstance().getPlayerUserData();
+                player = UserSessionManager.getInstance().GetPlayerUserData();
                 FriendServer.FriendshipServiceClient friendsProxy = new FriendServer.FriendshipServiceClient();
                 var response = friendsProxy.GetPlayersListByUsername(searchPlayerUsername, player.Username);
 
@@ -140,7 +140,7 @@ namespace BMCWindows
                 string receiverUsername = selectedPlayer.UserName;
                 FriendServer.FriendshipServiceClient proxy = new FriendServer.FriendshipServiceClient();
                 Server.PlayerDTO player = new Server.PlayerDTO();
-                player = UserSessionManager.getInstance().getPlayerUserData();
+                player = UserSessionManager.getInstance().GetPlayerUserData();
                 var result = proxy.SendFriendRequest(player.Username, receiverUsername);
                 if (result.IsSuccess) 
                 {

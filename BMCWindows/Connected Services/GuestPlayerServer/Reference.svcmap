@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="50d29ca5-1040-49b8-a715-36145f3ac762" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8098/GuestPlayerService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="GuestPlayerService.xsd" MetadataType="Schema" ID="2a5fe908-f05c-4e36-9c3f-9a7aa445d140" SourceId="1" SourceUrl="http://localhost:8098/GuestPlayerService?xsd=xsd2" />
+    <MetadataFile FileName="GuestPlayerService1.xsd" MetadataType="Schema" ID="13fb301f-8989-4c8f-8d28-9dbf6f60f829" SourceId="1" SourceUrl="http://localhost:8098/GuestPlayerService?xsd=xsd1" />
+    <MetadataFile FileName="GuestPlayerService2.xsd" MetadataType="Schema" ID="30ff299e-03d1-4d02-a298-4b36b0d52174" SourceId="1" SourceUrl="http://localhost:8098/GuestPlayerService?xsd=xsd0" />
+    <MetadataFile FileName="GuestPlayerService.wsdl" MetadataType="Wsdl" ID="f1b52e71-8833-4774-977b-808e7b04c3ad" SourceId="1" SourceUrl="http://localhost:8098/GuestPlayerService?wsdl" />
+    <MetadataFile FileName="GuestPlayerService.disco" MetadataType="Disco" ID="13a8a28e-f78a-4ee7-b003-0c7fc3f5a6db" SourceId="1" SourceUrl="http://localhost:8098/GuestPlayerService?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

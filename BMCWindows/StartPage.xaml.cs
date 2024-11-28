@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BMCWindows.GuestPlayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,6 +34,12 @@ namespace BMCWindows
         private void GoToSignUpPage(Object sender, EventArgs e)
         {
             this.NavigationService.Navigate(new SignUpWindow());
+        }
+
+        private void LoginAsGuest(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new GuestPlayerLogin());
+
         }
 
     }

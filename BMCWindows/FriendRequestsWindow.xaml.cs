@@ -27,7 +27,7 @@ namespace BMCWindows
         {
             InitializeComponent();
             Server.PlayerDTO player = new Server.PlayerDTO();
-            player = UserSessionManager.getInstance().getPlayerUserData();
+            player = UserSessionManager.getInstance().GetPlayerUserData();
             LoadFriendshipRequests(player.Username);
         }
 

@@ -1,7 +1,9 @@
 ﻿using BMCWindows.DTOs;
+using BMCWindows.GameplayPage;
 using BMCWindows.GameplayServer;
 using BMCWindows.LobbyServer;
 using BMCWindows.Patterns.Singleton;
+using BMCWindows.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,7 +27,7 @@ namespace BMCWindows
     /// <summary>
     /// Lógica de interacción para GameplayWindow.xaml
     /// </summary>
-    public partial class GameplayWindow : Page, GameplayServer.IGameServiceCallback
+    public partial class GameplayWindow : Page
     {
         private LobbyDTO _lobby;
         private ObservableCollection<String> _Players { get; set; } = new ObservableCollection<String>();
@@ -39,17 +41,29 @@ namespace BMCWindows
         private ObservableCollection<Card> Player2GameCards { get; set; }
         private string selectedCardName;
         private int selectedCardLife;
+        private GameCallbackHandler _callbackHandler;
+        private GameServiceClient _proxy;
+        private int _playersReadyCount = 0; // Track players ready
+
 
 
         public GameplayWindow(LobbyDTO lobby, ObservableCollection<String> Players)
         {
+
+            _callbackHandler = new GameCallbackHandler();
+            _callbackHandler.OnGameStartedEvent += HandleGameStarted;
+            _callbackHandler.OnPlayerReadyEvent += HandlePlayerReady;
+
+            var context = new System.ServiceModel.InstanceContext(_callbackHandler);
+            _proxy = new GameplayServer.GameServiceClient(context);
+
             InitializeComponent();
             _lobby = lobby;
             _Players = Players;
             this.DataContext = this;
-            Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().getPlayerUserData();
+            Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
             Player1Cards.ItemsSource = LoadPlayer1List();
-            if(_lobby.Host == currentPlayer.Username)
+            if (_lobby.Host == currentPlayer.Username)
             {
                 Player2Cards.ItemsSource = LoadHost();
             }
@@ -60,7 +74,7 @@ namespace BMCWindows
             textBlockGameName.Text = lobby.Name;
 
             Matrix = new int[5, 3];
-       
+
             Player1GameCards = new ObservableCollection<Card>();
             Player2GameCards = new ObservableCollection<Card>();
 
@@ -69,13 +83,13 @@ namespace BMCWindows
 
             if (lobby.Host == currentPlayer.Username)
             {
-                
-                string imagePath = "Images/IñakiCard.png"; 
+
+                string imagePath = "Images/IñakiCard.png";
                 BitmapImage imageOneLifeCard = new BitmapImage(new Uri(imagePath, UriKind.Relative));
                 imageCardOneLife.Source = imageOneLifeCard;
                 textBlockOneLifeCardName.Text = "Cat1Life";
                 textBlockOneLifeCardLife.Text = "1";
-               
+
 
 
                 textBlockAnotherOneLifeCardName.Text = "CatAnother1Life";
@@ -135,7 +149,7 @@ namespace BMCWindows
 
         private ObservableCollection<Player> LoadPlayer1List()
         {
-            Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().getPlayerUserData();
+            Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
             ProfileServer.ProfileServiceClient profileProxy = new ProfileServer.ProfileServiceClient();
             ObservableCollection<Player> playerList = new ObservableCollection<Player>();
 
@@ -164,37 +178,33 @@ namespace BMCWindows
 
         private ObservableCollection<Player> LoadHost()
         {
-            Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().getPlayerUserData();
+            Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
             ProfileServer.ProfileServiceClient profileProxy = new ProfileServer.ProfileServiceClient();
             ObservableCollection<Player> playerList = new ObservableCollection<Player>();
 
             try
             {
-                
-                
-                    if (currentPlayer.Username == _lobby.Host)
+                if (currentPlayer.Username == _lobby.Host)
+                {
+                    var playerProfilePicture = profileProxy.GetProfileImage(currentPlayer.Username);
+                    if (playerProfilePicture.ImageData != null && playerProfilePicture.ImageData.Length > 0)
                     {
-                        var playerProfilePicture = profileProxy.GetProfileImage(currentPlayer.Username);
-                        if (playerProfilePicture.ImageData != null && playerProfilePicture.ImageData.Length > 0)
-                        {
-                            BitmapImage image = ConvertByteArrayToImage(playerProfilePicture.ImageData);
-                            playerList.Add(new Player { Username = _lobby.Host, ProfilePicture = image });
-                        }
+                        BitmapImage image = ConvertByteArrayToImage(playerProfilePicture.ImageData);
+                        playerList.Add(new Player { Username = _lobby.Host, ProfilePicture = image });
                     }
-                
+                }
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error loading player 1 list: {ex.Message}");
             }
-
             return playerList;
-
         }
 
         private ObservableCollection<Player> LoadCurrentPlayerList()
         {
-            Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().getPlayerUserData();
+            Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
             ProfileServer.ProfileServiceClient profileProxy = new ProfileServer.ProfileServiceClient();
             ObservableCollection<Player> playerList = new ObservableCollection<Player>();
 
@@ -211,7 +221,6 @@ namespace BMCWindows
             {
                 MessageBox.Show($"Error loading current player: {ex.Message}");
             }
-
             return playerList;
         }
 
@@ -224,7 +233,7 @@ namespace BMCWindows
                 bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
                 bitmapImage.StreamSource = stream;
                 bitmapImage.EndInit();
-                bitmapImage.Freeze(); 
+                bitmapImage.Freeze();
                 return bitmapImage;
             }
         }
@@ -232,7 +241,6 @@ namespace BMCWindows
         private void LeaveGame(object sender, EventArgs e)
         {
             this.NavigationService.Navigate(new LobbiesWindow());
-
         }
 
         public ObservableCollection<int> FlatMatrix
@@ -262,8 +270,8 @@ namespace BMCWindows
                     var value = textBlock.Text;
                     MessageBox.Show($"Seleccionaste la celda con el valor: {value}");
                 }
-                var row = Grid.GetRow(cell);  
-                var column = Grid.GetColumn(cell);  
+                var row = Grid.GetRow(cell);
+                var column = Grid.GetColumn(cell);
 
                 MessageBox.Show($"Posición de la celda seleccionada: Fila {row}, Columna {column}");
             }
@@ -275,9 +283,9 @@ namespace BMCWindows
 
             int buttonCount = 0;
 
-            for (int row = 0; row < 4; row++)  
+            for (int row = 0; row < 4; row++)
             {
-                for (int col = 0; col < 3; col++)  
+                for (int col = 0; col < 3; col++)
                 {
                     Button cellButton = new Button
                     {
@@ -286,23 +294,18 @@ namespace BMCWindows
                         Margin = new Thickness(1)
                     };
 
-                    
+
 
                     Grid.SetRow(cellButton, row);
                     Grid.SetColumn(cellButton, col);
 
-                    cellButton.Click += AssignOrRemoveCard; 
-                    BoardGrid.Children.Add(cellButton); 
+                    cellButton.Click += AssignOrRemoveCard;
+                    BoardGrid.Children.Add(cellButton);
                     buttonCount++;
 
                 }
             }
         }
-
-        
-
-        
-
 
         private void AssignCard(object sender, RoutedEventArgs e)
         {
@@ -317,10 +320,8 @@ namespace BMCWindows
                 UpdateCardInMatrix(row, col);
 
                 clickedButton.Content = $"{selectedCardName} - Vida: {selectedCardLife}";
-            } 
+            }
         }
-
-        
 
         private void AssignOrRemoveCard(object sender, RoutedEventArgs e)
         {
@@ -328,40 +329,40 @@ namespace BMCWindows
 
             if (clickedButton != null)
             {
-                var assignedCard = clickedButton.Content as StackPanel;
+                int row = Grid.GetRow(clickedButton);
+                int col = Grid.GetColumn(clickedButton);
 
-                if (assignedCard != null)
+                if (clickedButton.Content == null && !string.IsNullOrEmpty(selectedCardName))
                 {
-                    Console.WriteLine($"Carta {selectedCardName} eliminada de la posición ({Grid.GetRow(clickedButton)}, {Grid.GetColumn(clickedButton)})");
-
-                    clickedButton.Content = null; 
-                }
-                else
-                {
-                    if (selectedCard != null)
+                    var cardData = GetCardData(selectedCard);
+                    if (cardData.Name != null)
                     {
-                        var cardData = GetCardData(selectedCard); 
-                        var newCard = new Card { Name = cardData.Name, Life = cardData.Life, CardImage = cardData.CardImage };
-
-                        RemoveCardFromOtherButtons(newCard);
-
                         StackPanel cardPanel = new StackPanel
                         {
                             Orientation = Orientation.Vertical,
                             Children =
                     {
-                        new Image { Source = newCard.CardImage, Width = 60, Height = 90 },
-                        new TextBlock { Text = newCard.Name, HorizontalAlignment = HorizontalAlignment.Center }
+                        new Image { Source = cardData.CardImage, Width = 60, Height = 90 },
+                        new TextBlock { Text = cardData.Name, HorizontalAlignment = HorizontalAlignment.Center }
                     }
                         };
+
                         clickedButton.Content = cardPanel;
 
-                        Console.WriteLine($"Carta {newCard.Name} colocada en la posición ({Grid.GetRow(clickedButton)}, {Grid.GetColumn(clickedButton)})");
+                        Matrix[row, col] = cardData.Life;
+
+                        Console.WriteLine($"Carta {cardData.Name} colocada en ({row}, {col}) con vida {cardData.Life}");
                     }
+                }
+                else
+                {
+                    clickedButton.Content = null;
+                    Matrix[row, col] = 0;
+
+                    Console.WriteLine($"Carta eliminada de ({row}, {col})");
                 }
             }
         }
-
 
 
         private void RemoveCardFromOtherButtons(Card cardToRemove)
@@ -385,7 +386,6 @@ namespace BMCWindows
             }
         }
 
-
         private void ManageCards(object sender, RoutedEventArgs e)
         {
             var clickedButton = sender as Button;
@@ -404,7 +404,7 @@ namespace BMCWindows
                 {
                     if (selectedCard != null)
                     {
-                        var cardData = GetCardData(selectedCard); 
+                        var cardData = GetCardData(selectedCard);
                         var newCard = new Card { Name = cardData.Name, Life = cardData.Life };
 
                         clickedButton.Content = newCard;
@@ -417,11 +417,16 @@ namespace BMCWindows
 
         private void UpdateCardInMatrix(int row, int col)
         {
-            Matrix[row, col] = selectedCardLife;  
-
-            Console.WriteLine($"Carta {selectedCardName} colocada en la posición ({row}, {col}) con vida {selectedCardLife}");
+            if (!string.IsNullOrEmpty(selectedCardName) && selectedCardLife > 0)
+            {
+                Matrix[row, col] = selectedCardLife;
+                Console.WriteLine($"Matriz actualizada: [{row}, {col}] = {selectedCardLife}");
+            }
+            else
+            {
+                Console.WriteLine($"Error al actualizar la matriz en ({row}, {col}): Carta no válida");
+            }
         }
-
 
 
         private void SelectCard(object sender, MouseButtonEventArgs e)
@@ -436,21 +441,12 @@ namespace BMCWindows
                     if (textBlock != null)
                     {
                         selectedCard = textBlock.Text;
-                        var cardData = GetCardData(selectedCard); 
-                        selectedCardName = cardData.Name; 
-                        selectedCardLife = cardData.Life; 
+                        var cardData = GetCardData(selectedCard);
+                        selectedCardName = cardData.Name;
+                        selectedCardLife = cardData.Life;
 
                         Console.WriteLine($"Carta seleccionada: {selectedCardName}, Vida: {selectedCardLife}");
                     }
-                }
-
-                if (card.Tag?.ToString() == "Clicked")
-                {
-                    card.Tag = null;
-                }
-                else
-                {
-                    card.Tag = "Clicked";
                 }
             }
         }
@@ -459,7 +455,6 @@ namespace BMCWindows
         private (string Name, int Life, BitmapImage CardImage) GetCardData(string cardName)
         {
             var cardData = new Dictionary<string, (string, int, BitmapImage)>
-
             {
                 { "Cat1Life", ("Cat1", 1, new BitmapImage(new Uri("pack://application:,,,/Images/IñakiCard.png"))) },
                 { "CatAnother1Life", ("Cat1.1", 1, new BitmapImage(new Uri("pack://application:,,,/Images/IñakiCard.png")))},
@@ -470,12 +465,9 @@ namespace BMCWindows
                 {"DogAnother1Life", ("Dog1.1", 1, new BitmapImage(new Uri("pack://application:,,,/Images/HuahuaCard.png"))) },
                 { "Dog2Lives", ("Dog2", 2, new BitmapImage(new Uri("pack://application:,,,/Images/AnasofCard.png"))) },
                 {"DogAnother2Lives", ("Dog2.1", 2, new BitmapImage(new Uri("pack://application:,,,/Images/AnasofCard.png"))) },
-                { "Dog3Lives", ("Dog3", 3, new BitmapImage(new Uri("pack://application:,,,/Images/ChilaquilCard.png"))) } 
+                { "Dog3Lives", ("Dog3", 3, new BitmapImage(new Uri("pack://application:,,,/Images/ChilaquilCard.png"))) }
             };
-
             return cardData.ContainsKey(cardName) ? cardData[cardName] : ("", 0, null);
-
-
         }
 
         private void RemoveCardFromGrid(object sender, RoutedEventArgs e)
@@ -489,8 +481,8 @@ namespace BMCWindows
 
         private void SendCardsPosition(string lobbyId, string player, List<int> flatMatrix)
         {
-            int rows = 5; 
-            int cols = 3; 
+            int rows = 5;
+            int cols = 3;
             int[][] matrix = new int[rows][];
 
             for (int i = 0; i < rows; i++)
@@ -518,7 +510,6 @@ namespace BMCWindows
                     }
                 }
             }
-
             return cardCount;
         }
 
@@ -536,10 +527,21 @@ namespace BMCWindows
             }
         }
 
-        private void AcceptCardsPosition(object sender, RoutedEventArgs e)
+        private async void AcceptCardsPosition(object sender, RoutedEventArgs e)
         {
-            List<int> flatMatrix = new List<int>();
-            if (!CheckIfFiveCardsArePlaced())             
+            // Depuración: Imprimir matriz antes de enviar
+            string matrixDebug = "";
+            for (int i = 0; i < Matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < Matrix.GetLength(1); j++)
+                {
+                    matrixDebug += Matrix[i, j] + " ";
+                }
+                matrixDebug += Environment.NewLine;
+            }
+            MessageBox.Show($"Matriz actual:\n{matrixDebug}", "Depuración");
+
+            if (!CheckIfFiveCardsArePlaced())
             {
                 MessageBox.Show("Coloque todas sus cartas en el tablero");
                 return;
@@ -547,14 +549,9 @@ namespace BMCWindows
 
             try
             {
-                var board = ConvertMatrixToGameBoardDTO(Matrix);
+                Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
 
-                Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().getPlayerUserData();
-
-                InstanceContext context = new InstanceContext(this);
-                GameplayServer.GameServiceClient proxy = new GameplayServer.GameServiceClient(context);
-
-                var response = proxy.SubmitInitialMatrix(_lobby.LobbyId, currentPlayer.Username, board);
+                var response = await _proxy.MarkPlayerReadyAsync(_lobby.LobbyId, currentPlayer.Username);
 
                 if (!response.IsSuccess)
                 {
@@ -569,58 +566,53 @@ namespace BMCWindows
             {
                 MessageBox.Show($"Error al enviar el tablero: {ex.Message}");
             }
-
-
         }
 
-        
 
-        private GameplayServer.GameBoardDTO ConvertMatrixToGameBoardDTO(int[,] matrix)
-        {
-            int rows = matrix.GetLength(0);
-            int cols = matrix.GetLength(1);
-
-            List<int> data = new List<int>();
-            for (int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < cols; j++)
-                {
-                    data.Add(matrix[i, j]);
-                }
-            }
-            return new GameplayServer.GameBoardDTO
-            {
-                Rows = rows,
-                Columns = cols,
-                Data = data.ToArray()
-            };
-        }
 
         private void FillGridWithImage(object sender, RoutedEventArgs e)
         {
-            string imagePath = "Images/CardBack.png";  
-            BitmapImage image = new BitmapImage(new Uri(imagePath, UriKind.Relative));  
+            string imagePath = "Images/CardBack.png";
+            BitmapImage image = new BitmapImage(new Uri(imagePath, UriKind.Relative));
 
             foreach (UIElement element in BoardGrid.Children)
             {
                 if (element is Button button)
                 {
-                    button.Content = new Image { Source = image, Width = 60, Height = 90 };  
+                    button.Content = new Image { Source = image, Width = 60, Height = 90 };
                 }
             }
-
             Console.WriteLine("Todos los botones del grid han sido llenados con la imagen.");
         }
 
-
-
-
-
-        public void OnGameStarted()
+        private void HandlePlayerReady(string player)
         {
-            throw new NotImplementedException();
+            Task.Run(() =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    _playersReadyCount++;
+                    MessageBox.Show($"El jugador {player} está listo. ({_playersReadyCount}/{_Players.Count})");
+                });
+            });
+        }
+
+        private void HandleGameStarted()
+        {
+            Task.Run(() =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    MessageBox.Show("Todos los jugadores están listos. Iniciando el juego...");
+                    NavigateToGameWindow();
+                });
+            });
+        }
+
+        private void NavigateToGameWindow()
+        {
+            var gameWindow = new GameplayAttackWindow(_lobby, Matrix);
+            NavigationService.Navigate(gameWindow);
         }
     }
 }
-
-
