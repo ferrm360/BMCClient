@@ -335,8 +335,11 @@ namespace BMCWindows
                 if (clickedButton.Content == null && !string.IsNullOrEmpty(selectedCardName))
                 {
                     var cardData = GetCardData(selectedCard);
+                    var newCard = new Card { Name = cardData.Name, Life = cardData.Life, CardImage = cardData.CardImage };
                     if (cardData.Name != null)
                     {
+                        RemoveCardFromOtherButtons(newCard);
+
                         StackPanel cardPanel = new StackPanel
                         {
                             Orientation = Orientation.Vertical,
@@ -348,7 +351,6 @@ namespace BMCWindows
                         };
 
                         clickedButton.Content = cardPanel;
-
                         Matrix[row, col] = cardData.Life;
 
                         Console.WriteLine($"Carta {cardData.Name} colocada en ({row}, {col}) con vida {cardData.Life}");
@@ -363,7 +365,6 @@ namespace BMCWindows
                 }
             }
         }
-
 
         private void RemoveCardFromOtherButtons(Card cardToRemove)
         {
@@ -385,6 +386,7 @@ namespace BMCWindows
                 }
             }
         }
+
 
         private void ManageCards(object sender, RoutedEventArgs e)
         {

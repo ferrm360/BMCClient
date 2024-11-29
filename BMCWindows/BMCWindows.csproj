@@ -101,6 +101,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="DTOs\AttackCard.cs" />
     <Compile Include="DTOs\Card.cs" />
     <Compile Include="DTOs\Lobby.cs" />
     <Compile Include="DTOs\Player.cs" />
@@ -113,6 +114,8 @@
     <Compile Include="GameplayAttack\GameplayAttackWindow.xaml.cs">
       <DependentUpon>GameplayAttackWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameplayBoard\AttackCardGuestManager.cs" />
+    <Compile Include="GameplayBoard\AttackCardHostManager.cs" />
     <Compile Include="GameplayBoard\CardInitializer.cs" />
     <Compile Include="GameplayBoard\CardManager.cs" />
     <Compile Include="GameplayBoard\CardSelector.cs" />

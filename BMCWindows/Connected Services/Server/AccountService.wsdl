@@ -28,6 +28,12 @@
   <wsdl:message name="IAccountService_Login_OutputMessage">
     <wsdl:part name="parameters" element="tns:LoginResponse" />
   </wsdl:message>
+  <wsdl:message name="IAccountService_Logout_InputMessage">
+    <wsdl:part name="parameters" element="tns:Logout" />
+  </wsdl:message>
+  <wsdl:message name="IAccountService_Logout_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LogoutResponse" />
+  </wsdl:message>
   <wsdl:portType name="IAccountService">
     <wsdl:operation name="Register">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccountService/Register" message="tns:IAccountService_Register_InputMessage" />
@@ -36,6 +42,10 @@
     <wsdl:operation name="Login">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccountService/Login" message="tns:IAccountService_Login_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccountService/LoginResponse" message="tns:IAccountService_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccountService/Logout" message="tns:IAccountService_Logout_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccountService/LogoutResponse" message="tns:IAccountService_Logout_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IAccountService" type="tns:IAccountService">
@@ -52,6 +62,15 @@
     </wsdl:operation>
     <wsdl:operation name="Login">
       <soap12:operation soapAction="http://tempuri.org/IAccountService/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <soap12:operation soapAction="http://tempuri.org/IAccountService/Logout" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

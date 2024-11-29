@@ -4,74 +4,152 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d"
+      d:DesignHeight="450" d:DesignWidth="800"
       Title="GameplayAttackWindow"
       Background="#FEFFDB">
 
     <Grid>
-        <!-- Definición del layout principal -->
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-
-        <!-- Contenedor del Tablero del Jugador -->
-        <Grid Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <!-- Para el título -->
-                <RowDefinition Height="*" />
-                <!-- Para el tablero -->
+                <RowDefinition />
+                <RowDefinition Height="Auto" MinHeight="101" />
             </Grid.RowDefinitions>
 
-            <!-- Título del Tablero del Jugador -->
-            <TextBlock Text="Tu Tablero" FontSize="16" FontWeight="Bold" 
-                       HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10" 
-                       TextWrapping="Wrap" />
+            <!-- Contenedor del Tablero del Jugador -->
+            <Grid Grid.Column="0" Margin="20,20,20,20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <!-- Para el título -->
+                    <RowDefinition Height="*" />
+                    <!-- Para el tablero -->
+                </Grid.RowDefinitions>
 
-            <!-- Tablero del Jugador -->
-            <Grid x:Name="PlayerBoardGrid" Grid.Row="1" Background="Transparent" 
-                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10"
-                  MinHeight="300" MinWidth="300">
-                <!-- Las filas y columnas serán generadas dinámicamente en el CodeBehind -->
+                <!-- Título del Tablero del Jugador -->
+                <TextBlock Text="Tu Tablero" FontSize="16" FontWeight="Bold" 
+               HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10" 
+               TextWrapping="Wrap" />
+
+                <!-- Tablero del Jugador -->
+                <Grid x:Name="PlayerBoardGrid" Grid.Row="1" Background="Transparent" 
+          HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10"
+          MinHeight="300" MinWidth="300">
+                    <!-- Las filas y columnas serán generadas dinámicamente en el CodeBehind -->
+                </Grid>
+            </Grid>
+
+            <!-- Texto VS -->
+            <Grid Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="36" Width="74">
+                <TextBlock Text="VS" FontSize="36" FontWeight="Bold" Foreground="Black" />
+            </Grid>
+
+            <!-- Contenedor del Tablero del Enemigo -->
+            <Grid Grid.Column="2" Margin="20,20,20,20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <!-- Para el título -->
+                    <RowDefinition Height="*" />
+                    <!-- Para el tablero -->
+                </Grid.RowDefinitions>
+
+                <!-- Título del Tablero del Enemigo -->
+                <TextBlock Text="Tablero del Enemigo" FontSize="16" FontWeight="Bold" 
+               HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10"
+               TextWrapping="Wrap" />
+
+                <!-- Tablero del Enemigo -->
+                <Grid x:Name="EnemyBoardGrid" Grid.Row="1" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
+                    <!-- Las filas y columnas serán generadas dinámicamente en el CodeBehind -->
+                </Grid>
+
             </Grid>
         </Grid>
 
-        <!-- Texto VS -->
-        <Grid Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
-            <TextBlock Text="VS" FontSize="36" FontWeight="Bold" Foreground="Black" />
-        </Grid>
-
-        <!-- Contenedor del Tablero del Enemigo -->
-        <Grid Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20">
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <!-- Para el título -->
-                <RowDefinition Height="*" />
-                <!-- Para el tablero -->
+                <RowDefinition Height="41*"/>
+                <RowDefinition Height="409*"/>
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="23*"/>
+                <ColumnDefinition Width="177*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Row="0" Grid.Column="0" BorderBrush="Transparent">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Images/BrownButton.png"/>
+                </Button.Background>
+                <TextBlock Text="Cancel" Grid.Row="0" Grid.Column="0" IsHitTestVisible="False"/>
+            </Button>
 
-            <!-- Título del Tablero del Enemigo -->
-            <TextBlock Text="Tablero del Enemigo" FontSize="16" FontWeight="Bold" 
-                       HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10"
-                       TextWrapping="Wrap" />
+        </Grid>
+        
 
-            <!-- Tablero del Enemigo -->
-            <Grid x:Name="EnemyBoardGrid" Grid.Row="1" Background="Transparent" 
-                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10"
-                  MinHeight="300" MinWidth="300">
-                <!-- Las filas y columnas serán generadas dinámicamente en el CodeBehind -->
-            </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="172*"/>
+                <RowDefinition Height="53*"/>
+            </Grid.RowDefinitions>
+            <StackPanel x:Name="stackPanelPlayerAttackCards" Grid.Column="1" Grid.Row="1" Orientation="Horizontal"  VerticalAlignment="Stretch" HorizontalAlignment="Center">
+               <!-- <Border x:Name="borderCurrentPlayer" Style="{StaticResource ClickableCardStyle}" Width="90" Height="120" CornerRadius="10" Background="#FFFAFA"  MouseLeftButtonDown="SelectCard">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="10" ShadowDepth="5" Color="#888" />
+                    </Border.Effect>
+                    <StackPanel x:Name="stackPanelCurrentPlayerAttackCards" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image x:Name="imageCardOneLife" Stretch="Fill"/>
+                        <TextBlock x:Name="textBlockOneLifeCardName"  FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
+                        <TextBlock x:Name="textBlockOneLifeCardLife" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
+                    </StackPanel>
+                </Border>
+
+                <Border x:Name="BorderAttackCard2" Style="{StaticResource ClickableCardStyle}" Width="90" Height="120" CornerRadius="10" Background="#FFFAFA"  MouseLeftButtonDown="SelectCard">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="10" ShadowDepth="5" Color="#888" />
+                    </Border.Effect>
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image x:Name="imageAnotherOneLifeCard" Stretch="Fill"/>
+                        <TextBlock x:Name="textBlockAnotherOneLifeCardName"  FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
+                        <TextBlock x:Name="textBlockAnotherOneLifeCardLife" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
+                    </StackPanel>
+                </Border>
+                <Border x:Name="BorderAttackCard3" Style="{StaticResource ClickableCardStyle}" Width="90" Height="120" CornerRadius="10" Background="#FFFAFA" MouseLeftButtonDown="SelectCard">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="10" ShadowDepth="5" Color="#888" />
+                    </Border.Effect>
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image x:Name="imageTwoLivesCard" Stretch="Fill"/>
+                        <TextBlock x:Name="textBlockTwoLivesCardName"  FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
+                        <TextBlock x:Name="textBlockTwoLivesCardLives" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
+                    </StackPanel>
+                </Border>
+                <Border x:Name="BorderAttackCard4" Style="{StaticResource ClickableCardStyle}" Width="90" Height="120" CornerRadius="10" Background="#FFFAFA" MouseLeftButtonDown="SelectCard">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="10" ShadowDepth="5" Color="#888" />
+                    </Border.Effect>
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image x:Name="imageAnotherTwoLivesCard" Stretch="Fill"/>
+                        <TextBlock x:Name="textBlockAnotherTwoLivesCardName"  FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
+                        <TextBlock x:Name="textBlockAnotherTwoLivesCardLives" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
+                    </StackPanel>
+                </Border>
+                <Border x:Name="BorderAttackCard5" Style="{StaticResource ClickableCardStyle}" Width="90" Height="120" CornerRadius="10" Background="#FFFAFA" MouseLeftButtonDown="SelectCard">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="10" ShadowDepth="5" Color="#888" />
+                    </Border.Effect>
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image x:Name="imageThreeLivesCard" Stretch="Fill"/>
+                        <TextBlock x:Name="textBlockThreeLivesCardName"  FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
+                        <TextBlock x:Name="textBlockThreeLivesCardLives" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
+                    </StackPanel>
+                </Border> -->
+            </StackPanel>
         </Grid>
 
-        <!-- Botones de Acción -->
-        <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-            <Button Content="Atrás" Click="BackButton_Click" Width="100" Margin="10" Padding="5" />
-            <Button Content="Atacar" Click="AttackButton_Click" Width="100" Margin="10" Padding="5" />
-        </StackPanel>
+
+
+
     </Grid>
 </Page>

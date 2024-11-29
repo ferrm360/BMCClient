@@ -11,7 +11,7 @@ namespace BMCWindows.GameplayBoard
 {
     public class CardManager
     {
-        private Dictionary<string, (string Name, int Life, BitmapImage Image)> _cardData;
+        private Dictionary<string, (string Name, int Life, BitmapImage Image)> _cardData;   
 
         public CardManager() 
         {

@@ -702,12 +702,6 @@ namespace BMCWindows.FriendServer {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendshipService/GetPlayersListByUsername", ReplyAction="http://tempuri.org/IFriendshipService/GetPlayersListByUsernameResponse")]
         System.Threading.Tasks.Task<BMCWindows.FriendServer.PlayerProfileResponse> GetPlayersListByUsernameAsync(string playerUsername, string loggedUsername);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendshipService/TestConnection", ReplyAction="http://tempuri.org/IFriendshipService/TestConnectionResponse")]
-        string TestConnection();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendshipService/TestConnection", ReplyAction="http://tempuri.org/IFriendshipService/TestConnectionResponse")]
-        System.Threading.Tasks.Task<string> TestConnectionAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -791,14 +785,6 @@ namespace BMCWindows.FriendServer {
         
         public System.Threading.Tasks.Task<BMCWindows.FriendServer.PlayerProfileResponse> GetPlayersListByUsernameAsync(string playerUsername, string loggedUsername) {
             return base.Channel.GetPlayersListByUsernameAsync(playerUsername, loggedUsername);
-        }
-        
-        public string TestConnection() {
-            return base.Channel.TestConnection();
-        }
-        
-        public System.Threading.Tasks.Task<string> TestConnectionAsync() {
-            return base.Channel.TestConnectionAsync();
         }
     }
 }

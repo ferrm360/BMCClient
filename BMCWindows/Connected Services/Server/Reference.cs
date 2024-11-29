@@ -199,6 +199,12 @@ namespace BMCWindows.Server {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/Login", ReplyAction="http://tempuri.org/IAccountService/LoginResponse")]
         System.Threading.Tasks.Task<BMCWindows.Server.OperationResponse> LoginAsync(string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/Logout", ReplyAction="http://tempuri.org/IAccountService/LogoutResponse")]
+        BMCWindows.Server.OperationResponse Logout(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/Logout", ReplyAction="http://tempuri.org/IAccountService/LogoutResponse")]
+        System.Threading.Tasks.Task<BMCWindows.Server.OperationResponse> LogoutAsync(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -242,6 +248,14 @@ namespace BMCWindows.Server {
         
         public System.Threading.Tasks.Task<BMCWindows.Server.OperationResponse> LoginAsync(string username, string password) {
             return base.Channel.LoginAsync(username, password);
+        }
+        
+        public BMCWindows.Server.OperationResponse Logout(string username) {
+            return base.Channel.Logout(username);
+        }
+        
+        public System.Threading.Tasks.Task<BMCWindows.Server.OperationResponse> LogoutAsync(string username) {
+            return base.Channel.LogoutAsync(username);
         }
     }
 }
