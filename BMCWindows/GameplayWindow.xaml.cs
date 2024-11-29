@@ -147,6 +147,8 @@ namespace BMCWindows
 
         }
 
+
+        //TO DO: Considerar cambiarlo a list
         private ObservableCollection<Player> LoadPlayer1List()
         {
             Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
@@ -162,7 +164,8 @@ namespace BMCWindows
                         var playerProfilePicture = profileProxy.GetProfileImage(player);
                         if (playerProfilePicture.ImageData != null && playerProfilePicture.ImageData.Length > 0)
                         {
-                            BitmapImage image = ConvertByteArrayToImage(playerProfilePicture.ImageData);
+                            ImageConvertor imageConvertor = new ImageConvertor();
+                            BitmapImage image = imageConvertor.ConvertByteArrayToImage(playerProfilePicture.ImageData);
                             playerList.Add(new Player { Username = player, ProfilePicture = image });
                         }
                     }

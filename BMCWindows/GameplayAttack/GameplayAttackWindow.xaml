@@ -86,7 +86,7 @@
             </Button>
 
         </Grid>
-        
+
 
         <Grid>
             <Grid.RowDefinitions>
@@ -94,7 +94,7 @@
                 <RowDefinition Height="53*"/>
             </Grid.RowDefinitions>
             <StackPanel x:Name="stackPanelPlayerAttackCards" Grid.Column="1" Grid.Row="1" Orientation="Horizontal"  VerticalAlignment="Stretch" HorizontalAlignment="Center">
-               <!-- <Border x:Name="borderCurrentPlayer" Style="{StaticResource ClickableCardStyle}" Width="90" Height="120" CornerRadius="10" Background="#FFFAFA"  MouseLeftButtonDown="SelectCard">
+                <!-- <Border x:Name="borderCurrentPlayer" Style="{StaticResource ClickableCardStyle}" Width="90" Height="120" CornerRadius="10" Background="#FFFAFA"  MouseLeftButtonDown="SelectCard">
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="10" ShadowDepth="5" Color="#888" />
                     </Border.Effect>
@@ -146,6 +146,27 @@
                     </StackPanel>
                 </Border> -->
             </StackPanel>
+        </Grid>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="166*"/>
+                <RowDefinition Height="59*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="689*"/>
+                <ColumnDefinition Width="96*"/>
+                <ColumnDefinition Width="15*"/>
+            </Grid.ColumnDefinitions>
+            <Button  x:Name="buttonGetAttackCard" Grid.Row="1" Grid.Column="1" Click="GetRandomCard">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Images/CardBack.png"/>
+
+                </Button.Background>
+
+            </Button>
+
+
         </Grid>
 
 

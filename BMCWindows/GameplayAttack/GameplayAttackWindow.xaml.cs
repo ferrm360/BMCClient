@@ -48,10 +48,10 @@ namespace BMCWindows.GameplayPage
             InitializeAvailableCards();
             if(_lobby.Host == currentPlayer.Username)
             {
-                AssignAttackCards(HostAvailableAttackCards);
+                AssignAttackCards(HostAvailableAttackCards, 5);
             } else
             {
-                AssignAttackCards(GuestAvailableAttackCards);
+                AssignAttackCards(GuestAvailableAttackCards, 5);
             }
 
             ShowAssignedCards();
@@ -182,7 +182,7 @@ namespace BMCWindows.GameplayPage
             NavigationService.GoBack();
         }
 
-        private void AssignAttackCards(Dictionary<string, AttackCard> AvailableCards)
+        private void AssignAttackCards(Dictionary<string, AttackCard> AvailableCards, int numCardsPerPlayer)
         {
             Random random = new Random();
             List<string> attackCardKeys = AvailableCards.Keys.ToList();
@@ -191,7 +191,7 @@ namespace BMCWindows.GameplayPage
             attackCardKeys = attackCardKeys.OrderBy(x => random.Next()).ToList();
 
             // Asignar las primeras 5 cartas al jugador
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < numCardsPerPlayer; i++)
             {
                 string selectedAttackCardKey = attackCardKeys[i];
                 AttackCard selectedAttackCard = AvailableCards[selectedAttackCardKey];
@@ -338,22 +338,22 @@ namespace BMCWindows.GameplayPage
             GuestAvailableAttackCards.Add("Charron negro", new AttackCard { Name = "Charron negro", AttackLevel = 2, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
             GuestAvailableAttackCards.Add("Chupacabras", new AttackCard { Name = "Chupacabras", AttackLevel = 2, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
             GuestAvailableAttackCards.Add("La mano peluda", new AttackCard { Name = "La mano peluda", AttackLevel = 2, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("La muerte", new AttackCard { Name = "Llorona", AttackLevel = 2, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("Olmeca", new AttackCard { Name = "Llorona", AttackLevel = 3, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("Tolteca", new AttackCard { Name = "Llorona", AttackLevel = 3, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("Azteca", new AttackCard { Name = "Llorona", AttackLevel = 3, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("Maya", new AttackCard { Name = "Llorona", AttackLevel = 3, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("Moixteca", new AttackCard { Name = "Llorona", AttackLevel = 3, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("Huitzilopochtli ", new AttackCard { Name = "Llorona", AttackLevel = 4, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("Quetzalcoatl", new AttackCard { Name = "Llorona", AttackLevel = 4, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("Tonatiuh", new AttackCard { Name = "Llorona", AttackLevel = 4, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("Chalchiuhtlicue", new AttackCard { Name = "Llorona", AttackLevel = 4, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("Xipe-Totec ", new AttackCard { Name = "Llorona", AttackLevel = 4, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("La huesuda", new AttackCard { Name = "Llorona", AttackLevel = 5, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("El misterioso", new AttackCard { Name = "Llorona", AttackLevel = 5, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("Demonio azul Jr.", new AttackCard { Name = "Llorona", AttackLevel = 5, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("El tirantes", new AttackCard { Name = "Llorona", AttackLevel = 5, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("El poliedro", new AttackCard { Name = "Llorona", AttackLevel = 5, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
+            GuestAvailableAttackCards.Add("La muerte", new AttackCard { Name = "La muerte", AttackLevel = 2, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
+            GuestAvailableAttackCards.Add("Olmeca", new AttackCard { Name = "Olmeca", AttackLevel = 3, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
+            GuestAvailableAttackCards.Add("Tolteca", new AttackCard { Name = "Tolteca", AttackLevel = 3, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
+            GuestAvailableAttackCards.Add("Azteca", new AttackCard { Name = "Azteca", AttackLevel = 3, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
+            GuestAvailableAttackCards.Add("Maya", new AttackCard { Name = "Maya", AttackLevel = 3, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
+            GuestAvailableAttackCards.Add("Moixteca", new AttackCard { Name = "Mixteca", AttackLevel = 3, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
+            GuestAvailableAttackCards.Add("Huitzilopochtli ", new AttackCard { Name = "Huitzilopochtli", AttackLevel = 4, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
+            GuestAvailableAttackCards.Add("Quetzalcoatl", new AttackCard { Name = "Quetzalcoatl", AttackLevel = 4, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
+            GuestAvailableAttackCards.Add("Tonatiuh", new AttackCard { Name = "Tonatiuh", AttackLevel = 4, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
+            GuestAvailableAttackCards.Add("Chalchiuhtlicue", new AttackCard { Name = "Chalchiuhtlicue", AttackLevel = 4, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
+            GuestAvailableAttackCards.Add("Xipe-Totec ", new AttackCard { Name = "Xipe-Totec", AttackLevel = 4, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
+            GuestAvailableAttackCards.Add("La huesuda", new AttackCard { Name = "La huesuda", AttackLevel = 5, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
+            GuestAvailableAttackCards.Add("El misterioso", new AttackCard { Name = "El misterioso", AttackLevel = 5, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
+            GuestAvailableAttackCards.Add("Demonio azul Jr.", new AttackCard { Name = "Demonio Azul Jr.", AttackLevel = 5, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
+            GuestAvailableAttackCards.Add("El tirantes", new AttackCard { Name = "El tirantes", AttackLevel = 5, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
+            GuestAvailableAttackCards.Add("El poliedro", new AttackCard { Name = "El poliedro", AttackLevel = 5, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
 
             foreach (var attackCard in GuestAvailableAttackCards)
             {
@@ -401,5 +401,25 @@ namespace BMCWindows.GameplayPage
             };
             return cardData.ContainsKey(cardName) ? cardData[cardName] : ("", 0, null);
         }
+
+        private void GetRandomCard(object sender, RoutedEventArgs e)
+        {
+            Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
+            if(_lobby.Host == currentPlayer.Username)
+            {
+                AssignAttackCards(HostAvailableAttackCards, 1);
+                var hostAvailableCards = HostAvailableAttackCards.Values.ToList();
+                int numCards = hostAvailableCards.Count;
+                AddCardToPanel(numCards - 1, hostAvailableCards[numCards-1]);
+            } else
+            {
+                AssignAttackCards(GuestAvailableAttackCards, 1);
+                var guestAvailableCards = GuestAvailableAttackCards.Values.ToList();
+                int numGuestAttackCards = guestAvailableCards.Count;
+                AddCardToPanel(numGuestAttackCards-1, guestAvailableCards[numGuestAttackCards-1]);
+            }
+        }
     }
+
+    
 }
