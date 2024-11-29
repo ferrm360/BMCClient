@@ -18,7 +18,7 @@ namespace BMCWindows.GameplayPage
     {
         private LobbyDTO _lobby;
         private int[,] _playerMatrix;
-        private string _cardBackImagePath = "pack://application:,,,/Images/CardBack.png"; // Pack URI
+        private string _cardBackImagePath = "pack://application:,,,/Images/CardBack.png"; 
         private Dictionary<string, AttackCard> HostAvailableAttackCards { get; set; }
         private Dictionary<string, AttackCard> GuestAvailableAttackCards { get; set; }
         private Dictionary<string, AttackCard> CurrentPlayerDeck { get; set; }
@@ -26,7 +26,8 @@ namespace BMCWindows.GameplayPage
         private Dictionary<string, AttackCard> RemainingGuestCards { get; set; }
         private string selectedCard = null;
         private string selectedCardName;
-        private int selectedCardLife;
+        private int selectedCardAttackLevel;
+        private BitmapImage selectedCardImage;
 
         public GameplayAttackWindow(LobbyDTO lobby, int[,] playerMatrix)
         {
@@ -42,16 +43,16 @@ namespace BMCWindows.GameplayPage
             Server.PlayerDTO currentPlayer = new Server.PlayerDTO();
             currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
 
-            // Inicializar los tableros
             InitializePlayerBoard();
             InitializeEnemyBoard();
             InitializeAvailableCards();
             if(_lobby.Host == currentPlayer.Username)
             {
-                AssignAttackCards(HostAvailableAttackCards, 5);
-            } else
+                AssignAttackCards(RemainingHostCards,5);
+            } 
+            else
             {
-                AssignAttackCards(GuestAvailableAttackCards, 5);
+                AssignAttackCards(RemainingGuestCards, 5);
             }
 
             ShowAssignedCards();
@@ -63,7 +64,6 @@ namespace BMCWindows.GameplayPage
             PlayerBoardGrid.RowDefinitions.Clear();
             PlayerBoardGrid.ColumnDefinitions.Clear();
 
-            // Definir las filas y columnas del tablero
             for (int row = 0; row < 4; row++)
             {
                 PlayerBoardGrid.RowDefinitions.Add(new RowDefinition());
@@ -73,7 +73,6 @@ namespace BMCWindows.GameplayPage
                 PlayerBoardGrid.ColumnDefinitions.Add(new ColumnDefinition());
             }
 
-            // Crear los botones
             for (int row = 0; row < 4; row++)
             {
                 for (int col = 0; col < 3; col++)
@@ -89,11 +88,11 @@ namespace BMCWindows.GameplayPage
                                 new Image
                                 {
                                     Source = new BitmapImage(new Uri(_cardBackImagePath, UriKind.Absolute)),
-                                    Stretch = Stretch.Fill // Asegura que la imagen abarque toda la celda
+                                    Stretch = Stretch.Fill 
                                 },
                                 new TextBlock
                                 {
-                                    Text = _playerMatrix[row, col].ToString(), // Mostrar valor de la matriz
+                                    Text = _playerMatrix[row, col].ToString(), 
                                     HorizontalAlignment = HorizontalAlignment.Center,
                                     VerticalAlignment = VerticalAlignment.Center,
                                     FontSize = 12,
@@ -119,7 +118,6 @@ namespace BMCWindows.GameplayPage
             EnemyBoardGrid.RowDefinitions.Clear();
             EnemyBoardGrid.ColumnDefinitions.Clear();
 
-            // Definir las filas y columnas del tablero
             for (int row = 0; row < 4; row++)
             {
                 EnemyBoardGrid.RowDefinitions.Add(new RowDefinition());
@@ -129,7 +127,6 @@ namespace BMCWindows.GameplayPage
                 EnemyBoardGrid.ColumnDefinitions.Add(new ColumnDefinition());
             }
 
-            // Crear los botones
             for (int row = 0; row < 4; row++)
             {
                 for (int col = 0; col < 3; col++)
@@ -141,7 +138,7 @@ namespace BMCWindows.GameplayPage
                         Content = new Image
                         {
                             Source = new BitmapImage(new Uri(_cardBackImagePath, UriKind.Absolute)),
-                            Stretch = Stretch.Fill // Asegura que la imagen abarque toda la celda
+                            Stretch = Stretch.Fill 
                         }
                     };
 
@@ -182,46 +179,43 @@ namespace BMCWindows.GameplayPage
             NavigationService.GoBack();
         }
 
-        private void AssignAttackCards(Dictionary<string, AttackCard> AvailableCards, int numCardsPerPlayer)
+
+        private void AssignAttackCards(Dictionary<string, AttackCard> AvailableCards,  int numCardsPerPlayer)
         {
             Random random = new Random();
             List<string> attackCardKeys = AvailableCards.Keys.ToList();
 
-            // Barajar las claves aleatoriamente para obtener un orden aleatorio
             attackCardKeys = attackCardKeys.OrderBy(x => random.Next()).ToList();
 
-            // Asignar las primeras 5 cartas al jugador
             for (int i = 0; i < numCardsPerPlayer; i++)
             {
                 string selectedAttackCardKey = attackCardKeys[i];
                 AttackCard selectedAttackCard = AvailableCards[selectedAttackCardKey];
 
-                // Agregar la carta al CurrentPlayerDeck
                 if (!CurrentPlayerDeck.ContainsKey(selectedAttackCard.Name))
                 {
                     CurrentPlayerDeck.Add(selectedAttackCard.Name, selectedAttackCard);
+
+                    AvailableCards.Remove(selectedAttackCardKey);
                 }
-
             }
-
-            foreach (var attackCard in CurrentPlayerDeck) 
+            foreach (var attackCard in CurrentPlayerDeck)
             {
                 Console.WriteLine(attackCard.Key);
             }
         }
 
+
+
         private void ShowAssignedCards()
         {
-            // Limpiar las cartas mostradas previamente
             stackPanelPlayerAttackCards.Children.Clear();
 
-            // Recorrer el diccionario de cartas del jugador
             int cardIndex = 0;
-            foreach (var card in CurrentPlayerDeck.Values)  // Suponiendo que tienes un diccionario de cartas
+            foreach (var card in CurrentPlayerDeck.Values)  
             {
-                // Agregar cada carta al panel, pasando el índice para personalizar la posición
                 AddCardToPanel(cardIndex, card);
-                cardIndex++;  // Aumentar el índice para la siguiente carta
+                cardIndex++; 
             }
         }
 
@@ -241,27 +235,25 @@ namespace BMCWindows.GameplayPage
                     ShadowDepth = 5,
                     Color = Colors.Gray
                 },
-                DataContext = attackCard.Name  // Asigna el nombre de la carta como contexto de datos
+                DataContext = attackCard.Name  
             };
 
-            newCard.MouseLeftButtonDown += SelectCard;  // Evento de clic para la carta
+            newCard.Tag = attackCard.Name;
+            newCard.MouseLeftButtonDown += SelectCard;  
 
-            // Crear el StackPanel para mostrar la carta
             var stackPanel = new StackPanel
             {
                 VerticalAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Center
             };
 
-            // Crear la imagen de la carta
             var cardImage = new Image
             {
-                Source = attackCard.CardImage,  // Usando la imagen de la carta
-                Width = 60,
-                Height = 90
+                Source = attackCard.CardImage,  
+                Width = 100,
+                Height = 130
             };
 
-            // Crear el texto con el nombre de la carta
             var textBlock = new TextBlock
             {
                 Text = attackCard.Name,
@@ -271,39 +263,24 @@ namespace BMCWindows.GameplayPage
                 Margin = new Thickness(5)
             };
 
-            // Agregar la imagen y el nombre de la carta al StackPanel
             stackPanel.Children.Add(cardImage);
             stackPanel.Children.Add(textBlock);
 
-            // Asignar el StackPanel al Border
             newCard.Child = stackPanel;
 
-            // Agregar la carta al contenedor
             stackPanelPlayerAttackCards.Children.Add(newCard);
         }
 
 
-
-
-
-
-
-
-
-
-
-        // verificar el host
         public int GetCardAttackLevel(string cardName, string player)
         {
-            // Determinar qué deck usar
             var deck = CurrentPlayerDeck;
 
-            // Verificar si la carta está en el deck
             if (deck.ContainsKey(cardName))
             {
-                return deck[cardName].AttackLevel; // Acceso rápido al nivel de ataque
+                return deck[cardName].AttackLevel; 
             }
-            return 0; // Si no se encuentra la carta, retornar 0 o algún valor por defecto
+            return 0;
         }
 
         private void InitializeAvailableCards()
@@ -364,56 +341,86 @@ namespace BMCWindows.GameplayPage
 
         private void SelectCard(object sender, MouseButtonEventArgs e)
         {
+            Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
+
             var card = sender as Border;
             if (card != null)
             {
-                var stackPanel = card.Child as StackPanel;
-                if (stackPanel != null)
-                {
-                    var textBlock = stackPanel.Children.OfType<TextBlock>().FirstOrDefault();
-                    if (textBlock != null)
-                    {
-                        selectedCard = textBlock.Text;
-                        var cardData = GetCardData(selectedCard);
-                        selectedCardName = cardData.Name;
-                        selectedCardLife = cardData.Life;
+                string cardName = card.Tag as string;
 
-                        Console.WriteLine($"Carta seleccionada: {selectedCardName}, Vida: {selectedCardLife}");
+                if (!string.IsNullOrEmpty(cardName))
+                {
+                    var cardData = GetCardData(cardName, currentPlayer.Username);
+
+                    if (cardData != null)
+                    {
+                        selectedCardName = cardData.Name;
+                        selectedCardAttackLevel = cardData.AttackLevel;
+                        selectedCardImage = cardData.CardImage;
+
+                        Console.WriteLine($"Carta seleccionada: {selectedCardName}, Ataque: {selectedCardAttackLevel}");
                     }
+                    else
+                    {
+                        Console.WriteLine("Carta no encontrada.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No se pudo obtener el nombre de la carta.");
                 }
             }
         }
 
-        private (string Name, int Life, BitmapImage CardImage) GetCardData(string cardName)
+
+
+
+
+        private AttackCard GetCardData(string  cardName, string currentPlayerUsername)
         {
-            var cardData = new Dictionary<string, (string, int, BitmapImage)>
+            if (string.IsNullOrEmpty(cardName))
             {
-                { "Cat1Life", ("Cat1", 1, new BitmapImage(new Uri("pack://application:,,,/Images/IñakiCard.png"))) },
-                { "CatAnother1Life", ("Cat1.1", 1, new BitmapImage(new Uri("pack://application:,,,/Images/IñakiCard.png")))},
-                { "Cat2Lives", ("Cat2", 2, new BitmapImage(new Uri("pack://application:,,,/Images/michideltoroCard.png"))) },
-                {"CatAnother2Lives", ("Cat2.1", 2, new BitmapImage(new Uri("pack://application:,,,/Images/michideltoroCard.png"))) },
-                { "Cat3Lives", ("Cat3", 3, new BitmapImage(new Uri("pack://application:,,,/Images/coca3litrosCard.png"))) },
-                { "Dog1Life", ("Dog1", 1, new BitmapImage(new Uri("pack://application:,,,/Images/HuahuaCard.png"))) },
-                {"DogAnother1Life", ("Dog1.1", 1, new BitmapImage(new Uri("pack://application:,,,/Images/HuahuaCard.png"))) },
-                { "Dog2Lives", ("Dog2", 2, new BitmapImage(new Uri("pack://application:,,,/Images/AnasofCard.png"))) },
-                {"DogAnother2Lives", ("Dog2.1", 2, new BitmapImage(new Uri("pack://application:,,,/Images/AnasofCard.png"))) },
-                { "Dog3Lives", ("Dog3", 3, new BitmapImage(new Uri("pack://application:,,,/Images/ChilaquilCard.png"))) }
-            };
-            return cardData.ContainsKey(cardName) ? cardData[cardName] : ("", 0, null);
+                Console.WriteLine("Carta vacía");
+            } 
+
+            Dictionary<string, AttackCard> SelectedAttackCardDeck = new Dictionary<string, AttackCard>();
+
+            if(_lobby.Host == currentPlayerUsername)
+            {
+                SelectedAttackCardDeck = HostAvailableAttackCards;
+            } 
+            else if (_lobby.Host != currentPlayerUsername)
+            {
+                SelectedAttackCardDeck = GuestAvailableAttackCards;
+            }
+            else
+            {
+                Console.WriteLine("No se encontraron las cartas");
+            }
+
+            if (SelectedAttackCardDeck.ContainsKey(cardName))
+            {
+                return SelectedAttackCardDeck[cardName];
+            }
+
+            return null;
+            
         }
+
 
         private void GetRandomCard(object sender, RoutedEventArgs e)
         {
             Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
             if(_lobby.Host == currentPlayer.Username)
             {
-                AssignAttackCards(HostAvailableAttackCards, 1);
+                AssignAttackCards(RemainingHostCards, 1);
                 var hostAvailableCards = HostAvailableAttackCards.Values.ToList();
                 int numCards = hostAvailableCards.Count;
                 AddCardToPanel(numCards - 1, hostAvailableCards[numCards-1]);
-            } else
+            } 
+            else
             {
-                AssignAttackCards(GuestAvailableAttackCards, 1);
+                AssignAttackCards(RemainingGuestCards, 1);
                 var guestAvailableCards = GuestAvailableAttackCards.Values.ToList();
                 int numGuestAttackCards = guestAvailableCards.Count;
                 AddCardToPanel(numGuestAttackCards-1, guestAvailableCards[numGuestAttackCards-1]);
