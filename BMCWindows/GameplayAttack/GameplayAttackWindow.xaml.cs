@@ -62,6 +62,22 @@ namespace BMCWindows.GameplayPage
                 });
             };
 
+            _callbackHandler.OnTurnChangedEvent += (isPlayerTurn) =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    _isPlayerTurn = isPlayerTurn;
+                    if (_isPlayerTurn)
+                    {
+                        DynamicTurnTextBlock.Text = $"¡Es tu turno {_currentPlayer.Username}!";
+                    }
+                    else
+                    {
+                        DynamicTurnTextBlock.Text = "Espera tu turno.";
+                    }
+                });
+            };
+
             HostAvailableAttackCards = new Dictionary<string, AttackCard>();    
             GuestAvailableAttackCards = new Dictionary<string, AttackCard>();
             CurrentPlayerDeck = new Dictionary<string, AttackCard>();
@@ -86,7 +102,7 @@ namespace BMCWindows.GameplayPage
             }
 
             ShowAssignedCards();
-
+            FirstTurn();
         }
 
         private void AssignAttackCards(Dictionary<string, AttackCard> AvailableCards,  int numCardsPerPlayer)
@@ -336,8 +352,9 @@ namespace BMCWindows.GameplayPage
 
         private void OnCellClickEnemyBoard(int row, int col)
         {
-            if (_isPlayerTurn) 
+            if (!_isPlayerTurn) 
             {
+                DynamicTurnTextBlock.Text = "Aun no es tu turno.";
                 return;
             }
 
@@ -345,21 +362,35 @@ namespace BMCWindows.GameplayPage
             attackPositionDTO.X = row;
             attackPositionDTO.Y = col;
             var result = _proxy.Attack(_lobby.LobbyId, _currentPlayer.Username, attackPositionDTO);
-            DynamicLabel.Text = ($"Has clickeado en la celda: ({row}, {col}) del tablero enemigo, ¡atacando!");
+            DynamicTalkTextBlock.Text = ($"¡Has atacando!");
+            DynamicTurnTextBlock.Text = ($"¡Espera tu turno!");
         }
 
         private void OnAttackReceivedHandler(AttackPositionDTO attackPosition)
         {
             if (_playerMatrixName[attackPosition.X, attackPosition.Y] == null) {
-                DynamicLabel.Text = "¡Ups! eso estuvo cerca :D";
+                DynamicTalkTextBlock.Text = "¡Ups! eso estuvo cerca :D";
             }
             else
             {
-                DynamicLabel.Text = "!NO! :c";
+                DynamicTalkTextBlock.Text = "!NO! :c";
                 _playerMatrixLife[attackPosition.X, attackPosition.Y] -= 1;
 
             }
             _boardPlayerManager.InitializePlayerBoard(PlayerBoardGrid, _playerMatrixLife);
+        }
+
+        private void FirstTurn() {
+            if (_currentPlayer.Username == _lobby.Host) {
+                DynamicTurnTextBlock.Text = "Tienes el primer turno";
+                _isPlayerTurn = true;
+            }
+            else
+            {
+                DynamicTurnTextBlock.Text = "No tienes el primer turno, espera tu turno";
+                _isPlayerTurn = false;
+            }
+        
         }
     }
 }

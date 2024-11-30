@@ -27,7 +27,7 @@
             </Grid.RowDefinitions>
 
             <!-- Texto dinámico -->
-            <TextBlock x:Name="DynamicLabel" Text="!A jugar!"
+            <TextBlock x:Name="DynamicTalkTextBlock" Text="!A jugar!"
                 FontSize="12" FontWeight="Bold"
                 HorizontalAlignment="Center" VerticalAlignment="Top"
                 Margin="0,137,0,0" Grid.Row="1" Height="Auto" Width="Auto"
@@ -38,6 +38,7 @@
                    Width="150" Height="150" Stretch="Uniform"
                    HorizontalAlignment="Center" VerticalAlignment="Top"
                    Margin="0,217,0,0" />
+            <TextBlock x:Name="DynamicTurnTextBlock" Text="Turnos" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,25,0,0" Grid.Row="1" Height="Auto" Width="Auto" TextWrapping="Wrap" VerticalAlignment="Top" />
         </Grid>
 
         <!-- Contenido central -->
