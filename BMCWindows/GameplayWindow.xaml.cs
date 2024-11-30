@@ -451,17 +451,6 @@ namespace BMCWindows
                 MessageBox.Show("Espere a que su rival confirme su tablero");
                 return;
             }
-            // Depuración: Imprimir matriz antes de enviar
-            string matrixDebug = "";
-            for (int i = 0; i < MatrixCardName.GetLength(0); i++)
-            {
-                for (int j = 0; j < MatrixCardName.GetLength(1); j++)
-                {
-                    matrixDebug += MatrixCardName[i, j] + " ";
-                }
-                matrixDebug += Environment.NewLine;
-            }
-            MessageBox.Show($"Matriz actual:\n{matrixDebug}", "Depuración");
 
             if (!CheckIfFiveCardsArePlaced())
             {

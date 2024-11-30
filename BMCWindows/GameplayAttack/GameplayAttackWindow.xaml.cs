@@ -59,23 +59,14 @@ namespace BMCWindows.GameplayPage
             Server.PlayerDTO currentPlayer = new Server.PlayerDTO();
             currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
 
-            Action<int, int> onCellClickActionOwnBoard = (row, col) =>
-            {
-                MessageBox.Show($"Has clickeado en la celda : ({row}, {col}) de tu propio tablero");
-            };
-
-            Action<int, int> onCellClickActionEnemyBoard = (row, col) =>
-            {
-                MessageBox.Show($"Has clickeado en la celda: ({row}, {col}) del tablero enemigo");
-            };
 
             var attackCallbackHandler = new AttackCallbackHandler();
             attackCallbackHandler.OnAttackReceivedEvent += OnAttackReceivedHandler;
 
-            _boardPlayerManager = new BoardPlayerManager(onCellClickActionOwnBoard);
+            _boardPlayerManager = new BoardPlayerManager(OnCellClickOwnBoard);
             _boardPlayerManager.InitializePlayerBoard(PlayerBoardGrid, _playerMatrixLife);
 
-            _boardEnemyManager = new BoardEnemyManager(onCellClickActionEnemyBoard);
+            _boardEnemyManager = new BoardEnemyManager(OnCellClickEnemyBoard);
             _boardEnemyManager.InitializeEnemyBoard(EnemyBoardGrid);
 
             InitializeAvailableCards();
@@ -90,7 +81,6 @@ namespace BMCWindows.GameplayPage
 
             ShowAssignedCards();
         }
-
 
         private void AssignAttackCards(Dictionary<string, AttackCard> AvailableCards,  int numCardsPerPlayer)
         {
@@ -116,8 +106,6 @@ namespace BMCWindows.GameplayPage
                 Console.WriteLine(attackCard.Key);
             }
         }
-
-
 
         private void ShowAssignedCards()
         {
@@ -332,6 +320,16 @@ namespace BMCWindows.GameplayPage
                 int numGuestAttackCards = guestAvailableCards.Count;
                 AddCardToPanel(numGuestAttackCards-1, guestAvailableCards[numGuestAttackCards-1]);
             }
+        }
+
+        private void OnCellClickOwnBoard(int row, int col)
+        {
+            MessageBox.Show($"Has clickeado en la celda: ({row}, {col}) de tu propio tablero");
+        }
+
+        private void OnCellClickEnemyBoard(int row, int col)
+        {
+            MessageBox.Show($"Has clickeado en la celda: ({row}, {col}) del tablero enemigo, atacando");
         }
 
         private void OnAttackReceivedHandler(AttackPositionDTO attackPosition)
