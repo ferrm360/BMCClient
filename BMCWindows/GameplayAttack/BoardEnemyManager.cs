@@ -7,9 +7,9 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Windows;
-using BMCWindows.AttackServer;
 using BMCWindows.DTOs;
 using BMCWindows.Patterns.Singleton;
+using BMCWindows.GameplayServer;
 
 namespace BMCWindows.GameplayAttack
 {

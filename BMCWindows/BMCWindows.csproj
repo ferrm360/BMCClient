@@ -35,7 +35,28 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
@@ -50,8 +71,6 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Fonts\PressStart2P-Regular.ttf" />
@@ -61,11 +80,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Connected Services\AttackServer\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Connected Services\ChatLobbyServer\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -153,7 +167,6 @@
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\AttackCallbackHandler.cs" />
     <Compile Include="Utilities\ChatCallBackHandler.cs" />
     <Compile Include="Utilities\EmptyLobbyCallback.cs" />
     <Compile Include="Utilities\EventMediator.cs" />
@@ -293,22 +306,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="Connected Services\AttackServer\AttackService.wsdl" />
-    <None Include="Connected Services\AttackServer\AttackService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\AttackServer\AttackService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\AttackServer\AttackService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\AttackServer\AttackService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\AttackServer\BMCWindows.AttackServer.OperationResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Connected Services\ChatLobbyServer\ChatLobbyService.wsdl" />
     <None Include="Connected Services\ChatLobbyServer\ChatLobbyService.xsd">
       <SubType>Designer</SubType>
@@ -353,6 +350,9 @@
     </None>
     <None Include="Connected Services\GameplayServer\BMCWindows.GameplayServer.OperationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\GameplayServer\GameService4.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\GuestPlayerServer\BMCWindows.GuestPlayerServer.OperationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -482,7 +482,6 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\AttackServer\" />
     <WCFMetadataStorage Include="Connected Services\ChatLobbyServer\" />
     <WCFMetadataStorage Include="Connected Services\ChatServer\" />
     <WCFMetadataStorage Include="Connected Services\FriendServer\" />
@@ -632,21 +631,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Avatar_talk.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\AttackServer\AttackService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\AttackServer\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\AttackServer\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\AttackServer\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

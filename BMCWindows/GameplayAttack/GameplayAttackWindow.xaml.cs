@@ -1,5 +1,5 @@
-﻿using BMCWindows.AttackServer;
-using BMCWindows.DTOs;
+﻿using BMCWindows.DTOs;
+using BMCWindows.FriendServer;
 using BMCWindows.GameplayAttack;
 using BMCWindows.GameplayServer;
 using BMCWindows.LobbyServer;
@@ -8,7 +8,10 @@ using BMCWindows.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Contexts;
+using System.ServiceModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -34,34 +37,37 @@ namespace BMCWindows.GameplayPage
         private string selectedCardName;
         private int selectedCardAttackLevel;
         private BitmapImage selectedCardImage;
-        private AttackCallbackHandler _callbackHandler;
-        private AttackServiceClient _proxy;
+        private GameCallbackHandler _callbackHandler;
+        private GameServiceClient _proxy;
         private BoardPlayerManager _boardPlayerManager;
         private BoardEnemyManager _boardEnemyManager;
+        private Server.PlayerDTO _currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
+        private bool _isPlayerTurn;
 
 
-        public GameplayAttackWindow(LobbyDTO lobby, int[,] playerMatrixLife, String[,] playerMatrixName)
+        public GameplayAttackWindow(GameCallbackHandler gameCallbackHandler, GameServiceClient proxy,LobbyDTO lobby, int[,] playerMatrixLife, String[,] playerMatrixName)
         {
             InitializeComponent();
             _lobby = lobby;
             _playerMatrixLife = playerMatrixLife;
             _playerMatrixName = playerMatrixName;
+            _proxy = proxy;
+            _callbackHandler = gameCallbackHandler;
 
-            _callbackHandler = new AttackCallbackHandler();
-            var context = new System.ServiceModel.InstanceContext(_callbackHandler);
-            _proxy = new AttackServer.AttackServiceClient(context);
+            _callbackHandler.OnAttackReceivedEvent += (attackPositionDTO) =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    OnAttackReceivedHandler(attackPositionDTO);
+                });
+            };
 
             HostAvailableAttackCards = new Dictionary<string, AttackCard>();    
             GuestAvailableAttackCards = new Dictionary<string, AttackCard>();
             CurrentPlayerDeck = new Dictionary<string, AttackCard>();
             RemainingHostCards = new Dictionary<string, AttackCard>();
             RemainingGuestCards = new Dictionary<string, AttackCard>();    
-            Server.PlayerDTO currentPlayer = new Server.PlayerDTO();
-            currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
-
-
-            var attackCallbackHandler = new AttackCallbackHandler();
-            attackCallbackHandler.OnAttackReceivedEvent += OnAttackReceivedHandler;
+  
 
             _boardPlayerManager = new BoardPlayerManager(OnCellClickOwnBoard);
             _boardPlayerManager.InitializePlayerBoard(PlayerBoardGrid, _playerMatrixLife);
@@ -70,7 +76,7 @@ namespace BMCWindows.GameplayPage
             _boardEnemyManager.InitializeEnemyBoard(EnemyBoardGrid);
 
             InitializeAvailableCards();
-            if(_lobby.Host == currentPlayer.Username)
+            if(_lobby.Host == _currentPlayer.Username)
             {
                 AssignAttackCards(RemainingHostCards,5);
             } 
@@ -80,6 +86,7 @@ namespace BMCWindows.GameplayPage
             }
 
             ShowAssignedCards();
+
         }
 
         private void AssignAttackCards(Dictionary<string, AttackCard> AvailableCards,  int numCardsPerPlayer)
@@ -329,15 +336,29 @@ namespace BMCWindows.GameplayPage
 
         private void OnCellClickEnemyBoard(int row, int col)
         {
-            MessageBox.Show($"Has clickeado en la celda: ({row}, {col}) del tablero enemigo, atacando");
+            if (_isPlayerTurn) 
+            {
+                return;
+            }
+
+            GameplayServer.AttackPositionDTO attackPositionDTO = new GameplayServer.AttackPositionDTO();
+            attackPositionDTO.X = row;
+            attackPositionDTO.Y = col;
+            var result = _proxy.Attack(_lobby.LobbyId, _currentPlayer.Username, attackPositionDTO);
+            DynamicLabel.Text = ($"Has clickeado en la celda: ({row}, {col}) del tablero enemigo, ¡atacando!");
         }
 
         private void OnAttackReceivedHandler(AttackPositionDTO attackPosition)
         {
-            MessageBox.Show($"Ataque recibido en la posición: {attackPosition.X}, {attackPosition.Y}");
+            if (_playerMatrixName[attackPosition.X, attackPosition.Y] == null) {
+                DynamicLabel.Text = "¡Ups! eso estuvo cerca :D";
+            }
+            else
+            {
+                DynamicLabel.Text = "!NO! :c";
+                _playerMatrixLife[attackPosition.X, attackPosition.Y] -= 1;
 
-            _playerMatrixLife[attackPosition.X, attackPosition.Y] -= 1;
-
+            }
             _boardPlayerManager.InitializePlayerBoard(PlayerBoardGrid, _playerMatrixLife);
         }
     }

@@ -506,7 +506,7 @@ namespace BMCWindows
 
         private void NavigateToGameWindow()
         {
-            var gameWindow = new GameplayAttackWindow(_lobby, MatrixCardLife, MatrixCardName);
+            var gameWindow = new GameplayAttackWindow(_callbackHandler, _proxy ,_lobby, MatrixCardLife, MatrixCardName);
             NavigationService.Navigate(gameWindow);
         }
     }

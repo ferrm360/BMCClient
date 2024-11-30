@@ -27,10 +27,11 @@
             </Grid.RowDefinitions>
 
             <!-- Texto dinámico -->
-            <TextBlock x:Name="DynamicLabel" Text="Texto dinámico aquí"
-                       FontSize="16" FontWeight="Bold"
-                       HorizontalAlignment="Left" VerticalAlignment="Top"
-                       Margin="37,119,0,0" Grid.Row="1" Height="70" Width="103" />
+            <TextBlock x:Name="DynamicLabel" Text="!A jugar!"
+                FontSize="12" FontWeight="Bold"
+                HorizontalAlignment="Center" VerticalAlignment="Top"
+                Margin="0,137,0,0" Grid.Row="1" Height="Auto" Width="Auto"
+                TextWrapping="Wrap" />
 
             <!-- Imagen dinámica -->
             <Image x:Name="DynamicImage" Grid.Row="1" Source="pack://application:,,,/Images/Avatar_talk.png"
