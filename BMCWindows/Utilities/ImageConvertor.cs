@@ -8,10 +8,10 @@ using System.Windows.Media.Imaging;
 
 namespace BMCWindows.Utilities
 {
-    public class ImageConvertor
+    public static class ImageConvertor
     {
 
-        public BitmapImage ConvertByteArrayToImage(byte[] imageData)
+        public static BitmapImage ConvertByteArrayToImage(byte[] imageData)
         {
             if (imageData == null || imageData.Length == 0)
                 return null;

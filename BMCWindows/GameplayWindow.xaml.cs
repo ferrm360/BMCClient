@@ -1,4 +1,5 @@
 ﻿using BMCWindows.DTOs;
+using BMCWindows.GameplayBoard;
 using BMCWindows.GameplayPage;
 using BMCWindows.GameplayServer;
 using BMCWindows.LobbyServer;
@@ -9,18 +10,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.ServiceModel;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace BMCWindows
 {
@@ -30,26 +26,22 @@ namespace BMCWindows
     public partial class GameplayWindow : Page
     {
         private LobbyDTO _lobby;
-        private ObservableCollection<String> _Players { get; set; } = new ObservableCollection<String>();
-        private ObservableCollection<Player> Player1 { get; set; } = new ObservableCollection<Player>();
-        private ObservableCollection<Player> Player2 { get; set; } = new ObservableCollection<Player>();
-        private ObservableCollection<Card> CatCards { get; set; }
-        private ObservableCollection<Card> DogCards { get; set; }
+        private ObservableCollection<String> Players { get; set; } = new ObservableCollection<String>();
         private string selectedCard = null;
-        private int[,] Matrix { get; set; }
+        private int[,] MatrixCardLife { get; set; }
+        private String[,] MatrixCardName { get; set; }
         private ObservableCollection<Card> Player1GameCards { get; set; }
         private ObservableCollection<Card> Player2GameCards { get; set; }
         private string selectedCardName;
         private int selectedCardLife;
         private GameCallbackHandler _callbackHandler;
         private GameServiceClient _proxy;
-        private int _playersReadyCount = 0; // Track players ready
-
+        private int _playersReadyCount = 0;
+        private bool _isReady = false;
 
 
         public GameplayWindow(LobbyDTO lobby, ObservableCollection<String> Players)
         {
-
             _callbackHandler = new GameCallbackHandler();
             _callbackHandler.OnGameStartedEvent += HandleGameStarted;
             _callbackHandler.OnPlayerReadyEvent += HandlePlayerReady;
@@ -59,7 +51,7 @@ namespace BMCWindows
 
             InitializeComponent();
             _lobby = lobby;
-            _Players = Players;
+            this.Players = Players;
             this.DataContext = this;
             Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
             Player1Cards.ItemsSource = LoadPlayer1List();
@@ -73,24 +65,21 @@ namespace BMCWindows
             }
             textBlockGameName.Text = lobby.Name;
 
-            Matrix = new int[5, 3];
+            MatrixCardLife = new int[5, 3];
+            MatrixCardName = new String[5, 3];
 
             Player1GameCards = new ObservableCollection<Card>();
             Player2GameCards = new ObservableCollection<Card>();
 
             InitializeBoard();
-            //InitializeCards(currentPlayer.Username);
 
             if (lobby.Host == currentPlayer.Username)
             {
-
                 string imagePath = "Images/IñakiCard.png";
                 BitmapImage imageOneLifeCard = new BitmapImage(new Uri(imagePath, UriKind.Relative));
                 imageCardOneLife.Source = imageOneLifeCard;
                 textBlockOneLifeCardName.Text = "Cat1Life";
                 textBlockOneLifeCardLife.Text = "1";
-
-
 
                 textBlockAnotherOneLifeCardName.Text = "CatAnother1Life";
                 textBlockAnotherOneLifeCardLife.Text = "1";
@@ -111,12 +100,9 @@ namespace BMCWindows
                 string imagePathThreeLives = "Images/coca3litrosCard.png";
                 BitmapImage imageThreeLives = new BitmapImage(new Uri(imagePathThreeLives, UriKind.Relative));
                 imageThreeLivesCard.Source = imageThreeLives;
-
-
             }
             else
             {
-
                 string imagePath = "Images/HuahuaCard.png";
                 BitmapImage imageOneLifeCard = new BitmapImage(new Uri(imagePath, UriKind.Relative));
                 imageCardOneLife.Source = imageOneLifeCard;
@@ -144,11 +130,9 @@ namespace BMCWindows
                 BitmapImage imageThreeLives = new BitmapImage(new Uri(imagePathThreeLives, UriKind.Relative));
                 imageThreeLivesCard.Source = imageThreeLives;
             }
-
         }
 
-
-        //TO DO: Considerar cambiarlo a list
+        //TODO : Considerar cambiarlo a list
         private ObservableCollection<Player> LoadPlayer1List()
         {
             Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
@@ -157,15 +141,14 @@ namespace BMCWindows
 
             try
             {
-                foreach (var player in _Players)
+                foreach (var player in Players)
                 {
                     if (currentPlayer.Username != player)
                     {
                         var playerProfilePicture = profileProxy.GetProfileImage(player);
                         if (playerProfilePicture.ImageData != null && playerProfilePicture.ImageData.Length > 0)
                         {
-                            ImageConvertor imageConvertor = new ImageConvertor();
-                            BitmapImage image = imageConvertor.ConvertByteArrayToImage(playerProfilePicture.ImageData);
+                            BitmapImage image = ImageConvertor.ConvertByteArrayToImage(playerProfilePicture.ImageData);
                             playerList.Add(new Player { Username = player, ProfilePicture = image });
                         }
                     }
@@ -192,11 +175,10 @@ namespace BMCWindows
                     var playerProfilePicture = profileProxy.GetProfileImage(currentPlayer.Username);
                     if (playerProfilePicture.ImageData != null && playerProfilePicture.ImageData.Length > 0)
                     {
-                        BitmapImage image = ConvertByteArrayToImage(playerProfilePicture.ImageData);
+                        BitmapImage image = ImageConvertor.ConvertByteArrayToImage(playerProfilePicture.ImageData);
                         playerList.Add(new Player { Username = _lobby.Host, ProfilePicture = image });
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -216,7 +198,7 @@ namespace BMCWindows
                 var playerProfilePicture = profileProxy.GetProfileImage(currentPlayer.Username);
                 if (playerProfilePicture.ImageData != null && playerProfilePicture.ImageData.Length > 0)
                 {
-                    BitmapImage image = ConvertByteArrayToImage(playerProfilePicture.ImageData);
+                    BitmapImage image = ImageConvertor.ConvertByteArrayToImage(playerProfilePicture.ImageData);
                     playerList.Add(new Player { Username = currentPlayer.Username, ProfilePicture = image });
                 }
             }
@@ -227,39 +209,9 @@ namespace BMCWindows
             return playerList;
         }
 
-        private BitmapImage ConvertByteArrayToImage(byte[] imageData)
-        {
-            using (var stream = new MemoryStream(imageData))
-            {
-                var bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.StreamSource = stream;
-                bitmapImage.EndInit();
-                bitmapImage.Freeze();
-                return bitmapImage;
-            }
-        }
-
         private void LeaveGame(object sender, EventArgs e)
         {
             this.NavigationService.Navigate(new LobbiesWindow());
-        }
-
-        public ObservableCollection<int> FlatMatrix
-        {
-            get
-            {
-                var flatList = new ObservableCollection<int>();
-                for (int i = 0; i < Matrix.GetLength(0); i++)
-                {
-                    for (int j = 0; j < Matrix.GetLength(1); j++)
-                    {
-                        flatList.Add(Matrix[i, j]);
-                    }
-                }
-                return flatList;
-            }
         }
 
         private void SetCard(object sender, MouseButtonEventArgs e)
@@ -293,11 +245,8 @@ namespace BMCWindows
                     Button cellButton = new Button
                     {
                         Background = Brushes.Transparent,
-                        //Content = $"{row},{col}",
                         Margin = new Thickness(1)
                     };
-
-
 
                     Grid.SetRow(cellButton, row);
                     Grid.SetColumn(cellButton, col);
@@ -305,7 +254,6 @@ namespace BMCWindows
                     cellButton.Click += AssignOrRemoveCard;
                     BoardGrid.Children.Add(cellButton);
                     buttonCount++;
-
                 }
             }
         }
@@ -337,7 +285,7 @@ namespace BMCWindows
 
                 if (clickedButton.Content == null && !string.IsNullOrEmpty(selectedCardName))
                 {
-                    var cardData = GetCardData(selectedCard);
+                    var cardData = CardManager.GetCardData(selectedCard);
                     var newCard = new Card { Name = cardData.Name, Life = cardData.Life, CardImage = cardData.CardImage };
                     if (cardData.Name != null)
                     {
@@ -354,7 +302,8 @@ namespace BMCWindows
                         };
 
                         clickedButton.Content = cardPanel;
-                        Matrix[row, col] = cardData.Life;
+                        MatrixCardLife[row, col] = cardData.Life;
+                        MatrixCardName[row, col] = cardData.Name;
 
                         Console.WriteLine($"Carta {cardData.Name} colocada en ({row}, {col}) con vida {cardData.Life}");
                     }
@@ -362,7 +311,7 @@ namespace BMCWindows
                 else
                 {
                     clickedButton.Content = null;
-                    Matrix[row, col] = 0;
+                    MatrixCardLife[row, col] = 0;
 
                     Console.WriteLine($"Carta eliminada de ({row}, {col})");
                 }
@@ -409,7 +358,7 @@ namespace BMCWindows
                 {
                     if (selectedCard != null)
                     {
-                        var cardData = GetCardData(selectedCard);
+                        var cardData = CardManager.GetCardData(selectedCard);
                         var newCard = new Card { Name = cardData.Name, Life = cardData.Life };
 
                         clickedButton.Content = newCard;
@@ -424,7 +373,7 @@ namespace BMCWindows
         {
             if (!string.IsNullOrEmpty(selectedCardName) && selectedCardLife > 0)
             {
-                Matrix[row, col] = selectedCardLife;
+                MatrixCardLife[row, col] = selectedCardLife;
                 Console.WriteLine($"Matriz actualizada: [{row}, {col}] = {selectedCardLife}");
             }
             else
@@ -446,7 +395,7 @@ namespace BMCWindows
                     if (textBlock != null)
                     {
                         selectedCard = textBlock.Text;
-                        var cardData = GetCardData(selectedCard);
+                        var cardData = CardManager.GetCardData(selectedCard);
                         selectedCardName = cardData.Name;
                         selectedCardLife = cardData.Life;
 
@@ -456,48 +405,12 @@ namespace BMCWindows
             }
         }
 
-
-        private (string Name, int Life, BitmapImage CardImage) GetCardData(string cardName)
-        {
-            var cardData = new Dictionary<string, (string, int, BitmapImage)>
-            {
-                { "Cat1Life", ("Cat1", 1, new BitmapImage(new Uri("pack://application:,,,/Images/IñakiCard.png"))) },
-                { "CatAnother1Life", ("Cat1.1", 1, new BitmapImage(new Uri("pack://application:,,,/Images/IñakiCard.png")))},
-                { "Cat2Lives", ("Cat2", 2, new BitmapImage(new Uri("pack://application:,,,/Images/michideltoroCard.png"))) },
-                {"CatAnother2Lives", ("Cat2.1", 2, new BitmapImage(new Uri("pack://application:,,,/Images/michideltoroCard.png"))) },
-                { "Cat3Lives", ("Cat3", 3, new BitmapImage(new Uri("pack://application:,,,/Images/coca3litrosCard.png"))) },
-                { "Dog1Life", ("Dog1", 1, new BitmapImage(new Uri("pack://application:,,,/Images/HuahuaCard.png"))) },
-                {"DogAnother1Life", ("Dog1.1", 1, new BitmapImage(new Uri("pack://application:,,,/Images/HuahuaCard.png"))) },
-                { "Dog2Lives", ("Dog2", 2, new BitmapImage(new Uri("pack://application:,,,/Images/AnasofCard.png"))) },
-                {"DogAnother2Lives", ("Dog2.1", 2, new BitmapImage(new Uri("pack://application:,,,/Images/AnasofCard.png"))) },
-                { "Dog3Lives", ("Dog3", 3, new BitmapImage(new Uri("pack://application:,,,/Images/ChilaquilCard.png"))) }
-            };
-            return cardData.ContainsKey(cardName) ? cardData[cardName] : ("", 0, null);
-        }
-
         private void RemoveCardFromGrid(object sender, RoutedEventArgs e)
         {
             var clickedButton = sender as Button;
             if (clickedButton.Content != null)
             {
                 clickedButton.Content = null;
-            }
-        }
-
-        private void SendCardsPosition(string lobbyId, string player, List<int> flatMatrix)
-        {
-            int rows = 5;
-            int cols = 3;
-            int[][] matrix = new int[rows][];
-
-            for (int i = 0; i < rows; i++)
-            {
-                matrix[i] = flatMatrix.Skip(i * cols).Take(cols).ToArray();
-            }
-
-            foreach (var row in matrix)
-            {
-                Console.WriteLine(string.Join(", ", row));
             }
         }
 
@@ -534,13 +447,17 @@ namespace BMCWindows
 
         private async void AcceptCardsPosition(object sender, RoutedEventArgs e)
         {
+            if (_isReady) {
+                MessageBox.Show("Espere a que su rival confirme su tablero");
+                return;
+            }
             // Depuración: Imprimir matriz antes de enviar
             string matrixDebug = "";
-            for (int i = 0; i < Matrix.GetLength(0); i++)
+            for (int i = 0; i < MatrixCardName.GetLength(0); i++)
             {
-                for (int j = 0; j < Matrix.GetLength(1); j++)
+                for (int j = 0; j < MatrixCardName.GetLength(1); j++)
                 {
-                    matrixDebug += Matrix[i, j] + " ";
+                    matrixDebug += MatrixCardName[i, j] + " ";
                 }
                 matrixDebug += Environment.NewLine;
             }
@@ -564,6 +481,7 @@ namespace BMCWindows
                 }
                 else
                 {
+                    _isReady = true;
                     MessageBox.Show("Tablero enviado exitosamente.");
                 }
             }
@@ -573,23 +491,6 @@ namespace BMCWindows
             }
         }
 
-
-
-        private void FillGridWithImage(object sender, RoutedEventArgs e)
-        {
-            string imagePath = "Images/CardBack.png";
-            BitmapImage image = new BitmapImage(new Uri(imagePath, UriKind.Relative));
-
-            foreach (UIElement element in BoardGrid.Children)
-            {
-                if (element is Button button)
-                {
-                    button.Content = new Image { Source = image, Width = 60, Height = 90 };
-                }
-            }
-            Console.WriteLine("Todos los botones del grid han sido llenados con la imagen.");
-        }
-
         private void HandlePlayerReady(string player)
         {
             Task.Run(() =>
@@ -597,7 +498,7 @@ namespace BMCWindows
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     _playersReadyCount++;
-                    MessageBox.Show($"El jugador {player} está listo. ({_playersReadyCount}/{_Players.Count})");
+                    MessageBox.Show($"El jugador {player} está listo. ({_playersReadyCount}/{Players.Count})");
                 });
             });
         }
@@ -616,7 +517,7 @@ namespace BMCWindows
 
         private void NavigateToGameWindow()
         {
-            var gameWindow = new GameplayAttackWindow(_lobby, Matrix);
+            var gameWindow = new GameplayAttackWindow(_lobby, MatrixCardLife, MatrixCardName);
             NavigationService.Navigate(gameWindow);
         }
     }

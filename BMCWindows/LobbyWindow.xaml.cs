@@ -380,8 +380,7 @@ namespace BMCWindows
                             response.Friends.Select(friendPlayer =>
                             {
                                 var friendProfilePicture = profileProxy.GetProfileImage(friendPlayer.Username);
-                                ImageConvertor imageConvertor = new ImageConvertor();
-                                BitmapImage image = imageConvertor.ConvertByteArrayToImage(friendProfilePicture.ImageData);
+                                BitmapImage image = ImageConvertor.ConvertByteArrayToImage(friendProfilePicture.ImageData);
 
                                 return new Friend
                                 {

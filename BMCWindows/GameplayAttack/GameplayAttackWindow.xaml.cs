@@ -1,9 +1,14 @@
-﻿using BMCWindows.DTOs;
+﻿using BMCWindows.AttackServer;
+using BMCWindows.DTOs;
+using BMCWindows.GameplayAttack;
+using BMCWindows.GameplayServer;
 using BMCWindows.LobbyServer;
 using BMCWindows.Patterns.Singleton;
+using BMCWindows.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -17,7 +22,8 @@ namespace BMCWindows.GameplayPage
     public partial class GameplayAttackWindow : Page
     {
         private LobbyDTO _lobby;
-        private int[,] _playerMatrix;
+        private int[,] _playerMatrixLife;
+        private readonly String[,] _playerMatrixName;
         private string _cardBackImagePath = "pack://application:,,,/Images/CardBack.png"; 
         private Dictionary<string, AttackCard> HostAvailableAttackCards { get; set; }
         private Dictionary<string, AttackCard> GuestAvailableAttackCards { get; set; }
@@ -28,12 +34,22 @@ namespace BMCWindows.GameplayPage
         private string selectedCardName;
         private int selectedCardAttackLevel;
         private BitmapImage selectedCardImage;
+        private AttackCallbackHandler _callbackHandler;
+        private AttackServiceClient _proxy;
+        private BoardPlayerManager _boardPlayerManager;
+        private BoardEnemyManager _boardEnemyManager;
 
-        public GameplayAttackWindow(LobbyDTO lobby, int[,] playerMatrix)
+
+        public GameplayAttackWindow(LobbyDTO lobby, int[,] playerMatrixLife, String[,] playerMatrixName)
         {
             InitializeComponent();
             _lobby = lobby;
-            _playerMatrix = playerMatrix;
+            _playerMatrixLife = playerMatrixLife;
+            _playerMatrixName = playerMatrixName;
+
+            _callbackHandler = new AttackCallbackHandler();
+            var context = new System.ServiceModel.InstanceContext(_callbackHandler);
+            _proxy = new AttackServer.AttackServiceClient(context);
 
             HostAvailableAttackCards = new Dictionary<string, AttackCard>();    
             GuestAvailableAttackCards = new Dictionary<string, AttackCard>();
@@ -43,8 +59,25 @@ namespace BMCWindows.GameplayPage
             Server.PlayerDTO currentPlayer = new Server.PlayerDTO();
             currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
 
-            InitializePlayerBoard();
-            InitializeEnemyBoard();
+            Action<int, int> onCellClickActionOwnBoard = (row, col) =>
+            {
+                MessageBox.Show($"Has clickeado en la celda : ({row}, {col}) de tu propio tablero");
+            };
+
+            Action<int, int> onCellClickActionEnemyBoard = (row, col) =>
+            {
+                MessageBox.Show($"Has clickeado en la celda: ({row}, {col}) del tablero enemigo");
+            };
+
+            var attackCallbackHandler = new AttackCallbackHandler();
+            attackCallbackHandler.OnAttackReceivedEvent += OnAttackReceivedHandler;
+
+            _boardPlayerManager = new BoardPlayerManager(onCellClickActionOwnBoard);
+            _boardPlayerManager.InitializePlayerBoard(PlayerBoardGrid, _playerMatrixLife);
+
+            _boardEnemyManager = new BoardEnemyManager(onCellClickActionEnemyBoard);
+            _boardEnemyManager.InitializeEnemyBoard(EnemyBoardGrid);
+
             InitializeAvailableCards();
             if(_lobby.Host == currentPlayer.Username)
             {
@@ -56,127 +89,6 @@ namespace BMCWindows.GameplayPage
             }
 
             ShowAssignedCards();
-        }
-
-        private void InitializePlayerBoard()
-        {
-            PlayerBoardGrid.Children.Clear();
-            PlayerBoardGrid.RowDefinitions.Clear();
-            PlayerBoardGrid.ColumnDefinitions.Clear();
-
-            for (int row = 0; row < 4; row++)
-            {
-                PlayerBoardGrid.RowDefinitions.Add(new RowDefinition());
-            }
-            for (int col = 0; col < 3; col++)
-            {
-                PlayerBoardGrid.ColumnDefinitions.Add(new ColumnDefinition());
-            }
-
-            for (int row = 0; row < 4; row++)
-            {
-                for (int col = 0; col < 3; col++)
-                {
-                    Button cellButton = new Button
-                    {
-                        Background = Brushes.Transparent,
-                        Margin = new Thickness(5),
-                        Content = new Grid
-                        {
-                            Children =
-                            {
-                                new Image
-                                {
-                                    Source = new BitmapImage(new Uri(_cardBackImagePath, UriKind.Absolute)),
-                                    Stretch = Stretch.Fill 
-                                },
-                                new TextBlock
-                                {
-                                    Text = _playerMatrix[row, col].ToString(), 
-                                    HorizontalAlignment = HorizontalAlignment.Center,
-                                    VerticalAlignment = VerticalAlignment.Center,
-                                    FontSize = 12,
-                                    FontWeight = FontWeights.Bold,
-                                    Foreground = Brushes.White
-                                }
-                            }
-                        }
-                    };
-
-                    Grid.SetRow(cellButton, row);
-                    Grid.SetColumn(cellButton, col);
-
-                    cellButton.Click += PlayerBoardButton_Click;
-                    PlayerBoardGrid.Children.Add(cellButton);
-                }
-            }
-        }
-
-        private void InitializeEnemyBoard()
-        {
-            EnemyBoardGrid.Children.Clear();
-            EnemyBoardGrid.RowDefinitions.Clear();
-            EnemyBoardGrid.ColumnDefinitions.Clear();
-
-            for (int row = 0; row < 4; row++)
-            {
-                EnemyBoardGrid.RowDefinitions.Add(new RowDefinition());
-            }
-            for (int col = 0; col < 3; col++)
-            {
-                EnemyBoardGrid.ColumnDefinitions.Add(new ColumnDefinition());
-            }
-
-            for (int row = 0; row < 4; row++)
-            {
-                for (int col = 0; col < 3; col++)
-                {
-                    Button cellButton = new Button
-                    {
-                        Background = Brushes.Transparent,
-                        Margin = new Thickness(5),
-                        Content = new Image
-                        {
-                            Source = new BitmapImage(new Uri(_cardBackImagePath, UriKind.Absolute)),
-                            Stretch = Stretch.Fill 
-                        }
-                    };
-
-                    Grid.SetRow(cellButton, row);
-                    Grid.SetColumn(cellButton, col);
-
-                    cellButton.Click += EnemyBoardButton_Click;
-                    EnemyBoardGrid.Children.Add(cellButton);
-                }
-            }
-        }
-
-        private void PlayerBoardButton_Click(object sender, RoutedEventArgs e)
-        {
-            Button button = sender as Button;
-            int row = Grid.GetRow(button);
-            int col = Grid.GetColumn(button);
-
-            MessageBox.Show($"Seleccionaste la posición del tablero propio: ({row}, {col})");
-        }
-
-        private void EnemyBoardButton_Click(object sender, RoutedEventArgs e)
-        {
-            Button button = sender as Button;
-            int row = Grid.GetRow(button);
-            int col = Grid.GetColumn(button);
-
-            MessageBox.Show($"Atacando posición del tablero enemigo: ({row}, {col})");
-        }
-
-        private void AttackButton_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Ejecutando ataque...");
-        }
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.GoBack();
         }
 
 
@@ -336,7 +248,6 @@ namespace BMCWindows.GameplayPage
             {
                 RemainingGuestCards.Add(attackCard.Key, attackCard.Value);
             }
-
         }
 
         private void SelectCard(object sender, MouseButtonEventArgs e)
@@ -373,9 +284,6 @@ namespace BMCWindows.GameplayPage
         }
 
 
-
-
-
         private AttackCard GetCardData(string  cardName, string currentPlayerUsername)
         {
             if (string.IsNullOrEmpty(cardName))
@@ -403,8 +311,7 @@ namespace BMCWindows.GameplayPage
                 return SelectedAttackCardDeck[cardName];
             }
 
-            return null;
-            
+            return null; 
         }
 
 
@@ -426,7 +333,14 @@ namespace BMCWindows.GameplayPage
                 AddCardToPanel(numGuestAttackCards-1, guestAvailableCards[numGuestAttackCards-1]);
             }
         }
-    }
 
-    
+        private void OnAttackReceivedHandler(AttackPositionDTO attackPosition)
+        {
+            MessageBox.Show($"Ataque recibido en la posición: {attackPosition.X}, {attackPosition.Y}");
+
+            _playerMatrixLife[attackPosition.X, attackPosition.Y] -= 1;
+
+            _boardPlayerManager.InitializePlayerBoard(PlayerBoardGrid, _playerMatrixLife);
+        }
+    }
 }

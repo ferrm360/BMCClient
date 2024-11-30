@@ -45,8 +45,7 @@ namespace BMCWindows
             }
             else
             {
-                ImageConvertor imageConvertor = new ImageConvertor();
-                BitmapImage image = imageConvertor.ConvertByteArrayToImage(imageUrl.ImageData);
+                BitmapImage image = ImageConvertor.ConvertByteArrayToImage(imageUrl.ImageData);
                 if (image == null)
                 {
                     Console.WriteLine("Image conversion failed.");
@@ -237,7 +236,6 @@ namespace BMCWindows
                 var response = friendsProxy.GetFriendList(username);
 
                 ProfileServer.ProfileServiceClient profileProxy = new ProfileServer.ProfileServiceClient();
-                ImageConvertor imageConvertor = new ImageConvertor();
 
                 if (response.IsSuccess)
                 {
@@ -247,7 +245,7 @@ namespace BMCWindows
                             response.Friends.Select(friendPlayer =>
                             {
                                 var friendProfilePicture = profileProxy.GetProfileImage(friendPlayer.Username);
-                                BitmapImage image = imageConvertor.ConvertByteArrayToImage(friendProfilePicture.ImageData);
+                                BitmapImage image = ImageConvertor.ConvertByteArrayToImage(friendProfilePicture.ImageData);
 
                                 return new Friend
                                 {

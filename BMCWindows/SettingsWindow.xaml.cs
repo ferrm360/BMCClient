@@ -37,8 +37,7 @@ namespace BMCWindows
             }
             else
             {
-                ImageConvertor imageConvertor = new ImageConvertor();
-                BitmapImage image = imageConvertor.ConvertByteArrayToImage(imageUrl.ImageData);
+                BitmapImage image = ImageConvertor.ConvertByteArrayToImage(imageUrl.ImageData);
                 if (image == null)
                 {
                     MessageBox.Show("Image conversion failed.");

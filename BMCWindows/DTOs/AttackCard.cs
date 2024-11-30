@@ -13,6 +13,5 @@ namespace BMCWindows.DTOs
         public int AttackLevel { get; set; }
         public BitmapImage CardImage { get; set; }
         public bool IsClicked { get; set; }
-
     }
 }

@@ -61,6 +61,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Connected Services\AttackServer\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ChatLobbyServer\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -111,23 +116,17 @@
     <Compile Include="GameOptionsWindow.xaml.cs">
       <DependentUpon>GameOptionsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameplayAttack\BoardEnemyManager.cs" />
+    <Compile Include="GameplayAttack\BoardPlayerManager.cs" />
     <Compile Include="GameplayAttack\GameplayAttackWindow.xaml.cs">
       <DependentUpon>GameplayAttackWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="GameplayBoard\AttackCardGuestManager.cs" />
     <Compile Include="GameplayBoard\AttackCardHostManager.cs" />
-    <Compile Include="GameplayBoard\CardInitializer.cs" />
     <Compile Include="GameplayBoard\CardManager.cs" />
-    <Compile Include="GameplayBoard\CardSelector.cs" />
-    <Compile Include="GameplayBoard\ConnectionHandler.cs" />
-    <Compile Include="GameplayBoard\GameBoardManager.cs" />
-    <Compile Include="GameplayBoard\GameEventsHandler.cs" />
-    <Compile Include="GameplayBoard\PlayerLoader.cs" />
     <Compile Include="GameplayWindow.xaml.cs">
       <DependentUpon>GameplayWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GameplayBoard\MatrixHandler.cs" />
-    <Compile Include="GameplayBoard\PlayerManager.cs" />
     <Compile Include="GuestPlayer\GuestPlayerLogin.xaml.cs">
       <DependentUpon>GuestPlayerLogin.xaml</DependentUpon>
     </Compile>
@@ -154,6 +153,7 @@
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\AttackCallbackHandler.cs" />
     <Compile Include="Utilities\ChatCallBackHandler.cs" />
     <Compile Include="Utilities\EmptyLobbyCallback.cs" />
     <Compile Include="Utilities\EventMediator.cs" />
@@ -293,6 +293,22 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="Connected Services\AttackServer\AttackService.wsdl" />
+    <None Include="Connected Services\AttackServer\AttackService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AttackServer\AttackService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AttackServer\AttackService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AttackServer\AttackService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AttackServer\BMCWindows.AttackServer.OperationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ChatLobbyServer\ChatLobbyService.wsdl" />
     <None Include="Connected Services\ChatLobbyServer\ChatLobbyService.xsd">
       <SubType>Designer</SubType>
@@ -466,6 +482,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\AttackServer\" />
     <WCFMetadataStorage Include="Connected Services\ChatLobbyServer\" />
     <WCFMetadataStorage Include="Connected Services\ChatServer\" />
     <WCFMetadataStorage Include="Connected Services\FriendServer\" />
@@ -606,6 +623,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\GuestPlayerServer\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Default_Avatar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Avatar_talk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\AttackServer\AttackService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\AttackServer\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\AttackServer\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\AttackServer\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
