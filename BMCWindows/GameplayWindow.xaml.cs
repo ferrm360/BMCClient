@@ -132,7 +132,6 @@ namespace BMCWindows
             }
         }
 
-        //TODO : Considerar cambiarlo a list
         private ObservableCollection<Player> LoadPlayer1List()
         {
             Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();

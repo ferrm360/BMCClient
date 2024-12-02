@@ -1,6 +1,7 @@
 ﻿using BMCWindows.Patterns.Singleton;
 using BMCWindows.Properties;
 using BMCWindows.Server;
+using BMCWindows.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,25 +28,21 @@ namespace BMCWindows
     public partial class HomePage : Page, ChatServer.IChatServiceCallback
     {
 
-
         public ObservableCollection<Friend> Friends { get; set; }
         public ObservableCollection<Message> Messages { get; set; }
         public ChatService chatService = new ChatService();
-        public ChatServer.ChatServiceClient proxy;
-
-
+        private ChatServer.ChatServiceClient _proxy;
 
         public HomePage()
         {
             InitializeComponent();
             Messages = new ObservableCollection<Message>();
             generalMessages.ItemsSource = Messages; 
-            //generalMessages.ItemsSource = Messages; 
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData();
             InstanceContext context = new InstanceContext(this);
-            proxy = new ChatServer.ChatServiceClient(context);
-            proxy.RegisterUser(player.Username);
+            _proxy = new ChatServer.ChatServiceClient(context);
+            _proxy.RegisterUser(player.Username);
             labelUserName.Content = player.Username;
             LoadFriendList(player.Username);
             buttonOpenContextMenu.Visibility = Visibility.Visible;
@@ -57,7 +54,7 @@ namespace BMCWindows
             }
             else
             {
-                BitmapImage image = ConvertByteArrayToImage(imageUrl.ImageData);
+                BitmapImage image = ImageConvertor.ConvertByteArrayToImage(imageUrl.ImageData);
                 if (image == null)
                 {
                     MessageBox.Show("Image conversion failed.");
@@ -66,20 +63,12 @@ namespace BMCWindows
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        //imageProfilePicture.Source = image;
                         ProfileImageBrush.ImageSource = image;
                     });
 
                 }
             }
-
-            //LoadImage(imageUrl.ImageData);
-
         }
-
-
-
-
 
         private void SendGeneralMessage(object sender, RoutedEventArgs e)
         {
@@ -90,11 +79,9 @@ namespace BMCWindows
             if (!string.IsNullOrEmpty(textboxGeneralChat.Text))
             {
                 var formattedMessage = $"{player.Username}: {textboxGeneralChat.Text}";
-                proxy.SendMessage(player.Username, formattedMessage);
+                _proxy.SendMessage(player.Username, formattedMessage);
                 ReceiveMessage(textboxGeneralChat.Text);
                 textboxGeneralChat.Clear();
-                //LoadRecentMessages();
-                // Actualizar los mensajes mostrados en la interfaz
             }
         }
 
@@ -141,7 +128,7 @@ namespace BMCWindows
                             response.Friends.Select(friendPlayer => 
                             {
                                 var friendProfilePicture = profileProxy.GetProfileImage(friendPlayer.Username);
-                                BitmapImage image = ConvertByteArrayToImage(friendProfilePicture.ImageData);
+                                BitmapImage image = ImageConvertor.ConvertByteArrayToImage(friendProfilePicture.ImageData);
 
                                 return new Friend
                                 {
@@ -186,7 +173,7 @@ namespace BMCWindows
             Server.PlayerDTO player = UserSessionManager.getInstance().GetPlayerUserData();
             UserSessionManager.getInstance().LogoutPlayer();   
             this.NavigationService.Navigate(new StartPage());
-            proxy.DisconnectUser(player.Username);
+            _proxy.DisconnectUser(player.Username);
 
         }
 
@@ -194,28 +181,13 @@ namespace BMCWindows
         private void LoadImage(byte[] imageData)
         {
             
-            BitmapImage image = ConvertByteArrayToImage(imageData);
+            BitmapImage image = ImageConvertor.ConvertByteArrayToImage(imageData);
             ProfileImageBrush.ImageSource = image;
 
         }
 
         // TODO: Pasar a utilities
-        public BitmapImage ConvertByteArrayToImage(byte[] imageData)
-        {
-            if (imageData == null || imageData.Length == 0)
-                return null;
-
-            using (var ms = new MemoryStream(imageData))
-            {
-                BitmapImage image = new BitmapImage();
-                image.BeginInit();
-                image.CacheOption = BitmapCacheOption.OnLoad;
-                image.StreamSource = ms;
-                image.EndInit();
-                image.Freeze(); 
-                return image;
-            }
-        }
+ 
 
         private void GoToFriendRequestsWindow(object sender, RoutedEventArgs e)
         {

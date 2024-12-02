@@ -142,7 +142,8 @@
     </Compile>
     <Compile Include="GameplayBoard\AttackCardGuestManager.cs" />
     <Compile Include="GameplayBoard\AttackCardHostManager.cs" />
-    <Compile Include="GameplayBoard\CardManager.cs" />
+    <Compile Include="GameplayBoard\Cards\CardManager.cs" />
+    <Compile Include="GameplayBoard\Cards\CardImagePaths.cs" />
     <Compile Include="GameplayWindow.xaml.cs">
       <DependentUpon>GameplayWindow.xaml</DependentUpon>
     </Compile>
