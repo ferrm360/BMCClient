@@ -80,11 +80,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Connected Services\ChatFriendServer\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Connected Services\ChatLobbyServer\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -313,25 +308,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="Connected Services\ChatFriendServer\BMCWindows.ChatFriendServer.ChatFriendResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ChatFriendServer\BMCWindows.ChatFriendServer.OperationResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ChatFriendServer\ChatFriendService.wsdl" />
-    <None Include="Connected Services\ChatFriendServer\ChatFriendService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ChatFriendServer\ChatFriendService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ChatFriendServer\ChatFriendService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ChatFriendServer\ChatFriendService4.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\ChatLobbyServer\ChatLobbyService.wsdl" />
     <None Include="Connected Services\ChatLobbyServer\ChatLobbyService.xsd">
       <SubType>Designer</SubType>
@@ -508,7 +484,6 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\ChatFriendServer\" />
     <WCFMetadataStorage Include="Connected Services\ChatLobbyServer\" />
     <WCFMetadataStorage Include="Connected Services\ChatServer\" />
     <WCFMetadataStorage Include="Connected Services\FriendServer\" />
@@ -658,18 +633,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Avatar_talk.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ChatFriendServer\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ChatFriendServer\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ChatFriendServer\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
