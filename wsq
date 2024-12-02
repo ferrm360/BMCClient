@@ -1,0 +1,48 @@
+[33mcommit d89285b1adb9d50b0b173d39cde5e99d712993ca[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmarla-respaldo-amigos[m[33m, [m[1;31morigin/marla-respaldo-amigos[m[33m)[m
+Merge: 7451096 372d64b
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Wed Oct 23 22:48:29 2024 -0600
+
+    correción de implementación para ver la lista de amigos
+
+[33mcommit 74510968dee68c6ed2db046ef12fe251bbfc737c[m
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Wed Oct 23 22:42:36 2024 -0600
+
+    cambiar usuario y pendiente ver amigosventanas con semi funcionalidad para amigos y editar perfil
+
+[33mcommit 372d64b9b4e4f5eb0d7e264f3298c639019e0d0d[m
+Author: Fernando Martinez Ramirez <zS22013690@estudiantes.uv.mx>
+Date:   Wed Oct 23 21:41:11 2024 -0600
+
+    Correcion de lista de amigos, si es nulo no hace nada, si contiene elementos los carga en la pantalla
+
+[33mcommit 9ccfd22c2deed99e55278b772a22065ff7b789b2[m
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Wed Oct 23 18:50:29 2024 -0600
+
+    ventanas con semi funcionalidad para amigos y editar perfil
+
+[33mcommit 3b057e381c60a268a498e00ae376c061a7446ebb[m
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Mon Oct 21 18:16:39 2024 -0600
+
+    Modificaciones en HomePage
+
+[33mcommit 28ef366a9486d28433e00365f8068c0badab1d58[m[33m ([m[1;31morigin/marla-respaldo-chat[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmarla-respaldo-chat[m[33m, [m[1;32mmain[m[33m)[m
+Author: Tearp89 <marla838.aguilar@gmail.com>
+Date:   Thu Oct 17 09:17:09 2024 -0600
+
+    Ventanas de login, sign up, homepage con chat y editar perfil incompleta
+
+[33mcommit 8e9ea12735470ceb9eeefee7bb11d68e21ab7d48[m
+Author: FerRMZ <44122689+ferrm360@users.noreply.github.com>
+Date:   Thu Oct 17 09:12:39 2024 -0600
+
+    Update .gitignore
+
+[33mcommit 83da416d23c3f65e8f00f696b8c1f36b7b8b7ca5[m
+Author: FerRMZ <44122689+ferrm360@users.noreply.github.com>
+Date:   Thu Oct 17 09:10:24 2024 -0600
+
+    Initial commit

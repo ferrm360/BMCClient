@@ -95,6 +95,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\EmailServer\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\FriendServer\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -354,6 +359,22 @@
     <None Include="Connected Services\ChatServer\ChatService1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\EmailServer\BMCWindows.EmailServer.OperationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EmailServer\EmailService.wsdl" />
+    <None Include="Connected Services\EmailServer\EmailService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EmailServer\EmailService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EmailServer\EmailService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EmailServer\EmailService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\FriendServer\BMCWindows.FriendServer.FriendListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -519,6 +540,7 @@
     <WCFMetadataStorage Include="Connected Services\ChatFriendServer\" />
     <WCFMetadataStorage Include="Connected Services\ChatLobbyServer\" />
     <WCFMetadataStorage Include="Connected Services\ChatServer\" />
+    <WCFMetadataStorage Include="Connected Services\EmailServer\" />
     <WCFMetadataStorage Include="Connected Services\FriendServer\" />
     <WCFMetadataStorage Include="Connected Services\LobbyServer\" />
     <WCFMetadataStorage Include="Connected Services\ProfileServer\" />
@@ -675,6 +697,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ChatFriendServer\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\EmailServer\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\EmailServer\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\EmailServer\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
