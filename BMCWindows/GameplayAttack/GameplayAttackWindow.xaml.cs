@@ -1,6 +1,7 @@
 ﻿using BMCWindows.DTOs;
 using BMCWindows.FriendServer;
 using BMCWindows.GameplayAttack;
+using BMCWindows.GameplayAttack.Rules;
 using BMCWindows.GameplayServer;
 using BMCWindows.LobbyServer;
 using BMCWindows.Patterns.Singleton;
@@ -42,9 +43,10 @@ namespace BMCWindows.GameplayPage
         private BoardEnemyManager _boardEnemyManager;
         private Server.PlayerDTO _currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
         private bool _isPlayerTurn;
+        private GameRules _gameRules;
 
 
-        public GameplayAttackWindow(GameCallbackHandler gameCallbackHandler, GameServiceClient proxy,LobbyDTO lobby, int[,] playerMatrixLife, String[,] playerMatrixName)
+        public GameplayAttackWindow(GameCallbackHandler gameCallbackHandler, GameServiceClient proxy, LobbyDTO lobby, int[,] playerMatrixLife, String[,] playerMatrixName)
         {
             InitializeComponent();
             _lobby = lobby;
@@ -57,7 +59,7 @@ namespace BMCWindows.GameplayPage
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    OnAttackReceivedHandler(attackPositionDTO);
+                    _ = OnAttackReceivedHandlerAsync(attackPositionDTO);
                 });
             };
 
@@ -65,6 +67,7 @@ namespace BMCWindows.GameplayPage
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
+                    Console.WriteLine($"Turno actualizado: {_currentPlayer.Username} es {_isPlayerTurn}");
                     _isPlayerTurn = isPlayerTurn;
                     if (_isPlayerTurn)
                     {
@@ -77,12 +80,24 @@ namespace BMCWindows.GameplayPage
                 });
             };
 
-            HostAvailableAttackCards = new Dictionary<string, AttackCard>();    
-            GuestAvailableAttackCards = new Dictionary<string, AttackCard>();
+            _callbackHandler.OnGameOverEvent += () =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    MessageBox.Show("Has ganado!");
+                });
+            };
+
+
+            var cardInitializer = new CardInitializer();
+            HostAvailableAttackCards = cardInitializer.InitializeHostCards();
+            GuestAvailableAttackCards = cardInitializer.InitializeGuestCards();
+
             CurrentPlayerDeck = new Dictionary<string, AttackCard>();
-            RemainingHostCards = new Dictionary<string, AttackCard>();
-            RemainingGuestCards = new Dictionary<string, AttackCard>();    
-  
+            RemainingHostCards = new Dictionary<string, AttackCard>(HostAvailableAttackCards);
+            RemainingGuestCards = new Dictionary<string, AttackCard>(GuestAvailableAttackCards);
+
+
 
             _boardPlayerManager = new BoardPlayerManager(OnCellClickOwnBoard);
             _boardPlayerManager.InitializePlayerBoard(PlayerBoardGrid, _playerMatrixLife);
@@ -90,11 +105,10 @@ namespace BMCWindows.GameplayPage
             _boardEnemyManager = new BoardEnemyManager(OnCellClickEnemyBoard);
             _boardEnemyManager.InitializeEnemyBoard(EnemyBoardGrid);
 
-            InitializeAvailableCards();
-            if(_lobby.Host == _currentPlayer.Username)
+            if (_lobby.Host == _currentPlayer.Username)
             {
-                AssignAttackCards(RemainingHostCards,5);
-            } 
+                AssignAttackCards(RemainingHostCards, 5);
+            }
             else
             {
                 AssignAttackCards(RemainingGuestCards, 5);
@@ -102,9 +116,10 @@ namespace BMCWindows.GameplayPage
 
             ShowAssignedCards();
             FirstTurn();
+            _gameRules = new GameRules(_playerMatrixLife, _playerMatrixName);
         }
 
-        private void AssignAttackCards(Dictionary<string, AttackCard> AvailableCards,  int numCardsPerPlayer)
+        private void AssignAttackCards(Dictionary<string, AttackCard> AvailableCards, int numCardsPerPlayer)
         {
             Random random = new Random();
             List<string> attackCardKeys = AvailableCards.Keys.ToList();
@@ -134,10 +149,10 @@ namespace BMCWindows.GameplayPage
             stackPanelPlayerAttackCards.Children.Clear();
 
             int cardIndex = 0;
-            foreach (var card in CurrentPlayerDeck.Values)  
+            foreach (var card in CurrentPlayerDeck.Values)
             {
                 AddCardToPanel(cardIndex, card);
-                cardIndex++; 
+                cardIndex++;
             }
         }
 
@@ -157,11 +172,11 @@ namespace BMCWindows.GameplayPage
                     ShadowDepth = 5,
                     Color = Colors.Gray
                 },
-                DataContext = attackCard.Name  
+                DataContext = attackCard.Name
             };
 
             newCard.Tag = attackCard.Name;
-            newCard.MouseLeftButtonDown += SelectCard;  
+            newCard.MouseLeftButtonDown += SelectCard;
 
             var stackPanel = new StackPanel
             {
@@ -171,7 +186,7 @@ namespace BMCWindows.GameplayPage
 
             var cardImage = new Image
             {
-                Source = attackCard.CardImage,  
+                Source = attackCard.CardImage,
                 Width = 100,
                 Height = 130
             };
@@ -200,64 +215,9 @@ namespace BMCWindows.GameplayPage
 
             if (deck.ContainsKey(cardName))
             {
-                return deck[cardName].AttackLevel; 
+                return deck[cardName].AttackLevel;
             }
             return 0;
-        }
-
-        private void InitializeAvailableCards()
-        {
-            HostAvailableAttackCards.Add("Llorona", new AttackCard { Name = "Llorona", AttackLevel = 2, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/IñakiCard.png")) });
-            HostAvailableAttackCards.Add("Charro negro", new AttackCard { Name = "Charro negro", AttackLevel = 2, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/IñakiCard.png")) });
-            HostAvailableAttackCards.Add("Chupacabras", new AttackCard { Name = "Chupacabras", AttackLevel = 2, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/IñakiCard.png")) });
-            HostAvailableAttackCards.Add("La mano peluda", new AttackCard { Name = "La mano peluda", AttackLevel = 2, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/IñakiCard.png")) });
-            HostAvailableAttackCards.Add("La muerte", new AttackCard { Name = "La muerte", AttackLevel = 2, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/IñakiCard.png")) });
-            HostAvailableAttackCards.Add("Olmeca", new AttackCard { Name = "Olmeca", AttackLevel = 3, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/IñakiCard.png")) });
-            HostAvailableAttackCards.Add("Tolteca", new AttackCard { Name = "Tolteca", AttackLevel = 3, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/IñakiCard.png")) });
-            HostAvailableAttackCards.Add("Azteca", new AttackCard { Name = "Azteca", AttackLevel = 3, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/IñakiCard.png")) });
-            HostAvailableAttackCards.Add("Maya", new AttackCard { Name = "Maya", AttackLevel = 3, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/IñakiCard.png")) });
-            HostAvailableAttackCards.Add("Moixteca", new AttackCard { Name = "Mixteca", AttackLevel = 3, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/IñakiCard.png")) });
-            HostAvailableAttackCards.Add("Huitzilopochtli ", new AttackCard { Name = "Huitzilopochtli", AttackLevel = 4, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/IñakiCard.png")) });
-            HostAvailableAttackCards.Add("Quetzalcoatl", new AttackCard { Name = "Quetzalcoatl", AttackLevel = 4, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/IñakiCard.png")) });
-            HostAvailableAttackCards.Add("Tonatiuh", new AttackCard { Name = "Tonatiuh", AttackLevel = 4, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/IñakiCard.png")) });
-            HostAvailableAttackCards.Add("Chalchiuhtlicue", new AttackCard { Name = "Chalchiuhtlicue", AttackLevel = 4, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/IñakiCard.png")) });
-            HostAvailableAttackCards.Add("Xipe-Totec ", new AttackCard { Name = "Xipe-Totec", AttackLevel = 4, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/IñakiCard.png")) });
-            HostAvailableAttackCards.Add("La huesuda", new AttackCard { Name = "La huesuda", AttackLevel = 5   , CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/IñakiCard.png")) });
-            HostAvailableAttackCards.Add("El misterioso", new AttackCard { Name = "El misterioso", AttackLevel = 5, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/IñakiCard.png")) });
-            HostAvailableAttackCards.Add("Demonio azul Jr.", new AttackCard { Name = "Demonio azul Jr.", AttackLevel = 5, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/IñakiCard.png")) });
-            HostAvailableAttackCards.Add("El tirantes", new AttackCard { Name = "El tirantes", AttackLevel = 5, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/IñakiCard.png")) });
-            HostAvailableAttackCards.Add("El poliedro", new AttackCard { Name = "El poliedro", AttackLevel = 5, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/IñakiCard.png")) });
-
-            foreach (var attackCard in HostAvailableAttackCards)
-            {
-                RemainingHostCards.Add(attackCard.Key, attackCard.Value);
-            }
-
-            GuestAvailableAttackCards.Add("Llorona", new AttackCard { Name = "Llorona", AttackLevel = 2, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("Charron negro", new AttackCard { Name = "Charron negro", AttackLevel = 2, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("Chupacabras", new AttackCard { Name = "Chupacabras", AttackLevel = 2, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("La mano peluda", new AttackCard { Name = "La mano peluda", AttackLevel = 2, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("La muerte", new AttackCard { Name = "La muerte", AttackLevel = 2, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("Olmeca", new AttackCard { Name = "Olmeca", AttackLevel = 3, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("Tolteca", new AttackCard { Name = "Tolteca", AttackLevel = 3, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("Azteca", new AttackCard { Name = "Azteca", AttackLevel = 3, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("Maya", new AttackCard { Name = "Maya", AttackLevel = 3, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("Moixteca", new AttackCard { Name = "Mixteca", AttackLevel = 3, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("Huitzilopochtli ", new AttackCard { Name = "Huitzilopochtli", AttackLevel = 4, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("Quetzalcoatl", new AttackCard { Name = "Quetzalcoatl", AttackLevel = 4, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("Tonatiuh", new AttackCard { Name = "Tonatiuh", AttackLevel = 4, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("Chalchiuhtlicue", new AttackCard { Name = "Chalchiuhtlicue", AttackLevel = 4, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("Xipe-Totec ", new AttackCard { Name = "Xipe-Totec", AttackLevel = 4, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("La huesuda", new AttackCard { Name = "La huesuda", AttackLevel = 5, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("El misterioso", new AttackCard { Name = "El misterioso", AttackLevel = 5, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("Demonio azul Jr.", new AttackCard { Name = "Demonio Azul Jr.", AttackLevel = 5, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("El tirantes", new AttackCard { Name = "El tirantes", AttackLevel = 5, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-            GuestAvailableAttackCards.Add("El poliedro", new AttackCard { Name = "El poliedro", AttackLevel = 5, CardImage = new BitmapImage(new Uri("pack://application:,,,/Images/AnaSofCard.png")) });
-
-            foreach (var attackCard in GuestAvailableAttackCards)
-            {
-                RemainingGuestCards.Add(attackCard.Key, attackCard.Value);
-            }
         }
 
         private void SelectCard(object sender, MouseButtonEventArgs e)
@@ -294,19 +254,19 @@ namespace BMCWindows.GameplayPage
         }
 
 
-        private AttackCard GetCardData(string  cardName, string currentPlayerUsername)
+        private AttackCard GetCardData(string cardName, string currentPlayerUsername)
         {
             if (string.IsNullOrEmpty(cardName))
             {
                 Console.WriteLine("Carta vacía");
-            } 
+            }
 
             Dictionary<string, AttackCard> SelectedAttackCardDeck = new Dictionary<string, AttackCard>();
 
-            if(_lobby.Host == currentPlayerUsername)
+            if (_lobby.Host == currentPlayerUsername)
             {
                 SelectedAttackCardDeck = HostAvailableAttackCards;
-            } 
+            }
             else if (_lobby.Host != currentPlayerUsername)
             {
                 SelectedAttackCardDeck = GuestAvailableAttackCards;
@@ -321,26 +281,26 @@ namespace BMCWindows.GameplayPage
                 return SelectedAttackCardDeck[cardName];
             }
 
-            return null; 
+            return null;
         }
 
 
         private void GetRandomCard(object sender, RoutedEventArgs e)
         {
             Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
-            if(_lobby.Host == currentPlayer.Username)
+            if (_lobby.Host == currentPlayer.Username)
             {
                 AssignAttackCards(RemainingHostCards, 1);
                 var hostAvailableCards = HostAvailableAttackCards.Values.ToList();
                 int numCards = hostAvailableCards.Count;
-                AddCardToPanel(numCards - 1, hostAvailableCards[numCards-1]);
-            } 
+                AddCardToPanel(numCards - 1, hostAvailableCards[numCards - 1]);
+            }
             else
             {
                 AssignAttackCards(RemainingGuestCards, 1);
                 var guestAvailableCards = GuestAvailableAttackCards.Values.ToList();
                 int numGuestAttackCards = guestAvailableCards.Count;
-                AddCardToPanel(numGuestAttackCards-1, guestAvailableCards[numGuestAttackCards-1]);
+                AddCardToPanel(numGuestAttackCards - 1, guestAvailableCards[numGuestAttackCards - 1]);
             }
         }
 
@@ -351,7 +311,7 @@ namespace BMCWindows.GameplayPage
 
         private void OnCellClickEnemyBoard(int row, int col)
         {
-            if (!_isPlayerTurn) 
+            if (!_isPlayerTurn)
             {
                 DynamicTurnTextBlock.Text = "Aun no es tu turno.";
                 return;
@@ -360,27 +320,59 @@ namespace BMCWindows.GameplayPage
             GameplayServer.AttackPositionDTO attackPositionDTO = new GameplayServer.AttackPositionDTO();
             attackPositionDTO.X = row;
             attackPositionDTO.Y = col;
+
+
             var result = _proxy.Attack(_lobby.LobbyId, _currentPlayer.Username, attackPositionDTO);
             DynamicTalkTextBlock.Text = ($"¡Has atacando!");
             DynamicTurnTextBlock.Text = ($"¡Espera tu turno!");
         }
 
-        private void OnAttackReceivedHandler(AttackPositionDTO attackPosition)
+        private async Task OnAttackReceivedHandlerAsync(AttackPositionDTO attackPosition)
         {
-            if (_playerMatrixName[attackPosition.X, attackPosition.Y] == null) {
+            if (_playerMatrixName[attackPosition.X, attackPosition.Y] == null)
+            {
                 DynamicTalkTextBlock.Text = "¡Ups! eso estuvo cerca :D";
+                
             }
             else
             {
                 DynamicTalkTextBlock.Text = "!NO! :c";
                 _playerMatrixLife[attackPosition.X, attackPosition.Y] -= 1;
 
+                var deadCell = _gameRules.CheckForDeadCell();
+                if (deadCell.IsDead)
+                {
+
+                    _playerMatrixName[deadCell.Row, deadCell.Col] = null;
+                }
             }
+
             _boardPlayerManager.InitializePlayerBoard(PlayerBoardGrid, _playerMatrixLife);
+
+            if (_gameRules.IsGameOver())
+            {
+                MessageBox.Show("Antes de la llamada");
+                var response = await _proxy.NotifyGameOverAsync(_lobby.LobbyId, _currentPlayer.Username);
+                MessageBox.Show("Despues de la llamada");
+
+                if (response.IsSuccess)
+                {
+                    MessageBox.Show("Notificando al ganador.");
+                    MessageBox.Show("¡Juego terminado! Has perdido.");
+                }
+                else
+                {
+                    MessageBox.Show("Error al notificar el fin del juego.");
+                }
+            }
         }
 
-        private void FirstTurn() {
-            if (_currentPlayer.Username == _lobby.Host) {
+
+
+        private void FirstTurn()
+        {
+            if (_currentPlayer.Username == _lobby.Host)
+            {
                 DynamicTurnTextBlock.Text = "Tienes el primer turno";
                 _isPlayerTurn = true;
             }
@@ -389,7 +381,7 @@ namespace BMCWindows.GameplayPage
                 DynamicTurnTextBlock.Text = "No tienes el primer turno, espera tu turno";
                 _isPlayerTurn = false;
             }
-        
+
         }
     }
 }

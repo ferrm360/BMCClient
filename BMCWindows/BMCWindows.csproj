@@ -142,13 +142,16 @@
     </Compile>
     <Compile Include="GameplayAttack\BoardEnemyManager.cs" />
     <Compile Include="GameplayAttack\BoardPlayerManager.cs" />
+    <Compile Include="GameplayAttack\CardInitializer.cs" />
     <Compile Include="GameplayAttack\GameplayAttackWindow.xaml.cs">
       <DependentUpon>GameplayAttackWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameplayAttack\Rules\GameRules.cs" />
     <Compile Include="GameplayBoard\AttackCardGuestManager.cs" />
     <Compile Include="GameplayBoard\AttackCardHostManager.cs" />
     <Compile Include="GameplayBoard\Cards\CardManager.cs" />
     <Compile Include="GameplayBoard\Cards\CardImagePaths.cs" />
+    <Compile Include="GameplayBoard\Cards\CardNames.cs" />
     <Compile Include="GameplayWindow.xaml.cs">
       <DependentUpon>GameplayWindow.xaml</DependentUpon>
     </Compile>
@@ -665,9 +668,7 @@
     <Resource Include="Images\IñakiCard.png" />
     <Resource Include="Images\michideltoroCard.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utilities\GameRules\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Connected Services\GuestPlayerServer\GuestPlayerService.disco" />
   </ItemGroup>

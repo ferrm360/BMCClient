@@ -13,6 +13,8 @@ namespace BMCWindows.Utilities
         public event Action<string> OnPlayerReadyEvent;
         public event Action<AttackPositionDTO> OnAttackReceivedEvent;
         public event Action<bool> OnTurnChangedEvent;
+        public event Action OnGameOverEvent;
+
 
         public void OnAttackReceived(AttackPositionDTO attackPosition)
         {
@@ -32,6 +34,11 @@ namespace BMCWindows.Utilities
         public void OnTurnChanged(bool isPlayerTurn)
         {
             OnTurnChangedEvent?.Invoke(isPlayerTurn);
+        }
+
+        public void OnGameOver()
+        {
+            OnGameStartedEvent?.Invoke();
         }
     }
 }
