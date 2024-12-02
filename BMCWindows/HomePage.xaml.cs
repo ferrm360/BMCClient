@@ -31,13 +31,21 @@ namespace BMCWindows
         public ObservableCollection<Friend> Friends { get; set; }
         public ObservableCollection<Message> Messages { get; set; }
         public ChatService chatService = new ChatService();
-        private ChatServer.ChatServiceClient _proxy;
+        public ChatServer.ChatServiceClient proxy;
+        public ObservableCollection<Message> FriendChatMessages { get; set; } = new ObservableCollection<Message>();
+        private FriendChatCallBackHandler _friendChatCallbackHandler; 
+
 
         public HomePage()
         {
             InitializeComponent();
+            DataContext = this;
+            _friendChatCallbackHandler = new FriendChatCallBackHandler();
+            _friendChatCallbackHandler.FriendMessageReceived += MessageReceived;
             Messages = new ObservableCollection<Message>();
             generalMessages.ItemsSource = Messages; 
+            ChatMessages.ItemsSource = FriendChatMessages;
+            //generalMessages.ItemsSource = Messages; 
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData();
             InstanceContext context = new InstanceContext(this);
@@ -119,7 +127,7 @@ namespace BMCWindows
                 FriendServer.FriendshipServiceClient friendsProxy = new FriendServer.FriendshipServiceClient();
                 var response = friendsProxy.GetFriendList(username);
                 ProfileServer.ProfileServiceClient profileProxy = new ProfileServer.ProfileServiceClient();
-
+                
                 if (response.IsSuccess)
                 {
                     if (response.Friends != null && response.Friends.Any())
@@ -141,7 +149,7 @@ namespace BMCWindows
                             })
                         );
                         FriendsList.ItemsSource = friendsList;
-                        Chat.ItemsSource = friendsList;
+                        ChatList.ItemsSource = friendsList;
                     }
                 }
                 else
@@ -205,6 +213,89 @@ namespace BMCWindows
             }
         }
 
+        private void SelectFriendChat(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedFriend = (Friend)ChatList.SelectedItem;
+
+            if (selectedFriend != null) 
+            {
+                ChatGrid.Visibility = Visibility.Visible;
+                FriendChatMessages.Clear();
+                LoadFriendChatMessages(selectedFriend.UserName);
+                labelFriendName.Content = selectedFriend.UserName;
+
+
+            }
+        }
+
+        
+
+
+        private void LoadFriendChatMessages(string username)
+        {
+            try
+            {
+                Server.PlayerDTO player = UserSessionManager.getInstance().GetPlayerUserData();
+                var context = new InstanceContext(new FriendChatCallBackHandler());
+                ChatFriendServer.ChatFriendServiceClient friendChatProxy = new ChatFriendServer.ChatFriendServiceClient(context);
+                var response = friendChatProxy.GetChatHistory(username, player.Username);
+                if (response.IsSuccess)
+                {
+                   
+                }
+                
+
+            }
+            catch (CommunicationException commEx)
+            {
+                MessageBox.Show($"Communication error: {commEx.Message}");
+            }
+            catch (TimeoutException timeoutEx)
+            {
+                MessageBox.Show($"Timeout error: {timeoutEx.Message}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"General error: {ex.Message}");
+            }
+        }
+
+        private void SendMessageToFriend(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Server.PlayerDTO player = UserSessionManager.getInstance().GetPlayerUserData();
+                var context = new InstanceContext(new FriendChatCallBackHandler());
+                ChatFriendServer.ChatFriendServiceClient friendChatProxy = new ChatFriendServer.ChatFriendServiceClient(context);
+                friendChatProxy.SendMessageToFriend(player.Username, labelFriendName.Content.ToString(), textBoxFriendMessage.Text);
+                Message friendMessage = new Message();
+                friendMessage.Sender = player.Username;
+                friendMessage.Messages = textBoxFriendMessage.Text;
+                textBoxFriendMessage.Clear();
+                MessageReceived(player.Username, labelFriendName.Content.ToString(), textBoxFriendMessage.Text);
+                
+            } catch (CommunicationException commEx)
+            {
+                MessageBox.Show($"Communication error: {commEx.Message}");
+            }
+            catch (TimeoutException timeoutEx)
+            {
+                MessageBox.Show($"Timeout error: {timeoutEx.Message}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"General error: {ex.Message}");
+            }
+        }
+
+        private void MessageReceived(string sender, string receiver, string message)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                FriendChatMessages.Add(new Message { Sender = sender, Messages = message, Alignment = HorizontalAlignment.Left });
+            });
+
+        }
         private void OpenPlayerProfileWindow(string username)
         {
             PlayerProfileWindow playerProfileWindow = new PlayerProfileWindow(username);
@@ -231,6 +322,11 @@ namespace BMCWindows
         public int RequestId { get; set; }
         public BitmapImage FriendPicture { get; set; }
     }
+
+
+
+    
+
 
 
 }

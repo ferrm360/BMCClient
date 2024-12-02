@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BMCWindows
 {
@@ -107,6 +108,7 @@ namespace BMCWindows
         public string Messages { get; set; }
 
         public DateTime TimeSent { get; set; }
+        public HorizontalAlignment Alignment { get; set; }
     }
 
 

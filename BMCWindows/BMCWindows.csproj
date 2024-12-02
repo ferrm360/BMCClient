@@ -173,9 +173,11 @@
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\AlignmentToMarginConverter.cs" />
     <Compile Include="Utilities\ChatCallBackHandler.cs" />
     <Compile Include="Utilities\EmptyLobbyCallback.cs" />
     <Compile Include="Utilities\EventMediator.cs" />
+    <Compile Include="Utilities\FriendChatCallBackHandler.cs" />
     <Compile Include="Utilities\GameCallbackHandler.cs" />
     <Compile Include="Utilities\ImageConvertor.cs" />
     <Compile Include="Utilities\LobbyCallbackHandler.cs" />
