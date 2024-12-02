@@ -90,6 +90,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\EmailServer\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\FriendServer\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -177,6 +182,9 @@
     <Compile Include="Utilities\RelayCommand.cs" />
     <Compile Include="Utilities\ToggleToColorConverter.cs" />
     <Compile Include="Validators\FieldValidator.cs" />
+    <Compile Include="VerificationCode\VerificationCodePage.xaml.cs">
+      <DependentUpon>VerificationCodePage.xaml</DependentUpon>
+    </Compile>
     <Page Include="FriendRequestsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -276,6 +284,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="VerificationCode\VerificationCodePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -318,6 +330,22 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ChatServer\ChatService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EmailServer\BMCWindows.EmailServer.OperationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\EmailServer\EmailService.wsdl" />
+    <None Include="Connected Services\EmailServer\EmailService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EmailServer\EmailService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EmailServer\EmailService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\EmailServer\EmailService3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\FriendServer\BMCWindows.FriendServer.FriendListResponse.datasource">
@@ -484,6 +512,7 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ChatLobbyServer\" />
     <WCFMetadataStorage Include="Connected Services\ChatServer\" />
+    <WCFMetadataStorage Include="Connected Services\EmailServer\" />
     <WCFMetadataStorage Include="Connected Services\FriendServer\" />
     <WCFMetadataStorage Include="Connected Services\LobbyServer\" />
     <WCFMetadataStorage Include="Connected Services\ProfileServer\" />
@@ -631,6 +660,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Avatar_talk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\EmailServer\EmailService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\EmailServer\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\EmailServer\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\EmailServer\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

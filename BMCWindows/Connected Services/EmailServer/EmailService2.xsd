@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8100/EmailService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Service.DTO" />
+  <xs:import schemaLocation="http://localhost:8100/EmailService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Service.Results" />
+  <xs:element name="SendEmail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Service.DTO" minOccurs="0" name="emailDTO" nillable="true" type="q1:EmailDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendEmailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Service.Results" minOccurs="0" name="SendEmailResult" nillable="true" type="q2:OperationResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -27,7 +27,6 @@ namespace BMCWindows.GameplayPage
         private LobbyDTO _lobby;
         private int[,] _playerMatrixLife;
         private readonly String[,] _playerMatrixName;
-        private string _cardBackImagePath = "pack://application:,,,/Images/CardBack.png"; 
         private Dictionary<string, AttackCard> HostAvailableAttackCards { get; set; }
         private Dictionary<string, AttackCard> GuestAvailableAttackCards { get; set; }
         private Dictionary<string, AttackCard> CurrentPlayerDeck { get; set; }
