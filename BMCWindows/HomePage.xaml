@@ -77,7 +77,7 @@
                 <StackPanel>
                     <TextBox x:Name="textBoxSearchFriendsChats" Margin="5" />
 
-                    <ListBox x:Name="Chat" Margin="5" >
+                    <ListBox x:Name="ChatList" Margin="5" SelectionChanged="SelectFriendChat">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Border Background="#DDD" CornerRadius="5" Margin="5">
@@ -104,24 +104,38 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <ListBox x:Name="MessagesList" Grid.Row="1" Margin="10,10,10,10" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="1">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="{Binding Sender}" FontWeight="Bold"/>
-                            <TextBlock Text="{Binding Messages}" TextWrapping="Wrap"/>
-                            <TextBlock Text="{Binding TimeSent}" FontStyle="Italic" FontSize="10" HorizontalAlignment="Right"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+            <Image Source="Images/GreenRectangle.png" Grid.Column="1" Grid.Row="1" Stretch="Fill" Grid.RowSpan="2"/>
+            
+            <ScrollViewer Grid.Row="1" Grid.Column="1" Margin="5,25,10,0" >
 
-            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10,10,10,10" Grid.ColumnSpan="2" HorizontalAlignment="Right">
-                <TextBox x:Name="MessageTextBox" Width="200" Margin="0,0,5,0"/>
-                <Button Content="Enviar" />
+                <ItemsControl x:Name="ChatMessages" ItemsSource="{Binding FriendChatMessages}" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Ellipse Grid.Column="0" Width="30" Height="30" Fill="LightGray" Margin="0,0,10,0">
+                                    <Ellipse.ToolTip>
+                                        <TextBlock Text="{Binding Sender}" />
+                                    </Ellipse.ToolTip>
+                                </Ellipse>
+                                <TextBlock Grid.Column="1" Text="{Binding Messages}" TextWrapping="Wrap" HorizontalAlignment="{Binding Alignment}" VerticalAlignment="Center"/>  
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    
+                </ItemsControl>
+
+            </ScrollViewer>
+
+            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Margin="10,10,10,10"  HorizontalAlignment="Right">
+                <TextBox x:Name="textBoxFriendMessage" Width="200" Margin="0,0,5,0"/>
+                <Button Content="Enviar" Click="SendMessageToFriend"/>
             </StackPanel>
-            <Button Content="Cancel"  Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,15,20,0"/>
-
+            <Button Content="Cancel"  Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,5,20,0"/>
+            <Label x:Name="labelFriendName" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center"/>
         </Grid>
 
         <Grid Grid.ColumnSpan="2">
