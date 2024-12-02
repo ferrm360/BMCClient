@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Service.Utilities.Results" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Service.Utilities.Results" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8090/ChatFriendService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Service.Results" />
+  <xs:complexType name="ChatFriendResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/Service.Results" base="q1:OperationResponse">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ChatFriendResponse" nillable="true" type="tns:ChatFriendResponse" />
+</xs:schema>
