@@ -1,5 +1,5 @@
 ﻿using BMCWindows.DTOs;
-using BMCWindows.FriendServer;
+using BMCWindows.GameOver;
 using BMCWindows.GameplayAttack;
 using BMCWindows.GameplayAttack.Rules;
 using BMCWindows.GameplayBoard;
@@ -10,9 +10,6 @@ using BMCWindows.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.Remoting.Contexts;
-using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,7 +17,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 
 namespace BMCWindows.GameplayPage
 {
@@ -47,7 +43,6 @@ namespace BMCWindows.GameplayPage
         private GameRules _gameRules;
         public event EventHandler AttackProcessed;
 
-
         public GameplayAttackWindow(GameCallbackHandler gameCallbackHandler, GameServiceClient proxy, LobbyDTO lobby, int[,] playerMatrixLife, String[,] playerMatrixName)
         {
             InitializeComponent();
@@ -69,7 +64,6 @@ namespace BMCWindows.GameplayPage
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    Console.WriteLine($"Turno actualizado: {_currentPlayer.Username} es {_isPlayerTurn}");
                     _isPlayerTurn = isPlayerTurn;
                     if (_isPlayerTurn)
                     {
@@ -86,8 +80,10 @@ namespace BMCWindows.GameplayPage
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    MessageBox.Show("Meow");
-                    MessageBox.Show($"Has ganado {_currentPlayer.Username}!" );
+                    MessageBox.Show($"Has ganado {_currentPlayer.Username}!");
+                    IncrementWin();
+                    CloseProxy();
+                    OpenGameOverPage();
                 });
             };
 
@@ -353,7 +349,7 @@ namespace BMCWindows.GameplayPage
                 var deadCell = _gameRules.CheckForDeadCell();
                 if (deadCell.IsDead)
                 {
-                  
+
 
                     string deadCellName = _playerMatrixName[attackPosition.X, attackPosition.Y];
                     var deadCardData = CardManager.GetCardData(deadCellName);
@@ -363,25 +359,25 @@ namespace BMCWindows.GameplayPage
                         _boardPlayerManager.UpdateCellToDead(PlayerBoardGrid, attackPosition.X, attackPosition.Y, deadCardData.CardImage);
                     }
 
-                    
-                   _ = Task.Run(() =>
-                   {
-                       CellDeadDTO cellDeadDTO = new CellDeadDTO
-                       {
-                           CardName = deadCellName,
-                           Looser = _currentPlayer.Username,
-                           LobbyId = _lobby.LobbyId,
-                           X = attackPosition.X,
-                           Y = attackPosition.Y
-                       };
 
-                       GameplayServer.OperationResponse responseNotify = _proxy.NotifyCellDead(cellDeadDTO);
+                    _ = Task.Run(() =>
+                    {
+                        CellDeadDTO cellDeadDTO = new CellDeadDTO
+                        {
+                            CardName = deadCellName,
+                            Looser = _currentPlayer.Username,
+                            LobbyId = _lobby.LobbyId,
+                            X = attackPosition.X,
+                            Y = attackPosition.Y
+                        };
 
-                       if (!responseNotify.IsSuccess)
-                       {
-                           MessageBox.Show(responseNotify.ErrorKey);
-                       }
-                   });
+                        GameplayServer.OperationResponse responseNotify = _proxy.NotifyCellDead(cellDeadDTO);
+
+                        if (!responseNotify.IsSuccess)
+                        {
+                            MessageBox.Show(responseNotify.ErrorKey);
+                        }
+                    });
 
                     _playerMatrixName[deadCell.Row, deadCell.Col] = null;
                 }
@@ -399,21 +395,9 @@ namespace BMCWindows.GameplayPage
                     }
                 });
 
-                MessageBox.Show($"Has perdido {_currentPlayer.Username}");
-            }
-        }
-
-        private async void DebugGameOver_Click(object sender, RoutedEventArgs e)
-        {
-            var response = await _proxy.NotifyGameOverAsync(_lobby.LobbyId, _currentPlayer.Username);
-
-            if (response.IsSuccess)
-            {
-                MessageBox.Show("NotifyGameOverAsync se llamó correctamente.");
-            }
-            else
-            {
-                MessageBox.Show($"Error en NotifyGameOverAsync: {response.ErrorKey}");
+                IncrementLosses();
+                CloseProxy();
+                OpenGameOverPage();
             }
         }
 
@@ -439,7 +423,49 @@ namespace BMCWindows.GameplayPage
             {
                 _boardEnemyManager.UpdateEnemyCellToDead(EnemyBoardGrid, cellDeadDTO.X, cellDeadDTO.Y, deadCardData.CardImage);
             }
+        }
 
+        private void OpenGameOverPage()
+        {
+            var gameOverWindow = new GameOverWindow(_lobby, _currentPlayer.Username);
+            this.NavigationService?.Navigate(gameOverWindow);
+        }
+
+        private void CloseProxy()
+        {
+            ProxyManager.CloseGameServiceProxy(_proxy);
+        }
+
+        private void IncrementWin()
+        {
+            if (!UserSessionManager.getInstance().IsGuestUser())
+            {
+                using (PlayerScoreServer.PlayerScoresServiceClient proxyScores = new PlayerScoreServer.PlayerScoresServiceClient())
+                {
+                    var result = proxyScores.IncrementWins(_currentPlayer.Username);
+
+                    if (!result.IsSuccess)
+                    {
+                        MessageBox.Show(result.ErrorKey);
+                    }
+                }
+            }
+        }
+
+        private void IncrementLosses()
+        {
+            if (!UserSessionManager.getInstance().IsGuestUser())
+            {
+                using (PlayerScoreServer.PlayerScoresServiceClient proxyScores = new PlayerScoreServer.PlayerScoresServiceClient())
+                {
+                    var result = proxyScores.IncrementLosses(_currentPlayer.Username);
+
+                    if (!result.IsSuccess)
+                    {
+                        MessageBox.Show(result.ErrorKey);
+                    }
+                }
+            }
         }
     }
 }

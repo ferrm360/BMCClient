@@ -145,6 +145,9 @@
     <Compile Include="GameOptionsWindow.xaml.cs">
       <DependentUpon>GameOptionsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameOver\GameOverWindow.xaml.cs">
+      <DependentUpon>GameOverWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GameplayAttack\BoardCellUpdater.cs" />
     <Compile Include="GameplayAttack\BoardEnemyManager.cs" />
     <Compile Include="GameplayAttack\BoardPlayerManager.cs" />
@@ -188,14 +191,16 @@
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilities\AlignmentToMarginConverter.cs" />
-    <Compile Include="Utilities\ChatCallBackHandler.cs" />
-    <Compile Include="Utilities\EmptyLobbyCallback.cs" />
+    <Compile Include="Utilities\CallbackHandlers\ChatCallBackHandler.cs" />
+    <Compile Include="Utilities\CallbackHandlers\EmptyLobbyCallback.cs" />
     <Compile Include="Utilities\EventMediator.cs" />
-    <Compile Include="Utilities\FriendChatCallBackHandler.cs" />
-    <Compile Include="Utilities\GameCallbackHandler.cs" />
+    <Compile Include="Utilities\CallbackHandlers\FriendChatCallBackHandler.cs" />
+    <Compile Include="Utilities\CallbackHandlers\GameCallbackHandler.cs" />
     <Compile Include="Utilities\ImageConvertor.cs" />
-    <Compile Include="Utilities\LobbyCallbackHandler.cs" />
+    <Compile Include="GameOver\ImageGameOverPath\ImageGameOverPath.cs" />
+    <Compile Include="Utilities\CallbackHandlers\LobbyCallbackHandler.cs" />
     <Compile Include="Utilities\LobbyViewModel.cs" />
+    <Compile Include="Utilities\ProxyManager.cs" />
     <Compile Include="Utilities\RelayCommand.cs" />
     <Compile Include="Utilities\ToggleToColorConverter.cs" />
     <Compile Include="Validators\FieldValidator.cs" />
@@ -207,6 +212,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GameOptionsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GameOver\GameOverWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -756,6 +765,16 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\catlose.png" />
+    <Resource Include="Images\catWin.png" />
+    <Resource Include="Images\dogLose.png" />
+    <Resource Include="Images\dogWin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\prehispanicBackground.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
