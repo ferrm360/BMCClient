@@ -186,6 +186,12 @@ namespace BMCWindows.GameplayServer {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/NotifyGameOver", ReplyAction="http://tempuri.org/IGameService/NotifyGameOverResponse")]
         System.Threading.Tasks.Task<BMCWindows.GameplayServer.OperationResponse> NotifyGameOverAsync(string lobbyId, string looser);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/NotifyCellDead", ReplyAction="http://tempuri.org/IGameService/NotifyCellDeadResponse")]
+        BMCWindows.GameplayServer.OperationResponse NotifyCellDead(string lobbyId, string looser, string cardName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/NotifyCellDead", ReplyAction="http://tempuri.org/IGameService/NotifyCellDeadResponse")]
+        System.Threading.Tasks.Task<BMCWindows.GameplayServer.OperationResponse> NotifyCellDeadAsync(string lobbyId, string looser, string cardName);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -205,6 +211,9 @@ namespace BMCWindows.GameplayServer {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/OnGameOver")]
         void OnGameOver();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/OnCellDead")]
+        void OnCellDead(string cardName);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -273,6 +282,14 @@ namespace BMCWindows.GameplayServer {
         
         public System.Threading.Tasks.Task<BMCWindows.GameplayServer.OperationResponse> NotifyGameOverAsync(string lobbyId, string looser) {
             return base.Channel.NotifyGameOverAsync(lobbyId, looser);
+        }
+        
+        public BMCWindows.GameplayServer.OperationResponse NotifyCellDead(string lobbyId, string looser, string cardName) {
+            return base.Channel.NotifyCellDead(lobbyId, looser, cardName);
+        }
+        
+        public System.Threading.Tasks.Task<BMCWindows.GameplayServer.OperationResponse> NotifyCellDeadAsync(string lobbyId, string looser, string cardName) {
+            return base.Channel.NotifyCellDeadAsync(lobbyId, looser, cardName);
         }
     }
 }

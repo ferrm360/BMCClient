@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="97ca2957-3427-448a-9631-c4979bea830d" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8092/PlayerScoresService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="PlayerScoresService.xsd" MetadataType="Schema" ID="6c5c589e-e6cc-4662-9c05-267f195f2935" SourceId="1" SourceUrl="http://localhost:8092/PlayerScoresService?xsd=xsd0" />
+    <MetadataFile FileName="PlayerScoresService1.xsd" MetadataType="Schema" ID="060ee579-fc95-432f-a382-9d08da6fd962" SourceId="1" SourceUrl="http://localhost:8092/PlayerScoresService?xsd=xsd1" />
+    <MetadataFile FileName="PlayerScoresService.disco" MetadataType="Disco" ID="21aaf7a1-b7c7-4f45-9098-2db95d141e2e" SourceId="1" SourceUrl="http://localhost:8092/PlayerScoresService?disco" />
+    <MetadataFile FileName="PlayerScoresService.wsdl" MetadataType="Wsdl" ID="541e690e-9595-492e-81cb-e2097da5bb97" SourceId="1" SourceUrl="http://localhost:8092/PlayerScoresService?wsdl" />
+    <MetadataFile FileName="PlayerScoresService2.xsd" MetadataType="Schema" ID="2c779844-bd6b-421b-aa59-004e906e8bf0" SourceId="1" SourceUrl="http://localhost:8092/PlayerScoresService?xsd=xsd4" />
+    <MetadataFile FileName="PlayerScoresService3.xsd" MetadataType="Schema" ID="adcd3d2c-a232-472a-90a5-f3ac770a64ce" SourceId="1" SourceUrl="http://localhost:8092/PlayerScoresService?xsd=xsd2" />
+    <MetadataFile FileName="PlayerScoresService4.xsd" MetadataType="Schema" ID="7af4d94f-30f9-4bad-bd5f-1f4145fc1a61" SourceId="1" SourceUrl="http://localhost:8092/PlayerScoresService?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

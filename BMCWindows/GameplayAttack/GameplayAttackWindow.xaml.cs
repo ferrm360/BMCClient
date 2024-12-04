@@ -2,6 +2,7 @@
 using BMCWindows.FriendServer;
 using BMCWindows.GameplayAttack;
 using BMCWindows.GameplayAttack.Rules;
+using BMCWindows.GameplayBoard;
 using BMCWindows.GameplayServer;
 using BMCWindows.LobbyServer;
 using BMCWindows.Patterns.Singleton;
@@ -342,6 +343,13 @@ namespace BMCWindows.GameplayPage
                 var deadCell = _gameRules.CheckForDeadCell();
                 if (deadCell.IsDead)
                 {
+                    string deadCellName = _playerMatrixName[attackPosition.X, attackPosition.Y];
+                    var deadCardData = CardManager.GetCardData(deadCellName);
+
+                    if (!string.IsNullOrEmpty(deadCardData.Name))
+                    {
+                        _boardPlayerManager.UpdateCellToDead(PlayerBoardGrid, attackPosition.X, attackPosition.Y, deadCardData.CardImage);
+                    }
 
 
                     _playerMatrixName[deadCell.Row, deadCell.Col] = null;

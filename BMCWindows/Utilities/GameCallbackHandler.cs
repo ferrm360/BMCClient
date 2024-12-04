@@ -14,6 +14,7 @@ namespace BMCWindows.Utilities
         public event Action<AttackPositionDTO> OnAttackReceivedEvent;
         public event Action<bool> OnTurnChangedEvent;
         public event Action OnGameOverEvent;
+        public event Action OnCellDeadEvent;
 
 
         public void OnAttackReceived(AttackPositionDTO attackPosition)
@@ -39,6 +40,11 @@ namespace BMCWindows.Utilities
         public void OnGameOver()
         {
             OnGameOverEvent?.Invoke();
+        }
+
+        public void OnCellDead(string cardName)
+        {
+            OnCellDeadEvent?.Invoke();
         }
     }
 }

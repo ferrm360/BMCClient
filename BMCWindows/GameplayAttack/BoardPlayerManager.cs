@@ -77,6 +77,12 @@ namespace BMCWindows.GameplayAttack
             }
         }
 
+        public void UpdateCellToDead(Grid playerBoardGrid, int row, int col, BitmapImage cardImage)
+        {
+            BoardCellUpdater.UpdateCellToDead(playerBoardGrid, row, col, cardImage);
+        }
+
+
 
         private void PlayerBoardButton_Click(object sender, RoutedEventArgs e)
         {

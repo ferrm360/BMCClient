@@ -110,6 +110,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\PlayerScoreServer\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ProfileServer\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -140,6 +145,7 @@
     <Compile Include="GameOptionsWindow.xaml.cs">
       <DependentUpon>GameOptionsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameplayAttack\BoardCellUpdater.cs" />
     <Compile Include="GameplayAttack\BoardEnemyManager.cs" />
     <Compile Include="GameplayAttack\BoardPlayerManager.cs" />
     <Compile Include="GameplayAttack\CardInitializer.cs" />
@@ -443,6 +449,28 @@
     <None Include="Connected Services\LobbyServer\LobbyService5.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\PlayerScoreServer\BMCWindows.PlayerScoreServer.OperationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PlayerScoreServer\BMCWindows.PlayerScoreServer.PlayerScoresResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PlayerScoreServer\PlayerScoresService.wsdl" />
+    <None Include="Connected Services\PlayerScoreServer\PlayerScoresService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\PlayerScoreServer\PlayerScoresService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\PlayerScoreServer\PlayerScoresService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\PlayerScoreServer\PlayerScoresService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\PlayerScoreServer\PlayerScoresService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ProfileServer\BMCWindows.ProfileServer.ImageResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -546,6 +574,7 @@
     <WCFMetadataStorage Include="Connected Services\EmailServer\" />
     <WCFMetadataStorage Include="Connected Services\FriendServer\" />
     <WCFMetadataStorage Include="Connected Services\LobbyServer\" />
+    <WCFMetadataStorage Include="Connected Services\PlayerScoreServer\" />
     <WCFMetadataStorage Include="Connected Services\ProfileServer\" />
     <WCFMetadataStorage Include="Connected Services\Server\" />
     <WCFMetadataStorage Include="Connected Services\GameplayServer\" />
@@ -668,7 +697,9 @@
     <Resource Include="Images\IñakiCard.png" />
     <Resource Include="Images\michideltoroCard.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Connected Services\PlayerScoreServer\PlayerScoresService.disco" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\GuestPlayerServer\GuestPlayerService.disco" />
   </ItemGroup>
@@ -710,6 +741,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\EmailServer\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PlayerScoreServer\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PlayerScoreServer\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PlayerScoreServer\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

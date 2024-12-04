@@ -65,6 +65,12 @@ namespace BMCWindows.GameplayAttack
             }
         }
 
+        public void UpdateEnemyCellToDead(Grid enemyBoardGrid, int row, int col, BitmapImage cardImage)
+        {
+            BoardCellUpdater.UpdateCellToDead(enemyBoardGrid, row, col, cardImage);
+        }
+
+
         private void EnemyBoardButton_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;

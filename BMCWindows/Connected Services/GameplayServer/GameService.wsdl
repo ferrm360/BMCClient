@@ -47,6 +47,12 @@
   <wsdl:message name="IGameService_NotifyGameOver_OutputMessage">
     <wsdl:part name="parameters" element="tns:NotifyGameOverResponse" />
   </wsdl:message>
+  <wsdl:message name="IGameService_NotifyCellDead_InputMessage">
+    <wsdl:part name="parameters" element="tns:NotifyCellDead" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_NotifyCellDead_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NotifyCellDeadResponse" />
+  </wsdl:message>
   <wsdl:message name="IGameService_OnGameStarted_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:OnGameStarted" />
   </wsdl:message>
@@ -61,6 +67,9 @@
   </wsdl:message>
   <wsdl:message name="IGameService_OnGameOver_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:OnGameOver" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_OnCellDead_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OnCellDead" />
   </wsdl:message>
   <wsdl:portType name="IGameService">
     <wsdl:operation name="InitializeGame">
@@ -83,6 +92,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/NotifyGameOver" message="tns:IGameService_NotifyGameOver_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/NotifyGameOverResponse" message="tns:IGameService_NotifyGameOver_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="NotifyCellDead">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/NotifyCellDead" message="tns:IGameService_NotifyCellDead_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/NotifyCellDeadResponse" message="tns:IGameService_NotifyCellDead_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="OnGameStarted">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/OnGameStarted" message="tns:IGameService_OnGameStarted_OutputCallbackMessage" />
     </wsdl:operation>
@@ -97,6 +110,9 @@
     </wsdl:operation>
     <wsdl:operation name="OnGameOver">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/OnGameOver" message="tns:IGameService_OnGameOver_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OnCellDead">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/OnCellDead" message="tns:IGameService_OnCellDead_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGameService" type="tns:IGameService">
@@ -147,6 +163,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="NotifyCellDead">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/NotifyCellDead" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="OnGameStarted">
       <soap12:operation soapAction="http://tempuri.org/IGameService/OnGameStarted" style="document" />
       <wsdl:output>
@@ -173,6 +198,12 @@
     </wsdl:operation>
     <wsdl:operation name="OnGameOver">
       <soap12:operation soapAction="http://tempuri.org/IGameService/OnGameOver" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnCellDead">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/OnCellDead" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
