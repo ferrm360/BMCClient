@@ -81,16 +81,14 @@
   <xs:element name="NotifyCellDead">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="lobbyId" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="looser" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="cardName" nillable="true" type="xs:string" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Service.DTO" minOccurs="0" name="cellDeadDTO" nillable="true" type="q8:CellDeadDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="NotifyCellDeadResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Service.Results" minOccurs="0" name="NotifyCellDeadResult" nillable="true" type="q8:OperationResponse" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Service.Results" minOccurs="0" name="NotifyCellDeadResult" nillable="true" type="q9:OperationResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -109,7 +107,7 @@
   <xs:element name="OnAttackReceived">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Service.DTO" minOccurs="0" name="attackPosition" nillable="true" type="q9:AttackPositionDTO" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Service.DTO" minOccurs="0" name="attackPosition" nillable="true" type="q10:AttackPositionDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -128,7 +126,7 @@
   <xs:element name="OnCellDead">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="cardName" nillable="true" type="xs:string" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Service.DTO" minOccurs="0" name="cellDeadDTO" nillable="true" type="q11:CellDeadDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

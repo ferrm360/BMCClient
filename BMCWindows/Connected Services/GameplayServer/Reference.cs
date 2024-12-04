@@ -19,6 +19,7 @@ namespace BMCWindows.GameplayServer {
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(string[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.GameplayServer.AttackPositionDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.GameplayServer.CellDeadDTO))]
     public partial class OperationResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -153,6 +154,115 @@ namespace BMCWindows.GameplayServer {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CellDeadDTO", Namespace="http://schemas.datacontract.org/2004/07/Service.DTO")]
+    [System.SerializableAttribute()]
+    public partial class CellDeadDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CardNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LobbyIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LooserField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int XField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int YField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CardName {
+            get {
+                return this.CardNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CardNameField, value) != true)) {
+                    this.CardNameField = value;
+                    this.RaisePropertyChanged("CardName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LobbyId {
+            get {
+                return this.LobbyIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LobbyIdField, value) != true)) {
+                    this.LobbyIdField = value;
+                    this.RaisePropertyChanged("LobbyId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Looser {
+            get {
+                return this.LooserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LooserField, value) != true)) {
+                    this.LooserField = value;
+                    this.RaisePropertyChanged("Looser");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int X {
+            get {
+                return this.XField;
+            }
+            set {
+                if ((this.XField.Equals(value) != true)) {
+                    this.XField = value;
+                    this.RaisePropertyChanged("X");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Y {
+            get {
+                return this.YField;
+            }
+            set {
+                if ((this.YField.Equals(value) != true)) {
+                    this.YField = value;
+                    this.RaisePropertyChanged("Y");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="GameplayServer.IGameService", CallbackContract=typeof(BMCWindows.GameplayServer.IGameServiceCallback))]
     public interface IGameService {
@@ -188,10 +298,10 @@ namespace BMCWindows.GameplayServer {
         System.Threading.Tasks.Task<BMCWindows.GameplayServer.OperationResponse> NotifyGameOverAsync(string lobbyId, string looser);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/NotifyCellDead", ReplyAction="http://tempuri.org/IGameService/NotifyCellDeadResponse")]
-        BMCWindows.GameplayServer.OperationResponse NotifyCellDead(string lobbyId, string looser, string cardName);
+        BMCWindows.GameplayServer.OperationResponse NotifyCellDead(BMCWindows.GameplayServer.CellDeadDTO cellDeadDTO);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/NotifyCellDead", ReplyAction="http://tempuri.org/IGameService/NotifyCellDeadResponse")]
-        System.Threading.Tasks.Task<BMCWindows.GameplayServer.OperationResponse> NotifyCellDeadAsync(string lobbyId, string looser, string cardName);
+        System.Threading.Tasks.Task<BMCWindows.GameplayServer.OperationResponse> NotifyCellDeadAsync(BMCWindows.GameplayServer.CellDeadDTO cellDeadDTO);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -213,7 +323,7 @@ namespace BMCWindows.GameplayServer {
         void OnGameOver();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/OnCellDead")]
-        void OnCellDead(string cardName);
+        void OnCellDead(BMCWindows.GameplayServer.CellDeadDTO cellDeadDTO);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -284,12 +394,12 @@ namespace BMCWindows.GameplayServer {
             return base.Channel.NotifyGameOverAsync(lobbyId, looser);
         }
         
-        public BMCWindows.GameplayServer.OperationResponse NotifyCellDead(string lobbyId, string looser, string cardName) {
-            return base.Channel.NotifyCellDead(lobbyId, looser, cardName);
+        public BMCWindows.GameplayServer.OperationResponse NotifyCellDead(BMCWindows.GameplayServer.CellDeadDTO cellDeadDTO) {
+            return base.Channel.NotifyCellDead(cellDeadDTO);
         }
         
-        public System.Threading.Tasks.Task<BMCWindows.GameplayServer.OperationResponse> NotifyCellDeadAsync(string lobbyId, string looser, string cardName) {
-            return base.Channel.NotifyCellDeadAsync(lobbyId, looser, cardName);
+        public System.Threading.Tasks.Task<BMCWindows.GameplayServer.OperationResponse> NotifyCellDeadAsync(BMCWindows.GameplayServer.CellDeadDTO cellDeadDTO) {
+            return base.Channel.NotifyCellDeadAsync(cellDeadDTO);
         }
     }
 }

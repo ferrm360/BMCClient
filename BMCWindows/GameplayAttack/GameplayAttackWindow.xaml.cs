@@ -86,7 +86,17 @@ namespace BMCWindows.GameplayPage
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
+                    MessageBox.Show("Meow");
                     MessageBox.Show($"Has ganado {_currentPlayer.Username}!" );
+                });
+            };
+
+            _callbackHandler.OnCellDeadEvent += (CellDeadDTO) =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+
+                    OnCellDeadReceivedHandler(CellDeadDTO);
                 });
             };
 
@@ -343,6 +353,8 @@ namespace BMCWindows.GameplayPage
                 var deadCell = _gameRules.CheckForDeadCell();
                 if (deadCell.IsDead)
                 {
+                  
+
                     string deadCellName = _playerMatrixName[attackPosition.X, attackPosition.Y];
                     var deadCardData = CardManager.GetCardData(deadCellName);
 
@@ -351,12 +363,29 @@ namespace BMCWindows.GameplayPage
                         _boardPlayerManager.UpdateCellToDead(PlayerBoardGrid, attackPosition.X, attackPosition.Y, deadCardData.CardImage);
                     }
 
+                    
+                   _ = Task.Run(() =>
+                   {
+                       CellDeadDTO cellDeadDTO = new CellDeadDTO
+                       {
+                           CardName = deadCellName,
+                           Looser = _currentPlayer.Username,
+                           LobbyId = _lobby.LobbyId,
+                           X = attackPosition.X,
+                           Y = attackPosition.Y
+                       };
+
+                       GameplayServer.OperationResponse responseNotify = _proxy.NotifyCellDead(cellDeadDTO);
+
+                       if (!responseNotify.IsSuccess)
+                       {
+                           MessageBox.Show(responseNotify.ErrorKey);
+                       }
+                   });
 
                     _playerMatrixName[deadCell.Row, deadCell.Col] = null;
                 }
             }
-
-            _boardPlayerManager.InitializePlayerBoard(PlayerBoardGrid, _playerMatrixLife);
 
             if (_gameRules.IsGameOver())
             {
@@ -400,6 +429,17 @@ namespace BMCWindows.GameplayPage
                 DynamicTurnTextBlock.Text = "No tienes el primer turno, espera tu turno";
                 _isPlayerTurn = false;
             }
+        }
+
+        private void OnCellDeadReceivedHandler(CellDeadDTO cellDeadDTO)
+        {
+            var deadCardData = CardManager.GetCardData(cellDeadDTO.CardName);
+
+            if (!string.IsNullOrEmpty(deadCardData.Name))
+            {
+                _boardEnemyManager.UpdateEnemyCellToDead(EnemyBoardGrid, cellDeadDTO.X, cellDeadDTO.Y, deadCardData.CardImage);
+            }
+
         }
     }
 }

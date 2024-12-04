@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
@@ -28,13 +29,22 @@ namespace BMCWindows.GameplayAttack
                             if (image != null)
                             {
                                 image.Source = cardImage;
+                                MessageBox.Show("Imagen actualizada");
+                            }
+
+                            var textBlock = grid.Children.OfType<TextBlock>().FirstOrDefault();
+                            if (textBlock != null)
+                            {
+                                textBlock.Visibility = Visibility.Collapsed;
                             }
                         }
 
                         button.IsEnabled = false;
+                        break;
                     }
                 }
             }
         }
+
     }
 }
