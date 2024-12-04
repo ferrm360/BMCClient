@@ -210,6 +210,35 @@ namespace BMCWindows.GameplayPage
             stackPanelPlayerAttackCards.Children.Add(newCard);
         }
 
+        private void RemoveCardByName(string cardName)
+        {
+            // Suponiendo que tus cartas están dentro de un ItemsControl o StackPanel
+            var container = stackPanelPlayerAttackCards; // Cambia esto por el contenedor adecuado (StackPanel, ItemsControl, etc.)
+
+            foreach (var item in container.Children)
+            {
+                var border = item as Border;
+                if (border != null)
+                {
+                    var stackPanel = border.Child as StackPanel;
+                    if (stackPanel != null)
+                    {
+                        var textBlock = stackPanel.Children.OfType<TextBlock>().FirstOrDefault();
+                        if (textBlock != null && textBlock.Text == cardName)
+                        {
+                            // Si encontramos el Border que contiene el TextBlock con el nombre de la carta, lo eliminamos
+                            container.Children.Remove(border);
+                            Console.WriteLine($"Carta {cardName} eliminada.");
+                            return; // Sale del método después de eliminar la carta
+                        }
+                    }
+                }
+            }
+
+            Console.WriteLine($"No se encontró la carta {cardName}.");
+        }
+
+
 
         public int GetCardAttackLevel(string cardName, string player)
         {
@@ -322,10 +351,11 @@ namespace BMCWindows.GameplayPage
             GameplayServer.AttackPositionDTO attackPositionDTO = new GameplayServer.AttackPositionDTO();
             attackPositionDTO.X = row;
             attackPositionDTO.Y = col;
-
             var result = _proxy.Attack(_lobby.LobbyId, _currentPlayer.Username, attackPositionDTO);
+            RemoveCardByName(selectedCardName);
             DynamicTalkTextBlock.Text = ($"¡Has atacando!");
             DynamicTurnTextBlock.Text = ($"¡Espera tu turno!");
+
         }
 
         private async Task OnAttackReceivedHandlerAsync(AttackPositionDTO attackPosition)

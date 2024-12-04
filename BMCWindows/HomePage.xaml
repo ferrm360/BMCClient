@@ -11,11 +11,8 @@
       Background="#FEFFDB"
       >
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="681*"/>
-            <ColumnDefinition Width="119*"/>
-        </Grid.ColumnDefinitions>
-        <Grid Grid.ColumnSpan="2">
+
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="129*"/>
                 <RowDefinition Height="44*"/>
@@ -27,8 +24,8 @@
                 <ColumnDefinition Width="387*"/>
                 <ColumnDefinition Width="221*"/>
             </Grid.ColumnDefinitions>
-            
-           <!-- <Image x:Name="imageProfilePicture" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Fill"/> -->
+
+            <!-- <Image x:Name="imageProfilePicture" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Fill"/> -->
             <Ellipse VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="0">
                 <Ellipse.Fill>
                     <ImageBrush x:Name="ProfileImageBrush" Stretch="UniformToFill"/>
@@ -36,7 +33,7 @@
             </Ellipse>
 
         </Grid>
-        <Grid Grid.ColumnSpan="2">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="133*"/>
                 <RowDefinition Height="37*"/>
@@ -66,7 +63,7 @@
             </ListBox>
 
         </Grid>
-        <Expander Header="Amigos" ExpandDirection="Up" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="250" Grid.ColumnSpan="2">
+        <Expander Header="Amigos" ExpandDirection="Up" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="250" Height="23">
             <Expander.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock Text="Chat" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center"/>
@@ -93,7 +90,7 @@
             </Border>
         </Expander>
 
-        <Grid x:Name="ChatGrid" Visibility="Collapsed" Margin="10,0,0,0" Grid.ColumnSpan="2">
+        <Grid x:Name="ChatGrid" Visibility="Collapsed" Margin="10,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="268*"/>
                 <ColumnDefinition Width="127*"/>
@@ -105,7 +102,7 @@
             </Grid.RowDefinitions>
 
             <Image Source="Images/GreenRectangle.png" Grid.Column="1" Grid.Row="1" Stretch="Fill" Grid.RowSpan="2"/>
-            
+
             <ScrollViewer Grid.Row="1" Grid.Column="1" Margin="5,25,10,0" >
 
                 <ItemsControl x:Name="ChatMessages" ItemsSource="{Binding FriendChatMessages}" VerticalAlignment="Bottom" HorizontalAlignment="Right">
@@ -121,11 +118,11 @@
                                         <TextBlock Text="{Binding Sender}" />
                                     </Ellipse.ToolTip>
                                 </Ellipse>
-                                <TextBlock Grid.Column="1" Text="{Binding Messages}" TextWrapping="Wrap" HorizontalAlignment="{Binding Alignment}" VerticalAlignment="Center"/>  
+                                <TextBlock Grid.Column="1" Text="{Binding Messages}" TextWrapping="Wrap" HorizontalAlignment="{Binding Alignment}" VerticalAlignment="Center"/>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
-                    
+
                 </ItemsControl>
 
             </ScrollViewer>
@@ -138,7 +135,7 @@
             <Label x:Name="labelFriendName" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center"/>
         </Grid>
 
-        <Grid Grid.ColumnSpan="2">
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="533*"/>
                 <ColumnDefinition Width="267*"/>
@@ -150,7 +147,7 @@
             </Grid.RowDefinitions>
 
             <ListBox x:Name="generalMessages" Grid.Row="1" Margin="10,2,10,10" Background="#B0D480" BorderBrush="#43224D" BorderThickness="2">
-                
+
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
@@ -176,7 +173,7 @@
             </StackPanel>
 
         </Grid>
-        <Grid Grid.ColumnSpan="2">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="43*"/>
                 <RowDefinition Height="61*"/>
@@ -222,7 +219,7 @@
 
 
         </Grid>
-        <Menu x:Name="menuOptions" VerticalAlignment="Top" Visibility="Hidden"  HorizontalAlignment="Left" >
+        <Menu x:Name="menuOptions" VerticalAlignment="Top" Visibility="Hidden"  HorizontalAlignment="Left" Height="14" Width="574" >
             <Menu.RenderTransform>
                 <TranslateTransform x:Name="translateMenu" Y="0"/>
             </Menu.RenderTransform>
@@ -247,6 +244,38 @@
                 <ColumnDefinition Width="92*"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="buttonSearch" Grid.Column="3" Grid.Row="1" Background="Transparent" BorderBrush="Transparent"/>
+
+        </Grid>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="177*"/>
+                <RowDefinition Height="134*"/>
+                <RowDefinition Height="139*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="288*"/>
+                <ColumnDefinition Width="399*"/>
+                <ColumnDefinition Width="113*"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="Images/GreenRectangle.png" Grid.Column="1" Grid.Row="1" Stretch="Fill"/>
+            <StackPanel Grid.Row="1" Grid.Column="1" Margin="40,20,10,0" Orientation="Vertical" >
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Image Source="Images/WinsImage.png" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Victorias" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="textBlockCurrentPlayerWins" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
+                    <Image Source="Images/LossesImage.png" Height="50"/>
+                    <TextBlock Text="Derrotas"/>
+                    <TextBlock x:Name="textBlockCurrentPlayerLosses"/>
+                </StackPanel>
+                
+                
+            </StackPanel>
+
+
+
 
         </Grid>
 

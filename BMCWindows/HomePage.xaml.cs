@@ -1,4 +1,5 @@
-﻿using BMCWindows.Patterns.Singleton;
+﻿using BMCWindows.DTOs;
+using BMCWindows.Patterns.Singleton;
 using BMCWindows.Properties;
 using BMCWindows.Server;
 using BMCWindows.Utilities;
@@ -27,12 +28,13 @@ namespace BMCWindows
     /// </summary>
     public partial class HomePage : Page, ChatServer.IChatServiceCallback
     {
-        public ObservableCollection<Friend> Friends { get; set; }
-        public ObservableCollection<Message> Messages { get; set; }
-        public ChatService chatService = new ChatService();
-        public ChatServer.ChatServiceClient _proxy;
-        public ObservableCollection<Message> FriendChatMessages { get; set; } = new ObservableCollection<Message>();
+        private ObservableCollection<Friend> Friends { get; set; }
+        private ObservableCollection<Message> Messages { get; set; }
+        private ChatService chatService = new ChatService();
+        private ChatServer.ChatServiceClient _proxy;
+        private ObservableCollection<Message> FriendChatMessages { get; set; } = new ObservableCollection<Message>();
         private FriendChatCallBackHandler _friendChatCallbackHandler;
+
 
 
         public HomePage()
@@ -74,6 +76,8 @@ namespace BMCWindows
 
                 }
             }
+
+            InitializeScores();
         }
 
         private void SendGeneralMessage(object sender, RoutedEventArgs e)
@@ -295,6 +299,25 @@ namespace BMCWindows
         private void GoToGames(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new GameOptionsWindow());
+        }
+
+
+        private void InitializeScores()
+        {
+            Server.PlayerDTO player = new Server.PlayerDTO();
+            player = UserSessionManager.getInstance().GetPlayerUserData();
+            PlayerScoreServer.PlayerScoresServiceClient scoreProxy = new PlayerScoreServer.PlayerScoresServiceClient();
+            var response = scoreProxy.GetScoresByUsername(player.Username);
+            if (response != null) 
+            {
+                if(response.Scores != null )
+                {
+                    textBlockCurrentPlayerWins.Text = response.Scores.Wins.ToString();
+                    textBlockCurrentPlayerLosses.Text = response.Scores.Losses.ToString();
+
+                }
+            }
+
         }
     }
 
