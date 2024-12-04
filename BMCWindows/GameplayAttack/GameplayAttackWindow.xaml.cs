@@ -44,6 +44,7 @@ namespace BMCWindows.GameplayPage
         private Server.PlayerDTO _currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
         private bool _isPlayerTurn;
         private GameRules _gameRules;
+        public event EventHandler AttackProcessed;
 
 
         public GameplayAttackWindow(GameCallbackHandler gameCallbackHandler, GameServiceClient proxy, LobbyDTO lobby, int[,] playerMatrixLife, String[,] playerMatrixName)
@@ -84,7 +85,7 @@ namespace BMCWindows.GameplayPage
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    MessageBox.Show("Has ganado!");
+                    MessageBox.Show($"Has ganado {_currentPlayer.Username}!" );
                 });
             };
 
@@ -321,7 +322,6 @@ namespace BMCWindows.GameplayPage
             attackPositionDTO.X = row;
             attackPositionDTO.Y = col;
 
-
             var result = _proxy.Attack(_lobby.LobbyId, _currentPlayer.Username, attackPositionDTO);
             DynamicTalkTextBlock.Text = ($"¡Has atacando!");
             DynamicTurnTextBlock.Text = ($"¡Espera tu turno!");
@@ -332,7 +332,7 @@ namespace BMCWindows.GameplayPage
             if (_playerMatrixName[attackPosition.X, attackPosition.Y] == null)
             {
                 DynamicTalkTextBlock.Text = "¡Ups! eso estuvo cerca :D";
-                
+
             }
             else
             {
@@ -343,6 +343,7 @@ namespace BMCWindows.GameplayPage
                 if (deadCell.IsDead)
                 {
 
+
                     _playerMatrixName[deadCell.Row, deadCell.Col] = null;
                 }
             }
@@ -351,23 +352,33 @@ namespace BMCWindows.GameplayPage
 
             if (_gameRules.IsGameOver())
             {
-                MessageBox.Show("Antes de la llamada");
-                var response = await _proxy.NotifyGameOverAsync(_lobby.LobbyId, _currentPlayer.Username);
-                MessageBox.Show("Despues de la llamada");
+                _ = Task.Run(() =>
+                {
+                    GameplayServer.OperationResponse responseNotify = _proxy.NotifyGameOver(_lobby.LobbyId, _currentPlayer.Username);
 
-                if (response.IsSuccess)
-                {
-                    MessageBox.Show("Notificando al ganador.");
-                    MessageBox.Show("¡Juego terminado! Has perdido.");
-                }
-                else
-                {
-                    MessageBox.Show("Error al notificar el fin del juego.");
-                }
+                    if (!responseNotify.IsSuccess)
+                    {
+                        MessageBox.Show(responseNotify.ErrorKey);
+                    }
+                });
+
+                MessageBox.Show($"Has perdido {_currentPlayer.Username}");
             }
         }
 
+        private async void DebugGameOver_Click(object sender, RoutedEventArgs e)
+        {
+            var response = await _proxy.NotifyGameOverAsync(_lobby.LobbyId, _currentPlayer.Username);
 
+            if (response.IsSuccess)
+            {
+                MessageBox.Show("NotifyGameOverAsync se llamó correctamente.");
+            }
+            else
+            {
+                MessageBox.Show($"Error en NotifyGameOverAsync: {response.ErrorKey}");
+            }
+        }
 
         private void FirstTurn()
         {
@@ -381,7 +392,6 @@ namespace BMCWindows.GameplayPage
                 DynamicTurnTextBlock.Text = "No tienes el primer turno, espera tu turno";
                 _isPlayerTurn = false;
             }
-
         }
     }
 }

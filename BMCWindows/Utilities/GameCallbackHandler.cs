@@ -38,7 +38,7 @@ namespace BMCWindows.Utilities
 
         public void OnGameOver()
         {
-            OnGameStartedEvent?.Invoke();
+            OnGameOverEvent?.Invoke();
         }
     }
 }
