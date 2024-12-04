@@ -191,7 +191,7 @@
             <Button x:Name="buttonGames"   Background="Transparent" BorderBrush="Transparent" Grid.Column="2" Grid.Row="1"  Click="GoToGames"/>
             <Image Source="Images/BrownButton.png" Grid.Column="2" Grid.Row="1" IsHitTestVisible="False" Stretch="Fill" Margin="2,2,2,2"/>
             <TextBlock Text="Games" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" IsHitTestVisible="False" />
-            <Button x:Name="buttonCards" Grid.Column="3" Grid.Row="1" Background="Transparent" BorderBrush="Transparent"/>
+            <Button x:Name="buttonCards" Grid.Column="3" Grid.Row="1" Background="Transparent" BorderBrush="Transparent" Click="SeeCards"/>
             <Image Source="Images/BrownButton.png" Grid.Column="3" Grid.Row="1" Stretch="Fill" IsHitTestVisible="False" Margin="2,2,2,2"/>
             <TextBlock Text="Cards" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False"/>
 

@@ -80,6 +80,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CardWindow.xaml.cs">
+      <DependentUpon>CardWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ChatFriendServer\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -203,6 +206,10 @@
     <Compile Include="VerificationCode\VerificationCodePage.xaml.cs">
       <DependentUpon>VerificationCodePage.xaml</DependentUpon>
     </Compile>
+    <Page Include="CardWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="FriendRequestsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

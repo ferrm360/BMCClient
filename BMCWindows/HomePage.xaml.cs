@@ -319,6 +319,11 @@ namespace BMCWindows
             }
 
         }
+
+        private void SeeCards(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new CardWindow());
+        }
     }
 
     public class Friend

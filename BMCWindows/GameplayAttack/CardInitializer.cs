@@ -11,7 +11,7 @@ namespace BMCWindows.GameplayAttack
 {
     public class CardInitializer
     {
-        private const string BaseImagePath = "pack://application:,,,/Images/AttackCards";
+        private const string BaseImagePath = "pack://application:,,,/Images/AttackCards/";
 
         public Dictionary<string, AttackCard> InitializeHostCards()
         {
@@ -85,5 +85,8 @@ namespace BMCWindows.GameplayAttack
             }
             return cardDictionary;
         }
+
+
+        
     }
 }
