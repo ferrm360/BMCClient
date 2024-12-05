@@ -67,9 +67,9 @@ namespace BMCWindows.GameplayAttack
             }
         }
 
-        public void UpdateCellToDead(Grid playerBoardGrid, int row, int col, BitmapImage cardImage)
+        public async void UpdateCellToDead(Grid playerBoardGrid, int row, int col, BitmapImage cardImage)
         {
-            BoardCellUpdater.UpdateCellToDead(playerBoardGrid, row, col, cardImage);
+            await BoardCellUpdater.UpdateCellToDeadAsync(playerBoardGrid, row, col, cardImage);
         }
 
 

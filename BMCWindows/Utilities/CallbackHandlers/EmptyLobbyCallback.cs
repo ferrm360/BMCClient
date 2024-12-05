@@ -17,5 +17,10 @@ namespace BMCWindows.Utilities
         {
             throw new NotImplementedException();
         }
+
+        public void NotifyPlayerKicked()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

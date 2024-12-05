@@ -13,7 +13,7 @@ namespace BMCWindows.Utilities
         public event Action<string> OnPlayerReadyEvent;
         public event Action<AttackPositionDTO> OnAttackReceivedEvent;
         public event Action<bool> OnTurnChangedEvent;
-        public event Action OnGameOverEvent;
+        public event Action<string> OnGameOverEvent;
         public event Action<CellDeadDTO> OnCellDeadEvent;
 
 
@@ -37,9 +37,9 @@ namespace BMCWindows.Utilities
             OnTurnChangedEvent?.Invoke(isPlayerTurn);
         }
 
-        public void OnGameOver()
+        public void OnGameOver(string loser)
         {
-            OnGameOverEvent?.Invoke();
+            OnGameOverEvent?.Invoke(loser);
         }
 
         public void OnCellDead(CellDeadDTO cellDeadDTO)

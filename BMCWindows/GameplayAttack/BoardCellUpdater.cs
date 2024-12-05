@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading.Tasks; // Necesario para usar Task.Delay
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -11,8 +9,10 @@ namespace BMCWindows.GameplayAttack
 {
     public static class BoardCellUpdater
     {
-        public static void UpdateCellToDead(Grid boardGrid, int row, int col, BitmapImage cardImage)
+        public static async Task UpdateCellToDeadAsync(Grid boardGrid, int row, int col, BitmapImage cardImage)
         {
+            await Task.Delay(1000);
+
             foreach (var child in boardGrid.Children)
             {
                 if (child is Button button)
@@ -29,7 +29,6 @@ namespace BMCWindows.GameplayAttack
                             if (image != null)
                             {
                                 image.Source = cardImage;
-                                MessageBox.Show("Imagen actualizada");
                             }
 
                             var textBlock = grid.Children.OfType<TextBlock>().FirstOrDefault();
@@ -45,6 +44,5 @@ namespace BMCWindows.GameplayAttack
                 }
             }
         }
-
     }
 }

@@ -76,14 +76,13 @@ namespace BMCWindows.GameplayPage
                 });
             };
 
-            _callbackHandler.OnGameOverEvent += () =>
+            _callbackHandler.OnGameOverEvent += (loser) =>
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    MessageBox.Show($"Has ganado {_currentPlayer.Username}!");
-                    IncrementWin();
-                    CloseProxy();
-                    OpenGameOverPage();
+                    //IncrementWin();
+                    // CloseProxy();
+                    OpenGameOverPage(loser);
                 });
             };
 
@@ -325,13 +324,24 @@ namespace BMCWindows.GameplayPage
                 return;
             }
 
-            GameplayServer.AttackPositionDTO attackPositionDTO = new GameplayServer.AttackPositionDTO();
-            attackPositionDTO.X = row;
-            attackPositionDTO.Y = col;
+            Task.Run(() =>
+             {
+                 GameplayServer.AttackPositionDTO attackPositionDTO = new GameplayServer.AttackPositionDTO
+                 {
+                     X = row,
+                     Y = col
+                 };
 
-            var result = _proxy.Attack(_lobby.LobbyId, _currentPlayer.Username, attackPositionDTO);
-            DynamicTalkTextBlock.Text = ($"¡Has atacando!");
-            DynamicTurnTextBlock.Text = ($"¡Espera tu turno!");
+                 // Aquí se hace la llamada al servidor, lo cual es una operación potencialmente lenta
+                 var result = _proxy.Attack(_lobby.LobbyId, _currentPlayer.Username, attackPositionDTO);
+
+                 // Actualizar los elementos de la UI después de la operación de fondo
+                 Dispatcher.Invoke(() =>
+                 {
+                     DynamicTalkTextBlock.Text = "¡Has atacado!";
+                     DynamicTurnTextBlock.Text = "¡Espera tu turno!";
+                 });
+             });
         }
 
         private async Task OnAttackReceivedHandlerAsync(AttackPositionDTO attackPosition)
@@ -371,12 +381,8 @@ namespace BMCWindows.GameplayPage
                             Y = attackPosition.Y
                         };
 
-                        GameplayServer.OperationResponse responseNotify = _proxy.NotifyCellDead(cellDeadDTO);
+                        _proxy.NotifyCellDeadAsync(cellDeadDTO);
 
-                        if (!responseNotify.IsSuccess)
-                        {
-                            MessageBox.Show(responseNotify.ErrorKey);
-                        }
                     });
 
                     _playerMatrixName[deadCell.Row, deadCell.Col] = null;
@@ -395,9 +401,8 @@ namespace BMCWindows.GameplayPage
                     }
                 });
 
-                IncrementLosses();
-                CloseProxy();
-                OpenGameOverPage();
+                //IncrementLosses();
+                OpenGameOverPage(UserSessionManager.getInstance().GetPlayerUserData().Username);
             }
         }
 
@@ -425,9 +430,9 @@ namespace BMCWindows.GameplayPage
             }
         }
 
-        private void OpenGameOverPage()
+        private void OpenGameOverPage(string loser)
         {
-            var gameOverWindow = new GameOverWindow(_lobby, _currentPlayer.Username);
+            var gameOverWindow = new GameOverWindow(_lobby, loser);
             this.NavigationService?.Navigate(gameOverWindow);
         }
 
