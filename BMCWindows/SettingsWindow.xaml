@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BMCWindows"
       xmlns:p="clr-namespace:BMCWindows.Properties"
+      
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ProfileWindow"
@@ -52,14 +53,12 @@
             <Image Source="Images/BrownButton.png" IsHitTestVisible="False" Stretch="Fill" Grid.Column="3" Grid.Row="4" Grid.ColumnSpan="2" Margin="47,0,0,0"/>
 
 
-            <TextBlock Grid.Row="4" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" Height="32" Width="60">
-                Cambiar 
-                <LineBreak/>
-                Contraseña
-            </TextBlock>
+            <TextBlock Grid.Row="4" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center"  Text="{x:Static p:Resources.ChangePasswordLabelChange}" FontSize="8"/>
+
+
             <Button x:Name="buttonCancel" Grid.Column="6" Grid.Row="4" Background="Transparent" BorderBrush="Transparent"  Margin="0,0,18,0" Click="GoBack"/>
             <Image Source="Images/BrownButton.png" Grid.Column="6" Grid.Row="4" IsHitTestVisible="False" Stretch="Fill" Margin="0,0,18,0"/>
-            <TextBlock Text="Cancelar" Grid.Column="6" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False"/>
+            <TextBlock Text="{x:Static p:Resources.GloblalButtonCancel}" Grid.Column="6" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False"/>
 
 
 
@@ -68,8 +67,8 @@
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="262*"/>
-                <ColumnDefinition Width="141*"/>
+                <ColumnDefinition Width="168*"/>
+                <ColumnDefinition Width="235*"/>
                 <ColumnDefinition Width="197*"/>
                 <ColumnDefinition Width="200*"/>
             </Grid.ColumnDefinitions>
@@ -82,11 +81,11 @@
                 <RowDefinition Height="28*"/>
                 <RowDefinition Height="218*"/>
             </Grid.RowDefinitions>
-            <Label x:Name="labelOldPassword" Content="Contraseña vieja:" Grid.Column="1" Grid.Row="1"/>
+            <Label x:Name="labelOldPassword" Content="{x:Static p:Resources.ChangePasswordLabelCurrentPassword}" Grid.Column="1" Grid.Row="1"/>
             <PasswordBox x:Name="passwordBoxOldPassword" Grid.Column="2" Grid.Row="1"/>
-            <Label x:Name="labelNewPassword" Content="Nueva contraseña:" Grid.Column="1" Grid.Row="3"/>
+            <Label x:Name="labelNewPassword" Content="{x:Static p:Resources.ChangePasswordLabelNewPassword}" Grid.Column="1" Grid.Row="3"/>
             <PasswordBox x:Name="passwordBoxPassword" Grid.Column="2" Grid.Row="3"/>
-            <Label x:Name="labelConfirmPassword" Content="Confirmar contraseña:" Grid.Column="1" Grid.Row="5"/>
+            <Label x:Name="labelConfirmPassword" Content="{x:Static p:Resources.ChangePasswordLabelConfirmPasswrod}" Grid.Column="1" Grid.Row="5"/>
             <PasswordBox x:Name="passwordBoxNewPassword" Grid.Column="2" Grid.Row="5"/>
 
         </Grid>

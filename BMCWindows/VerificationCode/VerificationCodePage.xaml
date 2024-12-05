@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:p="clr-namespace:BMCWindows.Properties"
       mc:Ignorable="d" 
       Title="VerificationCodePage"
       Background="#FEFFDB"
@@ -28,13 +29,13 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Row="0" Grid.ColumnSpan="4" 
-                       Text="Verificación de la cuenta" 
+                       Text="{x:Static p:Resources.AccountVerification}" 
                        FontSize="28" FontWeight="Bold" Foreground="#333333" 
                        TextAlignment="Center" Margin="0,0,0,20" />
 
             <TextBlock Grid.Row="1" Grid.ColumnSpan="4"
                        x:Name="EmailTextBlock"
-                       Text="Se ha enviado un correo a [correo_truncado] con un código de verificación. Introduce el código."
+                       Text="{x:Static p:Resources.VerificationDescription}"
                        Foreground="#555555" TextAlignment="Center" TextWrapping="Wrap" Margin="0,0,0,20" />
 
             <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
@@ -45,7 +46,7 @@
 
             <Button Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
                     x:Name="ResendCodeButton"
-                    Content="Solicitar Otro Código" Height="40"
+                    Content="{x:Static p:Resources.AccountRequestAnotherCode}" Height="40"
                     Background="#FFC107" Foreground="#000000" FontWeight="Bold"
                     Click="OnResendCodeButtonClick" Margin="30,10,30,10" />
 
@@ -60,7 +61,7 @@
 
             <Button Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2"
                     x:Name="CancelButton"
-                    Content="Cancelar" Width="200" Height="40"
+                    Content="{x:Static p:Resources.GloblalButtonCancel}" Width="200" Height="40"
                     Background="#FF4444" Foreground="#FFFFFF" FontWeight="Bold"
                     Click="OnCancelButtonClick" Margin="30,20,30,10" />
         </Grid>

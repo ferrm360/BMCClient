@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BMCWindows"
+      xmlns:p="clr-namespace:BMCWindows.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="LobbyWindow"
@@ -27,11 +28,9 @@
                 <ColumnDefinition Width="53*"/>
             </Grid.ColumnDefinitions>
             <Image x:Name="imagePlayer1Background" Source="Images/GreenRectangle.png" Grid.Column="1" Grid.Row="2" Stretch="Fill"/>
-            <StackPanel Grid.Column="1" Grid.Row="2">
+            <StackPanel Grid.Column="1" Grid.Row="2" Margin="25,0,0,0">
                 <TextBlock x:Name="textBlockCurrentPlayerUsername" FontSize="20" />
-                <TextBlock Text="Victorias: {Binding Players[0].Wins}" />
-                <TextBlock Text="Derrotas: {Binding Players[0].Losses}" />
-                <TextBlock Text="Nivel: {Binding Players[0].Level}" />
+               
             </StackPanel>
 
             <Image x:Name="imagePlayer2Background" Source="Images/GreenRectangle.png" Grid.Column="3" Grid.Row="2" Stretch="Fill"/>
@@ -41,9 +40,7 @@
                         <Border Background="#D0EAB4" Margin="5" Padding="10">
                             <StackPanel>
                                 <TextBlock Text="{Binding }" FontSize="16" FontWeight="Bold"/>
-                                <TextBlock Text="Victorias: {Binding Wins}" />
-                                <TextBlock Text="Derrotas: {Binding Losses}" />
-                                <TextBlock Text="Nivel: {Binding Level}" />
+                                
                             </StackPanel>
                         </Border>
                     </DataTemplate>
@@ -52,7 +49,7 @@
 
             <Button x:Name="buttonStartGame" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="3" Margin="0,0,0,0" Background="Transparent" BorderBrush="Transparent" Click="StartGame"/>
             <Image x:Name="imageButtonStartGame" Source="Images/BrownGreenButton.png" Stretch="Fill" Grid.Column="2" Grid.Row="3" IsHitTestVisible="False"/>
-            <TextBlock x:Name="textBlock" Text="Start game" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,15" IsHitTestVisible="False"/>
+            <TextBlock x:Name="textBlock" Text="{x:Static p:Resources.MatchButtonStartMatch}" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,15" IsHitTestVisible="False"/>
         </Grid>
 
         <Grid>
@@ -68,8 +65,8 @@
             </Grid.ColumnDefinitions>
             <Button x:Name="buttonCancelGame" Grid.Column="1" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Transparent" BorderBrush="Transparent" Click="Cancel"/>
             <Image x:Name="imageButtonCancel" Source="Images/BrownButton.png" Grid.Column="1" Grid.Row="0" Stretch="Fill" IsHitTestVisible="False"/>
-            <TextBlock x:Name="textBlockCancel" Text="Cancel" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False"/>
-            <Label x:Name="labelLobbyName"/>
+            <TextBlock x:Name="textBlockCancel" Text="{x:Static p:Resources.GloblalButtonCancel}" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False"/>
+            <Label x:Name="labelLobbyName" Grid.Column="2" Grid.Row="0"/>
         </Grid>
 
         <Grid>
@@ -83,7 +80,8 @@
                 <RowDefinition Height="31*"/>
             </Grid.RowDefinitions>
 
-            <ListBox x:Name="generalMessages" Grid.Row="1" Margin="10,2,10,10">
+            <ListBox x:Name="generalMessages" Grid.Row="1" Margin="10,2,10,10" >
+                
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
@@ -96,7 +94,7 @@
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBox x:Name="textboxGeneralChat" Width="200" Margin="0,0,5,0"/>
-                <Button Content="Enviar" Click="SendGeneralMessage"/>
+                <Button Content="{x:Static p:Resources.FriendButtonSendMessage}" Click="SendGeneralMessage"/>
             </StackPanel>
 
         </Grid>
@@ -114,9 +112,9 @@
             <Popup x:Name="passwordPopup" StaysOpen="False" Placement="Mouse" AllowsTransparency="True" PopupAnimation="Slide" Grid.Column="1" Grid.Row="1">
                 <Border Background="White" BorderBrush="Gray" BorderThickness="1" Padding="10">
                     <StackPanel>
-                        <Label Content="Ingrese la contraseña:"/>
+                        <Label Content="{x:Static p:Resources.LoginLaberlPassword}"/>
                         <PasswordBox x:Name="passwordBox" Margin="0,5,0,10"/>
-                        <Button Content="Aceptar" Click="AcceptPassword" />
+                        <Button Content="{x:Static p:Resources.GlobalButtonAccept}" Click="AcceptPassword" />
                     </StackPanel>
                 </Border>
             </Popup>
@@ -137,7 +135,7 @@
             </Grid.ColumnDefinitions>
             <Button x:Name="buttonInviteFriend" Grid.Column="2" Grid.Row="0" Background="Transparent" BorderBrush="Transparent" Click="LoadFriends"/>
             <Image x:Name="imageButtonInviteFriends" Source="Images/BrownButton.png" Grid.Column="2" Grid.Row="0" IsHitTestVisible="False" Stretch="Fill" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"/>
-            <TextBlock x:Name="textBlockInviteFriends" Text="Invite friends" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False"/>
+            <TextBlock x:Name="textBlockInviteFriends" Text="{x:Static p:Resources.MatchButtonInviteFriend}" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False"/>
 
             <ListBox x:Name="FriendsList" Grid.Row="2" Grid.Column="1" Margin="10,10,10,10" Visibility="Hidden" SelectionChanged="SelectFriend" Background="#C6EDA8">
                 <ListBox.ItemTemplate>
@@ -154,11 +152,6 @@
             </ListBox>
 
         </Grid>
-
-
-
-
-
 
     </Grid>
 </Page>

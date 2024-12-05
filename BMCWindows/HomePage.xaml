@@ -165,7 +165,7 @@
                     </TextBox.Background>
                 </TextBox>
 
-                <Button Content="Enviar" Click="SendGeneralMessage" BorderBrush="Transparent">
+                <Button Content="{x:Static p:Resources.FriendButtonSendMessage}" Click="SendGeneralMessage" BorderBrush="Transparent">
                     <Button.Background>
                         <ImageBrush ImageSource="Images/BrownButton.png" Stretch="Fill"/>
                     </Button.Background>
@@ -187,13 +187,13 @@
                 <ColumnDefinition Width="135*"/>
                 <ColumnDefinition Width="135*"/>
             </Grid.ColumnDefinitions>
-            <Label x:Name="labelUserName" Content="User" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" FontFamily="Press Start 2P Regular"  Margin="0,0,0,0"/>
+            <Label x:Name="labelUserName" Content="{x:Static p:Resources.GlobalLabelUser }" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" FontFamily="Press Start 2P Regular"  Margin="0,0,0,0"/>
             <Button x:Name="buttonGames"   Background="Transparent" BorderBrush="Transparent" Grid.Column="2" Grid.Row="1"  Click="GoToGames"/>
             <Image Source="Images/BrownButton.png" Grid.Column="2" Grid.Row="1" IsHitTestVisible="False" Stretch="Fill" Margin="2,2,2,2"/>
-            <TextBlock Text="Games" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" IsHitTestVisible="False" />
+            <TextBlock Text="{x:Static p:Resources.HomePageButtonMatch}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" IsHitTestVisible="False" />
             <Button x:Name="buttonCards" Grid.Column="3" Grid.Row="1" Background="Transparent" BorderBrush="Transparent" Click="SeeCards"/>
             <Image Source="Images/BrownButton.png" Grid.Column="3" Grid.Row="1" Stretch="Fill" IsHitTestVisible="False" Margin="2,2,2,2"/>
-            <TextBlock Text="Cards" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False"/>
+            <TextBlock Text="{x:Static p:Resources.HomePageShowCards}" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False"/>
 
 
 
@@ -211,23 +211,16 @@
 
             <Button x:Name="buttonOpenContextMenu" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Stretch" Margin="0,5,0,0" Click="OpenContextMenu"  />
             <Image Source="Images/ButtonSettings.png" Grid.Column="0" Grid.Row="0" IsHitTestVisible="False" VerticalAlignment="Top" Margin="0,5,0,0"/>
-
-
-
-
-
-
-
         </Grid>
         <Menu x:Name="menuOptions" VerticalAlignment="Top" Visibility="Hidden"  HorizontalAlignment="Left" Height="14" Width="574" >
             <Menu.RenderTransform>
                 <TranslateTransform x:Name="translateMenu" Y="0"/>
             </Menu.RenderTransform>
-            <MenuItem Header="Perfil" Click="GoToProfileWindow"/>
-            <MenuItem Header="Jugadores" Click="GoToSearchWindow"/>
-            <MenuItem Header="Solicitudes" Click="GoToFriendRequestsWindow"/>
-            <MenuItem Header="Configuración" Click="GoToSettings"/>
-            <MenuItem Header="Salir" Click="LogOut"/>
+            <MenuItem Header="{x:Static p:Resources.EditProfileLabelEditProfile}" Click="GoToProfileWindow"/>
+            <MenuItem Header="{x:Static p:Resources.HomepagePlayers}" Click="GoToSearchWindow"/>
+            <MenuItem Header="{x:Static p:Resources.HomepageRequests}" Click="GoToFriendRequestsWindow"/>
+            <MenuItem Header="{x:Static p:Resources.HomepageSettings}" Click="GoToSettings"/>
+            <MenuItem Header="{x:Static p:Resources.FriendLabelFriends}" Click="LogOut"/>
         </Menu>
 
         <Grid>
@@ -243,7 +236,6 @@
                 <ColumnDefinition Width="50*"/>
                 <ColumnDefinition Width="92*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="buttonSearch" Grid.Column="3" Grid.Row="1" Background="Transparent" BorderBrush="Transparent"/>
 
         </Grid>
 
@@ -262,13 +254,13 @@
             <StackPanel Grid.Row="1" Grid.Column="1" Margin="40,20,10,0" Orientation="Vertical" >
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <Image Source="Images/WinsImage.png" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBlock Text="Victorias" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{x:Static p:Resources.PlayerWins}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     <TextBlock x:Name="textBlockCurrentPlayerWins" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
-                    <Image Source="Images/LossesImage.png" Height="50"/>
-                    <TextBlock Text="Derrotas"/>
-                    <TextBlock x:Name="textBlockCurrentPlayerLosses"/>
+                    <Image Source="Images/LossesImage.png" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{x:Static p:Resources.PlayerLosses}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="textBlockCurrentPlayerLosses" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </StackPanel>
                 
                 

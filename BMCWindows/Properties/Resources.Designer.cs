@@ -61,6 +61,24 @@ namespace BMCWindows.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Request another code.
+        /// </summary>
+        public static string AccountRequestAnotherCode {
+            get {
+                return ResourceManager.GetString("AccountRequestAnotherCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Account verification.
+        /// </summary>
+        public static string AccountVerification {
+            get {
+                return ResourceManager.GetString("AccountVerification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Change password.
         /// </summary>
         public static string ChangePasswordLabelChange {
@@ -214,6 +232,33 @@ namespace BMCWindows.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Decline.
+        /// </summary>
+        public static string FriendRequestDecline {
+            get {
+                return ResourceManager.GetString("FriendRequestDecline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Send request.
+        /// </summary>
+        public static string FriendSendRequest {
+            get {
+                return ResourceManager.GetString("FriendSendRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Players in lobby.
+        /// </summary>
+        public static string GameplayPlayesInLobby {
+            get {
+                return ResourceManager.GetString("GameplayPlayesInLobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Accept.
         /// </summary>
         public static string GlobalButtonAccept {
@@ -295,6 +340,33 @@ namespace BMCWindows.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Players.
+        /// </summary>
+        public static string HomepagePlayers {
+            get {
+                return ResourceManager.GetString("HomepagePlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Requests.
+        /// </summary>
+        public static string HomepageRequests {
+            get {
+                return ResourceManager.GetString("HomepageRequests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Settings.
+        /// </summary>
+        public static string HomepageSettings {
+            get {
+                return ResourceManager.GetString("HomepageSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Show cards.
         /// </summary>
         public static string HomePageShowCards {
@@ -304,11 +376,29 @@ namespace BMCWindows.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Join.
+        /// </summary>
+        public static string LobbyJoinLobby {
+            get {
+                return ResourceManager.GetString("LobbyJoinLobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Log In.
         /// </summary>
         public static string LoginButtonLogin {
             get {
                 return ResourceManager.GetString("LoginButtonLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a LogIn As guest.
+        /// </summary>
+        public static string LogInButtonLogInAsGuest {
+            get {
+                return ResourceManager.GetString("LogInButtonLogInAsGuest", resourceCulture);
             }
         }
         
@@ -412,7 +502,7 @@ namespace BMCWindows.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a MatchName.
+        ///   Busca una cadena traducida similar a Match name:.
         /// </summary>
         public static string MatchLabelMatchName {
             get {
@@ -687,6 +777,15 @@ namespace BMCWindows.Properties {
         public static string SignUpTextBoxUser {
             get {
                 return ResourceManager.GetString("SignUpTextBoxUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An email has been sent to [email_truncated] with a verification code. Please enter the code..
+        /// </summary>
+        public static string VerificationDescription {
+            get {
+                return ResourceManager.GetString("VerificationDescription", resourceCulture);
             }
         }
         

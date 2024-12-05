@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountRequestAnotherCode" xml:space="preserve">
+    <value>Solicitar otro código</value>
+  </data>
+  <data name="AccountVerification" xml:space="preserve">
+    <value>Verificación de la cuenta</value>
+  </data>
   <data name="ChangePasswordLabelChange" xml:space="preserve">
     <value>Cambiar contraseña</value>
   </data>
@@ -168,6 +174,15 @@
   <data name="FriendLabelShowOnline" xml:space="preserve">
     <value>Mostrar amigos conectados</value>
   </data>
+  <data name="FriendRequestDecline" xml:space="preserve">
+    <value>Rechazar</value>
+  </data>
+  <data name="FriendSendRequest" xml:space="preserve">
+    <value>Enviar solicitud</value>
+  </data>
+  <data name="GameplayPlayesInLobby" xml:space="preserve">
+    <value>Jugadores en el lobby</value>
+  </data>
   <data name="GlobalButtonAccept" xml:space="preserve">
     <value>Aceptar</value>
   </data>
@@ -195,11 +210,26 @@
   <data name="HomePageButtonMatch" xml:space="preserve">
     <value>Partidas</value>
   </data>
+  <data name="HomepagePlayers" xml:space="preserve">
+    <value>Jugadores</value>
+  </data>
+  <data name="HomepageRequests" xml:space="preserve">
+    <value>Solicitudes</value>
+  </data>
+  <data name="HomepageSettings" xml:space="preserve">
+    <value>Configuración</value>
+  </data>
   <data name="HomePageShowCards" xml:space="preserve">
     <value>Ver cartas</value>
   </data>
+  <data name="LobbyJoinLobby" xml:space="preserve">
+    <value>Unirse</value>
+  </data>
   <data name="LoginButtonLogin" xml:space="preserve">
     <value>Iniciar sesión</value>
+  </data>
+  <data name="LogInButtonLogInAsGuest" xml:space="preserve">
+    <value>Unirse como invitado</value>
   </data>
   <data name="LoginLabelForgotPassword" xml:space="preserve">
     <value>¿Olvidaste la contraseña?</value>
@@ -235,7 +265,7 @@
     <value>Cartas restantes</value>
   </data>
   <data name="MatchLabelMatchName" xml:space="preserve">
-    <value>Nombre de partida</value>
+    <value>Nombre de partida:</value>
   </data>
   <data name="MatchPropertyButtonCreateMarch" xml:space="preserve">
     <value>Crear partida</value>
@@ -326,6 +356,9 @@
   </data>
   <data name="SignUpTextBoxUser" xml:space="preserve">
     <value>Usuario</value>
+  </data>
+  <data name="VerificationDescription" xml:space="preserve">
+    <value>Se ha enviado un correo a [correo_truncado] con un código de verificación. Introduce el código.</value>
   </data>
   <data name="ViewCardsLabelCardDescription" xml:space="preserve">
     <value>Carta de ejemplo </value>
