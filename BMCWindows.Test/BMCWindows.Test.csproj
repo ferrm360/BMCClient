@@ -58,7 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BMCWindows\BMCWindows.csproj">
-      <Project>{ebe2a283-1642-49b7-8a45-8b32a91920b9}</Project>
+      <Project>{EBE2A283-1642-49B7-8A45-8B32A91920B9}</Project>
       <Name>BMCWindows</Name>
     </ProjectReference>
   </ItemGroup>
