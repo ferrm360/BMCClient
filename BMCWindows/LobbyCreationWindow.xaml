@@ -5,12 +5,11 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BMCWindows"
       xmlns:utils="clr-namespace:BMCWindows.Utilities"
+      xmlns:p="clr-namespace:BMCWindows.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="LobbyCreationWindow"
       Background="#FEFFDB">
-
-
 
     <Grid>
         <Grid>
@@ -24,10 +23,8 @@
                 <RowDefinition Height="13*"/>
             </Grid.RowDefinitions>
 
-            <Label x:Name="labelUser" Content="User" Grid.Column="0" Grid.Row="0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,0,0"/>
-            <Label x:Name="labelLevel" Content="Level:" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <Label x:Name="labelUserLevel" Content="Level" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-
+            <Label x:Name="labelUser" Content="{x:Static p:Resources.GlobalLabelUser}" Grid.Column="1" Grid.Row="0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,0,0"/>
+            
         </Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -61,7 +58,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <ToggleButton x:Name="publicToggleButton" Grid.Column="0" IsChecked="True" Content="Public" FontWeight="Bold" Style="{StaticResource SelectorToggleButtonStyle}" />
+                <ToggleButton x:Name="publicToggleButton" Grid.Column="0" IsChecked="True" Content="{x:Static p:Resources.MarchPropertyButtonPrivate}" FontWeight="Bold" Style="{StaticResource SelectorToggleButtonStyle}" />
 
                 <ToggleButton x:Name="privateToggleButton" IsChecked="False" Grid.Column="1" Content="Private" FontWeight="Bold" Style="{StaticResource SelectorToggleButtonStyle}" />
             </Grid>
@@ -88,16 +85,16 @@
                 <RowDefinition Height="49*"/>
                 <RowDefinition Height="70*"/>
             </Grid.RowDefinitions>
-            <Label x:Name="labelGameName" Content="Lobby name:" Grid.Column="2" Grid.Row="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+            <Label x:Name="labelGameName" Content="{x:Static p:Resources.MatchLabelMatchName}" Grid.Column="2" Grid.Row="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
             <Image x:Name="imageTextBoxGameName" Source="Images/LongTextbox.png" Grid.Column="2" Grid.Row="4" Stretch="Fill"/>
-            <Label x:Name="labelLobbyPassword" Content="Password:" Grid.Column="2" Grid.Row="6" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+            <Label x:Name="labelLobbyPassword" Content="{x:Static p:Resources.LoginLaberlPassword}" Grid.Column="2" Grid.Row="6" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
             <Image x:Name="imageTextBoxLobbyPassword" Source="Images/LongTextbox.png" Grid.Column="2" Grid.Row="8" Stretch="Fill"/>
             <Button x:Name="buttonCreateLobby" Grid.Column="2" Grid.Row="9" Margin="10,10,10,10" Background="Transparent" BorderBrush="Transparent" Click="CreateLobby"/>
             <Image x:Name="imageButtonCreateLobby" Source="Images/BrownButton.png" Grid.Column="2" Grid.Row="9" Stretch="Fill" Margin="10,10,10,10" IsHitTestVisible="False"/>
-            <TextBlock x:Name="textBlockCreateLobby" Grid.Column="2" Grid.Row="9" Text="Create lobby" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,16,0,0" Height="12" Width="144"/>
+            <TextBlock x:Name="textBlockCreateLobby" Grid.Column="2" Grid.Row="9" Text="{x:Static p:Resources.MatchButtonCreateMatch}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,16,0,0" Height="12" Width="144"/>
             <Button x:Name="buttonCancel" Grid.Column="0" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="CancelLobbyCreation" Margin="10,10,10,10" Background="Transparent" BorderBrush="Transparent"/>
             <Image x:Name="imageButtonCancelLobbyCreation" Source="Images/BrownButton.png" Grid.Column="0" Grid.Row="0"  Stretch="Fill" Margin="10,10,10,5" IsHitTestVisible="False"/>
-            <TextBlock x:Name="textBlockCancelLobbyCreation" Text="Cancel" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" IsHitTestVisible="False"/>
+            <TextBlock x:Name="textBlockCancelLobbyCreation" Text="{x:Static p:Resources.GloblalButtonCancel}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" IsHitTestVisible="False"/>
         </Grid>
 
         <Grid>

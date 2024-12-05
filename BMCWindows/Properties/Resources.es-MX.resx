@@ -117,11 +117,119 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountRequestAnotherCode" xml:space="preserve">
+    <value>Solicitar otro código</value>
+  </data>
+  <data name="AccountVerification" xml:space="preserve">
+    <value>Verificación de la cuenta</value>
+  </data>
+  <data name="ChangePasswordLabelChange" xml:space="preserve">
+    <value>Cambiar contraseña</value>
+  </data>
+  <data name="ChangePasswordLabelConfirmPasswrod" xml:space="preserve">
+    <value>Confirmar contraseña</value>
+  </data>
+  <data name="ChangePasswordLabelCurrentPassword" xml:space="preserve">
+    <value>Contraseña actual</value>
+  </data>
+  <data name="ChangePasswordLabelNewPassword" xml:space="preserve">
+    <value>Nueva contraseña</value>
+  </data>
+  <data name="ConfirmMessageCancelTitle" xml:space="preserve">
+    <value>Confirmar cancelación</value>
+  </data>
+  <data name="ConfirmMessageContentBanPlayer" xml:space="preserve">
+    <value>¿Está seguro de que desea expulsar al jugador?</value>
+  </data>
+  <data name="ConfirmMessageTileBanPlayer" xml:space="preserve">
+    <value>Confirmar expulsión</value>
+  </data>
+  <data name="ConfirmMessageUpdatePassword" xml:space="preserve">
+    <value>¿Está seguro de que desea cambia la contraseña?</value>
+  </data>
+  <data name="EditProfileButtonChangeAvatar" xml:space="preserve">
+    <value>Cambiar foto</value>
+  </data>
+  <data name="EditProfileLabelEditProfile" xml:space="preserve">
+    <value>Editar perfil</value>
+  </data>
+  <data name="FriendButtonAddFriend" xml:space="preserve">
+    <value>Añadir amigo</value>
+  </data>
+  <data name="FriendButtonRemove" xml:space="preserve">
+    <value>Eliminar amigo</value>
+  </data>
+  <data name="FriendButtonSendMessage" xml:space="preserve">
+    <value>Enviar mensaje</value>
+  </data>
+  <data name="FriendLabelFriends" xml:space="preserve">
+    <value>Amigos</value>
+  </data>
+  <data name="FriendLabelNoFriends" xml:space="preserve">
+    <value>No se encontraron amigos</value>
+  </data>
+  <data name="FriendLabelSearchFriend" xml:space="preserve">
+    <value>Buscar amigo</value>
+  </data>
+  <data name="FriendLabelShowOnline" xml:space="preserve">
+    <value>Mostrar amigos conectados</value>
+  </data>
+  <data name="FriendRequestDecline" xml:space="preserve">
+    <value>Rechazar</value>
+  </data>
+  <data name="FriendSendRequest" xml:space="preserve">
+    <value>Enviar solicitud</value>
+  </data>
+  <data name="GameplayPlayesInLobby" xml:space="preserve">
+    <value>Jugadores en el lobby</value>
+  </data>
+  <data name="GlobalButtonAccept" xml:space="preserve">
+    <value>Aceptar</value>
+  </data>
+  <data name="GlobalButtonBack" xml:space="preserve">
+    <value>Regresar</value>
+  </data>
+  <data name="GlobalButtonSaveChanges" xml:space="preserve">
+    <value>Guardar cambios</value>
+  </data>
+  <data name="GlobalButtonSearch" xml:space="preserve">
+    <value>Buscar</value>
+  </data>
+  <data name="GlobalExitButton" xml:space="preserve">
+    <value>Salir</value>
+  </data>
+  <data name="GlobalLabelUser" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
   <data name="GloblalButtonCancel" xml:space="preserve">
     <value>Cancelar</value>
   </data>
+  <data name="HomePageButtonEditProfile" xml:space="preserve">
+    <value>Perfil</value>
+  </data>
+  <data name="HomePageButtonMatch" xml:space="preserve">
+    <value>Partidas</value>
+  </data>
+  <data name="HomepagePlayers" xml:space="preserve">
+    <value>Jugadores</value>
+  </data>
+  <data name="HomepageRequests" xml:space="preserve">
+    <value>Solicitudes</value>
+  </data>
+  <data name="HomepageSettings" xml:space="preserve">
+    <value>Configuración</value>
+  </data>
+  <data name="HomePageShowCards" xml:space="preserve">
+    <value>Ver cartas</value>
+  </data>
+  <data name="LobbyJoinLobby" xml:space="preserve">
+    <value>Unirse</value>
+  </data>
   <data name="LoginButtonLogin" xml:space="preserve">
     <value>Iniciar sesión</value>
+  </data>
+  <data name="LogInButtonLogInAsGuest" xml:space="preserve">
+    <value>Unirse como invitado</value>
   </data>
   <data name="LoginLabelForgotPassword" xml:space="preserve">
     <value>¿Olvidaste la contraseña?</value>
@@ -132,6 +240,102 @@
   <data name="LoginLaberlPassword" xml:space="preserve">
     <value>Contraseña</value>
   </data>
+  <data name="MarchPropertyButtonPrivate" xml:space="preserve">
+    <value>Privado</value>
+  </data>
+  <data name="MarchPropertyButtonPublic" xml:space="preserve">
+    <value>Público</value>
+  </data>
+  <data name="MatchButtonCreateMatch" xml:space="preserve">
+    <value>Crear partida</value>
+  </data>
+  <data name="MatchButtonInviteFriend" xml:space="preserve">
+    <value>Invitar amigo</value>
+  </data>
+  <data name="MatchButtonJoinMatch" xml:space="preserve">
+    <value>Unirse a partida</value>
+  </data>
+  <data name="MatchButtonPlay" xml:space="preserve">
+    <value>Jugar</value>
+  </data>
+  <data name="MatchButtonStartMatch" xml:space="preserve">
+    <value>Empezar partida</value>
+  </data>
+  <data name="MatchLabelCards" xml:space="preserve">
+    <value>Cartas restantes</value>
+  </data>
+  <data name="MatchLabelMatchName" xml:space="preserve">
+    <value>Nombre de partida:</value>
+  </data>
+  <data name="MatchPropertyButtonCreateMarch" xml:space="preserve">
+    <value>Crear partida</value>
+  </data>
+  <data name="MatchPropertyTextBoxMatchName" xml:space="preserve">
+    <value>Nombre de partida</value>
+  </data>
+  <data name="MatchPropertyTextBoxPassword" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="MessageBoxEmptyFields" xml:space="preserve">
+    <value>Hay campos vacíos verífiquelos</value>
+  </data>
+  <data name="MessageInformationContentAvatarUpdated" xml:space="preserve">
+    <value>Avatar actualizado exitosamente</value>
+  </data>
+  <data name="MessageInformationContentDiferentPassword" xml:space="preserve">
+    <value>La contraseñas no coinciden, no se pudo actualizar la contraseña</value>
+  </data>
+  <data name="MessageInformationContentInvalidePassword" xml:space="preserve">
+    <value>La contraseña no cumple con los requerimientos de seguridad, no se pudo actualizar la contraseña</value>
+  </data>
+  <data name="MessageInformationContentPlayerAdded" xml:space="preserve">
+    <value>Jugador añadido exitosamente</value>
+  </data>
+  <data name="MessageInformationContentRepeatedUser" xml:space="preserve">
+    <value>No se puedes actualizar el perfil el usuario está repetido</value>
+  </data>
+  <data name="MessageInformationContentUpdatePassword" xml:space="preserve">
+    <value>La contraseña se ha actualizado exitosamente</value>
+  </data>
+  <data name="MessageInformationContentWrongPassword" xml:space="preserve">
+    <value>Contraseña incorrecta, no se pudo actualizar la contraseña</value>
+  </data>
+  <data name="MessageInformationLabelContentUpdateProfile" xml:space="preserve">
+    <value>Perfil actualizado exitosamente</value>
+  </data>
+  <data name="MessageInformationLabelTitleRepeatUser" xml:space="preserve">
+    <value>Nombre de usuario repetido </value>
+  </data>
+  <data name="MessageInformationLabelTitleUpdateProfile" xml:space="preserve">
+    <value>Perfil actualizado</value>
+  </data>
+  <data name="MessageInformationTitleAvatarUpdated" xml:space="preserve">
+    <value>Avatar actualizado</value>
+  </data>
+  <data name="MessageInformationTitlePlayerAdded" xml:space="preserve">
+    <value>Jugador añadido</value>
+  </data>
+  <data name="PlayerLabelLevel" xml:space="preserve">
+    <value>Nivel</value>
+  </data>
+  <data name="PlayerLabelPlaytime" xml:space="preserve">
+    <value>Tiempo jugado</value>
+  </data>
+  <data name="PlayerLosses" xml:space="preserve">
+    <value>Derrotas</value>
+  </data>
+  <data name="PlayerStatusOffline" xml:space="preserve">
+    <value>Desconectado</value>
+  </data>
+  <data name="PlayerStatusOnline" xml:space="preserve">
+    <value>En línea</value>
+  </data>
+  <data name="PlayerTooltipHours" xml:space="preserve">
+    <value>Horas</value>
+  </data>
+  <data name="PlayerWins" xml:space="preserve">
+    <value>Victorias</value>
+  </data>
   <data name="SignUpButtonSignUp" xml:space="preserve">
     <value>Registrarse</value>
   </data>
@@ -140,5 +344,26 @@
   </data>
   <data name="SignUpLabelEmail" xml:space="preserve">
     <value>Correo electrónico</value>
+  </data>
+  <data name="SignUpPasswordBoxPassword" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="SignUpPasswordBoxRepeatPassword" xml:space="preserve">
+    <value>Repetir contraseña</value>
+  </data>
+  <data name="SignUpTextBoxEmail" xml:space="preserve">
+    <value>Correo electrónico</value>
+  </data>
+  <data name="SignUpTextBoxUser" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="VerificationDescription" xml:space="preserve">
+    <value>Se ha enviado un correo a [correo_truncado] con un código de verificación. Introduce el código.</value>
+  </data>
+  <data name="ViewCardsLabelCardDescription" xml:space="preserve">
+    <value>Carta de ejemplo </value>
+  </data>
+  <data name="ViewCardsLabelCards" xml:space="preserve">
+    <value>Cartas</value>
   </data>
 </root>

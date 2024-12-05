@@ -80,6 +80,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CardWindow.xaml.cs">
+      <DependentUpon>CardWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ChatFriendServer\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -139,6 +142,7 @@
     <Compile Include="DTOs\Card.cs" />
     <Compile Include="DTOs\Lobby.cs" />
     <Compile Include="DTOs\Player.cs" />
+    <Compile Include="DTOs\Score.cs" />
     <Compile Include="FriendRequestsWindow.xaml.cs">
       <DependentUpon>FriendRequestsWindow.xaml</DependentUpon>
     </Compile>
@@ -207,6 +211,10 @@
     <Compile Include="VerificationCode\VerificationCodePage.xaml.cs">
       <DependentUpon>VerificationCodePage.xaml</DependentUpon>
     </Compile>
+    <Page Include="CardWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="FriendRequestsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -765,6 +773,54 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\AttackCards\AztecaCat.png" />
+    <Resource Include="Images\AttackCards\AztecaDog.png" />
+    <Resource Include="Images\AttackCards\ChalchiuhticueCat.png" />
+    <Resource Include="Images\AttackCards\ChalchiuhticueDog.png" />
+    <Resource Include="Images\AttackCards\CharroCat.png" />
+    <Resource Include="Images\AttackCards\CharroDog.png" />
+    <Resource Include="Images\AttackCards\ChupaCabrasCat.png" />
+    <Resource Include="Images\AttackCards\ChupaCabrasDog.png" />
+    <Resource Include="Images\AttackCards\DemonioAzulCat.png" />
+    <Resource Include="Images\AttackCards\DemonioAzulDOg.png" />
+    <Resource Include="Images\AttackCards\ElPoliedroCat.png" />
+    <Resource Include="Images\AttackCards\ElPoliedroDog.png" />
+    <Resource Include="Images\AttackCards\ElTirantesCat.png" />
+    <Resource Include="Images\AttackCards\ElTirantesDog.png" />
+    <Resource Include="Images\AttackCards\HuesudaCat.png" />
+    <Resource Include="Images\AttackCards\HuesudaDog.png" />
+    <Resource Include="Images\AttackCards\HuitzilopochtliCat.png" />
+    <Resource Include="Images\AttackCards\HuitzilopochtliDog.png" />
+    <Resource Include="Images\AttackCards\LloronaCat.png" />
+    <Resource Include="Images\AttackCards\LloronaDog.png" />
+    <Resource Include="Images\AttackCards\ManoPeludaCat.png" />
+    <Resource Include="Images\AttackCards\ManoPeludaDog.png" />
+    <Resource Include="Images\AttackCards\MayaCat.png" />
+    <Resource Include="Images\AttackCards\MayaDog.png" />
+    <Resource Include="Images\AttackCards\MisteriosoCat.png" />
+    <Resource Include="Images\AttackCards\MisteriosoDog.png" />
+    <Resource Include="Images\AttackCards\MixtecaCat.png" />
+    <Resource Include="Images\AttackCards\MixtecaDog.png" />
+    <Resource Include="Images\AttackCards\MuerteCat.png" />
+    <Resource Include="Images\AttackCards\MuerteDog.png" />
+    <Resource Include="Images\AttackCards\OlmecaCat.png" />
+    <Resource Include="Images\AttackCards\OlmecaDog.png" />
+    <Resource Include="Images\AttackCards\QuetzalcoatlDog.png" />
+    <Resource Include="Images\AttackCards\ToltecaCat.png" />
+    <Resource Include="Images\AttackCards\ToltecaDog.png" />
+    <Resource Include="Images\AttackCards\TonatiuhCat.png" />
+    <Resource Include="Images\AttackCards\TonatiuhDOg.png" />
+    <Resource Include="Images\AttackCards\XipeTotecCat.png" />
+    <Resource Include="Images\AttackCards\XipeTotecDog.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\AttackCards\QuetzalcoatlCat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\LossesImage.png" />
+    <Resource Include="Images\WinsImage.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
