@@ -12,7 +12,10 @@
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
+
+# Ignorar la carpeta .sonarqube donde se guardan los resultados y logs del análisis
 .sonarqube/
+
 # Mono auto generated files
 mono_crash.*
 

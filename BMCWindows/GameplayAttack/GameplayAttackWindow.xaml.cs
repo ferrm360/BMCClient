@@ -41,7 +41,6 @@ namespace BMCWindows.GameplayPage
         private Server.PlayerDTO _currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
         private bool _isPlayerTurn;
         private GameRules _gameRules;
-        public event EventHandler AttackProcessed;
 
         public GameplayAttackWindow(GameCallbackHandler gameCallbackHandler, GameServiceClient proxy, LobbyDTO lobby, int[,] playerMatrixLife, String[,] playerMatrixName)
         {
@@ -80,8 +79,7 @@ namespace BMCWindows.GameplayPage
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    //IncrementWin();
-                    // CloseProxy();
+                    IncrementWin();
                     OpenGameOverPage(loser);
                 });
             };
@@ -361,10 +359,13 @@ namespace BMCWindows.GameplayPage
                      Y = col
                  };
 
-                 // Aquí se hace la llamada al servidor, lo cual es una operación potencialmente lenta
                  var result = _proxy.Attack(_lobby.LobbyId, _currentPlayer.Username, attackPositionDTO);
 
-                 // Actualizar los elementos de la UI después de la operación de fondo
+                 if (!result.IsSuccess)
+                 {
+                     MessageBox.Show(result.ErrorKey);
+                 }
+
                  Dispatcher.Invoke(() =>
                  {
                      DynamicTalkTextBlock.Text = "¡Has atacado!";
@@ -430,7 +431,7 @@ namespace BMCWindows.GameplayPage
                     }
                 });
 
-                //IncrementLosses();
+                IncrementLosses();
                 OpenGameOverPage(UserSessionManager.getInstance().GetPlayerUserData().Username);
             }
         }

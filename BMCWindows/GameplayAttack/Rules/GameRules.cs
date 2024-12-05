@@ -8,8 +8,8 @@ namespace BMCWindows.GameplayAttack.Rules
 {
     public class GameRules
     {
-        private int[,] _playerMatrixLife;
-        private string[,] _playerMatrixName;
+        private readonly int[,] _playerMatrixLife;
+        private readonly string[,] _playerMatrixName;
 
         public GameRules(int[,] playerMatrixLife, string[,] playerMatrixName)
         {
