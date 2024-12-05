@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BMCWindows.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +9,9 @@ namespace BMCWindows.GameOver.ImagePath
 {
     public static class ImageGameOverPath
     {
-        private const string BasePath = "pack://application:,,,/Images/";
-
-        public const string CatLose = BasePath + "catLose.png";
-        public const string CatWin = BasePath + "catWin.png";
-        public const string DogLose = BasePath + "dogLose.png";
-        public const string DogWin = BasePath + "dogWin.png";
-
-
+        public const string CatLose = CardImagePaths.BasePath + "catLose.png";
+        public const string CatWin = CardImagePaths.BasePath + "catWin.png";
+        public const string DogLose = CardImagePaths.BasePath + "dogLose.png";
+        public const string DogWin = CardImagePaths.BasePath + "dogWin.png";
     }
 }

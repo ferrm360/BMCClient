@@ -10,13 +10,12 @@ using System.Windows;
 using BMCWindows.DTOs;
 using BMCWindows.Patterns.Singleton;
 using BMCWindows.GameplayServer;
+using BMCWindows.Utilities;
 
 namespace BMCWindows.GameplayAttack
 {
     public class BoardEnemyManager
     {
-        private readonly string _cardBackImagePath = "pack://application:,,,/Images/CardBack.png";
-
         private readonly Action<int, int> _onCellClickAction;
 
         public BoardEnemyManager(Action<int, int> onCellClickAction)
@@ -51,7 +50,7 @@ namespace BMCWindows.GameplayAttack
                         Margin = new Thickness(5),
                         Content = new Image
                         {
-                            Source = new BitmapImage(new Uri(_cardBackImagePath, UriKind.Absolute)),
+                            Source = new BitmapImage(new Uri(CardImagePaths.CardBack, UriKind.Absolute)),
                             Stretch = Stretch.Fill
                         }
                     };
