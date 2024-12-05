@@ -22,7 +22,7 @@
             <Button x:Name="ButtonLogIn" Grid.Column="0"  Background="#FFFEE0" Height="91" Width="301" BorderBrush="#FFFEE0" FocusVisualStyle="{x:Null}" Focusable="False" Click="GoToLogInPage">
                 <Grid>
                     <Image Source="Images/GreenButton.png" Height="90" Width="300"/>
-                    <TextBlock Text="{x:Static p:Resources.LoginButtonLogin}" HorizontalAlignment="Center" VerticalAlignment="Top"  Foreground="Black" Height="20" FontFamily="Press Start 2P Normal" FontSize="9" Margin="0,24,0,0" />
+                    <TextBlock Text="{x:Static p:Resources.LoginButtonLogin}" HorizontalAlignment="Center" VerticalAlignment="Top"   FontSize="9" Margin="0,24,0,0" />
                 </Grid>
 
             </Button>
@@ -33,7 +33,7 @@
                         <ColumnDefinition Width="9*"/>
                     </Grid.ColumnDefinitions>
                     <Image Source="Images/BrownGreenButton.png" Height="90" Width="300" Grid.ColumnSpan="2" Margin="0,0,-2,0"/>
-                    <TextBlock HorizontalAlignment="Left"  VerticalAlignment="Top" Foreground="Black" Height="20" FontFamily="Press Start 2P Normal" FontSize="9" Margin="118,10,0,0"><Run/><LineBreak/><Run Text="Sign Up"/></TextBlock>
+                    <TextBlock HorizontalAlignment="Left"  VerticalAlignment="Top"  FontSize="9" Margin="118,10,0,0"><Run/><LineBreak/><Run Text="{x:Static p:Resources.SignUpButtonSignUp}"/></TextBlock>
                 </Grid>
                 
                 
@@ -60,7 +60,7 @@
             <Button x:Name="ButtonGuestLogin" Background="#FFFEE0" Height="91" Width="301" BorderBrush="#FFFEE0" FocusVisualStyle="{x:Null}" Focusable="False" Click="LoginAsGuest">
                 <Grid>
                     <Image Source="Images/BrownButton.png" Height="90" Width="300" />
-                    <TextBlock Text="Log in as Guest" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" Height="20" FontFamily="Press Start 2P Normal" FontSize="9" />
+                    <TextBlock Text="{x:Static p:Resources.LogInButtonLogInAsGuest}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" Height="20" FontFamily="Press Start 2P Normal" FontSize="9" />
                 </Grid>
             </Button>
         </Grid>

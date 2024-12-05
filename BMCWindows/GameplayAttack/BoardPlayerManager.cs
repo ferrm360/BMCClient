@@ -13,7 +13,6 @@ namespace BMCWindows.GameplayAttack
     public class BoardPlayerManager
     {
         private  readonly string _cardBackImagePath = "pack://application:,,,/Images/CardBack.png";
-
         private readonly Action<int, int> _onCellClickAction;
 
         public BoardPlayerManager(Action<int, int> onCellClickAction)
@@ -54,15 +53,6 @@ namespace BMCWindows.GameplayAttack
                                 {
                                     Source = new BitmapImage(new Uri(_cardBackImagePath, UriKind.Absolute)),
                                     Stretch = Stretch.Fill
-                                },
-                                new TextBlock
-                                {
-                                    Text = _playerMatrixLife[row, col].ToString(),
-                                    HorizontalAlignment = HorizontalAlignment.Center,
-                                    VerticalAlignment = VerticalAlignment.Center,
-                                    FontSize = 12,
-                                    FontWeight = FontWeights.Bold,
-                                    Foreground = Brushes.White
                                 }
                             }
                         }
@@ -76,6 +66,12 @@ namespace BMCWindows.GameplayAttack
                 }
             }
         }
+
+        public async void UpdateCellToDead(Grid playerBoardGrid, int row, int col, BitmapImage cardImage)
+        {
+            await BoardCellUpdater.UpdateCellToDeadAsync(playerBoardGrid, row, col, cardImage);
+        }
+
 
 
         private void PlayerBoardButton_Click(object sender, RoutedEventArgs e)

@@ -1,4 +1,5 @@
-﻿using BMCWindows.Patterns.Singleton;
+﻿using BMCWindows.DTOs;
+using BMCWindows.Patterns.Singleton;
 using BMCWindows.Properties;
 using BMCWindows.Server;
 using BMCWindows.Utilities;
@@ -27,13 +28,13 @@ namespace BMCWindows
     /// </summary>
     public partial class HomePage : Page, ChatServer.IChatServiceCallback
     {
+        private ObservableCollection<Friend> Friends { get; set; }
+        private ObservableCollection<Message> Messages { get; set; }
+        private ChatService chatService = new ChatService();
+        private ChatServer.ChatServiceClient _proxy;
+        private ObservableCollection<Message> FriendChatMessages { get; set; } = new ObservableCollection<Message>();
+        private FriendChatCallBackHandler _friendChatCallbackHandler;
 
-        public ObservableCollection<Friend> Friends { get; set; }
-        public ObservableCollection<Message> Messages { get; set; }
-        public ChatService chatService = new ChatService();
-        public ChatServer.ChatServiceClient proxy;
-        public ObservableCollection<Message> FriendChatMessages { get; set; } = new ObservableCollection<Message>();
-        private FriendChatCallBackHandler _friendChatCallbackHandler; 
 
 
         public HomePage()
@@ -43,9 +44,8 @@ namespace BMCWindows
             _friendChatCallbackHandler = new FriendChatCallBackHandler();
             _friendChatCallbackHandler.FriendMessageReceived += MessageReceived;
             Messages = new ObservableCollection<Message>();
-            generalMessages.ItemsSource = Messages; 
+            generalMessages.ItemsSource = Messages;
             ChatMessages.ItemsSource = FriendChatMessages;
-            //generalMessages.ItemsSource = Messages; 
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData();
             InstanceContext context = new InstanceContext(this);
@@ -76,11 +76,12 @@ namespace BMCWindows
 
                 }
             }
+
+            InitializeScores();
         }
 
         private void SendGeneralMessage(object sender, RoutedEventArgs e)
         {
-
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData();
 
@@ -127,13 +128,13 @@ namespace BMCWindows
                 FriendServer.FriendshipServiceClient friendsProxy = new FriendServer.FriendshipServiceClient();
                 var response = friendsProxy.GetFriendList(username);
                 ProfileServer.ProfileServiceClient profileProxy = new ProfileServer.ProfileServiceClient();
-                
+
                 if (response.IsSuccess)
                 {
                     if (response.Friends != null && response.Friends.Any())
                     {
                         ObservableCollection<Friend> friendsList = new ObservableCollection<Friend>(
-                            response.Friends.Select(friendPlayer => 
+                            response.Friends.Select(friendPlayer =>
                             {
                                 var friendProfilePicture = profileProxy.GetProfileImage(friendPlayer.Username);
                                 BitmapImage image = ImageConvertor.ConvertByteArrayToImage(friendProfilePicture.ImageData);
@@ -145,7 +146,7 @@ namespace BMCWindows
                                 };
 
 
-                                
+
                             })
                         );
                         FriendsList.ItemsSource = friendsList;
@@ -171,15 +172,15 @@ namespace BMCWindows
             }
         }
 
-        private void GoToProfileWindow(object sender, RoutedEventArgs e) 
+        private void GoToProfileWindow(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new ProfileWindow());  
+            this.NavigationService.Navigate(new ProfileWindow());
         }
 
         private void LogOut(object sender, RoutedEventArgs e)
         {
             Server.PlayerDTO player = UserSessionManager.getInstance().GetPlayerUserData();
-            UserSessionManager.getInstance().LogoutPlayer();   
+            UserSessionManager.getInstance().LogoutPlayer();
             this.NavigationService.Navigate(new StartPage());
             _proxy.DisconnectUser(player.Username);
 
@@ -188,18 +189,15 @@ namespace BMCWindows
 
         private void LoadImage(byte[] imageData)
         {
-            
+
             BitmapImage image = ImageConvertor.ConvertByteArrayToImage(imageData);
             ProfileImageBrush.ImageSource = image;
 
         }
 
-        // TODO: Pasar a utilities
- 
-
         private void GoToFriendRequestsWindow(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new FriendRequestsWindow());    
+            this.NavigationService.Navigate(new FriendRequestsWindow());
         }
 
         private void SelectFriend(object sender, SelectionChangedEventArgs e)
@@ -217,19 +215,14 @@ namespace BMCWindows
         {
             var selectedFriend = (Friend)ChatList.SelectedItem;
 
-            if (selectedFriend != null) 
+            if (selectedFriend != null)
             {
                 ChatGrid.Visibility = Visibility.Visible;
                 FriendChatMessages.Clear();
                 LoadFriendChatMessages(selectedFriend.UserName);
                 labelFriendName.Content = selectedFriend.UserName;
-
-
             }
         }
-
-        
-
 
         private void LoadFriendChatMessages(string username)
         {
@@ -241,9 +234,8 @@ namespace BMCWindows
                 var response = friendChatProxy.GetChatHistory(username, player.Username);
                 if (response.IsSuccess)
                 {
-                   
+
                 }
-                
 
             }
             catch (CommunicationException commEx)
@@ -273,8 +265,9 @@ namespace BMCWindows
                 friendMessage.Messages = textBoxFriendMessage.Text;
                 textBoxFriendMessage.Clear();
                 MessageReceived(player.Username, labelFriendName.Content.ToString(), textBoxFriendMessage.Text);
-                
-            } catch (CommunicationException commEx)
+
+            }
+            catch (CommunicationException commEx)
             {
                 MessageBox.Show($"Communication error: {commEx.Message}");
             }
@@ -308,26 +301,37 @@ namespace BMCWindows
             this.NavigationService.Navigate(new GameOptionsWindow());
         }
 
+
+        private void InitializeScores()
+        {
+            Server.PlayerDTO player = new Server.PlayerDTO();
+            player = UserSessionManager.getInstance().GetPlayerUserData();
+            PlayerScoreServer.PlayerScoresServiceClient scoreProxy = new PlayerScoreServer.PlayerScoresServiceClient();
+            var response = scoreProxy.GetScoresByUsername(player.Username);
+            if (response != null) 
+            {
+                if(response.Scores != null )
+                {
+                    textBlockCurrentPlayerWins.Text = response.Scores.Wins.ToString();
+                    textBlockCurrentPlayerLosses.Text = response.Scores.Losses.ToString();
+
+                }
+            }
+
+        }
+
+        private void SeeCards(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new CardWindow());
+        }
     }
-
-
-
-
 
     public class Friend
     {
         public string UserName { get; set; }
-        public DateTime LastVisit {  get; set; }
+        public DateTime LastVisit { get; set; }
         public Byte[] ProfileImage { get; set; }
         public int RequestId { get; set; }
         public BitmapImage FriendPicture { get; set; }
     }
-
-
-
-    
-
-
-
 }
-

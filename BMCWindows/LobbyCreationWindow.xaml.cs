@@ -108,6 +108,11 @@ namespace BMCWindows
                     if (result.IsSuccess)
                     {
                         var lobbyDto = result.Lobby;
+
+                        if (requestDTO.IsPrivate) { 
+                            lobbyDto.Password = requestDTO.Password;
+                        }
+
                         Console.WriteLine("Lobbies disponibles: " + proxy.GetAllLobbies().Length);
 
                         callbackHandler.PlayerJoined += (playerName, lobbyId) =>

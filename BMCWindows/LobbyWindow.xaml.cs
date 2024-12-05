@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using BMCWindows.ChatLobbyServer;
-using BMCWindows.DTOs;
+using BMCWindows.EmailServer;
 using BMCWindows.LobbyServer;
 using BMCWindows.Patterns.Singleton;
 using BMCWindows.Utilities;
@@ -17,6 +17,7 @@ namespace BMCWindows
     {
         private LobbyDTO _lobby;
         public ObservableCollection<string> FilteredPlayers { get; set; }
+        public ObservableCollection<string> FilteredPlayersGameSession { get; set; }
         public ObservableCollection<Message> Messages { get; set; }
         private LobbyServiceClient _lobbyProxy;
         private IChatLobbyService _chatService;
@@ -31,6 +32,7 @@ namespace BMCWindows
             DataContext = this;
             Messages = new ObservableCollection<Message>();
             FilteredPlayers = new ObservableCollection<string>();
+            FilteredPlayersGameSession = new ObservableCollection<string>();
 
             generalMessages.ItemsSource = Messages;
             listViewJoinedPlayer.ItemsSource = FilteredPlayers;
@@ -85,6 +87,16 @@ namespace BMCWindows
                 });
             };
 
+            callbackHandler.PlayerKicked += () =>
+            {
+                
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        OnPlayerKicked();
+                    });
+                
+            };
+
 
             callbackHandler.StartGame += lobbyId =>
             {
@@ -107,7 +119,7 @@ namespace BMCWindows
 
             if (_lobby.Host == player.Username)
             {
-                FilteredPlayers.Add(player.Username);
+                FilteredPlayersGameSession.Add(player.Username);
             }
             else
             {
@@ -170,6 +182,7 @@ namespace BMCWindows
                     if (player != currentPlayer)
                     {
                         FilteredPlayers.Add(player);
+                        FilteredPlayersGameSession.Add(player);
                     }
                 }
             });
@@ -177,6 +190,11 @@ namespace BMCWindows
 
         private void OnPlayerJoined(string playerUsername)
         {
+            if (!FilteredPlayersGameSession.Contains(playerUsername))
+            {
+                FilteredPlayersGameSession.Add(playerUsername);
+            }
+
             if (!FilteredPlayers.Contains(playerUsername))
             {
                 FilteredPlayers.Add(playerUsername);
@@ -188,7 +206,12 @@ namespace BMCWindows
             if (FilteredPlayers.Contains(playerUsername))
             {
                 FilteredPlayers.Remove(playerUsername);
+                FilteredPlayersGameSession.Remove(playerUsername);
             }
+        }
+
+        private void OnPlayerKicked() {
+            NavigationService.GoBack();
         }
 
         private void Cancel(object sender, RoutedEventArgs e)
@@ -286,7 +309,6 @@ namespace BMCWindows
                     var playersList = _lobby.Players.ToList(); 
                     playersList.Add(player.Username); 
                     _lobby.Players = playersList.ToArray();
-                    OnPlayerJoined(player.Username);
                 }
                 else
                 {
@@ -316,13 +338,13 @@ namespace BMCWindows
                     var context = new InstanceContext(new GameCallbackHandler());
                     var gameServiceClient = new GameplayServer.GameServiceClient(context);
 
-                    var players = FilteredPlayers.ToList().ToArray();
+                    var players = FilteredPlayersGameSession.ToList().ToArray();
 
                     var response2 = gameServiceClient.InitializeGame(_lobby.LobbyId, players);
 
                     if (_lobby.Host == player.Username)
                     {
-                        this.NavigationService.Navigate(new GameplayWindow(_lobby, FilteredPlayers));
+                        this.NavigationService.Navigate(new GameplayWindow(_lobby, FilteredPlayersGameSession));
                     }
                 }
             }
@@ -347,7 +369,7 @@ namespace BMCWindows
                 var context = new InstanceContext(new GameCallbackHandler());
                 var gameServiceClient = new GameplayServer.GameServiceClient(context);
 
-                var players = FilteredPlayers.ToList().ToArray();
+                var players = FilteredPlayersGameSession.ToList().ToArray();
 
                 var response = gameServiceClient.InitializeGame(_lobby.LobbyId, players);
 
@@ -359,7 +381,7 @@ namespace BMCWindows
 
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    this.NavigationService.Navigate(new GameplayWindow(_lobby, FilteredPlayers));
+                    this.NavigationService.Navigate(new GameplayWindow(_lobby, FilteredPlayersGameSession));
                 });
             }
         }
@@ -387,13 +409,9 @@ namespace BMCWindows
                                     UserName = friendPlayer.Username,
                                     FriendPicture = image,
                                 };
-
-
-
                             })
                         );
-                        FriendsList.ItemsSource = friendsList;
-                       
+                        FriendsList.ItemsSource = friendsList;         
                     }
                 }
                 else
@@ -417,20 +435,136 @@ namespace BMCWindows
 
         private void LoadFriends(Object sender, RoutedEventArgs e)
         {
-            var player = UserSessionManager.getInstance().GetPlayerUserData();
-
-            FriendsList.Visibility = FriendsList.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
-
-            if (FriendsList.Visibility == Visibility.Visible)
             {
-                LoadFriendList(player.Username);
+                var player = UserSessionManager.getInstance().GetPlayerUserData();
+
+                FriendsList.Visibility = FriendsList.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
+
+                if (FriendsList.Visibility == Visibility.Visible)
+                {
+                    LoadFriendList(player.Username);
+                }
             }
         }
 
-        private void SelectFriend(object sender, RoutedEventArgs e) 
+        private void SelectFriend(object sender, RoutedEventArgs e)
         {
+            if (FriendsList.SelectedItem != null)
+            {
 
+                var selectedItem = (Friend)FriendsList.SelectedItem;
+
+                var result = MessageBox.Show($"¿Desea invitar a {selectedItem.UserName}?", "Confirmar invitación", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    EmailDTO emailDTO = new EmailDTO
+                    {
+                        LobbyName = _lobby.Name,
+                        LobbyHost = _lobby.Host,
+                        Username = selectedItem.UserName,
+                        EmailType = "lobbyinvite"
+                    };
+
+                    if (_lobby.IsPrivate)
+                    {
+                        emailDTO.LobbyPassword = _lobby.Password;
+                    }
+
+                    InvitePlayerToLobby(emailDTO);
+                }
+
+                FriendsList.SelectedItem = null;
+            }
         }
+
+
+        private void InvitePlayerToLobby(EmailDTO emailDTO)
+        {
+            try
+            {
+                using (EmailServer.EmailServiceClient proxyEmail = new EmailServer.EmailServiceClient())
+                {
+                    var result = proxyEmail.SendEmail(emailDTO);
+
+                    if (result.IsSuccess)
+                    {
+                        MessageBox.Show("Correo de invitación enviado exitosamente");
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo enviar el correo de invitación");
+                    }
+                }
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                MessageBox.Show($"El servicio no está disponible: {ex.Message}");
+            }
+            catch (CommunicationException ex)
+            {
+                MessageBox.Show($"Error de comunicación: {ex.Message}");
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show($"El servicio no respondió a tiempo: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error inesperado: {ex.Message}");
+            }
+        }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (listViewJoinedPlayer.SelectedItem != null)
+            {
+                if (UserSessionManager.getInstance().GetPlayerUserData().Username != _lobby.Host)
+                {
+                    MessageBox.Show("Solo el host de sala puede expulsar");
+                    return;
+                }
+                var playerName = listViewJoinedPlayer.SelectedItem.ToString();
+
+                var result = MessageBox.Show($"¿Desea expulsar a {playerName}?",
+                                              "Confirmar expulsión",
+                                              MessageBoxButton.YesNo,
+                                              MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        var kickResult = _lobbyProxy.KickPlayer(_lobby.LobbyId, _lobby.Host, playerName);
+                        if (kickResult.IsSuccess)
+                        {
+                            _lobby = kickResult.Lobby;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Ocurrió un problema al expulsar al jugador");
+                        }
+                    }
+                    catch (EndpointNotFoundException ex)
+                    {
+                        MessageBox.Show($"El servicio no está disponible: {ex.Message}");
+                    }
+                    catch (CommunicationException ex)
+                    {
+                        MessageBox.Show($"Error de comunicación: {ex.Message}");
+                    }
+                    catch (TimeoutException ex)
+                    {
+                        MessageBox.Show($"El servicio no respondió a tiempo: {ex.Message}");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error inesperado: {ex.Message}");
+                    }
+                }
+            }
+        }
+
 
     }
 }

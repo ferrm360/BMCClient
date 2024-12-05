@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="PlayerScoresService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_IPlayerScoresService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:8092/PlayerScoresService?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8092/PlayerScoresService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8092/PlayerScoresService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Service.Utilities.Results" />
+      <xsd:import schemaLocation="http://localhost:8092/PlayerScoresService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Service.DTO" />
+      <xsd:import schemaLocation="http://localhost:8092/PlayerScoresService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Service.Results" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IPlayerScoresService_GetScoresByUsername_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetScoresByUsername" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerScoresService_GetScoresByUsername_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetScoresByUsernameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerScoresService_IncrementWins_InputMessage">
+    <wsdl:part name="parameters" element="tns:IncrementWins" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerScoresService_IncrementWins_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IncrementWinsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerScoresService_IncrementLosses_InputMessage">
+    <wsdl:part name="parameters" element="tns:IncrementLosses" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerScoresService_IncrementLosses_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IncrementLossesResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IPlayerScoresService">
+    <wsdl:operation name="GetScoresByUsername">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerScoresService/GetScoresByUsername" message="tns:IPlayerScoresService_GetScoresByUsername_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerScoresService/GetScoresByUsernameResponse" message="tns:IPlayerScoresService_GetScoresByUsername_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IncrementWins">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerScoresService/IncrementWins" message="tns:IPlayerScoresService_IncrementWins_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerScoresService/IncrementWinsResponse" message="tns:IPlayerScoresService_IncrementWins_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IncrementLosses">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerScoresService/IncrementLosses" message="tns:IPlayerScoresService_IncrementLosses_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerScoresService/IncrementLossesResponse" message="tns:IPlayerScoresService_IncrementLosses_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_IPlayerScoresService" type="tns:IPlayerScoresService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IPlayerScoresService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetScoresByUsername">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerScoresService/GetScoresByUsername" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IncrementWins">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerScoresService/IncrementWins" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IncrementLosses">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerScoresService/IncrementLosses" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PlayerScoresService">
+    <wsdl:port name="NetTcpBinding_IPlayerScoresService" binding="tns:NetTcpBinding_IPlayerScoresService">
+      <soap12:address location="net.tcp://localhost:8093/PlayerScoresService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8093/PlayerScoresService</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

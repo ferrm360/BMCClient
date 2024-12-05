@@ -65,6 +65,38 @@ namespace BMCWindows.GameplayAttack
             }
         }
 
+        public void UpdateEnemyCellToDead(Grid enemyBoardGrid, int row, int col, BitmapImage cardImage)
+        {
+            var button = GetButtonAtPosition(enemyBoardGrid, row, col);
+            if (button != null)
+            {
+                button.Content = new Image
+                {
+                    Source = cardImage,
+                    Stretch = Stretch.Fill
+                };
+
+                button.IsEnabled = false;
+            }
+        }
+
+        private Button GetButtonAtPosition(Grid grid, int row, int col)
+        {
+            foreach (var child in grid.Children)
+            {
+                if (child is Button button)
+                {
+                    if (Grid.GetRow(button) == row && Grid.GetColumn(button) == col)
+                    {
+                        return button;
+                    }
+                }
+            }
+            return null;
+        }
+
+
+
         private void EnemyBoardButton_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;

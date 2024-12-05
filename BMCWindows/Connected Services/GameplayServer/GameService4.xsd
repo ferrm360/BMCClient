@@ -7,4 +7,14 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="AttackPositionDTO" nillable="true" type="tns:AttackPositionDTO" />
+  <xs:complexType name="CellDeadDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CardName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LobbyId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Looser" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="X" type="xs:int" />
+      <xs:element minOccurs="0" name="Y" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CellDeadDTO" nillable="true" type="tns:CellDeadDTO" />
 </xs:schema>

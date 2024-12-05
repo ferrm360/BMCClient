@@ -302,7 +302,7 @@ namespace BMCWindows
 
                         clickedButton.Content = cardPanel;
                         MatrixCardLife[row, col] = cardData.Life;
-                        MatrixCardName[row, col] = cardData.Name;
+                        MatrixCardName[row, col] = selectedCard;
 
                         Console.WriteLine($"Carta {cardData.Name} colocada en ({row}, {col}) con vida {cardData.Life}");
                     }
@@ -311,6 +311,7 @@ namespace BMCWindows
                 {
                     clickedButton.Content = null;
                     MatrixCardLife[row, col] = 0;
+                    MatrixCardName[row, col] = null;
 
                     Console.WriteLine($"Carta eliminada de ({row}, {col})");
                 }

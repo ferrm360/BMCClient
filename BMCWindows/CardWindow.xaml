@@ -1,0 +1,66 @@
+﻿<Page x:Class="BMCWindows.CardWindow"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BMCWindows"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="CardWindow"
+      Background="#FEFFDB">
+
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="33*"/>
+                <RowDefinition Height="407*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="12*"/>
+                <ColumnDefinition Width="99*"/>
+                <ColumnDefinition Width="689*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Cancelar" BorderBrush="Transparent" Click="Cancel">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/BrownButton.png"/>
+                </Button.Background>
+            </Button>
+
+
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="11*"/>
+                <RowDefinition Height="79*"/>
+            </Grid.RowDefinitions>
+            <Grid x:Name="gridCardGames" Grid.Column="0" Grid.Row="1">
+                <ScrollViewer Grid.Row="1" Grid.Column="1" Margin="5,25,10,0" >
+                    <!-- Contenedor para las cartas -->
+                    <ItemsControl x:Name="cardsControl" ItemsSource="{Binding cardData}">
+                        <ItemsControl.ItemsPanel>
+                            <!-- Usa WrapPanel para distribuir las cartas en filas y columnas -->
+                            <ItemsPanelTemplate>
+                                <WrapPanel ItemWidth="200" ItemHeight="250" Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <!-- Representación visual de la carta -->
+                                <Border BorderBrush="Black" BorderThickness="1" Margin="5">
+                                    <StackPanel>
+                                        <Image Source="{Binding CardImage}" Width="150" Height="200" />
+                                        <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" />
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+
+        </Grid>
+
+    </Grid>
+</Page>

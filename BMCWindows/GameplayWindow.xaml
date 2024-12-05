@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BMCWindows"
       mc:Ignorable="d" 
+      xmlns:p="clr-namespace:BMCWindows.Properties"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="GameplayWindow"
       Background="#FEFFDB">
@@ -70,14 +71,11 @@
             </Grid>
 
 
-            <TextBlock Grid.Row="1" Text="Selecciona una carta para jugar" HorizontalAlignment="Center" Margin="0,10,0,10" Grid.Column="1" Width="372"/>
 
 
-            <TextBlock Grid.Row="1" Text="Selecciona una carta para jugar" HorizontalAlignment="Center" Margin="0,10,0,10" Grid.Column="1" Width="372"/>
         </Grid>
 
         <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10">
-            <TextBlock Text="Jugador 1:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Background="#43224D" Foreground="#FEFFDB"/>
             <ItemsControl x:Name="Player1Cards" Margin="5" Background="#43224D">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -94,7 +92,6 @@
 
         
         <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10">
-            <TextBlock Text="Jugador 2:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Background="#43224D" Foreground="#FEFFDB"/>
             <ItemsControl x:Name="Player2Cards" Margin="5" Background="#43224D">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -109,9 +106,7 @@
             </ItemsControl>
         </StackPanel>
 
-        <!-- Lobby Info -->
         <StackPanel Grid.Row="2" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-            <TextBlock Text="Jugadores en el lobby:" FontSize="16" Margin="5" IsHitTestVisible="False"/>
             <TextBlock x:Name="TextBlockPlayerStatus" FontSize="16" Margin="5" IsHitTestVisible="False"/>
         </StackPanel>
 
@@ -181,8 +176,6 @@
             </StackPanel>
 
 
-
-
         </Grid>
 
         <Grid>
@@ -208,7 +201,7 @@
                 <Grid>
                     <Image Source="Images/BrownButton.png" Stretch="Fill"/>
 
-                    <TextBlock Text="Accept" 
+                    <TextBlock Text="{x:Static p:Resources.GlobalButtonAccept}" 
                        VerticalAlignment="Center" 
                        HorizontalAlignment="Center" 
                        FontSize="16" 
@@ -217,9 +210,6 @@
                 </Grid>
             </Button>
         </Grid>
-
-
-
 
     </Grid>
 

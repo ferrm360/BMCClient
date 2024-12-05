@@ -9,31 +9,23 @@
       Background="#FEFFDB">
 
     <Grid>
-        <!-- Dividimos en dos columnas principales -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" />
-            <!-- Columna izquierda: Texto e Imagen -->
             <ColumnDefinition Width="*" />
-            <!-- Columna central: Tableros y demás -->
         </Grid.ColumnDefinitions>
 
-        <!-- Columna izquierda -->
         <Grid Grid.Column="0" Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <!-- Texto -->
                 <RowDefinition Height="*" />
-                <!-- Imagen -->
             </Grid.RowDefinitions>
 
-            <!-- Texto dinámico -->
             <TextBlock x:Name="DynamicTalkTextBlock" Text="!A jugar!"
                 FontSize="12" FontWeight="Bold"
                 HorizontalAlignment="Center" VerticalAlignment="Top"
                 Margin="0,137,0,0" Grid.Row="1" Height="Auto" Width="Auto"
                 TextWrapping="Wrap" />
 
-            <!-- Imagen dinámica -->
             <Image x:Name="DynamicImage" Grid.Row="1" Source="pack://application:,,,/Images/Avatar_talk.png"
                    Width="150" Height="150" Stretch="Uniform"
                    HorizontalAlignment="Center" VerticalAlignment="Top"
@@ -41,19 +33,13 @@
             <TextBlock x:Name="DynamicTurnTextBlock" Text="Turnos" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,25,0,0" Grid.Row="1" Height="Auto" Width="Auto" TextWrapping="Wrap" VerticalAlignment="Top" />
         </Grid>
 
-        <!-- Contenido central -->
         <Grid Grid.Column="1">
-            <!-- Dividimos la columna central en filas -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="3*" />
-                <!-- Tableros -->
                 <RowDefinition Height="2*" />
-                <!-- Cartas -->
                 <RowDefinition Height="Auto" />
-                <!-- Botón -->
             </Grid.RowDefinitions>
 
-            <!-- Tableros -->
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -61,7 +47,6 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <!-- Tablero del Jugador -->
                 <Grid Grid.Column="0" Margin="20,20,20,20">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -74,16 +59,13 @@
 
                     <Grid x:Name="PlayerBoardGrid" Grid.Row="1" Background="Transparent"
                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
-                        <!-- Tablero dinámico del jugador -->
                     </Grid>
                 </Grid>
 
-                <!-- Texto VS -->
                 <Grid Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="36" Width="74">
                     <TextBlock Text="VS" FontSize="36" FontWeight="Bold" Foreground="Black" />
                 </Grid>
 
-                <!-- Tablero del Enemigo -->
                 <Grid Grid.Column="2" Margin="20,20,20,20">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -96,27 +78,22 @@
 
                     <Grid x:Name="EnemyBoardGrid" Grid.Row="1" Background="Transparent"
                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
-                        <!-- Tablero dinámico del enemigo -->
                     </Grid>
                 </Grid>
             </Grid>
 
-            <!-- Cartas de ataque -->
             <Grid Grid.Row="1">
                 <StackPanel x:Name="stackPanelPlayerAttackCards" Orientation="Horizontal"
                             VerticalAlignment="Stretch" HorizontalAlignment="Center">
-                    <!-- Las cartas se generan dinámicamente aquí -->
                 </StackPanel>
             </Grid>
 
-            <!-- Botón BMC ajustado -->
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <!-- Botón con BMC ajustado -->
                 <Button x:Name="buttonGetAttackCard" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
                         Margin="10" Width="100" Height="50" Click="GetRandomCard">
                     <Button.Background>
