@@ -63,8 +63,9 @@
                     <RowDefinition Height="28*" />
                     <RowDefinition Height="149*" />
                 </Grid.RowDefinitions>
-                <TextBox x:Name="textBoxUser" Grid.Row="1" Grid.Column="1"  Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <PasswordBox x:Name="passwordBoxPassword" Grid.Column="1" Grid.Row="3"  Background="Transparent" BorderBrush="Transparent"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBox x:Name="textBoxUser" Grid.Row="1" Grid.Column="1" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center"/>
+                <PasswordBox x:Name="passwordBoxPassword" Grid.Row="3" Grid.Column="1" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+
 
 
             </Grid>

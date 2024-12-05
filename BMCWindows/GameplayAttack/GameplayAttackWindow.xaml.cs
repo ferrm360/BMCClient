@@ -215,8 +215,7 @@ namespace BMCWindows.GameplayPage
 
         private void RemoveCardByName(string cardName)
         {
-            // Suponiendo que tus cartas están dentro de un ItemsControl o StackPanel
-            var container = stackPanelPlayerAttackCards; // Cambia esto por el contenedor adecuado (StackPanel, ItemsControl, etc.)
+            var container = stackPanelPlayerAttackCards;
 
             foreach (var item in container.Children)
             {
@@ -229,10 +228,9 @@ namespace BMCWindows.GameplayPage
                         var textBlock = stackPanel.Children.OfType<TextBlock>().FirstOrDefault();
                         if (textBlock != null && textBlock.Text == cardName)
                         {
-                            // Si encontramos el Border que contiene el TextBlock con el nombre de la carta, lo eliminamos
                             container.Children.Remove(border);
                             Console.WriteLine($"Carta {cardName} eliminada.");
-                            return; // Sale del método después de eliminar la carta
+                            return;
                         }
                     }
                 }
@@ -351,6 +349,12 @@ namespace BMCWindows.GameplayPage
                 return;
             }
 
+            if (string.IsNullOrEmpty(selectedCardName))
+            {
+                MessageBox.Show("Debes seleccionar una carta para atacar.");
+                return;
+            }
+
             Task.Run(() =>
              {
                  GameplayServer.AttackPositionDTO attackPositionDTO = new GameplayServer.AttackPositionDTO
@@ -368,6 +372,12 @@ namespace BMCWindows.GameplayPage
 
                  Dispatcher.Invoke(() =>
                  {
+                     RemoveCardByName(selectedCardName);
+                     selectedCard = null;
+                     selectedCardName = null;
+                     selectedCardAttackLevel = 0;
+                     selectedCardImage = null;
+
                      DynamicTalkTextBlock.Text = "¡Has atacado!";
                      DynamicTurnTextBlock.Text = "¡Espera tu turno!";
                  });
