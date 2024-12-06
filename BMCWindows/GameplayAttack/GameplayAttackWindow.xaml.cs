@@ -215,7 +215,28 @@ namespace BMCWindows.GameplayPage
             stackPanelPlayerAttackCards.Children.Add(newCard);
         }
 
-        
+        private void RemoveCardByName(string cardName)
+        {
+            var container = stackPanelPlayerAttackCards;
+
+            foreach (var item in container.Children)
+            {
+                var border = item as Border;
+                if (border != null)
+                {
+                    var stackPanel = border.Child as StackPanel;
+                    if (stackPanel != null)
+                    {
+                        var textBlock = stackPanel.Children.OfType<TextBlock>().FirstOrDefault();
+                        if (textBlock != null && textBlock.Text == cardName)
+                        {
+                            container.Children.Remove(border);
+                            Console.WriteLine($"Carta {cardName} eliminada.");
+                            return;
+                        }
+                    }
+                }
+            }
 
 
 
@@ -326,6 +347,12 @@ namespace BMCWindows.GameplayPage
                 return;
             }
 
+            if (string.IsNullOrEmpty(selectedCardName))
+            {
+                MessageBox.Show("Debes seleccionar una carta para atacar.");
+                return;
+            }
+
             Task.Run(() =>
              {
                  GameplayServer.AttackPositionDTO attackPositionDTO = new GameplayServer.AttackPositionDTO
@@ -343,6 +370,14 @@ namespace BMCWindows.GameplayPage
 
                  Dispatcher.Invoke(() =>
                  {
+                     RemoveCardByName(selectedCardName);
+                     selectedCard = null;
+                     selectedCardName = null;
+                     selectedCardAttackLevel = 0;
+                     selectedCardImage = null;
+
+                     DynamicTalkTextBlock.Text = "¡Has atacado!";
+                     DynamicTurnTextBlock.Text = "¡Espera tu turno!";
                      string attackMessage = Properties.Resources.AttackMade.ToString();
                      DynamicTalkTextBlock.Text = attackMessage;
                      string errorTurnText = Properties.Resources.Error_WaitTurn;
