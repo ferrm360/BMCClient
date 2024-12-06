@@ -376,8 +376,7 @@ namespace BMCWindows.GameplayPage
                      selectedCardAttackLevel = 0;
                      selectedCardImage = null;
 
-                     DynamicTalkTextBlock.Text = "¡Has atacado!";
-                     DynamicTurnTextBlock.Text = "¡Espera tu turno!";
+                     
                      string attackMessage = Properties.Resources.AttackMade.ToString();
                      DynamicTalkTextBlock.Text = attackMessage;
                      string errorTurnText = Properties.Resources.Error_WaitTurn;
