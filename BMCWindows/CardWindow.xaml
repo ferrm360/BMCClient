@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:p="clr-namespace:BMCWindows.Properties"
       xmlns:local="clr-namespace:BMCWindows"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -21,7 +22,7 @@
                 <ColumnDefinition Width="99*"/>
                 <ColumnDefinition Width="689*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Cancelar" BorderBrush="Transparent" Click="Cancel">
+            <Button Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="{x:Static p:Resources.GloblalButtonCancel}" BorderBrush="Transparent" Click="Cancel">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/BrownButton.png"/>
                 </Button.Background>
@@ -36,10 +37,8 @@
             </Grid.RowDefinitions>
             <Grid x:Name="gridCardGames" Grid.Column="0" Grid.Row="1">
                 <ScrollViewer Grid.Row="1" Grid.Column="1" Margin="5,25,10,0" >
-                    <!-- Contenedor para las cartas -->
                     <ItemsControl x:Name="cardsControl" ItemsSource="{Binding cardData}">
                         <ItemsControl.ItemsPanel>
-                            <!-- Usa WrapPanel para distribuir las cartas en filas y columnas -->
                             <ItemsPanelTemplate>
                                 <WrapPanel ItemWidth="200" ItemHeight="250" Orientation="Horizontal" />
                             </ItemsPanelTemplate>

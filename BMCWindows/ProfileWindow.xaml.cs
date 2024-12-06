@@ -41,20 +41,21 @@ namespace BMCWindows
             var imageUrl = proxyProfile.GetProfileImage(player.Username);
             if (imageUrl.ImageData == null || imageUrl.ImageData.Length == 0)
             {
-                Console.WriteLine("No image data returned.");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.EmptyImage");
             }
             else
             {
                 BitmapImage image = ImageConvertor.ConvertByteArrayToImage(imageUrl.ImageData);
                 if (image == null)
                 {
-                    Console.WriteLine("Image conversion failed.");
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.ImageNotFound");    
                 }
                 else
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        //imageUserProfile.Source = image;
                         ProfileImageBrush.ImageSource = image;
                     });
 
@@ -78,7 +79,8 @@ namespace BMCWindows
                 var result = proxy.UpdateProfilePicture(player.Username, byteImage, urlImage);
                 if(result.IsSuccess)
                 {
-                    MessageBox.Show("Imagen de perfil actualizada exitosamente");
+                    string message = Properties.Resources.Info_ProfileImageUpdated;
+                    MessageBox.Show(message);
                 }
                 else
                 {
@@ -101,7 +103,8 @@ namespace BMCWindows
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al leer la imagen: " + ex.Message);
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.ImageNotFound");
             }
 
             return imageBytes;
@@ -138,7 +141,8 @@ namespace BMCWindows
                 labelUser.Content = newUsername;
                 textBoxUser.Visibility= Visibility.Hidden;
                 labelUser.Visibility= Visibility.Visible;
-                MessageBox.Show("Nombre de usuario actualizado exitosamente");
+                string message = Properties.Resources.Info_UserUpdated.ToString();
+                MessageBox.Show(message);
                 buttonAccepNewUsername.Visibility = Visibility.Hidden;
                 imageButtonAcceptUsernameEdition.Visibility = Visibility.Hidden;
                 textBlockAcceptEdition.Visibility = Visibility.Hidden;
@@ -150,7 +154,8 @@ namespace BMCWindows
             }
             else
             {
-                MessageBox.Show(result.ErrorKey);
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage(result.ErrorKey);
             }
         }
 
@@ -195,7 +200,8 @@ namespace BMCWindows
                 textBoxBio.Visibility = Visibility.Hidden;
                 textBlockBio.Visibility = Visibility.Visible;
                 textBlockBio.Text = newBio;
-                MessageBox.Show("Biografía actualizada exitosamente");
+                string message = Properties.Resources.Info_BioUpdated.ToString();
+                MessageBox.Show(message);
                 buttonAcceptNewBio.Visibility = Visibility.Hidden;
                 imageAcceptBio.Visibility = Visibility.Hidden;
                 textBlockAcceptBio.Visibility = Visibility.Hidden;
@@ -263,25 +269,26 @@ namespace BMCWindows
                 }
                 else
                 {
-                    MessageBox.Show($"Error: {response?.ErrorKey ?? "Unknown error"}");
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage(response.ErrorKey);
                 }
             }
             catch (CommunicationException commEx)
             {
-                MessageBox.Show($"Communication error: {commEx.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.CommunicationError");
             }
             catch (TimeoutException timeoutEx)
             {
-                MessageBox.Show($"Timeout error: {timeoutEx.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.TimeoutError");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"General error: {ex.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.GeneralException");
             }
         }
-
-
-
 
     }
 }

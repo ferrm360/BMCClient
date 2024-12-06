@@ -1,4 +1,5 @@
 ﻿using BMCWindows.Patterns.Singleton;
+using BMCWindows.Utilities;
 using BMCWindows.Validators;
 using System;
 using System.Collections.Generic;
@@ -58,17 +59,20 @@ namespace BMCWindows
                     }
                     else
                     {
-                        MessageBox.Show(result.ErrorKey);
+                        ErrorMessages errorMessages = new ErrorMessages();  
+                        errorMessages.ShowErrorMessage(result.ErrorKey);
                     }
                 }
                 catch(EndpointNotFoundException)
                 {
-                    MessageBox.Show("Error en el servidor");
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.ServerError");
                 }
             }
             else 
             {
-                MessageBox.Show("Hay campos vacíos");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("MessageBoxEmptyFields");
             }
         }
 

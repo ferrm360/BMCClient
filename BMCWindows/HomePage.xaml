@@ -220,7 +220,7 @@
             <MenuItem Header="{x:Static p:Resources.HomepagePlayers}" Click="GoToSearchWindow"/>
             <MenuItem Header="{x:Static p:Resources.HomepageRequests}" Click="GoToFriendRequestsWindow"/>
             <MenuItem Header="{x:Static p:Resources.HomepageSettings}" Click="GoToSettings"/>
-            <MenuItem Header="{x:Static p:Resources.FriendLabelFriends}" Click="LogOut"/>
+            <MenuItem Header="{x:Static p:Resources.GlobalExitButton}" Click="LogOut"/>
         </Menu>
 
         <Grid>

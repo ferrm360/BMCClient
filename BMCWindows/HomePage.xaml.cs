@@ -58,14 +58,17 @@ namespace BMCWindows
             var imageUrl = proxyProfile.GetProfileImage(player.Username);
             if (imageUrl.ImageData == null || imageUrl.ImageData.Length == 0)
             {
-                Console.WriteLine("No image data returned.");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.EmptyImage");
             }
             else
             {
                 BitmapImage image = ImageConvertor.ConvertByteArrayToImage(imageUrl.ImageData);
                 if (image == null)
                 {
-                    MessageBox.Show("Image conversion failed.");
+                     
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.ImageNotFound");
                 }
                 else
                 {
@@ -155,20 +158,24 @@ namespace BMCWindows
                 }
                 else
                 {
-                    MessageBox.Show($"Error: {response?.ErrorKey ?? "Unknown error"}");
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage(response.ErrorKey);
                 }
             }
             catch (CommunicationException commEx)
             {
-                MessageBox.Show($"Communication error: {commEx.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.CommunicationError");
             }
             catch (TimeoutException timeoutEx)
             {
-                MessageBox.Show($"Timeout error: {timeoutEx.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.TimeOutError");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"General error: {ex.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.GeneralException");
             }
         }
 
@@ -187,13 +194,7 @@ namespace BMCWindows
         }
 
 
-        private void LoadImage(byte[] imageData)
-        {
-
-            BitmapImage image = ImageConvertor.ConvertByteArrayToImage(imageData);
-            ProfileImageBrush.ImageSource = image;
-
-        }
+        
 
         private void GoToFriendRequestsWindow(object sender, RoutedEventArgs e)
         {
@@ -207,7 +208,6 @@ namespace BMCWindows
             if (selectedFriend != null)
             {
                 OpenPlayerProfileWindow(selectedFriend.UserName);
-                Console.WriteLine($"Username enviado: {selectedFriend.UserName}");
             }
         }
 
@@ -304,19 +304,44 @@ namespace BMCWindows
 
         private void InitializeScores()
         {
-            Server.PlayerDTO player = new Server.PlayerDTO();
-            player = UserSessionManager.getInstance().GetPlayerUserData();
-            PlayerScoreServer.PlayerScoresServiceClient scoreProxy = new PlayerScoreServer.PlayerScoresServiceClient();
-            var response = scoreProxy.GetScoresByUsername(player.Username);
-            if (response != null) 
+            try
             {
-                if(response.Scores != null )
+                Server.PlayerDTO player = new Server.PlayerDTO();
+                player = UserSessionManager.getInstance().GetPlayerUserData();
+                PlayerScoreServer.PlayerScoresServiceClient scoreProxy = new PlayerScoreServer.PlayerScoresServiceClient();
+                var response = scoreProxy.GetScoresByUsername(player.Username);
+                if (response.IsSuccess)
                 {
-                    textBlockCurrentPlayerWins.Text = response.Scores.Wins.ToString();
-                    textBlockCurrentPlayerLosses.Text = response.Scores.Losses.ToString();
+                    if (response.Scores != null)
+                    {
+                        textBlockCurrentPlayerWins.Text = response.Scores.Wins.ToString();
+                        textBlockCurrentPlayerLosses.Text = response.Scores.Losses.ToString();
 
+                    }
                 }
+                else
+                {
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage(response.ErrorKey);
+                }
+
             }
+            catch (CommunicationException commEx)
+            {
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.CommunicationError");
+            }
+            catch (TimeoutException timeoutEx)
+            {
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.TimeOutError");
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.GeneralException");
+            }
+
 
         }
 

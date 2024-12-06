@@ -197,6 +197,7 @@
     <Compile Include="Utilities\AlignmentToMarginConverter.cs" />
     <Compile Include="Utilities\CallbackHandlers\ChatCallBackHandler.cs" />
     <Compile Include="Utilities\CallbackHandlers\EmptyLobbyCallback.cs" />
+    <Compile Include="Utilities\ErrorMessages.cs" />
     <Compile Include="Utilities\EventMediator.cs" />
     <Compile Include="Utilities\CallbackHandlers\FriendChatCallBackHandler.cs" />
     <Compile Include="Utilities\CallbackHandlers\GameCallbackHandler.cs" />

@@ -1,4 +1,5 @@
 ﻿using BMCWindows.Patterns.Singleton;
+using BMCWindows.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,8 @@ namespace BMCWindows.GuestPlayer
 
             if (string.IsNullOrWhiteSpace(username))
             {
-                MessageBox.Show("Por favor, ingresa un nombre de usuario.");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.InvalidUsername");
                 return;
             }
 
@@ -54,12 +56,14 @@ namespace BMCWindows.GuestPlayer
                 }
                 else
                 {
-                    MessageBox.Show(result.ErrorKey);
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage(result.ErrorKey);
                 }
             }
             catch (EndpointNotFoundException)
             {
-                MessageBox.Show("Error en el servidor");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.ServerError");
             }
         }
 

@@ -69,16 +69,19 @@ namespace BMCWindows
                 var result = proxy.UpdatePassword(username, newPassword, password);
                 if (result.IsSuccess)
                 {
-                    MessageBox.Show("Contraseña actualizada exitosamente");
+                    string message = Properties.Resources.PasswordUpdated;
+                    MessageBox.Show(message);
                 }
                 else
                 {
-                    MessageBox.Show(result.ErrorKey);
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage(result.ErrorKey);
                 }
 
             } else
             {
-                MessageBox.Show("Hay campos vacío o incorrectos, verífiquelos");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("MessageBoxEmptyFields");
             }
             
             

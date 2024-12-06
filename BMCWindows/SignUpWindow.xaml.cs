@@ -1,5 +1,6 @@
 ﻿using BMCWindows.Patterns.Singleton;
 using BMCWindows.Server;
+using BMCWindows.Utilities;
 using BMCWindows.Validators;
 using System;
 using System.Collections.Generic;
@@ -53,20 +54,24 @@ namespace BMCWindows
                 }
                 catch (EndpointNotFoundException)
                 {
-                    MessageBox.Show("Error en el servidor");
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.ServerError");
                 }
                 catch (CommunicationException)
                 {
-                    MessageBox.Show("Error al registrarse, verifique su configuración de red");
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.CommunicationError");
                 }
                 catch (TimeoutException) 
                 {
-                    MessageBox.Show("El tiempo para el registro del usuario ha experido");
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.TimeoutError");
                 }
             }
             else
             {
-                MessageBox.Show("Hay campos vacíos o incorrectos");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("MessageBoxEmptyFields");
 
             }  
         }

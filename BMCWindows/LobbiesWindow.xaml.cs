@@ -80,7 +80,8 @@ namespace BMCWindows
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error al cargar los lobbies: {ex.Message}");
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Lobby.LoadError");
                 }
             }
         }
@@ -110,7 +111,8 @@ namespace BMCWindows
         {
             if (selectedLobby == null)
             {
-                MessageBox.Show("Por favor, selecciona un lobby.");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Lobby.NotSelectedLobby");
                 return;
             }
 

@@ -66,11 +66,13 @@ namespace BMCWindows.GameplayPage
                     _isPlayerTurn = isPlayerTurn;
                     if (_isPlayerTurn)
                     {
-                        DynamicTurnTextBlock.Text = $"¡Es tu turno {_currentPlayer.Username}!";
+                        string turnText = string.Format(Properties.Resources.Info_Turn, _currentPlayer.Username);
+                        DynamicTurnTextBlock.Text = turnText;
                     }
                     else
                     {
-                        DynamicTurnTextBlock.Text = "Espera tu turno.";
+                        string errorTurnText = Properties.Resources.Error_WaitTurn;
+                        DynamicTurnTextBlock.Text = errorTurnText;
                     }
                 });
             };
@@ -213,33 +215,7 @@ namespace BMCWindows.GameplayPage
             stackPanelPlayerAttackCards.Children.Add(newCard);
         }
 
-        private void RemoveCardByName(string cardName)
-        {
-            // Suponiendo que tus cartas están dentro de un ItemsControl o StackPanel
-            var container = stackPanelPlayerAttackCards; // Cambia esto por el contenedor adecuado (StackPanel, ItemsControl, etc.)
-
-            foreach (var item in container.Children)
-            {
-                var border = item as Border;
-                if (border != null)
-                {
-                    var stackPanel = border.Child as StackPanel;
-                    if (stackPanel != null)
-                    {
-                        var textBlock = stackPanel.Children.OfType<TextBlock>().FirstOrDefault();
-                        if (textBlock != null && textBlock.Text == cardName)
-                        {
-                            // Si encontramos el Border que contiene el TextBlock con el nombre de la carta, lo eliminamos
-                            container.Children.Remove(border);
-                            Console.WriteLine($"Carta {cardName} eliminada.");
-                            return; // Sale del método después de eliminar la carta
-                        }
-                    }
-                }
-            }
-
-            Console.WriteLine($"No se encontró la carta {cardName}.");
-        }
+        
 
 
 
@@ -273,16 +249,13 @@ namespace BMCWindows.GameplayPage
                         selectedCardAttackLevel = cardData.AttackLevel;
                         selectedCardImage = cardData.CardImage;
 
-                        Console.WriteLine($"Carta seleccionada: {selectedCardName}, Ataque: {selectedCardAttackLevel}");
                     }
                     else
                     {
-                        Console.WriteLine("Carta no encontrada.");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("No se pudo obtener el nombre de la carta.");
                 }
             }
         }
@@ -292,7 +265,7 @@ namespace BMCWindows.GameplayPage
         {
             if (string.IsNullOrEmpty(cardName))
             {
-                Console.WriteLine("Carta vacía");
+                return null;
             }
 
             Dictionary<string, AttackCard> SelectedAttackCardDeck = new Dictionary<string, AttackCard>();
@@ -307,7 +280,7 @@ namespace BMCWindows.GameplayPage
             }
             else
             {
-                Console.WriteLine("No se encontraron las cartas");
+                return null;
             }
 
             if (SelectedAttackCardDeck.ContainsKey(cardName))
@@ -340,14 +313,16 @@ namespace BMCWindows.GameplayPage
 
         private void OnCellClickOwnBoard(int row, int col)
         {
-            MessageBox.Show($"Has clickeado en la celda: ({row}, {col}) de tu propio tablero");
+            string infoMessage = string.Format(Properties.Resources.Gameplay_Attack, row, col);
+            MessageBox.Show(infoMessage);
         }
 
         private void OnCellClickEnemyBoard(int row, int col)
         {
             if (!_isPlayerTurn)
             {
-                DynamicTurnTextBlock.Text = "Aun no es tu turno.";
+                string errorTurnText = Properties.Resources.Error_WaitTurn;
+                DynamicTurnTextBlock.Text = errorTurnText;
                 return;
             }
 
@@ -368,8 +343,10 @@ namespace BMCWindows.GameplayPage
 
                  Dispatcher.Invoke(() =>
                  {
-                     DynamicTalkTextBlock.Text = "¡Has atacado!";
-                     DynamicTurnTextBlock.Text = "¡Espera tu turno!";
+                     string attackMessage = Properties.Resources.AttackMade.ToString();
+                     DynamicTalkTextBlock.Text = attackMessage;
+                     string errorTurnText = Properties.Resources.Error_WaitTurn;
+                     DynamicTurnTextBlock.Text = errorTurnText;
                  });
              });
         }
@@ -378,7 +355,8 @@ namespace BMCWindows.GameplayPage
         {
             if (_playerMatrixName[attackPosition.X, attackPosition.Y] == null)
             {
-                DynamicTalkTextBlock.Text = "¡Ups! eso estuvo cerca :D";
+                string missedAttack = Properties.Resources.MissedAttack;
+                DynamicTalkTextBlock.Text = missedAttack;
 
             }
             else
@@ -440,12 +418,14 @@ namespace BMCWindows.GameplayPage
         {
             if (_currentPlayer.Username == _lobby.Host)
             {
-                DynamicTurnTextBlock.Text = "Tienes el primer turno";
+                string turnText = Properties.Resources.FirstTurn.ToString();
+                DynamicTurnTextBlock.Text = turnText;
                 _isPlayerTurn = true;
             }
             else
             {
-                DynamicTurnTextBlock.Text = "No tienes el primer turno, espera tu turno";
+                string turnText = Properties.Resources.TurnInfo.ToString();
+                DynamicTurnTextBlock.Text = turnText;
                 _isPlayerTurn = false;
             }
         }
@@ -481,7 +461,8 @@ namespace BMCWindows.GameplayPage
 
                     if (!result.IsSuccess)
                     {
-                        MessageBox.Show(result.ErrorKey);
+                        ErrorMessages errorMessages = new ErrorMessages();
+                        errorMessages.ShowErrorMessage(result.ErrorKey);
                     }
                 }
             }
@@ -497,7 +478,8 @@ namespace BMCWindows.GameplayPage
 
                     if (!result.IsSuccess)
                     {
-                        MessageBox.Show(result.ErrorKey);
+                        ErrorMessages errorMessages = new ErrorMessages();
+                        errorMessages.ShowErrorMessage(result.ErrorKey);
                     }
                 }
             }

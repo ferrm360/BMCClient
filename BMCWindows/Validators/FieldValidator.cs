@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace BMCWindows.Validators
 {
@@ -31,6 +32,13 @@ namespace BMCWindows.Validators
             return hasUpperCase && hasLowerCase && hasDigit && hasSpecialCharacter;
         }
 
+        public static bool ValidateEmail(string email)
+        {
+            string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+
+            return Regex.IsMatch(email, pattern);
+        }
+
         
     
 
@@ -45,5 +53,21 @@ namespace BMCWindows.Validators
             }
             return false; 
         }
+
+        private void CheckLimit(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            int maxLength = int.Parse(textBox.Tag.ToString()); 
+
+            if (textBox.Text.Length >= maxLength)
+            {
+                textBox.IsReadOnly = true; 
+            }
+            else
+            {
+                textBox.IsReadOnly = false; 
+            }
+        }
+
     }
 }

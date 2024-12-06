@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BMCWindows.GuestPlayer"
+      xmlns:p="clr-namespace:BMCWindows.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="GuestPlayerLogin"
@@ -32,8 +33,7 @@
             <!-- Logo -->
             <Image Source="pack://application:,,,/Images/LogoBMC.png" Grid.Column="1" Grid.Row="0" Margin="1,20,0,0"/>
 
-            <!-- Label de Username -->
-            <Label Content="Username:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" FontFamily="Press Start 2P Regular" Foreground="#43224D" Height="22" Grid.Row="1" Width="100"/>
+            <Label Content="{x:Static p:Resources.GlobalLabelUser}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1"  Foreground="#43224D" Height="22" Grid.Row="1" />
 
             <Grid Grid.Row="1" Grid.Column="1" Margin="0,5,0,0">
                 <Image Source="pack://application:,,,/Images/LongTextbox.png" Stretch="Uniform" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
@@ -44,14 +44,14 @@
             <Button x:Name="buttonLoginAsGuest" Grid.Row="2" Grid.Column="1" Click="LoginAsGuest" Background="Transparent" BorderBrush="Transparent" FocusVisualStyle="{x:Null}" Focusable="False">
                 <Grid>
                     <Image Source="pack://application:,,,/Images/BrownButton.png" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10,10,10,10"/>
-                    <TextBlock Text="Log in as Guest" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" Height="20" FontFamily="Press Start 2P Normal" FontSize="9"/>
+                    <TextBlock Text="{x:Static p:Resources.LogInButtonLogInAsGuest}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" Height="20" FontFamily="Press Start 2P Normal" FontSize="9"/>
                 </Grid>
             </Button>
 
             <Button x:Name="buttonCancel" Grid.Row="0" Grid.Column="0" Click="Cancel" Background="Transparent" BorderBrush="Transparent" FocusVisualStyle="{x:Null}" Focusable="False" Margin="10,16,177,56" Width="80" Height="40">
                 <Grid>
                     <Image Source="pack://application:,,,/Images/BrownButton.png" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,0,0,0"/>
-                    <TextBlock Text="Cancel" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" Height="20" FontFamily="Press Start 2P Normal" FontSize="9"/>
+                    <TextBlock Text="{x:Static p:Resources.GloblalButtonCancel}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" Height="20" FontFamily="Press Start 2P Normal" FontSize="9"/>
                 </Grid>
             </Button>
 

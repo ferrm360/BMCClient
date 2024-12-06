@@ -1,5 +1,6 @@
 ﻿using BMCWindows.GuestPlayerServer;
 using BMCWindows.Patterns.Singleton;
+using BMCWindows.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,13 +67,15 @@ namespace BMCWindows
                 if (result.IsSuccess)
                 {
                     UserSessionManager.getInstance().LogoutPlayer();
-                    MessageBox.Show("You have been logged out.");
+                    String infoMessage = Properties.Resources.ResourceManager.GetString("Info.GuestLogOut");
+                    MessageBox.Show(infoMessage);
                     this.NavigationService.GoBack();
 
                 }
                 else
                 {
-                    MessageBox.Show($"Error: {result.ErrorKey}");
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage(result.ErrorKey);
                 }
             }
             catch (Exception ex) {

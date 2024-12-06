@@ -1,5 +1,6 @@
 ﻿using BMCWindows.EmailServer;
 using BMCWindows.Patterns.Singleton;
+using BMCWindows.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +48,8 @@ namespace BMCWindows.VerificationCode
                 _isProcessing = true;
 
                 LoadingProgressBar.Visibility = Visibility.Visible;
-                DynamicMessageTextBlock.Text = "Enviando código de verificación...";
+                string infoText = Properties.Resources.Info_SendingCode.ToString();
+                DynamicMessageTextBlock.Text = infoText;
                 DynamicMessageTextBlock.Foreground = new SolidColorBrush(Colors.Orange);
 
                 await Task.Run(() =>
@@ -67,24 +69,27 @@ namespace BMCWindows.VerificationCode
                             var result = proxy.SendEmail(emailDTO);
                             if (!result.IsSuccess)
                             {
-                                Dispatcher.Invoke(() =>
-                                    MessageBox.Show(result.ErrorKey, "Error al Enviar", MessageBoxButton.OK, MessageBoxImage.Error));
+                               
+                                    ErrorMessages errorMessages = new ErrorMessages();
+                                    errorMessages.ShowErrorMessage(result.ErrorKey);
                             }
                         }
                         catch (Exception ex)
                         {
-                            Dispatcher.Invoke(() =>
-                                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error));
+                            ErrorMessages errorMessages = new ErrorMessages();
+                            errorMessages.ShowErrorMessage("Error.ServerError");
                         }
                     }
                 });
 
-                DynamicMessageTextBlock.Text = "Código enviado con éxito.";
+                string codeSent = Properties.Resources.Info_CodeSentSuccesfully.ToString(); 
+                DynamicMessageTextBlock.Text = codeSent;
                 DynamicMessageTextBlock.Foreground = new SolidColorBrush(Colors.Green);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al enviar el código: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.SendCodeFailed");
             }
             finally
             {
@@ -97,19 +102,21 @@ namespace BMCWindows.VerificationCode
         {
             if (VerificationCodeTextBox.Text.Trim().Equals(_currentCode, StringComparison.OrdinalIgnoreCase))
             {
-                DynamicMessageTextBlock.Text = "¡Código correcto!";
+                string infoText = Properties.Resources.Info_ValidationCodeCorrect.ToString();
+                DynamicMessageTextBlock.Text = infoText;
                 DynamicMessageTextBlock.Foreground = new SolidColorBrush(Colors.Green);
 
                 Task.Delay(1000).ContinueWith(_ =>
                 {
                     Dispatcher.Invoke(() =>
                     {
-                        NavigationService?.Navigate(new Uri("NextPage.xaml", UriKind.Relative));
+                        this.NavigationService.Navigate(new SettingsWindow());
                     });
                 });
             }
             else if (VerificationCodeTextBox.Text.Length == _currentCode.Length)
             {
+                string errorText = Properties.Resources.Error_InvalidValidationCode.ToString();
                 DynamicMessageTextBlock.Text = "Código de verificación incorrecto.";
                 DynamicMessageTextBlock.Foreground = new SolidColorBrush(Colors.Red);
             }
@@ -129,7 +136,8 @@ namespace BMCWindows.VerificationCode
 
             if (_resendAttempts >= MaxResendAttempts)
             {
-                DynamicMessageTextBlock.Text = "Muchos intentos de reenvío. Intenta nuevamente en 1 minuto.";
+                string errorText = Properties.Resources.Error_TooManyTries.ToString();
+                DynamicMessageTextBlock.Text = errorText;
                 DynamicMessageTextBlock.Foreground = new SolidColorBrush(Colors.Red);
                 return;
             }
@@ -142,8 +150,10 @@ namespace BMCWindows.VerificationCode
 
         private void OnCancelButtonClick(object sender, RoutedEventArgs e)
         {
-            var result = MessageBox.Show("¿Estás seguro de que deseas cancelar la operación?",
-                                         "Cancelar Verificación",
+            string confirmationText = Properties.Resources.Confirmation_ConfirmCancelation.ToString();
+            string messageTitle = Properties.Resources.CancelVerificationTitle.ToString();
+            var result = MessageBox.Show(confirmationText,
+                                         messageTitle,
                                          MessageBoxButton.YesNo,
                                          MessageBoxImage.Warning);
 

@@ -181,7 +181,8 @@ namespace BMCWindows
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading player 1 list: {ex.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.GeneralException");
             }
             return playerList;
         }
@@ -203,7 +204,8 @@ namespace BMCWindows
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading current player: {ex.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.GeneralException");
             }
             return playerList;
         }
@@ -304,7 +306,6 @@ namespace BMCWindows
                         MatrixCardLife[row, col] = cardData.Life;
                         MatrixCardName[row, col] = selectedCard;
 
-                        Console.WriteLine($"Carta {cardData.Name} colocada en ({row}, {col}) con vida {cardData.Life}");
                     }
                 }
                 else
@@ -313,7 +314,6 @@ namespace BMCWindows
                     MatrixCardLife[row, col] = 0;
                     MatrixCardName[row, col] = null;
 
-                    Console.WriteLine($"Carta eliminada de ({row}, {col})");
                 }
             }
         }
@@ -332,7 +332,6 @@ namespace BMCWindows
                         if (textBlock != null && textBlock.Text == cardToRemove.Name)
                         {
                             button.Content = null;
-                            Console.WriteLine($"Carta {cardToRemove.Name} eliminada de la posición ({Grid.GetRow(button)}, {Grid.GetColumn(button)})");
                         }
                     }
                 }
@@ -350,7 +349,6 @@ namespace BMCWindows
 
                 if (assignedCard != null)
                 {
-                    Console.WriteLine($"Carta {assignedCard.Name} eliminada de la posición ({Grid.GetRow(clickedButton)}, {Grid.GetColumn(clickedButton)})");
 
                     clickedButton.Content = null;
                 }
@@ -363,7 +361,6 @@ namespace BMCWindows
 
                         clickedButton.Content = newCard;
 
-                        Console.WriteLine($"Carta {newCard.Name} colocada en la posición ({Grid.GetRow(clickedButton)}, {Grid.GetColumn(clickedButton)})");
                     }
                 }
             }
@@ -374,12 +371,8 @@ namespace BMCWindows
             if (!string.IsNullOrEmpty(selectedCardName) && selectedCardLife > 0)
             {
                 MatrixCardLife[row, col] = selectedCardLife;
-                Console.WriteLine($"Matriz actualizada: [{row}, {col}] = {selectedCardLife}");
             }
-            else
-            {
-                Console.WriteLine($"Error al actualizar la matriz en ({row}, {col}): Carta no válida");
-            }
+            
         }
 
 
@@ -399,7 +392,6 @@ namespace BMCWindows
                         selectedCardName = cardData.Name;
                         selectedCardLife = cardData.Life;
 
-                        Console.WriteLine($"Carta seleccionada: {selectedCardName}, Vida: {selectedCardLife}");
                     }
                 }
             }
@@ -448,14 +440,17 @@ namespace BMCWindows
         private async void AcceptCardsPosition(object sender, RoutedEventArgs e)
         {
             if (_isReady) {
-                MessageBox.Show("Espere a que su rival confirme su tablero");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.PlayerNotReady");
                 return;
             }
 
             if (!CheckIfFiveCardsArePlaced())
             {
-                MessageBox.Show("Coloque todas sus cartas en el tablero");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.GameboardCardsNotPlaced");
                 return;
+                
             }
 
             try
@@ -466,17 +461,20 @@ namespace BMCWindows
 
                 if (!response.IsSuccess)
                 {
-                    MessageBox.Show($"Error al enviar el tablero: {response.ErrorKey}");
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage(response.ErrorKey);
                 }
                 else
                 {
                     _isReady = true;
-                    MessageBox.Show("Tablero enviado exitosamente.");
+                    string infoMessage = Properties.Resources.ResourceManager.GetString("Info.CardsPostionSent");
+                    MessageBox.Show(infoMessage);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al enviar el tablero: {ex.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.CantSummitMatrix");
             }
         }
 
@@ -487,7 +485,6 @@ namespace BMCWindows
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     _playersReadyCount++;
-                    MessageBox.Show($"El jugador {player} está listo. ({_playersReadyCount}/{Players.Count})");
                 });
             });
         }
@@ -498,7 +495,8 @@ namespace BMCWindows
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    MessageBox.Show("Todos los jugadores están listos. Iniciando el juego...");
+                    string infoMessage = Properties.Resources.ResourceManager.GetString("Info.GameStarted");
+                    MessageBox.Show(infoMessage);
                     NavigateToGameWindow();
                 });
             });

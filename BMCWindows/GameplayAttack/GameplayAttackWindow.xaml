@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:p="clr-namespace:BMCWindows.Properties"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="GameplayAttackWindow"
@@ -20,7 +21,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <TextBlock x:Name="DynamicTalkTextBlock" Text="!A jugar!"
+            <TextBlock x:Name="DynamicTalkTextBlock" Text="{x:Static p:Resources.Gameplay_Play}"
                 FontSize="12" FontWeight="Bold"
                 HorizontalAlignment="Center" VerticalAlignment="Top"
                 Margin="0,137,0,0" Grid.Row="1" Height="Auto" Width="Auto"
@@ -30,7 +31,7 @@
                    Width="150" Height="150" Stretch="Uniform"
                    HorizontalAlignment="Center" VerticalAlignment="Top"
                    Margin="0,217,0,0" />
-            <TextBlock x:Name="DynamicTurnTextBlock" Text="Turnos" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,25,0,0" Grid.Row="1" Height="Auto" Width="Auto" TextWrapping="Wrap" VerticalAlignment="Top" />
+            <TextBlock x:Name="DynamicTurnTextBlock" Text="{x:Static p:Resources.GameplayShifts}" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,25,0,0" Grid.Row="1" Height="Auto" Width="Auto" TextWrapping="Wrap" VerticalAlignment="Top" />
         </Grid>
 
         <Grid Grid.Column="1">
@@ -53,7 +54,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <TextBlock Text="Tu Tablero" FontSize="16" FontWeight="Bold"
+                    <TextBlock Text="{x:Static p:Resources.Gameplay_PlayerBoard}" FontSize="16" FontWeight="Bold"
                                HorizontalAlignment="Center" VerticalAlignment="Center"
                                Margin="0,10" TextWrapping="Wrap" />
 
@@ -72,7 +73,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <TextBlock Text="Tablero del Enemigo" FontSize="16" FontWeight="Bold"
+                    <TextBlock Text="{x:Static p:Resources.Gameplay_EnemyBoard}" FontSize="16" FontWeight="Bold"
                                HorizontalAlignment="Center" VerticalAlignment="Center"
                                Margin="0,10" TextWrapping="Wrap" />
 

@@ -1,4 +1,5 @@
 ﻿using BMCWindows.Patterns.Singleton;
+using BMCWindows.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -55,20 +56,24 @@ namespace BMCWindows
                 }
                 else
                 {
-                    MessageBox.Show($"Error: {response?.ErrorKey ?? "Unknown error"}");
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage(response.ErrorKey);
                 }
             }
             catch (CommunicationException commEx)
             {
-                MessageBox.Show($"Communication error: {commEx.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.CommunicationError");
             }
             catch (TimeoutException timeoutEx)
             {
-                MessageBox.Show($"Timeout error: {timeoutEx.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.TimeoutError");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"General error: {ex.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.ServerError");
             }
         }
 
@@ -89,11 +94,13 @@ namespace BMCWindows
                 var result = proxy.AcceptFriendRequest(selectedPlayer.RequestId);
                 if (result.IsSuccess)
                 {
-                    MessageBox.Show("Solicitud rechazada exitosamente");
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Friend.AcceptRequest");
                 }
                 else
                 {
-                    MessageBox.Show(result.ErrorKey);
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage(result.ErrorKey);
                 }
 
             }
@@ -111,11 +118,14 @@ namespace BMCWindows
                 var result = proxy.RejectFriendResponse(selectedPlayer.RequestId);
                 if (result.IsSuccess)
                 {
-                    MessageBox.Show("Solicitud rechazada exitosamente");
+                    
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Friend.DeclinedRequest");
                 }
                 else 
                 {
-                    MessageBox.Show(result.ErrorKey);
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage(result.ErrorKey);
                 }
 
             }

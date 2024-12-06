@@ -1,4 +1,5 @@
 ﻿using BMCWindows.Patterns.Singleton;
+using BMCWindows.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,7 +30,6 @@ namespace BMCWindows
         {
             InitializeComponent();
             _username = username;
-            Console.WriteLine($"Username enviado: {_username}");
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData();
             labelUser.Content = _username;
@@ -40,14 +40,16 @@ namespace BMCWindows
             var imageUrl = proxyProfile.GetProfileImage(_username);
             if (imageUrl.ImageData == null || imageUrl.ImageData.Length == 0)
             {
-                Console.WriteLine("No image data returned.");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.EmptyImage");
             }
             else
             {
                 BitmapImage image = ConvertByteArrayToImage(imageUrl.ImageData);
                 if (image == null)
                 {
-                    Console.WriteLine("Image conversion failed.");
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.ImageNotFound");
                 }
                 else
                 {
@@ -60,7 +62,6 @@ namespace BMCWindows
             }
 
             var profile = proxyProfile.GetProfileByUsername(_username);
-            //textBlockBio.Text = profile.Profile.Bio;
 
         }
 
@@ -87,30 +88,28 @@ namespace BMCWindows
                 }
                 else
                 {
-                    MessageBox.Show($"Error: {response?.ErrorKey ?? "Unknown error"}");
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage(response.ErrorKey);
                 }
             }
             catch (CommunicationException commEx)
             {
-                MessageBox.Show($"Communication error: {commEx.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.CommunicationError");
             }
             catch (TimeoutException timeoutEx)
             {
-                MessageBox.Show($"Timeout error: {timeoutEx.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.TimeoutError");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"General error: {ex.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.GeneralException");
             }
         }
 
-        private void LoadImage(byte[] imageData)
-        {
-
-            BitmapImage image = ConvertByteArrayToImage(imageData);
-            imagePlayerProfilePicture.Source = image;
-
-        }
+        
 
         // TODO: Pasar a utilities
         public BitmapImage ConvertByteArrayToImage(byte[] imageData)
