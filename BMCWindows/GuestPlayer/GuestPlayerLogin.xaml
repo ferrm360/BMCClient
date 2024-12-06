@@ -38,7 +38,7 @@
             <Grid Grid.Row="1" Grid.Column="1" Margin="0,5,0,0">
                 <Image Source="pack://application:,,,/Images/LongTextbox.png" Stretch="Uniform" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
-                <TextBox x:Name="textBoxUsername" Background="Transparent" BorderBrush="Transparent" TextAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="0,23,0,22"/>
+                <TextBox x:Name="textBoxUsername" Background="Transparent" BorderBrush="Transparent" TextAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="0,23,0,22" TextChanged="CheckLimit" MaxLength="255" Tag="255"/>
             </Grid>
 
             <Button x:Name="buttonLoginAsGuest" Grid.Row="2" Grid.Column="1" Click="LoginAsGuest" Background="Transparent" BorderBrush="Transparent" FocusVisualStyle="{x:Null}" Focusable="False">

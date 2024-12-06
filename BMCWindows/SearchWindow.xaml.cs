@@ -91,10 +91,21 @@ namespace BMCWindows
                 {
                     if (response.Player != null && response.Player.Any())
                     {
+                        ProfileServer.ProfileServiceClient profileProxy = new ProfileServer.ProfileServiceClient();
+
                         ObservableCollection<Friend> friendsList = new ObservableCollection<Friend>(
-                            response.Player.Select(friendPlayer => new Friend
+                            response.Player.Select(friendPlayer =>
                             {
-                                UserName = friendPlayer.Username,
+                                var friendProfilePicture = profileProxy.GetProfileImage(friendPlayer.Username);
+                                BitmapImage image = ImageConvertor.ConvertByteArrayToImage(friendProfilePicture.ImageData);
+
+                                return new Friend
+                                {
+                                    UserName = friendPlayer.Username,
+                                    FriendPicture = image,
+                                };
+
+
 
                             })
                         );

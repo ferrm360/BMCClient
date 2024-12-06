@@ -111,8 +111,8 @@
                 <RowDefinition Height="125*"/>
             </Grid.RowDefinitions>
 
-            <TextBox x:Name="textBoxLobbyName" Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" MaxLength=""/>
-            <TextBox x:Name="textBoxLobbyPassword" Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent"/>
+            <TextBox x:Name="textBoxLobbyName" Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" MaxLength="256" TextChanged="CheckLimit" Tag="256"/>
+            <TextBox x:Name="textBoxLobbyPassword" Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" MaxLength="256" TextChanged="CheckLimit" Tag="256"/>
 
         </Grid>
 

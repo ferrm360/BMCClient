@@ -25,6 +25,8 @@ namespace BMCWindows
     /// </summary>
     public partial class SignUpWindow : Page
     {
+
+        private int maxPasswordLength = 255;
         public SignUpWindow()
         {
             InitializeComponent();
@@ -81,6 +83,36 @@ namespace BMCWindows
             this.NavigationService.GoBack();
         }
 
-       
+        private void CheckLimit(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            int maxLength = int.Parse(textBox.Tag.ToString());
+
+            if (textBox.Text.Length >= maxLength)
+            {
+                textBox.IsReadOnly = true;
+            }
+            else
+            {
+                textBox.IsReadOnly = false;
+            }
+        }
+
+        private void CheckPasswordLimit(object sender, RoutedEventArgs e)
+        {
+            PasswordBox passwordBox = sender as PasswordBox;
+            string password = passwordBox.Password;
+
+            if (password.Length >= maxPasswordLength)
+            {
+                passwordBox.IsEnabled = false;
+            }
+            else
+            {
+                passwordBox.IsEnabled = true;
+            }
+        }
+
+
     }
 }

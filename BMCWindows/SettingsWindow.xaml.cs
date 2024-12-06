@@ -24,33 +24,13 @@ namespace BMCWindows
     /// </summary>
     public partial class SettingsWindow : Page
     {
+        private int maxPasswordLength = 255;
         public SettingsWindow()
         {
             InitializeComponent();
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData(); 
-            ProfileServer.ProfileServiceClient proxyProfile = new ProfileServer.ProfileServiceClient();
-            var imageUrl = proxyProfile.GetProfileImage(player.Username);
-            if (imageUrl.ImageData == null || imageUrl.ImageData.Length == 0)
-            {
-                MessageBox.Show("No image data returned.");
-            }
-            else
-            {
-                BitmapImage image = ImageConvertor.ConvertByteArrayToImage(imageUrl.ImageData);
-                if (image == null)
-                {
-                    MessageBox.Show("Image conversion failed.");
-                }
-                else
-                {
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        imageUserProfilePicture.Source = image;
-                    });
-
-                }
-            }
+           
 
         }
 
@@ -90,6 +70,21 @@ namespace BMCWindows
         private void GoBack(object sender, RoutedEventArgs e)
         {
             this.NavigationService.GoBack();
+        }
+
+        private void CheckPasswordLimit(object sender, RoutedEventArgs e)
+        {
+            PasswordBox passwordBox = sender as PasswordBox;
+            string password = passwordBox.Password;
+
+            if (password.Length >= maxPasswordLength)
+            {
+                passwordBox.IsEnabled = false;
+            }
+            else
+            {
+                passwordBox.IsEnabled = true;
+            }
         }
     }
 }

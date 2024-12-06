@@ -63,7 +63,7 @@
             </ListBox>
 
         </Grid>
-        <Expander Header="Amigos" ExpandDirection="Up" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="250" Height="23">
+        <Expander Header="Amigos" ExpandDirection="Up" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="250" Height="23" Visibility="Hidden">
             <Expander.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock Text="Chat" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center"/>
@@ -90,7 +90,7 @@
             </Border>
         </Expander>
 
-        <Grid x:Name="ChatGrid" Visibility="Collapsed" Margin="10,0,0,0">
+        <Grid x:Name="ChatGrid"  Margin="10,0,0,0" Visibility="Hidden"> 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="268*"/>
                 <ColumnDefinition Width="127*"/>

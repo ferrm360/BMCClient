@@ -55,7 +55,7 @@ namespace BMCWindows
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        imagePlayerProfilePicture.Source = image;
+                        ProfileImageBrush.ImageSource = image;
                     });
 
                 }
@@ -76,10 +76,22 @@ namespace BMCWindows
                 {
                     if (response.Friends != null && response.Friends.Any())
                     {
+                        ProfileServer.ProfileServiceClient profileProxy = new ProfileServer.ProfileServiceClient();
+
                         ObservableCollection<Friend> friendsList = new ObservableCollection<Friend>(
-                            response.Friends.Select(friendPlayer => new Friend
+                            response.Friends.Select(friendPlayer =>
                             {
-                                UserName = friendPlayer.Username,
+                                var friendProfilePicture = profileProxy.GetProfileImage(friendPlayer.Username);
+                                BitmapImage image = ImageConvertor.ConvertByteArrayToImage(friendProfilePicture.ImageData);
+
+                                return new Friend
+                                {
+                                    UserName = friendPlayer.Username,
+                                    FriendPicture = image,
+                                };
+
+
+
                             })
                         );
                         FriendsList.ItemsSource = friendsList;
@@ -127,6 +139,12 @@ namespace BMCWindows
                 image.Freeze();
                 return image;
             }
+        }
+
+        private void DeleteFriend(object sender, RoutedEventArgs e)
+        {
+            FriendServer.FriendshipServiceClient friendsProxy = new FriendServer.FriendshipServiceClient();
+            
         }
 
         private void GoBack(object sender, EventArgs e)

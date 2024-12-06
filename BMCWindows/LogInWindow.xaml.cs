@@ -25,6 +25,7 @@ namespace BMCWindows
     public partial class LogIn : Page
     {
         private string realPassword = string.Empty;
+        private int maxPasswordLength = 255;
 
         public LogIn()
         {
@@ -84,6 +85,47 @@ namespace BMCWindows
             textBox.Text = new string( '*', realPassword.Length);
             textBox.SelectionStart = textBox.Text.Length;
             e.Handled = true;
+        }
+
+        private void CheckLimit(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            int maxLength = int.Parse(textBox.Tag.ToString());  
+
+            if (textBox.Text.Length >= maxLength)
+            {
+                if (textBox.Text.Length > maxLength)
+                {
+                    textBox.Text = textBox.Text.Substring(0, maxLength);
+                    textBox.SelectionStart = textBox.Text.Length;
+                }
+
+                textBox.IsReadOnly = true;
+            }
+            else
+            {
+                textBox.IsReadOnly = false;
+            }
+        }
+
+
+        private void CheckPasswordLimit(object sender,  RoutedEventArgs e)
+        {
+            PasswordBox passwordBox = sender as PasswordBox;
+            string password = passwordBoxPassword.Password;
+
+            if (password.Length >= maxPasswordLength)
+            {
+                passwordBoxPassword.IsEnabled = false;
+                if (password.Length > maxPasswordLength)
+                {
+                    passwordBox.Password = password.Substring(0, maxPasswordLength);
+                }
+            }
+            else
+            {
+                passwordBoxPassword.IsEnabled = true;
+            }
         }
     }
 }

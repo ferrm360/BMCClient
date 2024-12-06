@@ -46,10 +46,8 @@
                 <RowDefinition Height="83*"/>
                 <RowDefinition Height="367*"/>
             </Grid.RowDefinitions>
-            <ListBox x:Name="PlayersList" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0"  Grid.Row="1" MouseLeftButtonUp="SelectPlayer">
-                <ListBox.Background>
-                    <ImageBrush ImageSource="Images/GreenRectangle.png"/>
-                </ListBox.Background>
+            <ListBox x:Name="PlayersList" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0"  Grid.Row="1" MouseLeftButtonUp="SelectPlayer" Background="Transparent">
+                
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="5" />
@@ -59,7 +57,10 @@
                     <DataTemplate>
                         <Border Background="{Binding StatusColor}" BorderThickness="1" CornerRadius="10" Padding="5" Margin="5">
                             <StackPanel>
-                                <Image Source="{Binding ProfileImage}" Width="50" Height="50" HorizontalAlignment="Center" />
+                                <StackPanel.Background>
+                                    <ImageBrush ImageSource="Images/GreenRectangle.png"/>
+                                </StackPanel.Background>
+                                <Image Source="{Binding FriendPicture}" Width="50" Height="50" HorizontalAlignment="Center" />
 
                                 <TextBlock Text="{Binding UserName}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Margin="5" />
 
@@ -72,12 +73,19 @@
             <Popup x:Name="PlayerPopup" Placement="Mouse" StaysOpen="False">
                 <Border Background="#D3D3D3" Padding="10" CornerRadius="10">
                     <StackPanel>
-                        <!-- Imagen del jugador en el popup -->
-                        <Image Source="{Binding SelectedPlayer.PlayerImage}" Width="50" Height="50" HorizontalAlignment="Center" />
+                        <StackPanel.Background>
+                            <ImageBrush ImageSource="Images/GreenRectangle.png"/>
+                        </StackPanel.Background>
+                        <Image Source="{Binding SelectedPlayer.FriendPicture}" Width="50" Height="50" HorizontalAlignment="Center" />
                         <TextBlock Text="{Binding UserName}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Margin="5" />
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-                            <Button x:Name="buttonSendRequest" Content="{x:Static p:Resources.FriendSendRequest}" Margin="5" Click="SendRequest"/>
-                            
+                           
+                            <Button x:Name="buttonSendRequest" Content="{x:Static p:Resources.FriendSendRequest}" Margin="5" Click="SendRequest">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="Images/BrownButton.png"/>
+                                </Button.Background>
+                            </Button>
+
                         </StackPanel>
                     </StackPanel>
                 </Border>

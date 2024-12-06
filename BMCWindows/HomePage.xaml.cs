@@ -3,6 +3,8 @@ using BMCWindows.Patterns.Singleton;
 using BMCWindows.Properties;
 using BMCWindows.Server;
 using BMCWindows.Utilities;
+using BMCWindows.Validators;
+using BMCWindows.VerificationCode;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -88,7 +90,7 @@ namespace BMCWindows
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData();
 
-            if (!string.IsNullOrEmpty(textboxGeneralChat.Text))
+            if (!FieldValidator.AreFieldsEmpty(textboxGeneralChat.Text))
             {
                 var formattedMessage = $"{player.Username}: {textboxGeneralChat.Text}";
                 _proxy.SendMessage(player.Username, formattedMessage);
@@ -110,7 +112,7 @@ namespace BMCWindows
 
         private void GoToSettings(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new SettingsWindow());
+            this.NavigationService.Navigate(new VerificationCodePage());
         }
 
         public void OpenContextMenu(object sender, RoutedEventArgs e)

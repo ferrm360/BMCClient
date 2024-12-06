@@ -290,5 +290,19 @@ namespace BMCWindows
             }
         }
 
+        private void CheckLimit(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            int maxLength = int.Parse(textBox.Tag.ToString());
+
+            if (textBox.Text.Length >= maxLength)
+            {
+                textBox.IsReadOnly = true;
+            }
+            else
+            {
+                textBox.IsReadOnly = false;
+            }
+        }
     }
 }

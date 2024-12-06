@@ -10,6 +10,7 @@ using BMCWindows.EmailServer;
 using BMCWindows.LobbyServer;
 using BMCWindows.Patterns.Singleton;
 using BMCWindows.Utilities;
+using BMCWindows.Validators;
 
 namespace BMCWindows
 {
@@ -247,7 +248,7 @@ namespace BMCWindows
         private void SendGeneralMessage(object sender, RoutedEventArgs e)
         {
             var player = UserSessionManager.getInstance().GetPlayerUserData();
-            if (!string.IsNullOrEmpty(textboxGeneralChat.Text))
+            if (!FieldValidator.AreFieldsEmpty(textboxGeneralChat.Text))
             {
                 var formattedMessage = $"{player.Username}: {textboxGeneralChat.Text}";
                 try

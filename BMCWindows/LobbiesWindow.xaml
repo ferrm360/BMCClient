@@ -24,12 +24,9 @@
                 <RowDefinition Height="347*"/>
             </Grid.RowDefinitions>
 
-            <ToggleButton x:Name="publicToggleButton" Grid.Column="1"  Grid.Row="1" IsChecked="True" Content="Public" FontWeight="Bold" Style="{StaticResource SelectorToggleButtonStyle}"  />
+            <ToggleButton x:Name="publicToggleButton" Grid.Column="1"  Grid.Row="1" IsChecked="True" Content="Public" FontWeight="Bold" Style="{StaticResource SelectorToggleButtonStyle}"  Visibility="Hidden"/>
 
-            <ToggleButton x:Name="privateToggleButton" IsChecked="False" Grid.Column="2" Grid.Row="1" Content="Private" FontWeight="Bold" Style="{StaticResource SelectorToggleButtonStyle}"  />
-
-
-
+            <ToggleButton x:Name="privateToggleButton" IsChecked="False" Grid.Column="2" Grid.Row="1" Content="Private" FontWeight="Bold" Style="{StaticResource SelectorToggleButtonStyle}"  Visibility="Hidden"/>
 
         </Grid>
 
@@ -45,7 +42,6 @@
                 <RowDefinition Height="283*"/>
                 <RowDefinition Height="62*"/>
             </Grid.RowDefinitions>
-            <!-- Lista de Partidas -->
             <ListBox x:Name="listBoxLobbies" Grid.Column="1" Grid.Row="2" ItemsSource="{Binding GameSessions}" Margin="10,10,10,10" SelectionMode="Single" SelectionChanged="LobbyListBoxSelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
