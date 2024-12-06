@@ -135,6 +135,9 @@
   <data name="ChangePasswordLabelNewPassword" xml:space="preserve">
     <value>New password</value>
   </data>
+  <data name="ConfirmationBanPlayer" xml:space="preserve">
+    <value>Are you sure you want to expel the player {0}?</value>
+  </data>
   <data name="ConfirmMessageCancelTitle" xml:space="preserve">
     <value>Confirm cancellation</value>
   </data>
@@ -152,6 +155,132 @@
   </data>
   <data name="EditProfileLabelEditProfile" xml:space="preserve">
     <value>Edit profile</value>
+  </data>
+  <data name="Error.CantAddingPlayer" xml:space="preserve">
+    <value>An error occurred while trying to add the player to the game, please try again</value>
+  </data>
+  <data name="Error.CantSendMessages" xml:space="preserve">
+    <value>An error occurred while trying to send the message, please try again later</value>
+  </data>
+  <data name="Error.CantSummitMatrix" xml:space="preserve">
+    <value>An error occurred while trying to send the position of your cards, please try again</value>
+  </data>
+  <data name="Error.CommunicationError" xml:space="preserve">
+    <value>There was a problem connecting to the server. Please check your internet connection or try again later.</value>
+  </data>
+  <data name="Error.DifferentPassword" xml:space="preserve">
+    <value>Passwords are different, check them</value>
+  </data>
+  <data name="Error.DuplicateEmail" xml:space="preserve">
+    <value>The email is duplicated, please change it</value>
+  </data>
+  <data name="Error.DuplicateLobbyName" xml:space="preserve">
+    <value>There is already a lobby registered with that name, please enter another name</value>
+  </data>
+  <data name="Error.DuplicateUsername" xml:space="preserve">
+    <value>The username is duplicated, please change it</value>
+  </data>
+  <data name="Error.EmptyImage" xml:space="preserve">
+    <value>The image is empty</value>
+  </data>
+  <data name="Error.ErrorWhileUpdatingProfile" xml:space="preserve">
+    <value>An error occurred while trying to update the profile, please try again later</value>
+  </data>
+  <data name="Error.ErrorWhileUpdatingProfilePicture" xml:space="preserve">
+    <value>An error occurred while trying to update your profile picture, please try again later.</value>
+  </data>
+  <data name="Error.ExpelPlayer" xml:space="preserve">
+    <value>An error occurred while trying to kick the player</value>
+  </data>
+  <data name="Error.GameAlredyExists" xml:space="preserve">
+    <value>The game already exists, please try another name</value>
+  </data>
+  <data name="Error.GameboardCardsNotPlaced" xml:space="preserve">
+    <value>Place all your cards on the board</value>
+  </data>
+  <data name="Error.GameWontStart" xml:space="preserve">
+    <value>An error occurred while trying to start the game, please try again later</value>
+  </data>
+  <data name="Error.GeneralMessage" xml:space="preserve">
+    <value>An error occurred, please try again later.</value>
+  </data>
+  <data name="Error.ImageNotFound" xml:space="preserve">
+    <value>The required image was not found</value>
+  </data>
+  <data name="Error.IncorrectPassword" xml:space="preserve">
+    <value>The password entered is incorrect, please correct it.</value>
+  </data>
+  <data name="Error.InvalidBio" xml:space="preserve">
+    <value>The entered biography is not valid, please correct it.</value>
+  </data>
+  <data name="Error.InvalidEmail" xml:space="preserve">
+    <value>The email entered is not valid, please check it</value>
+  </data>
+  <data name="Error.InvalidLobbyPassword" xml:space="preserve">
+    <value>The password entered is not correct, please correct it.</value>
+  </data>
+  <data name="Error.InvalidPassword" xml:space="preserve">
+    <value>The password entered is incorrect, please check it.</value>
+  </data>
+  <data name="Error.InvalidProfileData" xml:space="preserve">
+    <value>The information entered in the profile is not valid, please correct it</value>
+  </data>
+  <data name="Error.InvalidUsername" xml:space="preserve">
+    <value>The username entered is not valid, please check it</value>
+  </data>
+  <data name="Error.LobbyAlreadyExists" xml:space="preserve">
+    <value>The lobby already exists, please try another name</value>
+  </data>
+  <data name="Error.LobbyFull" xml:space="preserve">
+    <value>The lobby you are trying to enter is full</value>
+  </data>
+  <data name="Error.LobbyNotFound" xml:space="preserve">
+    <value>The lobby you are trying to enter was not found.</value>
+  </data>
+  <data name="Error.NotificacitionMissing" xml:space="preserve">
+    <value>An error occurred while trying to notify the player, please try again</value>
+  </data>
+  <data name="Error.NotLobbyHost" xml:space="preserve">
+    <value>Only the host can perform this action</value>
+  </data>
+  <data name="Error.PlayerNotInLobby" xml:space="preserve">
+    <value>The selected player is not in the lobby</value>
+  </data>
+  <data name="Error.PlayerNotReady" xml:space="preserve">
+    <value>The player is not ready yet, please wait a moment</value>
+  </data>
+  <data name="Error.ProfileNotFound" xml:space="preserve">
+    <value>Profile not found</value>
+  </data>
+  <data name="Error.ScoreNotFound" xml:space="preserve">
+    <value>No score found for the selected player</value>
+  </data>
+  <data name="Error.SenderNotFound" xml:space="preserve">
+    <value>An error occurred while identifying the sender of the message, please try again.</value>
+  </data>
+  <data name="Error.SeverError" xml:space="preserve">
+    <value>The server is having trouble completing your request, please try again later</value>
+  </data>
+  <data name="Error.TimeoutError" xml:space="preserve">
+    <value>The connection to the server has timed out. Please try again later.</value>
+  </data>
+  <data name="Error.UnauthorizedAccess" xml:space="preserve">
+    <value>You are not allowed access</value>
+  </data>
+  <data name="Error.UserAlreadyConnected" xml:space="preserve">
+    <value>The user you are trying to log in with is already logged in</value>
+  </data>
+  <data name="Error.UserNotConnected" xml:space="preserve">
+    <value>The user is not logged in, please try again later</value>
+  </data>
+  <data name="Error.UserNotFound" xml:space="preserve">
+    <value>The user entered was not found, please check it</value>
+  </data>
+  <data name="Friend.AcceptRequest" xml:space="preserve">
+    <value>Friend request accepted successfully</value>
+  </data>
+  <data name="Friend.DeclinedRequest" xml:space="preserve">
+    <value>Friend request rejected successfully</value>
   </data>
   <data name="FriendButtonAddFriend" xml:space="preserve">
     <value>Add friend</value>
@@ -221,6 +350,42 @@
   </data>
   <data name="HomePageShowCards" xml:space="preserve">
     <value>Show cards</value>
+  </data>
+  <data name="Info.CardsPostionSent" xml:space="preserve">
+    <value>Your cards have been placed correctly</value>
+  </data>
+  <data name="Info.GameNotFound" xml:space="preserve">
+    <value>Game not found, please try again</value>
+  </data>
+  <data name="Info.GameStarted" xml:space="preserve">
+    <value>Starting the game</value>
+  </data>
+  <data name="Info.GuestLogOut" xml:space="preserve">
+    <value>Your session has been closed successfully</value>
+  </data>
+  <data name="Info.InvitationSuccessful" xml:space="preserve">
+    <value>Invitation email sent successfully </value>
+  </data>
+  <data name="Info.InvitationEmailFailed" xml:space="preserve">
+    <value>An error occurred while trying to send the invitation email</value>
+  </data>
+  <data name="Info.NoAreFriends" xml:space="preserve">
+    <value>Can't send messages because you are not friends</value>
+  </data>
+  <data name="Info.NotEnoughPlayer" xml:space="preserve">
+    <value>There are not enough players to start the game, please wait for a player to join</value>
+  </data>
+  <data name="Info.OnlyHostStart" xml:space="preserve">
+    <value>Only the host can start the game, please wait for them to do so</value>
+  </data>
+  <data name="Info.PlayerDontSummitGameBoard" xml:space="preserve">
+    <value>The player has not finished placing their cards, please wait</value>
+  </data>
+  <data name="Lobby.LoadError" xml:space="preserve">
+    <value>An error occurred while loading the available lobbies</value>
+  </data>
+  <data name="Lobby.NotSelectedLobby" xml:space="preserve">
+    <value>Please select a lobby</value>
   </data>
   <data name="LobbyJoinLobby" xml:space="preserve">
     <value>Join</value>
@@ -315,6 +480,9 @@
   <data name="MessageInformationTitlePlayerAdded" xml:space="preserve">
     <value>Player added</value>
   </data>
+  <data name="MessageTitleBanPlayer" xml:space="preserve">
+    <value>Confirm expulsion</value>
+  </data>
   <data name="PlayerLabelLevel" xml:space="preserve">
     <value>Level</value>
   </data>
@@ -365,5 +533,80 @@
   </data>
   <data name="ViewCardsLabelCards" xml:space="preserve">
     <value>Cards</value>
+  </data>
+  <data name="Info.ProfileImageUpdated" xml:space="preserve">
+    <value>Profile picture updated successfully</value>
+  </data>
+  <data name="Info.UserUpdated" xml:space="preserve">
+    <value>Username updated successfully</value>
+  </data>
+  <data name="Info.BioUpdated" xml:space="preserve">
+    <value>Biography successfully updated</value>
+  </data>
+  <data name="Info.RequestSentSuccesfully" xml:space="preserve">
+    <value>The request was sent successfully</value>
+  </data>
+  <data name="Error.NotSelectedPlayer" xml:space="preserve">
+    <value>Please select a player</value>
+  </data>
+  <data name="PasswordUpdated" xml:space="preserve">
+    <value>Password updated successfully</value>
+  </data>
+  <data name="Info.SendingCode" xml:space="preserve">
+    <value>Sending verification code...</value>
+  </data>
+  <data name="Info.CodeSentSuccesfully" xml:space="preserve">
+    <value>Code sent successfully.</value>
+  </data>
+  <data name="Error.SendCodeFailed" xml:space="preserve">
+    <value>An error occurred while trying to send the code</value>
+  </data>
+  <data name="Info.ValidationCodeCorrect" xml:space="preserve">
+    <value>Correct code</value>
+  </data>
+  <data name="Error.InvalidValidationCode" xml:space="preserve">
+    <value>The code entered is incorrect</value>
+  </data>
+  <data name="Error.TooManyTries" xml:space="preserve">
+    <value>Many resend attempts. Please try again in 1 minute.</value>
+  </data>
+  <data name="Confirmation.ConfirmCancelation" xml:space="preserve">
+    <value>Are you sure you want to cancel the operation?</value>
+  </data>
+  <data name="CancelVerificationTitle" xml:space="preserve">
+    <value>Cancel verification</value>
+  </data>
+  <data name="GameplayShifts" xml:space="preserve">
+    <value>Shifts</value>
+  </data>
+  <data name="Gameplay.PlayerBoard" xml:space="preserve">
+    <value>Your board</value>
+  </data>
+  <data name="Gameplay.EnemyBoard" xml:space="preserve">
+    <value>Enemy´s board</value>
+  </data>
+  <data name="Gameplay.Play" xml:space="preserve">
+    <value>Let´s play!</value>
+  </data>
+  <data name="Info.Turn" xml:space="preserve">
+    <value>Is your turn {0}</value>
+  </data>
+  <data name="Error.WaitTurn" xml:space="preserve">
+    <value>Wait for your turn</value>
+  </data>
+  <data name="Gameplay.Attack" xml:space="preserve">
+    <value>You have clicked on cell: ({0},{1}) in your own dashboard</value>
+  </data>
+  <data name="AttackMade" xml:space="preserve">
+    <value>You have attacked!</value>
+  </data>
+  <data name="MissedAttack" xml:space="preserve">
+    <value>Oops! that was close :D</value>
+  </data>
+  <data name="FirstTurn" xml:space="preserve">
+    <value>You have the first turn</value>
+  </data>
+  <data name="TurnInfo" xml:space="preserve">
+    <value>You don't have the first turn, wait your turn</value>
   </data>
 </root>

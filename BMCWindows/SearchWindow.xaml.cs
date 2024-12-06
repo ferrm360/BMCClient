@@ -1,4 +1,5 @@
 ﻿using BMCWindows.Patterns.Singleton;
+using BMCWindows.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -55,20 +56,24 @@ namespace BMCWindows
                 }
                 else
                 {
-                    MessageBox.Show($"Error: {response?.ErrorKey ?? "Unknown error"}");
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage(response.ErrorKey);
                 }
             }
             catch (CommunicationException commEx)
             {
-                MessageBox.Show($"Communication error: {commEx.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.CommunicationError");
             }
             catch (TimeoutException timeoutEx)
             {
-                MessageBox.Show($"Timeout error: {timeoutEx.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.TimeoutError");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"General error: {ex.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.GeneralException");
             }
         }
 
@@ -86,10 +91,21 @@ namespace BMCWindows
                 {
                     if (response.Player != null && response.Player.Any())
                     {
+                        ProfileServer.ProfileServiceClient profileProxy = new ProfileServer.ProfileServiceClient();
+
                         ObservableCollection<Friend> friendsList = new ObservableCollection<Friend>(
-                            response.Player.Select(friendPlayer => new Friend
+                            response.Player.Select(friendPlayer =>
                             {
-                                UserName = friendPlayer.Username,
+                                var friendProfilePicture = profileProxy.GetProfileImage(friendPlayer.Username);
+                                BitmapImage image = ImageConvertor.ConvertByteArrayToImage(friendProfilePicture.ImageData);
+
+                                return new Friend
+                                {
+                                    UserName = friendPlayer.Username,
+                                    FriendPicture = image,
+                                };
+
+
 
                             })
                         );
@@ -98,24 +114,25 @@ namespace BMCWindows
                 }
                 else
                 {
-                    MessageBox.Show($"Error: {response?.ErrorKey ?? "Unknown error"}");
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage(response.ErrorKey);
                 }
             }
             catch (CommunicationException commEx)
             {
-                MessageBox.Show($"Communication error: {commEx.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.CommunicationError");
             }
             catch (TimeoutException timeoutEx)
             {
-                MessageBox.Show($"Timeout error: {timeoutEx.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.TimeoutError");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"General error: {ex.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.GeneralException");
             }
-
-
-
         }
 
         private void GoBack(object sender, EventArgs e)
@@ -144,19 +161,22 @@ namespace BMCWindows
                 var result = proxy.SendFriendRequest(player.Username, receiverUsername);
                 if (result.IsSuccess) 
                 {
-                    MessageBox.Show("Solicitud enviada exitosamente");
+                    string message = Properties.Resources.Info_RequestSentSuccesfully.ToString();
+                    MessageBox.Show(message);
 
                 }
                 else
                 {
-                    MessageBox.Show(result.ErrorKey);
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.GeneralException");
                 }
 
                 
             }
             else
             {
-                MessageBox.Show("No se ha seleccionado ningún jugador.");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.NotSelectedPlayer");
             }
         }
     }

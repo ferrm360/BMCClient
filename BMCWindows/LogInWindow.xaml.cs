@@ -1,4 +1,5 @@
 ﻿using BMCWindows.Patterns.Singleton;
+using BMCWindows.Utilities;
 using BMCWindows.Validators;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ namespace BMCWindows
     public partial class LogIn : Page
     {
         private string realPassword = string.Empty;
+        private int maxPasswordLength = 255;
 
         public LogIn()
         {
@@ -58,17 +60,20 @@ namespace BMCWindows
                     }
                     else
                     {
-                        MessageBox.Show(result.ErrorKey);
+                        ErrorMessages errorMessages = new ErrorMessages();  
+                        errorMessages.ShowErrorMessage(result.ErrorKey);
                     }
                 }
                 catch(EndpointNotFoundException)
                 {
-                    MessageBox.Show("Error en el servidor");
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.ServerError");
                 }
             }
             else 
             {
-                MessageBox.Show("Hay campos vacíos");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("MessageBoxEmptyFields");
             }
         }
 
@@ -80,6 +85,47 @@ namespace BMCWindows
             textBox.Text = new string( '*', realPassword.Length);
             textBox.SelectionStart = textBox.Text.Length;
             e.Handled = true;
+        }
+
+        private void CheckLimit(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            int maxLength = int.Parse(textBox.Tag.ToString());  
+
+            if (textBox.Text.Length >= maxLength)
+            {
+                if (textBox.Text.Length > maxLength)
+                {
+                    textBox.Text = textBox.Text.Substring(0, maxLength);
+                    textBox.SelectionStart = textBox.Text.Length;
+                }
+
+                textBox.IsReadOnly = true;
+            }
+            else
+            {
+                textBox.IsReadOnly = false;
+            }
+        }
+
+
+        private void CheckPasswordLimit(object sender,  RoutedEventArgs e)
+        {
+            PasswordBox passwordBox = sender as PasswordBox;
+            string password = passwordBoxPassword.Password;
+
+            if (password.Length >= maxPasswordLength)
+            {
+                passwordBoxPassword.IsEnabled = false;
+                if (password.Length > maxPasswordLength)
+                {
+                    passwordBox.Password = password.Substring(0, maxPasswordLength);
+                }
+            }
+            else
+            {
+                passwordBoxPassword.IsEnabled = true;
+            }
         }
     }
 }

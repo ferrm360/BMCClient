@@ -10,6 +10,7 @@ using BMCWindows.EmailServer;
 using BMCWindows.LobbyServer;
 using BMCWindows.Patterns.Singleton;
 using BMCWindows.Utilities;
+using BMCWindows.Validators;
 
 namespace BMCWindows
 {
@@ -80,10 +81,7 @@ namespace BMCWindows
                     {
                         Messages.Add(new Message { Sender = "System", Messages = message });
                     }
-                    else
-                    {
-                        Console.WriteLine($"Duplicate message ignored: {message}");
-                    }
+                    
                 });
             };
 
@@ -137,15 +135,18 @@ namespace BMCWindows
             }
             catch (EndpointNotFoundException)
             {
-                MessageBox.Show("Error: El servidor de chat no está disponible. Verifique su conexión o la configuración del servidor.");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.ServerError");
             }
             catch (CommunicationException)
             {
-                MessageBox.Show("Error de comunicación con el servicio de chat. Por favor, inténtelo más tarde.");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.CommunicationError");
             }
             catch (TimeoutException)
             {
-                MessageBox.Show("El intento de conexión con el servicio de chat ha superado el tiempo límite.");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.TimeoutError");
             }
         }
 
@@ -157,15 +158,18 @@ namespace BMCWindows
             }
             catch (EndpointNotFoundException)
             {
-                MessageBox.Show("Error: No se pudo conectar con el servicio de chat. Verifique que el servidor esté en línea.");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.ServerError");
             }
             catch (CommunicationException)
             {
-                MessageBox.Show("Error en el chat de la lobby. Por favor, verifique su conexión de red.");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.CommunicationError");
             }
             catch (TimeoutException)
             {
-                MessageBox.Show("Tiempo de respuesta excedido.");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.TimeoutError");
             }
         }
 
@@ -226,22 +230,25 @@ namespace BMCWindows
             }
             catch (EndpointNotFoundException)
             {
-                MessageBox.Show("No se pudo desconectar del lobby. El servidor de lobby no está disponible.");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.ServerError");
             }
             catch (CommunicationException)
             {
-                MessageBox.Show("Error de comunicación al intentar salir del lobby.");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.CommunicationError");
             }
             catch (TimeoutException)
             {
-                MessageBox.Show("La operación de desconexión ha superado el tiempo límite.");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.TimeoutError");
             }
         }
 
         private void SendGeneralMessage(object sender, RoutedEventArgs e)
         {
             var player = UserSessionManager.getInstance().GetPlayerUserData();
-            if (!string.IsNullOrEmpty(textboxGeneralChat.Text))
+            if (!FieldValidator.AreFieldsEmpty(textboxGeneralChat.Text))
             {
                 var formattedMessage = $"{player.Username}: {textboxGeneralChat.Text}";
                 try
@@ -251,15 +258,18 @@ namespace BMCWindows
                 }
                 catch (EndpointNotFoundException)
                 {
-                    MessageBox.Show("No se pudo enviar el mensaje. El servidor de chat no está disponible.");
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.ServerError");
                 }
                 catch (CommunicationException)
                 {
-                    MessageBox.Show("Error de comunicación al intentar enviar el mensaje. Por favor, verifique su conexión.");
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.CommunicationError");
                 }
                 catch (TimeoutException)
                 {
-                    MessageBox.Show("El envío del mensaje ha superado el tiempo límite.");
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.TimeoutException");
                 }
             }
         }
@@ -288,7 +298,8 @@ namespace BMCWindows
             var player = UserSessionManager.getInstance().GetPlayerUserData();
             if (lobby == null)
             {
-                MessageBox.Show("Por favor, selecciona un lobby.");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Lobby.NotSelectedLobby");
                 return;
             }
 
@@ -317,7 +328,8 @@ namespace BMCWindows
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al unirse a la lobby: {ex.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.ServerError");
             }
         }
 
@@ -331,7 +343,8 @@ namespace BMCWindows
 
                 if (!response.IsSuccess)
                 {
-                    MessageBox.Show(response.ErrorKey);
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage(response.ErrorKey);
                 }
                 else
                 {
@@ -350,7 +363,8 @@ namespace BMCWindows
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al iniciar el juego: {ex.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.GameWontStart");
             }
         }
 
@@ -416,20 +430,24 @@ namespace BMCWindows
                 }
                 else
                 {
-                    MessageBox.Show($"Error: {response?.ErrorKey ?? "Unknown error"}");
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.ServerError");
                 }
             }
             catch (CommunicationException commEx)
             {
-                MessageBox.Show($"Communication error: {commEx.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.CommunicationError");
             }
             catch (TimeoutException timeoutEx)
             {
-                MessageBox.Show($"Timeout error: {timeoutEx.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.TimeoutError");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"General error: {ex.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.ServerError");
             }
         }
 
@@ -489,29 +507,35 @@ namespace BMCWindows
 
                     if (result.IsSuccess)
                     {
-                        MessageBox.Show("Correo de invitación enviado exitosamente");
+                        string message = Properties.Resources.Info_InvitationSuccessful.ToString();
+                        MessageBox.Show(message);
                     }
                     else
                     {
-                        MessageBox.Show("No se pudo enviar el correo de invitación");
+                        string message = Properties.Resources.Info_InvitationEmailFailed.ToString();
+                        MessageBox.Show(message);
                     }
                 }
             }
             catch (EndpointNotFoundException ex)
             {
-                MessageBox.Show($"El servicio no está disponible: {ex.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.ServerError");
             }
             catch (CommunicationException ex)
             {
-                MessageBox.Show($"Error de comunicación: {ex.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.CommunicationError");
             }
             catch (TimeoutException ex)
             {
-                MessageBox.Show($"El servicio no respondió a tiempo: {ex.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.TiemoutError");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error inesperado: {ex.Message}");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.ServerError");
             }
         }
 
@@ -521,13 +545,16 @@ namespace BMCWindows
             {
                 if (UserSessionManager.getInstance().GetPlayerUserData().Username != _lobby.Host)
                 {
-                    MessageBox.Show("Solo el host de sala puede expulsar");
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.NotLobbyHost");
                     return;
                 }
                 var playerName = listViewJoinedPlayer.SelectedItem.ToString();
 
-                var result = MessageBox.Show($"¿Desea expulsar a {playerName}?",
-                                              "Confirmar expulsión",
+                string confirmationMessage = string.Format(Properties.Resources.ConfirmationBanPlayer, playerName);
+                string messageTitle = Properties.Resources.MessageTitleBanPlayer.ToString();
+                var result = MessageBox.Show(confirmationMessage,
+                                              messageTitle,
                                               MessageBoxButton.YesNo,
                                               MessageBoxImage.Question);
 
@@ -542,24 +569,29 @@ namespace BMCWindows
                         }
                         else
                         {
-                            MessageBox.Show("Ocurrió un problema al expulsar al jugador");
+                            ErrorMessages errorMessages = new ErrorMessages();
+                            errorMessages.ShowErrorMessage("Error.ExpelPlayer");
                         }
                     }
                     catch (EndpointNotFoundException ex)
                     {
-                        MessageBox.Show($"El servicio no está disponible: {ex.Message}");
+                        ErrorMessages errorMessages = new ErrorMessages();
+                        errorMessages.ShowErrorMessage("Error.ServerError");
                     }
                     catch (CommunicationException ex)
                     {
-                        MessageBox.Show($"Error de comunicación: {ex.Message}");
+                        ErrorMessages errorMessages = new ErrorMessages();
+                        errorMessages.ShowErrorMessage("Error.CommunicationError");
                     }
                     catch (TimeoutException ex)
                     {
-                        MessageBox.Show($"El servicio no respondió a tiempo: {ex.Message}");
+                        ErrorMessages errorMessages = new ErrorMessages();
+                        errorMessages.ShowErrorMessage("Error.TiemoutError");
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Error inesperado: {ex.Message}");
+                        ErrorMessages errorMessages = new ErrorMessages();
+                        errorMessages.ShowErrorMessage("Error.ServerError");
                     }
                 }
             }

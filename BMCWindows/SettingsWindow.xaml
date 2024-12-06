@@ -82,11 +82,23 @@
                 <RowDefinition Height="218*"/>
             </Grid.RowDefinitions>
             <Label x:Name="labelOldPassword" Content="{x:Static p:Resources.ChangePasswordLabelCurrentPassword}" Grid.Column="1" Grid.Row="1"/>
-            <PasswordBox x:Name="passwordBoxOldPassword" Grid.Column="2" Grid.Row="1"/>
+            <PasswordBox x:Name="passwordBoxOldPassword" Grid.Column="2" Grid.Row="1" PasswordChanged="CheckPasswordLimit" Padding="15">
+                <PasswordBox.Background>
+                    <ImageBrush ImageSource="Images/LongTextbox.png"/>
+                </PasswordBox.Background>
+            </PasswordBox>
             <Label x:Name="labelNewPassword" Content="{x:Static p:Resources.ChangePasswordLabelNewPassword}" Grid.Column="1" Grid.Row="3"/>
-            <PasswordBox x:Name="passwordBoxPassword" Grid.Column="2" Grid.Row="3"/>
+            <PasswordBox x:Name="passwordBoxPassword" Grid.Column="2" Grid.Row="3" PasswordChanged="CheckPasswordLimit" Padding="15">
+                <PasswordBox.Background>
+                    <ImageBrush ImageSource="Images/LongTextbox.png"/>
+                </PasswordBox.Background>
+            </PasswordBox>
             <Label x:Name="labelConfirmPassword" Content="{x:Static p:Resources.ChangePasswordLabelConfirmPasswrod}" Grid.Column="1" Grid.Row="5"/>
-            <PasswordBox x:Name="passwordBoxNewPassword" Grid.Column="2" Grid.Row="5"/>
+            <PasswordBox x:Name="passwordBoxNewPassword" Grid.Column="2" Grid.Row="5" PasswordChanged="CheckPasswordLimit">
+                <PasswordBox.Background>
+                    <ImageBrush ImageSource="Images/LongTextbox.png"/>
+                </PasswordBox.Background>
+            </PasswordBox>
 
         </Grid>
 

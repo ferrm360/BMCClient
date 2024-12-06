@@ -85,8 +85,5 @@ namespace BMCWindows.GameplayAttack
             }
             return cardDictionary;
         }
-
-
-        
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BMCWindows.Patterns.Singleton;
 using BMCWindows.Server;
+using BMCWindows.Utilities;
 using BMCWindows.Validators;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,8 @@ namespace BMCWindows
     /// </summary>
     public partial class SignUpWindow : Page
     {
+
+        private int maxPasswordLength = 255;
         public SignUpWindow()
         {
             InitializeComponent();
@@ -53,20 +56,24 @@ namespace BMCWindows
                 }
                 catch (EndpointNotFoundException)
                 {
-                    MessageBox.Show("Error en el servidor");
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.ServerError");
                 }
                 catch (CommunicationException)
                 {
-                    MessageBox.Show("Error al registrarse, verifique su configuración de red");
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.CommunicationError");
                 }
                 catch (TimeoutException) 
                 {
-                    MessageBox.Show("El tiempo para el registro del usuario ha experido");
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.TimeoutError");
                 }
             }
             else
             {
-                MessageBox.Show("Hay campos vacíos o incorrectos");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("MessageBoxEmptyFields");
 
             }  
         }
@@ -76,6 +83,36 @@ namespace BMCWindows
             this.NavigationService.GoBack();
         }
 
-       
+        private void CheckLimit(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            int maxLength = int.Parse(textBox.Tag.ToString());
+
+            if (textBox.Text.Length >= maxLength)
+            {
+                textBox.IsReadOnly = true;
+            }
+            else
+            {
+                textBox.IsReadOnly = false;
+            }
+        }
+
+        private void CheckPasswordLimit(object sender, RoutedEventArgs e)
+        {
+            PasswordBox passwordBox = sender as PasswordBox;
+            string password = passwordBox.Password;
+
+            if (password.Length >= maxPasswordLength)
+            {
+                passwordBox.IsEnabled = false;
+            }
+            else
+            {
+                passwordBox.IsEnabled = true;
+            }
+        }
+
+
     }
 }

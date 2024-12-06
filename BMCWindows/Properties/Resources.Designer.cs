@@ -79,6 +79,24 @@ namespace BMCWindows.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a You have attacked!.
+        /// </summary>
+        public static string AttackMade {
+            get {
+                return ResourceManager.GetString("AttackMade", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cancel verification.
+        /// </summary>
+        public static string CancelVerificationTitle {
+            get {
+                return ResourceManager.GetString("CancelVerificationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Change password.
         /// </summary>
         public static string ChangePasswordLabelChange {
@@ -111,6 +129,24 @@ namespace BMCWindows.Properties {
         public static string ChangePasswordLabelNewPassword {
             get {
                 return ResourceManager.GetString("ChangePasswordLabelNewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Are you sure you want to cancel the operation?.
+        /// </summary>
+        public static string Confirmation_ConfirmCancelation {
+            get {
+                return ResourceManager.GetString("Confirmation.ConfirmCancelation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Are you sure you want to expel the player {0}?.
+        /// </summary>
+        public static string ConfirmationBanPlayer {
+            get {
+                return ResourceManager.GetString("ConfirmationBanPlayer", resourceCulture);
             }
         }
         
@@ -165,6 +201,438 @@ namespace BMCWindows.Properties {
         public static string EditProfileLabelEditProfile {
             get {
                 return ResourceManager.GetString("EditProfileLabelEditProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred while trying to add the player to the game, please try again.
+        /// </summary>
+        public static string Error_CantAddingPlayer {
+            get {
+                return ResourceManager.GetString("Error.CantAddingPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred while trying to send the message, please try again later.
+        /// </summary>
+        public static string Error_CantSendMessages {
+            get {
+                return ResourceManager.GetString("Error.CantSendMessages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred while trying to send the position of your cards, please try again.
+        /// </summary>
+        public static string Error_CantSummitMatrix {
+            get {
+                return ResourceManager.GetString("Error.CantSummitMatrix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a There was a problem connecting to the server. Please check your internet connection or try again later..
+        /// </summary>
+        public static string Error_CommunicationError {
+            get {
+                return ResourceManager.GetString("Error.CommunicationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Passwords are different, check them.
+        /// </summary>
+        public static string Error_DifferentPassword {
+            get {
+                return ResourceManager.GetString("Error.DifferentPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The email is duplicated, please change it.
+        /// </summary>
+        public static string Error_DuplicateEmail {
+            get {
+                return ResourceManager.GetString("Error.DuplicateEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a There is already a lobby registered with that name, please enter another name.
+        /// </summary>
+        public static string Error_DuplicateLobbyName {
+            get {
+                return ResourceManager.GetString("Error.DuplicateLobbyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The username is duplicated, please change it.
+        /// </summary>
+        public static string Error_DuplicateUsername {
+            get {
+                return ResourceManager.GetString("Error.DuplicateUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The image is empty.
+        /// </summary>
+        public static string Error_EmptyImage {
+            get {
+                return ResourceManager.GetString("Error.EmptyImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred while trying to update the profile, please try again later.
+        /// </summary>
+        public static string Error_ErrorWhileUpdatingProfile {
+            get {
+                return ResourceManager.GetString("Error.ErrorWhileUpdatingProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred while trying to update your profile picture, please try again later..
+        /// </summary>
+        public static string Error_ErrorWhileUpdatingProfilePicture {
+            get {
+                return ResourceManager.GetString("Error.ErrorWhileUpdatingProfilePicture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred while trying to kick the player.
+        /// </summary>
+        public static string Error_ExpelPlayer {
+            get {
+                return ResourceManager.GetString("Error.ExpelPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The game already exists, please try another name.
+        /// </summary>
+        public static string Error_GameAlredyExists {
+            get {
+                return ResourceManager.GetString("Error.GameAlredyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Place all your cards on the board.
+        /// </summary>
+        public static string Error_GameboardCardsNotPlaced {
+            get {
+                return ResourceManager.GetString("Error.GameboardCardsNotPlaced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred while trying to start the game, please try again later.
+        /// </summary>
+        public static string Error_GameWontStart {
+            get {
+                return ResourceManager.GetString("Error.GameWontStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred, please try again later..
+        /// </summary>
+        public static string Error_GeneralMessage {
+            get {
+                return ResourceManager.GetString("Error.GeneralMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The required image was not found.
+        /// </summary>
+        public static string Error_ImageNotFound {
+            get {
+                return ResourceManager.GetString("Error.ImageNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The password entered is incorrect, please correct it..
+        /// </summary>
+        public static string Error_IncorrectPassword {
+            get {
+                return ResourceManager.GetString("Error.IncorrectPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The entered biography is not valid, please correct it..
+        /// </summary>
+        public static string Error_InvalidBio {
+            get {
+                return ResourceManager.GetString("Error.InvalidBio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The email entered is not valid, please check it.
+        /// </summary>
+        public static string Error_InvalidEmail {
+            get {
+                return ResourceManager.GetString("Error.InvalidEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The password entered is not correct, please correct it..
+        /// </summary>
+        public static string Error_InvalidLobbyPassword {
+            get {
+                return ResourceManager.GetString("Error.InvalidLobbyPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The password entered is incorrect, please check it..
+        /// </summary>
+        public static string Error_InvalidPassword {
+            get {
+                return ResourceManager.GetString("Error.InvalidPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The information entered in the profile is not valid, please correct it.
+        /// </summary>
+        public static string Error_InvalidProfileData {
+            get {
+                return ResourceManager.GetString("Error.InvalidProfileData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The username entered is not valid, please check it.
+        /// </summary>
+        public static string Error_InvalidUsername {
+            get {
+                return ResourceManager.GetString("Error.InvalidUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The code entered is incorrect.
+        /// </summary>
+        public static string Error_InvalidValidationCode {
+            get {
+                return ResourceManager.GetString("Error.InvalidValidationCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The lobby already exists, please try another name.
+        /// </summary>
+        public static string Error_LobbyAlreadyExists {
+            get {
+                return ResourceManager.GetString("Error.LobbyAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The lobby you are trying to enter is full.
+        /// </summary>
+        public static string Error_LobbyFull {
+            get {
+                return ResourceManager.GetString("Error.LobbyFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The lobby you are trying to enter was not found..
+        /// </summary>
+        public static string Error_LobbyNotFound {
+            get {
+                return ResourceManager.GetString("Error.LobbyNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred while trying to notify the player, please try again.
+        /// </summary>
+        public static string Error_NotificacitionMissing {
+            get {
+                return ResourceManager.GetString("Error.NotificacitionMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Only the host can perform this action.
+        /// </summary>
+        public static string Error_NotLobbyHost {
+            get {
+                return ResourceManager.GetString("Error.NotLobbyHost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Please select a player.
+        /// </summary>
+        public static string Error_NotSelectedPlayer {
+            get {
+                return ResourceManager.GetString("Error.NotSelectedPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The selected player is not in the lobby.
+        /// </summary>
+        public static string Error_PlayerNotInLobby {
+            get {
+                return ResourceManager.GetString("Error.PlayerNotInLobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The player is not ready yet, please wait a moment.
+        /// </summary>
+        public static string Error_PlayerNotReady {
+            get {
+                return ResourceManager.GetString("Error.PlayerNotReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Profile not found.
+        /// </summary>
+        public static string Error_ProfileNotFound {
+            get {
+                return ResourceManager.GetString("Error.ProfileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No score found for the selected player.
+        /// </summary>
+        public static string Error_ScoreNotFound {
+            get {
+                return ResourceManager.GetString("Error.ScoreNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred while trying to send the code.
+        /// </summary>
+        public static string Error_SendCodeFailed {
+            get {
+                return ResourceManager.GetString("Error.SendCodeFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred while identifying the sender of the message, please try again..
+        /// </summary>
+        public static string Error_SenderNotFound {
+            get {
+                return ResourceManager.GetString("Error.SenderNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The server is having trouble completing your request, please try again later.
+        /// </summary>
+        public static string Error_SeverError {
+            get {
+                return ResourceManager.GetString("Error.SeverError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The connection to the server has timed out. Please try again later..
+        /// </summary>
+        public static string Error_TimeoutError {
+            get {
+                return ResourceManager.GetString("Error.TimeoutError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Many resend attempts. Please try again in 1 minute..
+        /// </summary>
+        public static string Error_TooManyTries {
+            get {
+                return ResourceManager.GetString("Error.TooManyTries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You are not allowed access.
+        /// </summary>
+        public static string Error_UnauthorizedAccess {
+            get {
+                return ResourceManager.GetString("Error.UnauthorizedAccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The user you are trying to log in with is already logged in.
+        /// </summary>
+        public static string Error_UserAlreadyConnected {
+            get {
+                return ResourceManager.GetString("Error.UserAlreadyConnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The user is not logged in, please try again later.
+        /// </summary>
+        public static string Error_UserNotConnected {
+            get {
+                return ResourceManager.GetString("Error.UserNotConnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The user entered was not found, please check it.
+        /// </summary>
+        public static string Error_UserNotFound {
+            get {
+                return ResourceManager.GetString("Error.UserNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Wait for your turn.
+        /// </summary>
+        public static string Error_WaitTurn {
+            get {
+                return ResourceManager.GetString("Error.WaitTurn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You have the first turn.
+        /// </summary>
+        public static string FirstTurn {
+            get {
+                return ResourceManager.GetString("FirstTurn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Friend request accepted successfully.
+        /// </summary>
+        public static string Friend_AcceptRequest {
+            get {
+                return ResourceManager.GetString("Friend.AcceptRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Friend request rejected successfully.
+        /// </summary>
+        public static string Friend_DeclinedRequest {
+            get {
+                return ResourceManager.GetString("Friend.DeclinedRequest", resourceCulture);
             }
         }
         
@@ -250,11 +718,56 @@ namespace BMCWindows.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a You have clicked on cell: ({0},{1}) in your own dashboard.
+        /// </summary>
+        public static string Gameplay_Attack {
+            get {
+                return ResourceManager.GetString("Gameplay.Attack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Enemy ´s board.
+        /// </summary>
+        public static string Gameplay_EnemyBoard {
+            get {
+                return ResourceManager.GetString("Gameplay.EnemyBoard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Let´s play!.
+        /// </summary>
+        public static string Gameplay_Play {
+            get {
+                return ResourceManager.GetString("Gameplay.Play", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your board.
+        /// </summary>
+        public static string Gameplay_PlayerBoard {
+            get {
+                return ResourceManager.GetString("Gameplay.PlayerBoard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Players in lobby.
         /// </summary>
         public static string GameplayPlayesInLobby {
             get {
                 return ResourceManager.GetString("GameplayPlayesInLobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Shifts.
+        /// </summary>
+        public static string GameplayShifts {
+            get {
+                return ResourceManager.GetString("GameplayShifts", resourceCulture);
             }
         }
         
@@ -372,6 +885,186 @@ namespace BMCWindows.Properties {
         public static string HomePageShowCards {
             get {
                 return ResourceManager.GetString("HomePageShowCards", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Biography successfully updated.
+        /// </summary>
+        public static string Info_BioUpdated {
+            get {
+                return ResourceManager.GetString("Info.BioUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your cards have been placed correctly.
+        /// </summary>
+        public static string Info_CardsPostionSent {
+            get {
+                return ResourceManager.GetString("Info.CardsPostionSent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Code sent successfully..
+        /// </summary>
+        public static string Info_CodeSentSuccesfully {
+            get {
+                return ResourceManager.GetString("Info.CodeSentSuccesfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Game not found, please try again.
+        /// </summary>
+        public static string Info_GameNotFound {
+            get {
+                return ResourceManager.GetString("Info.GameNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Starting the game.
+        /// </summary>
+        public static string Info_GameStarted {
+            get {
+                return ResourceManager.GetString("Info.GameStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your session has been closed successfully.
+        /// </summary>
+        public static string Info_GuestLogOut {
+            get {
+                return ResourceManager.GetString("Info.GuestLogOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred while trying to send the invitation email.
+        /// </summary>
+        public static string Info_InvitationEmailFailed {
+            get {
+                return ResourceManager.GetString("Info.InvitationEmailFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Invitation email sent successfully.
+        /// </summary>
+        public static string Info_InvitationSuccessful {
+            get {
+                return ResourceManager.GetString("Info.InvitationSuccessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Can&apos;t send messages because you are not friends.
+        /// </summary>
+        public static string Info_NoAreFriends {
+            get {
+                return ResourceManager.GetString("Info.NoAreFriends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a There are not enough players to start the game, please wait for a player to join.
+        /// </summary>
+        public static string Info_NotEnoughPlayer {
+            get {
+                return ResourceManager.GetString("Info.NotEnoughPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Only the host can start the game, please wait for them to do so.
+        /// </summary>
+        public static string Info_OnlyHostStart {
+            get {
+                return ResourceManager.GetString("Info.OnlyHostStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The player has not finished placing their cards, please wait.
+        /// </summary>
+        public static string Info_PlayerDontSummitGameBoard {
+            get {
+                return ResourceManager.GetString("Info.PlayerDontSummitGameBoard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Profile picture updated successfully.
+        /// </summary>
+        public static string Info_ProfileImageUpdated {
+            get {
+                return ResourceManager.GetString("Info.ProfileImageUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The request was sent successfully.
+        /// </summary>
+        public static string Info_RequestSentSuccesfully {
+            get {
+                return ResourceManager.GetString("Info.RequestSentSuccesfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Sending verification code....
+        /// </summary>
+        public static string Info_SendingCode {
+            get {
+                return ResourceManager.GetString("Info.SendingCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Is your turn {0}.
+        /// </summary>
+        public static string Info_Turn {
+            get {
+                return ResourceManager.GetString("Info.Turn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Username updated successfully.
+        /// </summary>
+        public static string Info_UserUpdated {
+            get {
+                return ResourceManager.GetString("Info.UserUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Correct code.
+        /// </summary>
+        public static string Info_ValidationCodeCorrect {
+            get {
+                return ResourceManager.GetString("Info.ValidationCodeCorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred while loading the available lobbies.
+        /// </summary>
+        public static string Lobby_LoadError {
+            get {
+                return ResourceManager.GetString("Lobby.LoadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Please select a lobby.
+        /// </summary>
+        public static string Lobby_NotSelectedLobby {
+            get {
+                return ResourceManager.GetString("Lobby.NotSelectedLobby", resourceCulture);
             }
         }
         
@@ -655,6 +1348,33 @@ namespace BMCWindows.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Confirm expulsion.
+        /// </summary>
+        public static string MessageTitleBanPlayer {
+            get {
+                return ResourceManager.GetString("MessageTitleBanPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Oops! that was close :D.
+        /// </summary>
+        public static string MissedAttack {
+            get {
+                return ResourceManager.GetString("MissedAttack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Password updated successfully.
+        /// </summary>
+        public static string PasswordUpdated {
+            get {
+                return ResourceManager.GetString("PasswordUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Level.
         /// </summary>
         public static string PlayerLabelLevel {
@@ -777,6 +1497,15 @@ namespace BMCWindows.Properties {
         public static string SignUpTextBoxUser {
             get {
                 return ResourceManager.GetString("SignUpTextBoxUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You don&apos;t have the first turn, wait your turn.
+        /// </summary>
+        public static string TurnInfo {
+            get {
+                return ResourceManager.GetString("TurnInfo", resourceCulture);
             }
         }
         

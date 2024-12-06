@@ -113,15 +113,12 @@ namespace BMCWindows
                             lobbyDto.Password = requestDTO.Password;
                         }
 
-                        Console.WriteLine("Lobbies disponibles: " + proxy.GetAllLobbies().Length);
 
                         callbackHandler.PlayerJoined += (playerName, lobbyId) =>
                         {
-                            Console.WriteLine($"{playerName} se ha unido a la lobby {lobbyId}");
                         };
                         callbackHandler.PlayerLeft += (playerName, lobbyId) =>
                         {
-                            Console.WriteLine($"{playerName} ha salido de la lobby {lobbyId}");
                         };
 
                         this.NavigationService.Navigate(new LobbyWindow(lobbyDto, proxy, callbackHandler));
@@ -133,23 +130,40 @@ namespace BMCWindows
                 }
                 catch (TimeoutException ex)
                 {
-                    MessageBox.Show("Timeout al intentar crear la lobby. Intenta de nuevo.");
-                    Console.WriteLine($"TimeoutException: {ex.Message}");
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.TimeoutError");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error inesperado: {ex.Message}");
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.ServerError");
                 }
             }
             else
             {
-                MessageBox.Show("No se puede crear el lobby; hay campos vacíos. Verífiquelos.");
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("MessageBoxEmptyFields");
             }
         }
 
         private void CancelLobbyCreation(object sender, RoutedEventArgs e)
         {
             this.NavigationService.GoBack();
+        }
+
+        private void CheckLimit(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            int maxLength = int.Parse(textBox.Tag.ToString());
+
+            if (textBox.Text.Length >= maxLength)
+            {
+                textBox.IsReadOnly = true;
+            }
+            else
+            {
+                textBox.IsReadOnly = false;
+            }
         }
     }
 }
