@@ -231,12 +231,12 @@ namespace BMCWindows.GameplayPage
                         if (textBlock != null && textBlock.Text == cardName)
                         {
                             container.Children.Remove(border);
-                            Console.WriteLine($"Carta {cardName} eliminada.");
                             return;
                         }
                     }
                 }
             }
+        }
 
 
 
@@ -316,21 +316,34 @@ namespace BMCWindows.GameplayPage
         private void GetRandomCard(object sender, RoutedEventArgs e)
         {
             Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
+            Random random = new Random();
+
             if (_lobby.Host == currentPlayer.Username)
             {
                 AssignAttackCards(RemainingHostCards, 1);
-                var hostAvailableCards = HostAvailableAttackCards.Values.ToList();
-                int numCards = hostAvailableCards.Count;
-                AddCardToPanel(numCards - 1, hostAvailableCards[numCards - 1]);
+                var hostAvailableCards = RemainingHostCards.Values.ToList();
+
+                if (hostAvailableCards.Count > 0)
+                {
+                    int randomIndex = random.Next(0, hostAvailableCards.Count);
+                    AddCardToPanel(randomIndex, hostAvailableCards[randomIndex]);
+                    RemainingHostCards.Remove(RemainingHostCards.ElementAt(randomIndex).Key); 
+                }
             }
             else
             {
                 AssignAttackCards(RemainingGuestCards, 1);
-                var guestAvailableCards = GuestAvailableAttackCards.Values.ToList();
-                int numGuestAttackCards = guestAvailableCards.Count;
-                AddCardToPanel(numGuestAttackCards - 1, guestAvailableCards[numGuestAttackCards - 1]);
+                var guestAvailableCards = RemainingGuestCards.Values.ToList();
+
+                if (guestAvailableCards.Count > 0)
+                {
+                    int randomIndex = random.Next(0, guestAvailableCards.Count);
+                    AddCardToPanel(randomIndex, guestAvailableCards[randomIndex]);
+                    GuestAvailableAttackCards.Remove(RemainingGuestCards.ElementAt(randomIndex).Key); 
+                }
             }
         }
+
 
         private void OnCellClickOwnBoard(int row, int col)
         {
@@ -347,11 +360,12 @@ namespace BMCWindows.GameplayPage
                 return;
             }
 
-            if (string.IsNullOrEmpty(selectedCardName))
+           /* if (string.IsNullOrEmpty(selectedCardName))
             {
-                MessageBox.Show("Debes seleccionar una carta para atacar.");
+                string errorMessage = Properties.Resources.Error_NoCardSelected;
+                MessageBox.Show(errorMessage);
                 return;
-            }
+            }*/
 
             Task.Run(() =>
              {

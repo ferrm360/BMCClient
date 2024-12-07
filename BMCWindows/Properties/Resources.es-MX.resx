@@ -442,7 +442,7 @@
     <value>Contraseña</value>
   </data>
   <data name="MessageBoxEmptyFields" xml:space="preserve">
-    <value>Hay campos vacíos verífiquelos</value>
+    <value>Hay campos vacíos o inválidos por favor verífiquelos</value>
   </data>
   <data name="MessageInformationContentAvatarUpdated" xml:space="preserve">
     <value>Avatar actualizado exitosamente</value>
@@ -608,5 +608,20 @@
   </data>
   <data name="TurnInfo" xml:space="preserve">
     <value>No tienes el primer turno, espera tu turno</value>
+  </data>
+  <data name="Error.GeneralException" xml:space="preserve">
+    <value>Ocurrió un error en el servidor, intente de nuevo más tarde</value>
+  </data>
+  <data name="Error.NoCardSelected" xml:space="preserve">
+    <value>Debe seleccionar una carta</value>
+  </data>
+  <data name="ConfirmInvitation" xml:space="preserve">
+    <value>¿Está seguro de que desea invitar a {0}?</value>
+  </data>
+  <data name="ConfirmInvitationTitle" xml:space="preserve">
+    <value>Confirmar invitación</value>
+  </data>
+  <data name="GuestLogout" xml:space="preserve">
+    <value>Salir</value>
   </data>
 </root>

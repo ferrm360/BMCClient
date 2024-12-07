@@ -22,11 +22,11 @@
     <MetadataSource Address="http://localhost:8098/GuestPlayerService" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="GuestPlayerService.xsd" MetadataType="Schema" ID="2a5fe908-f05c-4e36-9c3f-9a7aa445d140" SourceId="1" SourceUrl="http://localhost:8098/GuestPlayerService?xsd=xsd2" />
-    <MetadataFile FileName="GuestPlayerService1.xsd" MetadataType="Schema" ID="13fb301f-8989-4c8f-8d28-9dbf6f60f829" SourceId="1" SourceUrl="http://localhost:8098/GuestPlayerService?xsd=xsd1" />
-    <MetadataFile FileName="GuestPlayerService2.xsd" MetadataType="Schema" ID="30ff299e-03d1-4d02-a298-4b36b0d52174" SourceId="1" SourceUrl="http://localhost:8098/GuestPlayerService?xsd=xsd0" />
-    <MetadataFile FileName="GuestPlayerService.wsdl" MetadataType="Wsdl" ID="f1b52e71-8833-4774-977b-808e7b04c3ad" SourceId="1" SourceUrl="http://localhost:8098/GuestPlayerService?wsdl" />
-    <MetadataFile FileName="GuestPlayerService.disco" MetadataType="Disco" ID="13a8a28e-f78a-4ee7-b003-0c7fc3f5a6db" SourceId="1" SourceUrl="http://localhost:8098/GuestPlayerService?disco" />
+    <MetadataFile FileName="GuestPlayerService.xsd" MetadataType="Schema" ID="226d2209-223b-42a9-bb68-e9b04cdfcbcd" SourceId="1" SourceUrl="http://localhost:8098/GuestPlayerService?xsd=xsd2" />
+    <MetadataFile FileName="GuestPlayerService1.xsd" MetadataType="Schema" ID="3c649082-1d6d-4cc2-a91a-2c229c0893d9" SourceId="1" SourceUrl="http://localhost:8098/GuestPlayerService?xsd=xsd1" />
+    <MetadataFile FileName="GuestPlayerService2.xsd" MetadataType="Schema" ID="7f24420d-bf0d-48da-89c6-3d81f3aee9b4" SourceId="1" SourceUrl="http://localhost:8098/GuestPlayerService?xsd=xsd0" />
+    <MetadataFile FileName="GuestPlayerService.wsdl" MetadataType="Wsdl" ID="cdb49467-1f59-4908-b388-30efa478ab0f" SourceId="1" SourceUrl="http://localhost:8098/GuestPlayerService?wsdl" />
+    <MetadataFile FileName="GuestPlayerService.disco" MetadataType="Disco" ID="f66468f2-9163-4c84-b982-c2e18c962c22" SourceId="1" SourceUrl="http://localhost:8098/GuestPlayerService?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

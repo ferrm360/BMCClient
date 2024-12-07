@@ -69,7 +69,14 @@ namespace BMCWindows.GameOver
 
         private void OnAcceptClick(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new HomePage());
+            if (!UserSessionManager.getInstance().IsGuestUser())
+            {
+                this.NavigationService.Navigate(new HomePage());
+
+            } else
+            {
+                this.NavigationService.Navigate(new GameOptionsWindow());
+            }
         }
     }
 }

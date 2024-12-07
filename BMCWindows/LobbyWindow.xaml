@@ -12,6 +12,9 @@
 
 
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/Background/LobbyBackground2.jpg"/> 
+        </Grid.Background>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="39*"/>

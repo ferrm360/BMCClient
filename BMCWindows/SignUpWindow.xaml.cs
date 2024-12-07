@@ -39,7 +39,7 @@ namespace BMCWindows
             player.Username = textBoxUser.Text;
             player.Email = textBoxEmail.Text;
             player.Password = passwordBoxPassword.Password;
-            if(!FieldValidator.AreFieldsEmpty(textBoxUser.Text, textBoxEmail.Text, passwordBoxPassword.Password, passwordBoxConfirmPassword.Password) && FieldValidator.ValidatePassword(passwordBoxPassword.Password) && passwordBoxPassword.Password == passwordBoxConfirmPassword.Password )
+            if(!FieldValidator.AreFieldsEmpty(textBoxUser.Text, textBoxEmail.Text, passwordBoxPassword.Password, passwordBoxConfirmPassword.Password) && FieldValidator.ValidatePassword(passwordBoxPassword.Password) && passwordBoxPassword.Password == passwordBoxConfirmPassword.Password && FieldValidator.ValidateEmail(textBoxEmail.Text))
             {
                 try
                 {
@@ -51,7 +51,8 @@ namespace BMCWindows
                     }
                     else
                     {
-                        MessageBox.Show(result.ErrorKey);
+                        ErrorMessages errorMessages = new ErrorMessages();
+                        errorMessages.ShowErrorMessage(result.ErrorKey);
                     }
                 }
                 catch (EndpointNotFoundException)

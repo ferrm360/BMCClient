@@ -394,7 +394,7 @@
     <value>Log In</value>
   </data>
   <data name="LogInButtonLogInAsGuest" xml:space="preserve">
-    <value>LogIn As guest</value>
+    <value>Log in as guest</value>
   </data>
   <data name="LoginLabelForgotPassword" xml:space="preserve">
     <value>Forgot password?</value>
@@ -442,7 +442,7 @@
     <value>Password</value>
   </data>
   <data name="MessageBoxEmptyFields" xml:space="preserve">
-    <value>There are empty fields, check them </value>
+    <value>There are empty or invalid fields, please check them </value>
   </data>
   <data name="MessageInformationContentAvatarUpdated" xml:space="preserve">
     <value>Avatar successfully updated</value>
@@ -608,5 +608,20 @@
   </data>
   <data name="TurnInfo" xml:space="preserve">
     <value>You don't have the first turn, wait your turn</value>
+  </data>
+  <data name="Error.GeneralException" xml:space="preserve">
+    <value>An error occurred on the server, please try again later</value>
+  </data>
+  <data name="Error.NoCardSelected" xml:space="preserve">
+    <value>You must select a card</value>
+  </data>
+  <data name="ConfirmInvitation" xml:space="preserve">
+    <value>Are you sure you want to invite {0}?</value>
+  </data>
+  <data name="ConfirmInvitationTitle" xml:space="preserve">
+    <value>Confirm invitation</value>
+  </data>
+  <data name="GuestLogout" xml:space="preserve">
+    <value>Logout</value>
   </data>
 </root>

@@ -60,8 +60,10 @@ namespace BMCWindows
                     }
                     else
                     {
+                        MessageBox.Show(result.ErrorKey);
                         ErrorMessages errorMessages = new ErrorMessages();  
                         errorMessages.ShowErrorMessage(result.ErrorKey);
+                        
                     }
                 }
                 catch(EndpointNotFoundException)

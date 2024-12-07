@@ -11,6 +11,9 @@
       Background="#FEFFDB">
 
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/Background/Purplebackground.jpg"/>
+        </Grid.Background>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*"/>

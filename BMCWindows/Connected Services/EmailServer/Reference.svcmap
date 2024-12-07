@@ -22,11 +22,11 @@
     <MetadataSource Address="http://localhost:8100/EmailService?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="EmailService.xsd" MetadataType="Schema" ID="7c278c20-bb31-48dd-9114-bce55b937e47" SourceId="1" SourceUrl="http://localhost:8100/EmailService?xsd=xsd2" />
-    <MetadataFile FileName="EmailService1.xsd" MetadataType="Schema" ID="32811134-525f-40a1-85c3-e0360a88b7d9" SourceId="1" SourceUrl="http://localhost:8100/EmailService?xsd=xsd1" />
-    <MetadataFile FileName="EmailService2.xsd" MetadataType="Schema" ID="9a00925a-750c-4412-888b-f06f579c2d9b" SourceId="1" SourceUrl="http://localhost:8100/EmailService?xsd=xsd0" />
-    <MetadataFile FileName="EmailService.wsdl" MetadataType="Wsdl" ID="56dac55b-ac85-49e7-90a4-b0c0b8137f25" SourceId="1" SourceUrl="http://localhost:8100/EmailService?wsdl" />
-    <MetadataFile FileName="EmailService3.xsd" MetadataType="Schema" ID="254febbd-0ea4-41d6-a022-0e36b699aeca" SourceId="1" SourceUrl="http://localhost:8100/EmailService?xsd=xsd3" />
+    <MetadataFile FileName="EmailService.xsd" MetadataType="Schema" ID="7d16caa9-4474-48f5-96ce-715980688945" SourceId="1" SourceUrl="http://localhost:8100/EmailService?xsd=xsd2" />
+    <MetadataFile FileName="EmailService1.xsd" MetadataType="Schema" ID="6b359a1a-e781-4c95-9495-b6b27776c634" SourceId="1" SourceUrl="http://localhost:8100/EmailService?xsd=xsd1" />
+    <MetadataFile FileName="EmailService2.xsd" MetadataType="Schema" ID="7128b776-87ba-476e-b993-45f936652bb4" SourceId="1" SourceUrl="http://localhost:8100/EmailService?xsd=xsd0" />
+    <MetadataFile FileName="EmailService.wsdl" MetadataType="Wsdl" ID="6543b750-6a40-4b40-83bc-1b1324cb6e21" SourceId="1" SourceUrl="http://localhost:8100/EmailService?wsdl" />
+    <MetadataFile FileName="EmailService3.xsd" MetadataType="Schema" ID="c5c0c471-46d9-4e74-bcb7-e7b5e3161537" SourceId="1" SourceUrl="http://localhost:8100/EmailService?xsd=xsd3" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

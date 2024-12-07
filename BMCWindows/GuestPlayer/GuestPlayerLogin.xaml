@@ -48,7 +48,7 @@
                 </Grid>
             </Button>
 
-            <Button x:Name="buttonCancel" Grid.Row="0" Grid.Column="0" Click="Cancel" Background="Transparent" BorderBrush="Transparent" FocusVisualStyle="{x:Null}" Focusable="False" Margin="10,16,177,56" Width="80" Height="40">
+            <Button x:Name="buttonCancel" Grid.Row="0" Grid.Column="0" Click="Cancel" Background="Transparent" BorderBrush="Transparent" FocusVisualStyle="{x:Null}" Focusable="False" Margin="10,16,177,56" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <Grid>
                     <Image Source="pack://application:,,,/Images/BrownButton.png" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,0,0,0"/>
                     <TextBlock Text="{x:Static p:Resources.GloblalButtonCancel}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" Height="20" FontFamily="Press Start 2P Normal" FontSize="9"/>

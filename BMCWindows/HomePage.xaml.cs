@@ -166,11 +166,14 @@ namespace BMCWindows
             }
             catch (CommunicationException commEx)
             {
+                MessageBox.Show(commEx.Message);
                 ErrorMessages errorMessages = new ErrorMessages();
                 errorMessages.ShowErrorMessage("Error.CommunicationError");
+               
             }
             catch (TimeoutException timeoutEx)
             {
+
                 ErrorMessages errorMessages = new ErrorMessages();
                 errorMessages.ShowErrorMessage("Error.TimeOutError");
             }

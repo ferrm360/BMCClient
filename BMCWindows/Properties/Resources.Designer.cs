@@ -151,6 +151,24 @@ namespace BMCWindows.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Are you sure you want to invite {0}?.
+        /// </summary>
+        public static string ConfirmInvitation {
+            get {
+                return ResourceManager.GetString("ConfirmInvitation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Confirm invitation.
+        /// </summary>
+        public static string ConfirmInvitationTitle {
+            get {
+                return ResourceManager.GetString("ConfirmInvitationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Confirm cancellation.
         /// </summary>
         public static string ConfirmMessageCancelTitle {
@@ -340,6 +358,15 @@ namespace BMCWindows.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred on the server, please try again later.
+        /// </summary>
+        public static string Error_GeneralException {
+            get {
+                return ResourceManager.GetString("Error.GeneralException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a An error occurred, please try again later..
         /// </summary>
         public static string Error_GeneralMessage {
@@ -453,6 +480,15 @@ namespace BMCWindows.Properties {
         public static string Error_LobbyNotFound {
             get {
                 return ResourceManager.GetString("Error.LobbyNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You must select a card.
+        /// </summary>
+        public static string Error_NoCardSelected {
+            get {
+                return ResourceManager.GetString("Error.NoCardSelected", resourceCulture);
             }
         }
         
@@ -835,6 +871,15 @@ namespace BMCWindows.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Logout.
+        /// </summary>
+        public static string GuestLogout {
+            get {
+                return ResourceManager.GetString("GuestLogout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Profile.
         /// </summary>
         public static string HomePageButtonEditProfile {
@@ -1087,7 +1132,7 @@ namespace BMCWindows.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a LogIn As guest.
+        ///   Busca una cadena traducida similar a Log in as guest.
         /// </summary>
         public static string LogInButtonLogInAsGuest {
             get {
@@ -1231,7 +1276,7 @@ namespace BMCWindows.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a There are empty fields, check them .
+        ///   Busca una cadena traducida similar a There are empty or invalid fields, please check them .
         /// </summary>
         public static string MessageBoxEmptyFields {
             get {

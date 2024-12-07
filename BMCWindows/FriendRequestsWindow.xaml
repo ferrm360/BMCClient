@@ -11,6 +11,9 @@
       Background="#FEFFDB">
 
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/Background/PurpleBackground.jpg"/>
+        </Grid.Background>
         <Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -26,12 +29,11 @@
                     <ColumnDefinition Width="78*"/>
                     <ColumnDefinition Width="119*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="buttonCancel" Grid.Column="0" Grid.Row="0" Background="Transparent" BorderBrush="Transparent"  Margin="10,5,0,0" Click="GoBack"/>
-                <Image Source="Images/BrownButton.png" Grid.Column="0" Grid.Row="0" IsHitTestVisible="False" Stretch="Fill"  Margin="10,5,0,0"/>
-                <TextBlock Text="{x:Static p:Resources.GloblalButtonCancel}" VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False" />
-
-
-
+                <Button x:Name="buttonCancel" Grid.Column="0" Grid.Row="0"  Content="{x:Static p:Resources.GloblalButtonCancel}" BorderBrush="Transparent"  Margin="10,5,0,0" Click="GoBack">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Images/BrownButton.png"/>
+                    </Button.Background>
+                </Button>
 
             </Grid>
             <Grid>
@@ -47,7 +49,10 @@
                     </ListBox.ItemsPanel>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Border Background="{Binding StatusColor}" BorderThickness="1" CornerRadius="10" Padding="5" Margin="5">
+                            <Border BorderThickness="1" CornerRadius="10" Padding="5" Margin="5">
+                                <Border.Background>
+                                    <ImageBrush ImageSource="Images/GreenRectangle.png"/>
+                                </Border.Background>
                                 <StackPanel>
                                     <Image Source="{Binding PlayerImage}" Width="50" Height="50" HorizontalAlignment="Center" />
                                     <TextBlock Text="{Binding UserName}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Margin="5" />

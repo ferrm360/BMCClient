@@ -25,5 +25,37 @@ namespace BMCWindows.Test.Validators.FieldsValidators
             bool result = FieldValidator.AreFieldsEmpty(user);
             Assert.IsTrue(result);
         }
+
+        [TestMethod]
+        public void ValidatePasswordSucces()
+        {
+            string password = "Contr@señ4";
+            bool result = FieldValidator.ValidatePassword(password);
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void ValidatePasswordFailure()
+        {
+            string password = "fg";
+            bool result = FieldValidator.ValidatePassword(password);
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void ValidateEmailSucces()
+        {
+            string email = "correo.ma@gmail.com";
+            bool result = FieldValidator.ValidateEmail(email);
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void ValidateEmailFailed()
+        {
+            string email = "correocom";
+            bool result = FieldValidator.ValidateEmail(email);
+            Assert.IsFalse(result);
+        }
     }
 }

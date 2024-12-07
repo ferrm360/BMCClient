@@ -46,5 +46,10 @@ namespace BMCWindows.Utilities
         {
             OnCellDeadEvent?.Invoke(cellDeadDTO);
         }
+
+        public void OnGameOver()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

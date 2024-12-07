@@ -47,7 +47,9 @@
                 <RowDefinition Height="23*"/>
                 <RowDefinition Height="131*"/>
             </Grid.RowDefinitions>
-
+            <Viewbox>
+                
+            </Viewbox>
             <Label x:Name="labelUser" Grid.Column="2" Grid.Row="1" Content="{x:Static p:Resources.GlobalLabelUser}"  FontSize="60" Grid.ColumnSpan="2"/>
             <TextBox x:Name="textBoxUser" Grid.Column="2" Grid.Row="1"  FontSize="60" Background="Transparent" BorderBrush="Transparent" Visibility="Hidden" MaxLength="255" />
             <Button x:Name="buttonEditUsername" Grid.Column="3" Grid.Row="1" Background="Transparent" BorderBrush="Transparent" Click="MakeUserEditable"/>

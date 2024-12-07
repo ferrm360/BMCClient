@@ -80,7 +80,9 @@
                     <RowDefinition Height="27*"/>
                     <RowDefinition Height="89*"/>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="textBoxUser" Grid.Row="1" Grid.Column="1"  Background="Transparent" BorderBrush="Transparent" TextAlignment="Center"  MaxLength="255" />
+                <Viewbox Stretch="Fill" Grid.Column="1" Grid.Row="1">
+                    <TextBox x:Name="textBoxUser"  Background="White" BorderBrush="Transparent" TextWrapping="Wrap" TextAlignment="Center"  MaxLength="255" />
+                </Viewbox>
                 <TextBox x:Name="textBoxEmail" Grid.Column="1" Grid.Row="3"  Background="Transparent" BorderBrush="Transparent" TextAlignment="Center"  MaxLength="255" />
                 <PasswordBox x:Name="passwordBoxPassword" Grid.Column="1" Grid.Row="5" Background="Transparent" BorderBrush="Transparent" PasswordChanged="CheckPasswordLimit"/>
                 <PasswordBox x:Name="passwordBoxConfirmPassword" Grid.Column="1" Grid.Row="7" Background="Transparent" BorderBrush="Transparent" PasswordChanged="CheckPasswordLimit"/>

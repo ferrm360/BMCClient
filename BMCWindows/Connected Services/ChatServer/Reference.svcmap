@@ -22,9 +22,9 @@
     <MetadataSource Address=" http://localhost:8082/ChatService?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ChatService.xsd" MetadataType="Schema" ID="f275f2bc-8b08-4dd7-ad9c-a0bffe23cd1e" SourceId="1" SourceUrl="http://localhost:8082/ChatService?xsd=xsd1" />
-    <MetadataFile FileName="ChatService1.xsd" MetadataType="Schema" ID="2d900ec3-448d-4a39-b2aa-37f84e88cdad" SourceId="1" SourceUrl="http://localhost:8082/ChatService?xsd=xsd0" />
-    <MetadataFile FileName="ChatService.wsdl" MetadataType="Wsdl" ID="fd6d4a30-bcb0-4995-99f9-2a66dec8208f" SourceId="1" SourceUrl="http://localhost:8082/ChatService?wsdl" />
+    <MetadataFile FileName="ChatService.xsd" MetadataType="Schema" ID="bd0958fb-592a-4b8c-aee8-475ed54c6c18" SourceId="1" SourceUrl="http://localhost:8082/ChatService?xsd=xsd1" />
+    <MetadataFile FileName="ChatService1.xsd" MetadataType="Schema" ID="48480ed3-62a1-4761-a892-e23a9a889e9e" SourceId="1" SourceUrl="http://localhost:8082/ChatService?xsd=xsd0" />
+    <MetadataFile FileName="ChatService.wsdl" MetadataType="Wsdl" ID="92782566-88a4-4b5e-9e66-09fa584ca859" SourceId="1" SourceUrl="http://localhost:8082/ChatService?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
