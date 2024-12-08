@@ -1,4 +1,5 @@
-﻿using BMCWindows.Patterns.Singleton;
+﻿using BMCWindows.DTOs;
+using BMCWindows.Patterns.Singleton;
 using BMCWindows.Utilities;
 using Microsoft.Win32;
 using System;

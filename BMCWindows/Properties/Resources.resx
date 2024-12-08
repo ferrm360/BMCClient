@@ -669,4 +669,7 @@
   <data name="Friend.DeletionSuccess" xml:space="preserve">
     <value>Friend has been successfully removed</value>
   </data>
+  <data name="Language.ChangeLanguage" xml:space="preserve">
+    <value>Change language</value>
+  </data>
 </root>

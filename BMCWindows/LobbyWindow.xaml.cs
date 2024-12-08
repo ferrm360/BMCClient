@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using BMCWindows.ChatLobbyServer;
+using BMCWindows.DTOs;
 using BMCWindows.EmailServer;
 using BMCWindows.LobbyServer;
 using BMCWindows.Patterns.Singleton;

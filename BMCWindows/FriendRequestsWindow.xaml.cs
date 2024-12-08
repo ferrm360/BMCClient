@@ -1,4 +1,5 @@
-﻿using BMCWindows.Patterns.Singleton;
+﻿using BMCWindows.DTOs;
+using BMCWindows.Patterns.Singleton;
 using BMCWindows.Utilities;
 using System;
 using System.Collections.Generic;
@@ -104,6 +105,7 @@ namespace BMCWindows
                     if( messageResult == MessageBoxResult.OK)
                     {
                         LoadFriendshipRequests(player.Username);
+                        this.NavigationService.Navigate(new FriendRequestsWindow());
                     }
                     
                 }

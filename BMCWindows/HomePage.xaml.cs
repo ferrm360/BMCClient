@@ -32,7 +32,6 @@ namespace BMCWindows
     {
         private ObservableCollection<Friend> friends { get; set; }
         private ObservableCollection<Message> messages { get; set; }
-        private ChatService _chatService = new ChatService();
         private ChatServer.ChatServiceClient _proxy;
         private ObservableCollection<Message> friendChatMessages { get; set; } = new ObservableCollection<Message>();
         private FriendChatCallBackHandler _friendChatCallbackHandler;
@@ -376,14 +375,50 @@ namespace BMCWindows
         {
             this.NavigationService.Navigate(new CardWindow());
         }
+
+        private void ChangeLanguageToSpanish(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.languageCode = "es-MX";
+            Properties.Settings.Default.Save();
+            SetLanguage("es-MX");
+        }
+
+        private void ChangeLanguageToEnglish(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.languageCode = "en-US";
+            Properties.Settings.Default.Save();
+            SetLanguage("en-US");
+        }
+
+        private void OpenContextMenuLanguage(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            var contextMenu = button?.ContextMenu;
+
+
+            if (contextMenu != null)
+            {
+                contextMenu.PlacementTarget = button;
+                contextMenu.IsOpen = true;
+            }
+        }
+
+        private void SetLanguage(string languageCode)
+        {
+            var cultureInfo = new System.Globalization.CultureInfo(languageCode);
+            System.Threading.Thread.CurrentThread.CurrentCulture = cultureInfo;
+            System.Threading.Thread.CurrentThread.CurrentUICulture = cultureInfo;
+
+            var currentPage = Application.Current.MainWindow?.Content as Page;
+            if (currentPage != null)
+            {
+                currentPage.Language = System.Windows.Markup.XmlLanguage.GetLanguage(cultureInfo.Name);
+            }
+            
+            
+            
+        }
     }
 
-    public class Friend
-    {
-        public string UserName { get; set; }
-        public DateTime LastVisit { get; set; }
-        public Byte[] ProfileImage { get; set; }
-        public int RequestId { get; set; }
-        public BitmapImage FriendPicture { get; set; }
-    }
+    
 }

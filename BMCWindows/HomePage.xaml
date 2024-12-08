@@ -92,7 +92,7 @@
             </Border>
         </Expander>
 
-        <Grid x:Name="GridChat"  Margin="10,0,0,0" Visibility="Hidden"> 
+        <Grid x:Name="GridChat"  Margin="10,0,0,0" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="268*"/>
                 <ColumnDefinition Width="127*"/>
@@ -137,7 +137,7 @@
                         </TextBox.Background>
                     </TextBox>
                 </Viewbox>
-                
+
                 <Button Content="Enviar" Click="SendMessageToFriend"/>
             </StackPanel>
             <Button Content="ButtonCancel"  Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,5,20,0"/>
@@ -174,7 +174,7 @@
                         </TextBox.Background>
                     </TextBox>
                 </Viewbox>
-                
+
 
                 <Button x:Name="ButtonSendMessage" Content="{x:Static p:Resources.FriendButtonSendMessage}" Click="SendGeneralMessage" BorderBrush="Transparent">
                     <Button.Background>
@@ -267,7 +267,7 @@
                 <ColumnDefinition Width="399*"/>
                 <ColumnDefinition Width="113*"/>
             </Grid.ColumnDefinitions>
-            
+
             <ListView x:Name="ListViewPlayerScoresTable" Grid.Row="1" Grid.Column="1" >
                 <ListView.Background>
                     <ImageBrush ImageSource="Images/GreenRectangle.png"/>
@@ -280,6 +280,33 @@
                     </GridView>
                 </ListView.View>
             </ListView>
+
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="711*"/>
+                <ColumnDefinition Width="89*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="ButtonChageLanguage" Grid.Column="1" Grid.Row="1" Click="OpenContextMenuLanguage">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/BrownButton.png"/>
+                </Button.Background>
+                <Button.Content>
+                    <Viewbox Stretch="Uniform">
+                        <TextBlock Text="{x:Static p:Resources.Language_ChangeLanguage}"/>
+                    </Viewbox>
+                </Button.Content>
+                <Button.ContextMenu>
+                    <ContextMenu Placement="Top" PlacementTarget="{Binding RelativeSource={RelativeSource Self}}">
+                        <MenuItem Header="Español" Click="ChangeLanguageToSpanish" Tag="es-MX"/>
+                        <MenuItem Header="Inglés" Click="ChangeLanguageToEnglish" Tag="en-US"/>
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
 
         </Grid>
 

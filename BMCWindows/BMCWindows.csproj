@@ -140,7 +140,9 @@
     </Compile>
     <Compile Include="DTOs\AttackCard.cs" />
     <Compile Include="DTOs\Card.cs" />
+    <Compile Include="DTOs\Friend.cs" />
     <Compile Include="DTOs\Lobby.cs" />
+    <Compile Include="DTOs\Message.cs" />
     <Compile Include="DTOs\Player.cs" />
     <Compile Include="DTOs\Score.cs" />
     <Compile Include="FriendRequestsWindow.xaml.cs">
@@ -172,6 +174,7 @@
       <DependentUpon>GuestPlayerLogin.xaml</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IPage.cs" />
+    <Compile Include="Laguage\LocalizationManager.cs" />
     <Compile Include="LobbiesWindow.xaml.cs">
       <DependentUpon>LobbiesWindow.xaml</DependentUpon>
     </Compile>
@@ -292,7 +295,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ChatService.cs" />
     <Compile Include="HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
@@ -566,7 +568,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>

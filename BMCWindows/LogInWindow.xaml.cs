@@ -34,7 +34,7 @@ namespace BMCWindows
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+            this.NavigationService.Navigate(new StartPage());
         }
 
         private void GoToHomePage(object sender, RoutedEventArgs e)

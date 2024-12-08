@@ -1,4 +1,5 @@
-﻿using BMCWindows.Patterns.Singleton;
+﻿using BMCWindows.DTOs;
+using BMCWindows.Patterns.Singleton;
 using BMCWindows.Utilities;
 using System;
 using System.Collections.Generic;
@@ -161,6 +162,7 @@ namespace BMCWindows
                 Server.PlayerDTO player = new Server.PlayerDTO();
                 player = UserSessionManager.getInstance().GetPlayerUserData();
                 var result = proxy.SendFriendRequest(player.Username, receiverUsername);
+                
                 if (result.IsSuccess) 
                 {
                     string message = Properties.Resources.Info_RequestSentSuccesfully.ToString();

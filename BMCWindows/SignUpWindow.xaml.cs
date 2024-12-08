@@ -4,9 +4,11 @@ using BMCWindows.Utilities;
 using BMCWindows.Validators;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -113,6 +115,22 @@ namespace BMCWindows
                 passwordBox.IsEnabled = true;
             }
         }
+
+        private void ChangeLanguajeToSpanish(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.languageCode = "es-MX";
+            Properties.Settings.Default.Save();
+            
+        }
+
+        private void BtnClickChangeLanguajeToEnglish(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.languageCode = "en-US";
+            Properties.Settings.Default.Save();
+            
+
+        }
+
 
 
     }

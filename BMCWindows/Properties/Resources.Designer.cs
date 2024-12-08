@@ -1177,6 +1177,15 @@ namespace BMCWindows.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Change language.
+        /// </summary>
+        public static string Language_ChangeLanguage {
+            get {
+                return ResourceManager.GetString("Language.ChangeLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Current players.
         /// </summary>
         public static string Lobby_CurrentPlayers {
