@@ -41,6 +41,7 @@ namespace BMCWindows.GameplayPage
         private Server.PlayerDTO _currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
         private bool _isPlayerTurn;
         private GameRules _gameRules;
+        private readonly object _lockObject = new object();
 
         public GameplayAttackWindow(GameCallbackHandler gameCallbackHandler, GameServiceClient proxy, LobbyDTO lobby, int[,] playerMatrixLife, String[,] playerMatrixName)
         {
@@ -132,8 +133,7 @@ namespace BMCWindows.GameplayPage
             List<string> attackCardKeys = AvailableCards.Keys.ToList();
 
             attackCardKeys = attackCardKeys.OrderBy(x => random.Next()).ToList();
-            try
-            {
+            
                 for (int i = 0; i < numCardsPerPlayer; i++)
                 {
                     string selectedAttackCardKey = attackCardKeys[i];
@@ -150,11 +150,7 @@ namespace BMCWindows.GameplayPage
                 {
                     Console.WriteLine(attackCard.Key);
                 }
-            } 
-            catch (ArgumentOutOfRangeException ex)
-            {
-                buttonGetAttackCard.IsEnabled = false;
-            }
+            
 
             
         }
@@ -317,39 +313,42 @@ namespace BMCWindows.GameplayPage
 
         private void GetRandomCard(object sender, RoutedEventArgs e)
         {
-            Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
-            Random random = new Random();
-
-            if (_lobby.Host == currentPlayer.Username)
+            lock (_lockObject)
             {
-                AssignAttackCards(RemainingHostCards, 1);
-                var hostAvailableCards = RemainingHostCards.Values.ToList();
+                Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
+                Random random = new Random();
 
-                if (hostAvailableCards.Count > 0)
+                if (_lobby.Host == currentPlayer.Username)
                 {
-                    int randomIndex = random.Next(hostAvailableCards.Count); 
-                    AddCardToPanel(randomIndex, hostAvailableCards[randomIndex]);
-                    RemainingHostCards.Remove(RemainingHostCards.ElementAt(randomIndex).Key);
+                    AssignAttackCards(RemainingHostCards, 1);
+                    var hostAvailableCards = RemainingHostCards.Values.ToList();
+
+                    if (hostAvailableCards.Count > 0)
+                    {
+                        int randomIndex = random.Next(hostAvailableCards.Count);
+                        AddCardToPanel(randomIndex, hostAvailableCards[randomIndex]);
+                        RemainingHostCards.Remove(RemainingHostCards.ElementAt(randomIndex).Key);
+                    }
+                    else
+                    {
+                        RefillCards(RemainingHostCards, HostAvailableAttackCards);
+                    }
                 }
                 else
                 {
-                    RefillCards(RemainingHostCards, HostAvailableAttackCards);
-                }
-            }
-            else
-            {
-                AssignAttackCards(RemainingGuestCards, 1);
-                var guestAvailableCards = RemainingGuestCards.Values.ToList();
+                    AssignAttackCards(RemainingGuestCards, 1);
+                    var guestAvailableCards = RemainingGuestCards.Values.ToList();
 
-                if (guestAvailableCards.Count > 0)
-                {
-                    int randomIndex = random.Next(guestAvailableCards.Count);
-                    AddCardToPanel(randomIndex, guestAvailableCards[randomIndex]);
-                    RemainingGuestCards.Remove(RemainingGuestCards.ElementAt(randomIndex).Key);
-                }
-                else
-                {
-                    RefillCards(RemainingGuestCards, GuestAvailableAttackCards);
+                    if (guestAvailableCards.Count > 0)
+                    {
+                        int randomIndex = random.Next(guestAvailableCards.Count);
+                        AddCardToPanel(randomIndex, guestAvailableCards[randomIndex]);
+                        RemainingGuestCards.Remove(RemainingGuestCards.ElementAt(randomIndex).Key);
+                    }
+                    else
+                    {
+                        RefillCards(RemainingGuestCards, GuestAvailableAttackCards);
+                    }
                 }
             }
         }

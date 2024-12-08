@@ -39,6 +39,7 @@ namespace BMCWindows
         private GameServiceClient _proxy;
         private int _playersReadyCount = 0;
         private bool _isReady = false;
+        
 
 
         public GameplayWindow(LobbyDTO lobby, ObservableCollection<String> Players)
