@@ -274,9 +274,9 @@
                 </ListView.Background>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="{x:Static p:Resources.GlobalLabelUser}" DisplayMemberBinding="{Binding Username}"/>
-                        <GridViewColumn Header="{x:Static p:Resources.PlayerWins}" DisplayMemberBinding="{Binding Wins}"/>
-                        <GridViewColumn Header="{x:Static p:Resources.PlayerLosses}" DisplayMemberBinding="{Binding Losses}"/>
+                        <GridViewColumn Header="{x:Static p:Resources.GlobalLabelUser}" DisplayMemberBinding="{Binding Username}" Width="200"/>
+                        <GridViewColumn Header="{x:Static p:Resources.PlayerWins}" DisplayMemberBinding="{Binding Wins}" Width="200"/>
+                        <GridViewColumn Header="{x:Static p:Resources.PlayerLosses}" DisplayMemberBinding="{Binding Losses}" Width="200"/>
                     </GridView>
                 </ListView.View>
             </ListView>
