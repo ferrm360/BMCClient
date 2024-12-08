@@ -645,4 +645,16 @@
   <data name="Match.Loser" xml:space="preserve">
     <value>Loser</value>
   </data>
+  <data name="Error.EndpointException" xml:space="preserve">
+    <value>The server is currently unavailable. Do you want to return to the login page?</value>
+  </data>
+  <data name="Error.ServerErrorTitle" xml:space="preserve">
+    <value>Server Unavailable</value>
+  </data>
+  <data name="ImageTooLarge" xml:space="preserve">
+    <value>The selected image exceeds the allowed size of 1 MB. Please choose another image.</value>
+  </data>
+  <data name="Error.IncorrectVerificationCode" xml:space="preserve">
+    <value>Incorrect verification code.</value>
+  </data>
 </root>

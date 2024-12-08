@@ -69,7 +69,7 @@ namespace BMCWindows
 
         private void GoBack(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+            this.NavigationService.Navigate(new ProfileWindow());
         }
 
         private void CheckPasswordLimit(object sender, RoutedEventArgs e)
