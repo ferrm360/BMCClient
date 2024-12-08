@@ -66,12 +66,8 @@
                     <RowDefinition Height="28*" />
                     <RowDefinition Height="149*" />
                 </Grid.RowDefinitions>
-                <Viewbox Grid.Row="1" Grid.Column="1" Stretch="Fill">
                     <TextBox x:Name="textBoxUser" Grid.Row="1" Grid.Column="1"  Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center"  MaxLength="255" />
-                </Viewbox>
-                <Viewbox Grid.Row="3" Grid.Column="1" Stretch="Fill">
-                    <PasswordBox x:Name="passwordBoxPassword" Grid.Column="1" Grid.Row="3"  Background="Transparent" BorderBrush="Transparent"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"   PasswordChanged="CheckPasswordLimit" />
-                </Viewbox>
+                    <PasswordBox x:Name="passwordBoxPassword" Grid.Column="1" Grid.Row="3"  Background="Transparent" BorderBrush="Transparent"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" PasswordChanged="CheckPasswordLimit" />
 
 
             </Grid>

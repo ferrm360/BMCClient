@@ -109,15 +109,16 @@
                 <RowDefinition Height="45*"/>
                 <RowDefinition Height="134*"/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="4" Grid.Column="2" Orientation="Horizontal">
+            <StackPanel Grid.Row="4" Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel.Background>
                     <ImageBrush ImageSource="Images/GreenRectangle.png"/>
                 </StackPanel.Background>
-                <StackPanel Background="Blue" Orientation="Vertical" Width="Auto">
-                    <TextBlock Text="{x:Static p:Resources.PlayerWins}"/>
+                <StackPanel  Orientation="Vertical" Width="Auto" >
+
+                    <TextBlock Text="{x:Static p:Resources.PlayerWins}" Margin="5,5,5,5"/>
                     <TextBlock x:Name="textBlockPlayerWins" />
                 </StackPanel>
-                <StackPanel Background="Beige" Orientation="Vertical" Width="Auto">
+                <StackPanel  Orientation="Vertical" Width="Auto" Margin="5,5,5,5">
                     <TextBlock Text="{x:Static p:Resources.PlayerLosses}"/>
                     <TextBlock x:Name="textBlockPlayerLosses"/>
                 </StackPanel>

@@ -62,6 +62,7 @@ namespace BMCWindows
                 }
 
             }
+            InitializeScores();
         }
         private void UploadProfilePicture(object sender, RoutedEventArgs e)
         {
@@ -93,6 +94,49 @@ namespace BMCWindows
 
         }
 
+        private void InitializeScores()
+        {
+            try
+            {
+                Server.PlayerDTO player = new Server.PlayerDTO();
+                player = UserSessionManager.getInstance().GetPlayerUserData();
+                PlayerScoreServer.PlayerScoresServiceClient scoreProxy = new PlayerScoreServer.PlayerScoresServiceClient();
+                var response = scoreProxy.GetScoresByUsername(player.Username);
+                if (response.IsSuccess)
+                {
+                    if (response.Scores != null)
+                    {
+                        textBlockPlayerWins.Text = response.Scores.Wins.ToString();
+                        textBlockPlayerLosses.Text = response.Scores.Losses.ToString();
+
+                    }
+                }
+                else
+                {
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage(response.ErrorKey);
+                }
+
+            }
+            catch (CommunicationException commEx)
+            {
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.CommunicationError");
+            }
+            catch (TimeoutException timeoutEx)
+            {
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.TimeOutError");
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.GeneralException");
+            }
+
+
+        }
+
         private byte[] ConvertImageToByteArray(string imagePath)
         {
             byte[] imageBytes = null;
@@ -118,13 +162,8 @@ namespace BMCWindows
             textBoxUser.Visibility = Visibility.Visible;
             textBoxUser.Text = player.Username;
             buttonAccepNewUsername.Visibility = Visibility.Visible;
-            imageButtonAcceptUsernameEdition.Visibility = Visibility.Visible;
             buttonCancelNewUsername.Visibility = Visibility.Visible;
-            textBlockAcceptEdition.Visibility = Visibility.Visible;
-            imageButtonCancelUsernameEdition.Visibility = Visibility.Visible;
-            textBlockCancelUserNameEdition.Visibility = Visibility.Visible;
             buttonEditUsername.Visibility = Visibility.Hidden;
-            imageButtonEditUsername.Visibility = Visibility.Hidden;
         }
 
         private void AcceptUsernameChange(object sender, RoutedEventArgs e) 
@@ -144,13 +183,8 @@ namespace BMCWindows
                 string message = Properties.Resources.Info_UserUpdated.ToString();
                 MessageBox.Show(message);
                 buttonAccepNewUsername.Visibility = Visibility.Hidden;
-                imageButtonAcceptUsernameEdition.Visibility = Visibility.Hidden;
-                textBlockAcceptEdition.Visibility = Visibility.Hidden;
                 buttonCancelNewUsername.Visibility = Visibility.Hidden;
-                textBlockCancelUserNameEdition.Visibility = Visibility.Hidden;
-                imageButtonCancelUsernameEdition.Visibility = Visibility.Hidden;
                 buttonEditUsername.Visibility = Visibility.Visible;
-                imageButtonEditUsername.Visibility = Visibility.Visible;
             }
             else
             {
@@ -162,9 +196,7 @@ namespace BMCWindows
         private void CancelUsernameEdition(object sender, RoutedEventArgs e) 
         {
             buttonAccepNewUsername.Visibility = Visibility.Hidden;
-            textBlockAcceptEdition.Visibility = Visibility.Hidden;
             buttonCancelNewUsername.Visibility = Visibility.Hidden;
-            textBlockCancelUserNameEdition.Visibility = Visibility.Hidden;
             buttonEditUsername.Visibility = Visibility.Visible;
             labelUser.Visibility = Visibility.Visible;
             textBoxUser.Visibility = Visibility.Hidden;
@@ -178,11 +210,7 @@ namespace BMCWindows
             textBoxBio.Visibility = Visibility.Visible;
             textBoxBio.Text = textBlockBio.Text;
             buttonAcceptNewBio.Visibility = Visibility.Visible;
-            imageAcceptBio.Visibility = Visibility.Visible;
-            textBlockAcceptBio.Visibility = Visibility.Visible;
             buttonCancelNewBio.Visibility = Visibility.Visible;
-            imageCancelBio.Visibility = Visibility.Visible;
-            textBlockCancelBio.Visibility = Visibility.Visible;
             buttonChangeBio.Visibility = Visibility.Hidden;
         }
 
@@ -203,11 +231,7 @@ namespace BMCWindows
                 string message = Properties.Resources.Info_BioUpdated.ToString();
                 MessageBox.Show(message);
                 buttonAcceptNewBio.Visibility = Visibility.Hidden;
-                imageAcceptBio.Visibility = Visibility.Hidden;
-                textBlockAcceptBio.Visibility = Visibility.Hidden;
                 buttonCancelNewBio.Visibility = Visibility.Visible;
-                imageCancelBio.Visibility = Visibility.Hidden;
-                textBlockCancelBio.Visibility = Visibility.Hidden;
                 buttonChangeBio.Visibility = Visibility.Visible;
             }
             else
@@ -221,11 +245,7 @@ namespace BMCWindows
             textBoxBio.Visibility = Visibility.Hidden;
             textBlockBio.Visibility = Visibility.Visible;
             buttonAcceptNewBio.Visibility = Visibility.Hidden;
-            imageAcceptBio.Visibility = Visibility.Hidden;
-            textBlockAcceptBio.Visibility = Visibility.Hidden;
             buttonCancelNewBio.Visibility = Visibility.Visible;
-            imageCancelBio.Visibility = Visibility.Hidden;
-            textBlockCancelBio.Visibility = Visibility.Hidden;
             buttonChangeBio.Visibility = Visibility.Visible;
         }
 
@@ -302,6 +322,23 @@ namespace BMCWindows
             else
             {
                 textBox.IsReadOnly = false;
+            }
+        }
+
+        private void OpenPlayerProfileWindow(string username)
+        {
+            PlayerProfileWindow playerProfileWindow = new PlayerProfileWindow(username);
+
+            this.NavigationService.Navigate(new PlayerProfileWindow(username));
+        }
+
+        private void SelectFriend(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedFriend = (Friend)FriendsList.SelectedItem;
+
+            if (selectedFriend != null)
+            {
+                OpenPlayerProfileWindow(selectedFriend.UserName);
             }
         }
     }

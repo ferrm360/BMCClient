@@ -12,6 +12,9 @@
       Background="#FEFFDB">
 
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/Background/NoPetsBackground.jpg"/>
+        </Grid.Background>
 
         <Grid>
             <Grid.RowDefinitions>
@@ -49,16 +52,22 @@
                 <RowDefinition Height="30*"/>
                 <RowDefinition Height="70*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="buttonChangePassword" Grid.Column="3" Grid.Row="4" Background="Transparent" BorderBrush="Transparent" Click="UpdatePassword" Margin="47,0,0,0" Grid.ColumnSpan="2"/>
-            <Image Source="Images/BrownButton.png" IsHitTestVisible="False" Stretch="Fill" Grid.Column="3" Grid.Row="4" Grid.ColumnSpan="2" Margin="47,0,0,0"/>
+            <Button x:Name="buttonChangePassword"  Grid.Column="4" Grid.Row="4"  BorderBrush="Transparent" Click="UpdatePassword" >
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/BrownButton.png"/>
+                </Button.Background>
+                <Button.Content>
+                    <Viewbox Stretch="Uniform">
+                        <TextBlock Text="{x:Static p:Resources.ChangePasswordLabelChange}"/>
+                    </Viewbox>
+                </Button.Content>
+            </Button>
 
-
-            <TextBlock Grid.Row="4" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center"  Text="{x:Static p:Resources.ChangePasswordLabelChange}" FontSize="8"/>
-
-
-            <Button x:Name="buttonCancel" Grid.Column="6" Grid.Row="4" Background="Transparent" BorderBrush="Transparent"  Margin="0,0,18,0" Click="GoBack"/>
-            <Image Source="Images/BrownButton.png" Grid.Column="6" Grid.Row="4" IsHitTestVisible="False" Stretch="Fill" Margin="0,0,18,0"/>
-            <TextBlock Text="{x:Static p:Resources.GloblalButtonCancel}" Grid.Column="6" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False"/>
+            <Button x:Name="buttonCancel" Content="{x:Static p:Resources.GloblalButtonCancel}" Grid.Column="6" Grid.Row="4"  BorderBrush="Transparent" Click="GoBack">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/BrownButton.png"/>
+                </Button.Background>
+            </Button>
 
 
 
@@ -81,45 +90,32 @@
                 <RowDefinition Height="28*"/>
                 <RowDefinition Height="218*"/>
             </Grid.RowDefinitions>
-            <Label x:Name="labelOldPassword" Content="{x:Static p:Resources.ChangePasswordLabelCurrentPassword}" Grid.Column="1" Grid.Row="1"/>
-            <PasswordBox x:Name="passwordBoxOldPassword" Grid.Column="2" Grid.Row="1" PasswordChanged="CheckPasswordLimit" Padding="15">
+            <Viewbox Grid.Column="1" Grid.Row="1">
+                <Label x:Name="labelOldPassword" Content="{x:Static p:Resources.ChangePasswordLabelCurrentPassword}" />
+            </Viewbox>
+            <PasswordBox x:Name="passwordBoxOldPassword" Grid.Column="2" Grid.Row="1" PasswordChanged="CheckPasswordLimit" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                 <PasswordBox.Background>
                     <ImageBrush ImageSource="Images/LongTextbox.png"/>
                 </PasswordBox.Background>
             </PasswordBox>
-            <Label x:Name="labelNewPassword" Content="{x:Static p:Resources.ChangePasswordLabelNewPassword}" Grid.Column="1" Grid.Row="3"/>
-            <PasswordBox x:Name="passwordBoxPassword" Grid.Column="2" Grid.Row="3" PasswordChanged="CheckPasswordLimit" Padding="15">
+            <Viewbox Stretch="Uniform" Grid.Column="1" Grid.Row="3">
+                <Label x:Name="labelNewPassword" Content="{x:Static p:Resources.ChangePasswordLabelNewPassword}" Grid.Column="1" Grid.Row="3"/>
+            </Viewbox>
+            <PasswordBox x:Name="passwordBoxPassword" Grid.Column="2" Grid.Row="3" PasswordChanged="CheckPasswordLimit" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"> 
                 <PasswordBox.Background>
                     <ImageBrush ImageSource="Images/LongTextbox.png"/>
                 </PasswordBox.Background>
             </PasswordBox>
-            <Label x:Name="labelConfirmPassword" Content="{x:Static p:Resources.ChangePasswordLabelConfirmPasswrod}" Grid.Column="1" Grid.Row="5"/>
-            <PasswordBox x:Name="passwordBoxNewPassword" Grid.Column="2" Grid.Row="5" PasswordChanged="CheckPasswordLimit">
+            <Viewbox Grid.Column="1" Grid.Row="5" Stretch="Uniform">
+                <Label x:Name="labelConfirmPassword" Content="{x:Static p:Resources.ChangePasswordLabelConfirmPasswrod}" Grid.Column="1" Grid.Row="5"/>
+            </Viewbox>
+            <PasswordBox x:Name="passwordBoxNewPassword" Grid.Column="2" Grid.Row="5" PasswordChanged="CheckPasswordLimit" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                 <PasswordBox.Background>
                     <ImageBrush ImageSource="Images/LongTextbox.png"/>
                 </PasswordBox.Background>
             </PasswordBox>
 
         </Grid>
-
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="72*"/>
-                <RowDefinition Height="49*"/>
-                <RowDefinition Height="104*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="127*"/>
-                <ColumnDefinition Width="119*"/>
-                <ColumnDefinition Width="554*"/>
-            </Grid.ColumnDefinitions>
-
-            <Image x:Name="imageUserProfilePicture" Grid.Row="1" Grid.Column="1" Stretch="Fill"/>
-
-        </Grid>
-
-
-
 
 
     </Grid>

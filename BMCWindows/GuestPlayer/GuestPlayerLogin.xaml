@@ -11,9 +11,20 @@
       Background="#FEFFDB">
 
     <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="pack://application:,,,/Images/GreenRectangle.png" Stretch="Uniform"/>
-        </Grid.Background>
+        <Grid>
+
+            <Grid.Background>
+                <ImageBrush ImageSource="/Images/Background/NoPetsBackground.jpg"/>
+            </Grid.Background>
+        </Grid>
+        <Grid>
+            <Grid.Background>
+                <ImageBrush ImageSource="/Images/GreenRectangle.png" Stretch="Uniform"/>
+            </Grid.Background>
+        </Grid>
+
+
+
 
         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid.RowDefinitions>
@@ -41,18 +52,26 @@
                 <TextBox x:Name="textBoxUsername" Background="Transparent" BorderBrush="Transparent" TextAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="0,23,0,22" TextChanged="CheckLimit" MaxLength="255" Tag="255"/>
             </Grid>
 
-            <Button x:Name="buttonLoginAsGuest" Grid.Row="2" Grid.Column="1" Click="LoginAsGuest" Background="Transparent" BorderBrush="Transparent" FocusVisualStyle="{x:Null}" Focusable="False">
-                <Grid>
-                    <Image Source="pack://application:,,,/Images/BrownButton.png" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10,10,10,10"/>
-                    <TextBlock Text="{x:Static p:Resources.LogInButtonLogInAsGuest}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" Height="20" FontFamily="Press Start 2P Normal" FontSize="9"/>
-                </Grid>
+            <Button x:Name="buttonLoginAsGuest" Grid.Row="2" Grid.Column="1" Click="LoginAsGuest"  BorderBrush="Transparent" FocusVisualStyle="{x:Null}" Focusable="False" Margin="40,0,40,0">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Images/BrownButton.png" />
+                </Button.Background>
+                <Button.Content>
+                    <Viewbox Stretch="Uniform">
+                        <TextBlock Text="{x:Static p:Resources.LogInButtonLogInAsGuest}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Viewbox>
+                </Button.Content>
             </Button>
 
-            <Button x:Name="buttonCancel" Grid.Row="0" Grid.Column="0" Click="Cancel" Background="Transparent" BorderBrush="Transparent" FocusVisualStyle="{x:Null}" Focusable="False" Margin="10,16,177,56" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                <Grid>
-                    <Image Source="pack://application:,,,/Images/BrownButton.png" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,0,0,0"/>
-                    <TextBlock Text="{x:Static p:Resources.GloblalButtonCancel}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" Height="20" FontFamily="Press Start 2P Normal" FontSize="9"/>
-                </Grid>
+            <Button x:Name="buttonCancel" Grid.Row="0" Grid.Column="0" Click="Cancel" BorderBrush="Transparent" Margin="20,10,100,40" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Images/BrownButton.png"/>
+                </Button.Background>
+                <Button.Content>
+                    <Viewbox Stretch="Uniform">
+                        <TextBlock Text="{x:Static p:Resources.GloblalButtonCancel}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Viewbox>
+                </Button.Content>
             </Button>
 
         </Grid>

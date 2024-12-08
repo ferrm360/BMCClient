@@ -53,9 +53,9 @@
                 <ListView.View>
                     <GridView >
                         <GridViewColumn Header="{x:Static p:Resources.Lobby_LobbyName}" DisplayMemberBinding="{Binding Name}" Width="Auto"/> 
-                        <GridViewColumn Header="{x:Static p:Resources.Lobby_MaxPlayers}" DisplayMemberBinding="{Binding CurrentPlayers}" Width="Auto"/>
+                        <GridViewColumn Header="{x:Static p:Resources.Lobby_CurrentPlayers}" DisplayMemberBinding="{Binding CurrentPlayers}" Width="Auto"/>
                         <GridViewColumn Header="{x:Static p:Resources.Lobby_MaxPlayers}" DisplayMemberBinding="{Binding MaxPlayers}" Width="Auto"/>
-                        <GridViewColumn Header="{x:Static p:Resources.Lobby_CurrentPlayers}" DisplayMemberBinding="{Binding CurrentPlayers}">
+                        <GridViewColumn Header="{x:Static p:Resources.Lobby_JoinLobby}" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Content="{x:Static p:Resources.Lobby_JoinLobby}" Click="JoinLobby" >

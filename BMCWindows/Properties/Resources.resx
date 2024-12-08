@@ -636,4 +636,13 @@
   <data name="Lobby.CurrentPlayers" xml:space="preserve">
     <value>Current players</value>
   </data>
+  <data name="GameOver" xml:space="preserve">
+    <value>Game over</value>
+  </data>
+  <data name="Match.Winner" xml:space="preserve">
+    <value>Winner</value>
+  </data>
+  <data name="Match.Loser" xml:space="preserve">
+    <value>Loser</value>
+  </data>
 </root>

@@ -62,6 +62,7 @@ namespace BMCWindows
             }
 
             var profile = proxyProfile.GetProfileByUsername(_username);
+            InitializeScores();
 
         }
 

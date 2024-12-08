@@ -69,7 +69,7 @@ namespace BMCWindows.GuestPlayer
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
-            NavigationService.GoBack();
+            NavigationService.Navigate(new StartPage());
         }
 
         private void CheckLimit(object sender, TextChangedEventArgs e)

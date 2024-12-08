@@ -132,23 +132,31 @@ namespace BMCWindows.GameplayPage
             List<string> attackCardKeys = AvailableCards.Keys.ToList();
 
             attackCardKeys = attackCardKeys.OrderBy(x => random.Next()).ToList();
-
-            for (int i = 0; i < numCardsPerPlayer; i++)
+            try
             {
-                string selectedAttackCardKey = attackCardKeys[i];
-                AttackCard selectedAttackCard = AvailableCards[selectedAttackCardKey];
-
-                if (!CurrentPlayerDeck.ContainsKey(selectedAttackCard.Name))
+                for (int i = 0; i < numCardsPerPlayer; i++)
                 {
-                    CurrentPlayerDeck.Add(selectedAttackCard.Name, selectedAttackCard);
+                    string selectedAttackCardKey = attackCardKeys[i];
+                    AttackCard selectedAttackCard = AvailableCards[selectedAttackCardKey];
 
-                    AvailableCards.Remove(selectedAttackCardKey);
+                    if (!CurrentPlayerDeck.ContainsKey(selectedAttackCard.Name))
+                    {
+                        CurrentPlayerDeck.Add(selectedAttackCard.Name, selectedAttackCard);
+
+                        AvailableCards.Remove(selectedAttackCardKey);
+                    }
                 }
-            }
-            foreach (var attackCard in CurrentPlayerDeck)
+                foreach (var attackCard in CurrentPlayerDeck)
+                {
+                    Console.WriteLine(attackCard.Key);
+                }
+            } 
+            catch (ArgumentOutOfRangeException ex)
             {
-                Console.WriteLine(attackCard.Key);
+                buttonGetAttackCard.IsEnabled = false;
             }
+
+            
         }
 
         private void ShowAssignedCards()
@@ -170,7 +178,7 @@ namespace BMCWindows.GameplayPage
                 Width = 180,
                 Height = 250,
                 CornerRadius = new CornerRadius(10),
-                Background = new SolidColorBrush(Color.FromRgb(255, 250, 250)),
+                Background = new SolidColorBrush(Color.FromRgb(128, 184, 122)),
                 Style = (Style)FindResource("ClickableCardStyle"),
                 Margin = new Thickness(-30 - (5 * cardIndex), 10, 10, 10),
                 Effect = new DropShadowEffect
@@ -194,8 +202,8 @@ namespace BMCWindows.GameplayPage
             var cardImage = new Image
             {
                 Source = attackCard.CardImage,
-                Width = 100,
-                Height = 130
+                Width = 180,
+                Height = 250
             };
 
             var textBlock = new TextBlock
@@ -271,12 +279,6 @@ namespace BMCWindows.GameplayPage
                         selectedCardImage = cardData.CardImage;
 
                     }
-                    else
-                    {
-                    }
-                }
-                else
-                {
                 }
             }
         }
@@ -325,9 +327,13 @@ namespace BMCWindows.GameplayPage
 
                 if (hostAvailableCards.Count > 0)
                 {
-                    int randomIndex = random.Next(0, hostAvailableCards.Count);
+                    int randomIndex = random.Next(hostAvailableCards.Count); 
                     AddCardToPanel(randomIndex, hostAvailableCards[randomIndex]);
-                    RemainingHostCards.Remove(RemainingHostCards.ElementAt(randomIndex).Key); 
+                    RemainingHostCards.Remove(RemainingHostCards.ElementAt(randomIndex).Key);
+                }
+                else
+                {
+                    RefillCards(RemainingHostCards, HostAvailableAttackCards);
                 }
             }
             else
@@ -337,12 +343,37 @@ namespace BMCWindows.GameplayPage
 
                 if (guestAvailableCards.Count > 0)
                 {
-                    int randomIndex = random.Next(0, guestAvailableCards.Count);
+                    int randomIndex = random.Next(guestAvailableCards.Count);
                     AddCardToPanel(randomIndex, guestAvailableCards[randomIndex]);
-                    GuestAvailableAttackCards.Remove(RemainingGuestCards.ElementAt(randomIndex).Key); 
+                    RemainingGuestCards.Remove(RemainingGuestCards.ElementAt(randomIndex).Key);
+                }
+                else
+                {
+                    RefillCards(RemainingGuestCards, GuestAvailableAttackCards);
                 }
             }
         }
+
+        private void RefillCards(Dictionary<string, AttackCard> remainingCards, Dictionary<string, AttackCard> availableAttackCards)
+        {
+            foreach (var card in availableAttackCards)
+            {
+                if (!remainingCards.ContainsKey(card.Key)) 
+                {
+                    remainingCards.Add(card.Key, card.Value);
+                }
+            }
+
+            if (remainingCards.Count > 0)
+            {
+                Random random = new Random();
+                var refreshedCards = remainingCards.Values.ToList();
+                int randomIndex = random.Next(refreshedCards.Count);
+                AddCardToPanel(randomIndex, refreshedCards[randomIndex]);
+                remainingCards.Remove(remainingCards.ElementAt(randomIndex).Key);
+            }
+        }
+
 
 
         private void OnCellClickOwnBoard(int row, int col)
@@ -360,12 +391,12 @@ namespace BMCWindows.GameplayPage
                 return;
             }
 
-           /* if (string.IsNullOrEmpty(selectedCardName))
+            if (string.IsNullOrEmpty(selectedCardName))
             {
                 string errorMessage = Properties.Resources.Error_NoCardSelected;
                 MessageBox.Show(errorMessage);
                 return;
-            }*/
+            }
 
             Task.Run(() =>
              {

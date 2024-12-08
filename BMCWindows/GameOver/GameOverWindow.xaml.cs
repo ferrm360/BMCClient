@@ -46,19 +46,23 @@ namespace BMCWindows.GameOver
 
             if (isHost)
             {
+                string winner = Properties.Resources.Match_Winner.ToString();
+                string loser = Properties.Resources.Match_Loser.ToString();
                 winnerImageLeft = isWinner ? ImageGameOverPath.DogWin : ImageGameOverPath.DogLose;
-                winnerTextLeft = isWinner ? $"¡Has ganado {_name}!" : "¡Has perdido!";
+                winnerTextLeft = isWinner ? winner : loser;
 
                 winnerImageRight = isWinner ? ImageGameOverPath.CatLose : ImageGameOverPath.CatWin;
-                winnerTextRight = isWinner ? "¡Has perdido!" : $"¡Has ganado {_name}!";
+                winnerTextRight = isWinner ? loser : winner;
             }
             else
             {
+                string winner = Properties.Resources.Match_Winner.ToString();
+                string loser = Properties.Resources.Match_Loser.ToString();
                 winnerImageLeft = isWinner ? ImageGameOverPath.CatWin : ImageGameOverPath.CatLose;
-                winnerTextLeft = isWinner ? $"¡Has ganado {_name}!" : "¡Has perdido!";
+                winnerTextLeft = isWinner ? winner : loser;
 
                 winnerImageRight = isWinner ? ImageGameOverPath.DogLose : ImageGameOverPath.DogWin;
-                winnerTextRight = isWinner ? "¡Has perdido!" : $"¡Has ganado {_name}!";
+                winnerTextRight = isWinner ? loser : winner;
             }
 
             PlayerImageLeft = winnerImageLeft;

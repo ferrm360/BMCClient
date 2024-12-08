@@ -4,6 +4,7 @@ using BMCWindows.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -74,10 +75,23 @@ namespace BMCWindows.VerificationCode
                                     errorMessages.ShowErrorMessage(result.ErrorKey);
                             }
                         }
+                        catch (CommunicationException commEx)
+                        {
+
+                            ErrorMessages errorMessages = new ErrorMessages();
+                            errorMessages.ShowErrorMessage("Error.CommunicationError");
+
+                        }
+                        catch (TimeoutException timeoutEx)
+                        {
+
+                            ErrorMessages errorMessages = new ErrorMessages();
+                            errorMessages.ShowErrorMessage("Error.TimeOutError");
+                        }
                         catch (Exception ex)
                         {
                             ErrorMessages errorMessages = new ErrorMessages();
-                            errorMessages.ShowErrorMessage("Error.ServerError");
+                            errorMessages.ShowErrorMessage("Error.GeneralException");
                         }
                     }
                 });
@@ -98,9 +112,9 @@ namespace BMCWindows.VerificationCode
             }
         }
 
-        private void VerificationCodeTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void VerificationCodeTextBox(object sender, TextChangedEventArgs e)
         {
-            if (VerificationCodeTextBox.Text.Trim().Equals(_currentCode, StringComparison.OrdinalIgnoreCase))
+            if (textBoxVerificationCode.Text.Trim().Equals(_currentCode, StringComparison.OrdinalIgnoreCase))
             {
                 string infoText = Properties.Resources.Info_ValidationCodeCorrect.ToString();
                 DynamicMessageTextBlock.Text = infoText;
@@ -114,7 +128,7 @@ namespace BMCWindows.VerificationCode
                     });
                 });
             }
-            else if (VerificationCodeTextBox.Text.Length == _currentCode.Length)
+            else if (textBoxVerificationCode.Text.Length == _currentCode.Length)
             {
                 string errorText = Properties.Resources.Error_InvalidValidationCode.ToString();
                 DynamicMessageTextBlock.Text = "Código de verificación incorrecto.";

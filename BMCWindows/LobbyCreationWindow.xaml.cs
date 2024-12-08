@@ -148,7 +148,8 @@ namespace BMCWindows
 
         private void CancelLobbyCreation(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+           
+            this.NavigationService.Navigate(new GameOptionsWindow());
         }
 
         private void CheckLimit(object sender, TextChangedEventArgs e)

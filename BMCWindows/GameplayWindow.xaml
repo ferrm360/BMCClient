@@ -37,7 +37,7 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="Images/Background/NoPetsBackground.jpg"/>
+            <ImageBrush ImageSource="Images/BackGround/NoPetsBackground.jpg"/>
         </Grid.Background>
         <Grid>
             <Grid.RowDefinitions>
@@ -83,37 +83,35 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border Background="#D0EAB4" Margin="5" Width="60" Height="90">
-                            <Viewbox Stretch="Uniform">
-                                <StackPanel>
-                                    <Image Source="{Binding ProfilePicture}" Width="50" Height="50" HorizontalAlignment="Center"/>
-                                    <TextBlock Text="{Binding Username}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#FEFFDB"/>
-                                </StackPanel>
-                            </Viewbox>
+                            <StackPanel>
+                                <Image Source="{Binding ProfileImage}" Width="50" Height="50" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding Username}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#FEFFDB"/>
+                            </StackPanel>
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </StackPanel>
 
-        
+
         <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10">
             <ItemsControl x:Name="Player2Cards" Margin="5" Background="#43224D">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border Background="#D0EAB4" Margin="5" Width="60" Height="90">
-                            <Viewbox Stretch="Uniform">
-                                <StackPanel>
-                                    <Image Source="{Binding ProfilePicture}" Width="50" Height="50" HorizontalAlignment="Center"/>
-                                    <TextBlock Text="{Binding Username}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#FEFFDB"/>
-                                </StackPanel>
-                            </Viewbox>
+                            <StackPanel>
+                                <Image Source="{Binding ProfileImage}" Width="50" Height="50" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding Username}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#FEFFDB"/>
+                            </StackPanel>
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </StackPanel>
 
-       
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <TextBlock x:Name="TextBlockPlayerStatus" FontSize="16" Margin="5" IsHitTestVisible="False"/>
+        </StackPanel>
 
         <Grid>
             <Grid.ColumnDefinitions>
@@ -126,74 +124,61 @@
                 <RowDefinition Height="38*"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                <Border x:Name="BorderCardOneLife" Style="{StaticResource ClickableCardStyle}" Width="90" Height="120" CornerRadius="10" Background="#80B87A"  MouseLeftButtonDown="SelectCard">
+                <Border x:Name="BorderCardOneLife" Style="{StaticResource ClickableCardStyle}" Width="90" Height="120" CornerRadius="10" Background="#FFFAFA"  MouseLeftButtonDown="SelectCard">
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="10" ShadowDepth="5" Color="#888" />
                     </Border.Effect>
-                    <Viewbox Stretch="Uniform">
-                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <Image x:Name="imageCardOneLife" Stretch="Fill"/>
-                            <TextBlock x:Name="textBlockOneLifeCardName"  FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
-                            <TextBlock x:Name="textBlockOneLifeCardLife" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
-                        </StackPanel>
-                    </Viewbox>
-
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image x:Name="imageCardOneLife" Stretch="Fill"/>
+                        <TextBlock x:Name="textBlockOneLifeCardName"  FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
+                        <TextBlock x:Name="textBlockOneLifeCardLife" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
+                    </StackPanel>
                 </Border>
 
-                <Border x:Name="BorderAnotherOneLifeCard" Style="{StaticResource ClickableCardStyle}" Width="90" Height="120" CornerRadius="10" Background="#80B87A"  MouseLeftButtonDown="SelectCard">
+                <Border x:Name="BorderAnotherOneLifeCard" Style="{StaticResource ClickableCardStyle}" Width="90" Height="120" CornerRadius="10" Background="#FFFAFA"  MouseLeftButtonDown="SelectCard">
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="10" ShadowDepth="5" Color="#888" />
                     </Border.Effect>
-                    <Viewbox Stretch="Uniform">
-                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <Image x:Name="imageAnotherOneLifeCard" Stretch="Fill"/>
-                            <TextBlock x:Name="textBlockAnotherOneLifeCardName"  FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
-                            <TextBlock x:Name="textBlockAnotherOneLifeCardLife" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
-                        </StackPanel>
-                    </Viewbox>
-
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image x:Name="imageAnotherOneLifeCard" Stretch="Fill"/>
+                        <TextBlock x:Name="textBlockAnotherOneLifeCardName"  FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
+                        <TextBlock x:Name="textBlockAnotherOneLifeCardLife" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
+                    </StackPanel>
                 </Border>
-                <Border x:Name="BorderCardTwoLives" Style="{StaticResource ClickableCardStyle}" Width="90" Height="120" CornerRadius="10" Background="#80B87A" MouseLeftButtonDown="SelectCard">
+                <Border x:Name="BorderCardTwoLives" Style="{StaticResource ClickableCardStyle}" Width="90" Height="120" CornerRadius="10" Background="#FFFAFA" MouseLeftButtonDown="SelectCard">
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="10" ShadowDepth="5" Color="#888" />
                     </Border.Effect>
-                    <Viewbox>
-                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <Image x:Name="imageTwoLivesCard" Stretch="Fill"/>
-                            <TextBlock x:Name="textBlockTwoLivesCardName"  FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
-                            <TextBlock x:Name="textBlockTwoLivesCardLives" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
-                        </StackPanel>
-                    </Viewbox>
-
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image x:Name="imageTwoLivesCard" Stretch="Fill"/>
+                        <TextBlock x:Name="textBlockTwoLivesCardName"  FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
+                        <TextBlock x:Name="textBlockTwoLivesCardLives" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
+                    </StackPanel>
                 </Border>
-                <Border x:Name="BorderAnotherTwoLivesCard" Style="{StaticResource ClickableCardStyle}" Width="90" Height="120" CornerRadius="10" Background="#80B87A" MouseLeftButtonDown="SelectCard">
+                <Border x:Name="BorderAnotherTwoLivesCard" Style="{StaticResource ClickableCardStyle}" Width="90" Height="120" CornerRadius="10" Background="#FFFAFA" MouseLeftButtonDown="SelectCard">
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="10" ShadowDepth="5" Color="#888" />
                     </Border.Effect>
-                    <Viewbox>
-                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <Image x:Name="imageAnotherTwoLivesCard" Stretch="Fill"/>
-                            <TextBlock x:Name="textBlockAnotherTwoLivesCardName"  FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
-                            <TextBlock x:Name="textBlockAnotherTwoLivesCardLives" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
-                        </StackPanel>
-                    </Viewbox>
-
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image x:Name="imageAnotherTwoLivesCard" Stretch="Fill"/>
+                        <TextBlock x:Name="textBlockAnotherTwoLivesCardName"  FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
+                        <TextBlock x:Name="textBlockAnotherTwoLivesCardLives" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
+                    </StackPanel>
                 </Border>
-                <Border x:Name="BorderCard3Lifes" Style="{StaticResource ClickableCardStyle}" Width="90" Height="120" CornerRadius="10" Background="#80B87A" MouseLeftButtonDown="SelectCard">
+                <Border x:Name="BorderCard3Lifes" Style="{StaticResource ClickableCardStyle}" Width="90" Height="120" CornerRadius="10" Background="#FFFAFA" MouseLeftButtonDown="SelectCard">
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="10" ShadowDepth="5" Color="#888" />
                     </Border.Effect>
-                    <Viewbox>
-                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <Image x:Name="imageThreeLivesCard" Stretch="Fill"/>
-                            <TextBlock x:Name="textBlockThreeLivesCardName"  FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
-                            <TextBlock x:Name="textBlockThreeLivesCardLives" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
-                        </StackPanel>
-                    </Viewbox>
-
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image x:Name="imageThreeLivesCard" Stretch="Fill"/>
+                        <TextBlock x:Name="textBlockThreeLivesCardName"  FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
+                        <TextBlock x:Name="textBlockThreeLivesCardLives" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" Margin="5"/>
+                    </StackPanel>
                 </Border>
 
             </StackPanel>
+
+
         </Grid>
 
         <Grid>
@@ -209,15 +194,15 @@
             </Grid.ColumnDefinitions>
 
             <Button x:Name="buttonAcceptCardsPosition" 
-            Grid.Row="1" 
-            Grid.Column="1" 
             Content="{x:Static p:Resources.GlobalButtonAccept}"
+            Grid.Row="1" 
+            Grid.Column="1"  
             BorderBrush="Transparent" 
             Click="AcceptCardsPosition"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch">
                 <Button.Background>
-                    <ImageBrush ImageSource="Images/BrownButton.png"/>
+                    <ImageBrush ImageSource="Images/BrownButton.png" />
                 </Button.Background>
             </Button>
         </Grid>

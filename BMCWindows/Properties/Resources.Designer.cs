@@ -754,6 +754,15 @@ namespace BMCWindows.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Game over.
+        /// </summary>
+        public static string GameOver {
+            get {
+                return ResourceManager.GetString("GameOver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a You have clicked on cell: ({0},{1}) in your own dashboard.
         /// </summary>
         public static string Gameplay_Attack {
@@ -1218,6 +1227,24 @@ namespace BMCWindows.Properties {
         public static string MarchPropertyButtonPublic {
             get {
                 return ResourceManager.GetString("MarchPropertyButtonPublic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Loser.
+        /// </summary>
+        public static string Match_Loser {
+            get {
+                return ResourceManager.GetString("Match.Loser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Winner.
+        /// </summary>
+        public static string Match_Winner {
+            get {
+                return ResourceManager.GetString("Match.Winner", resourceCulture);
             }
         }
         

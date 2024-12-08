@@ -53,10 +53,11 @@
                                 <Border.Background>
                                     <ImageBrush ImageSource="Images/GreenRectangle.png"/>
                                 </Border.Background>
-                                <StackPanel>
+                                <StackPanel Width="80" Height="95">
                                     <Image Source="{Binding PlayerImage}" Width="50" Height="50" HorizontalAlignment="Center" />
-                                    <TextBlock Text="{Binding UserName}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Margin="5" />
-                                    <TextBlock Text="{Binding Status}" FontSize="12" HorizontalAlignment="Center" />
+                                    <Viewbox Stretch="Uniform">
+                                        <TextBlock Text="{Binding UserName}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Margin="5" />
+                                    </Viewbox>
 
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                                         <Button Content="{x:Static p:Resources.GlobalButtonAccept}" Width="80" Margin="5" Click="AcceptFriend">

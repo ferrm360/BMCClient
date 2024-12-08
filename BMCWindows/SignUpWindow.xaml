@@ -11,6 +11,9 @@
       Background="#FEFFDB">
 
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/Background/NoPetsBackground.jpg"/>
+        </Grid.Background>
         <Grid Margin="0,25,0,10">
             <Grid.Background>
                 <ImageBrush ImageSource="Images/GreenRectangle.png" Stretch="Uniform" />
@@ -52,13 +55,6 @@
 
                 </Grid>
 
-
-
-
-
-
-
-
             </Grid>
 
             <Grid>
@@ -79,21 +75,13 @@
                     <RowDefinition Height="27*"/>
                     <RowDefinition Height="89*"/>
                 </Grid.RowDefinitions>
-                <Viewbox Stretch="Fill" Grid.Column="1" Grid.Row="1" >
-                    <TextBox x:Name="textBoxUser"  Background="Transparent" BorderBrush="Transparent" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxLength="255" SelectionBrush="Transparent" FontSize="10"/>
-                </Viewbox>
+                    <TextBox x:Name="textBoxUser" Grid.Column="1" Grid.Row="1" Background="Transparent" BorderBrush="Transparent"  TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxLength="255" SelectionBrush="Transparent" />
                 
-                <Viewbox Stretch="Fill" Grid.Column="1" Grid.Row="3">
-                    <TextBox x:Name="textBoxEmail"   Background="Transparent" BorderBrush="Transparent" TextAlignment="Center"  MaxLength="255" />
-                </Viewbox>
+                    <TextBox x:Name="textBoxEmail" Grid.Column="1" Grid.Row="3" Background="Transparent" BorderBrush="Transparent" TextAlignment="Center"  MaxLength="255" />
 
-                <Viewbox Stretch="Fill" Grid.Column="1" Grid.Row="5">
-                    <PasswordBox x:Name="passwordBoxPassword" Grid.Column="1" Grid.Row="5" Background="Transparent" BorderBrush="Transparent" PasswordChanged="CheckPasswordLimit"/>
-                </Viewbox>
+                    <PasswordBox x:Name="passwordBoxPassword" Grid.Column="1" Grid.Row="5" Background="Transparent" BorderBrush="Transparent" PasswordChanged="CheckPasswordLimit" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
 
-                <Viewbox Stretch="Fill" Grid.Column="1" Grid.Row="7">
-                    <PasswordBox x:Name="passwordBoxConfirmPassword"  Background="Transparent" BorderBrush="Transparent" PasswordChanged="CheckPasswordLimit"/>
-                </Viewbox>
+                    <PasswordBox x:Name="passwordBoxConfirmPassword" Grid.Column="1" Grid.Row="7" Background="Transparent" BorderBrush="Transparent" PasswordChanged="CheckPasswordLimit" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
 
 
             </Grid>

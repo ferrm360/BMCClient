@@ -43,7 +43,6 @@
             </Setter>
         </Style>
 
-        <!-- Estilo para cartas con efecto de clic para quedarse desplazadas -->
         <Style x:Key="ClickableCardStyle" TargetType="Border">
             <Setter Property="RenderTransform">
                 <Setter.Value>
@@ -51,7 +50,6 @@
                 </Setter.Value>
             </Setter>
             <Style.Triggers>
-                <!-- Desplazar la carta hacia arriba cuando el mouse pasa por encima -->
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="RenderTransform">
                         <Setter.Value>
@@ -59,7 +57,6 @@
                         </Setter.Value>
                     </Setter>
                 </Trigger>
-                <!-- Mantener la carta desplazada al hacer clic y regresar al hacer clic de nuevo -->
                 <Trigger Property="Tag" Value="Clicked">
                     <Setter Property="RenderTransform">
                         <Setter.Value>
@@ -121,23 +118,6 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-
-        <Style TargetType="ListView">
-            <Setter Property="View">
-                <Setter.Value>
-                    <GridView>
-                        <GridView.ColumnHeaderContainerStyle>
-                            <Style TargetType="GridViewColumnHeader">
-                                <Setter Property="Background" Value="#5CA159" />
-                                <Setter Property="Foreground" Value="#43224D" />
-                            </Style>
-                        </GridView.ColumnHeaderContainerStyle>
-                    </GridView>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-
 
     </Application.Resources>
 
