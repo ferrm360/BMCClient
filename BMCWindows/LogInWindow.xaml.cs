@@ -54,6 +54,7 @@ namespace BMCWindows
                         Server.PlayerDTO player = new Server.PlayerDTO();
                         player.Username = user;
                         player.Password = password;
+                        player.Email = result.Email;
                         UserSessionManager.getInstance().LoginPlayer(player, false);
                         this.NavigationService.Navigate(new HomePage());
 

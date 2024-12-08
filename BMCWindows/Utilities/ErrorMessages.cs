@@ -25,5 +25,29 @@ namespace BMCWindows.Utilities
             }
         }
 
+        public bool ShowServerErrorAndNavigateToLogin(string messageKey, string titleKey)
+        {
+            string message = Properties.Resources.ResourceManager.GetString(messageKey);
+            string title = Properties.Resources.ResourceManager.GetString(titleKey);
+
+            if (string.IsNullOrEmpty(message))
+            {
+                message = Properties.Resources.ResourceManager.GetString("Error.GeneralException") ?? "Ocurrió un error desconocido.";
+            }
+
+            if (string.IsNullOrEmpty(title))
+            {
+                title = "Error";
+            }
+
+            var result = MessageBox.Show(
+                message,
+                title,
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Error);
+
+            return result == MessageBoxResult.Yes;
+        }
+
     }
 }

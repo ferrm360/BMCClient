@@ -361,10 +361,33 @@ namespace BMCWindows
                     }
                 }
             }
+            catch (EndpointNotFoundException ex)
+            {
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.ServerError");
+            }
+            catch (CommunicationException ex)
+            {
+                ErrorMessages errorMessages = new ErrorMessages();
+                bool shouldNavigateToLogin = errorMessages.ShowServerErrorAndNavigateToLogin("Error.EndpointException", "Error.ServerErrorTitle");
+
+                if (shouldNavigateToLogin)
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        this.NavigationService.Navigate(new LogIn());
+                    });
+                }
+            }
+            catch (TimeoutException ex)
+            {
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.TiemoutError");
+            }
             catch (Exception ex)
             {
                 ErrorMessages errorMessages = new ErrorMessages();
-                errorMessages.ShowErrorMessage("Error.GameWontStart");
+                errorMessages.ShowErrorMessage("Error.ServerError");
             }
         }
 
@@ -497,6 +520,27 @@ namespace BMCWindows
                 FriendsList.SelectedItem = null;
             }
         }
+
+        private void ShowServerErrorAndNavigateToLogin(string message, string title)
+        {
+            var result = MessageBox.Show(
+                message,
+                title,
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Error);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    if (this.NavigationService != null)
+                    {
+                        this.NavigationService.Navigate(new LogIn());
+                    }
+                });
+            }
+        }
+
 
 
         private void InvitePlayerToLobby(EmailDTO emailDTO)

@@ -42,7 +42,7 @@ namespace BMCWindows.GameOver
 
         private void UpdatePlayerDetails(bool isHost, bool isWinner)
         {
-            string winnerImageLeft, winnerTextLeft, winnerImageRight, winnerTextRight;
+            string winnerImageLeft, winnerTextLeft;
 
             if (isHost)
             {
@@ -50,9 +50,6 @@ namespace BMCWindows.GameOver
                 string loser = Properties.Resources.Match_Loser.ToString();
                 winnerImageLeft = isWinner ? ImageGameOverPath.DogWin : ImageGameOverPath.DogLose;
                 winnerTextLeft = isWinner ? winner : loser;
-
-                winnerImageRight = isWinner ? ImageGameOverPath.CatLose : ImageGameOverPath.CatWin;
-                winnerTextRight = isWinner ? loser : winner;
             }
             else
             {
@@ -60,27 +57,15 @@ namespace BMCWindows.GameOver
                 string loser = Properties.Resources.Match_Loser.ToString();
                 winnerImageLeft = isWinner ? ImageGameOverPath.CatWin : ImageGameOverPath.CatLose;
                 winnerTextLeft = isWinner ? winner : loser;
-
-                winnerImageRight = isWinner ? ImageGameOverPath.DogLose : ImageGameOverPath.DogWin;
-                winnerTextRight = isWinner ? loser : winner;
             }
 
             PlayerImageLeft = winnerImageLeft;
             PlayerTextLeft = winnerTextLeft;
-            PlayerImageRight = winnerImageRight;
-            PlayerTextRight = winnerTextRight;
         }
 
         private void OnAcceptClick(object sender, RoutedEventArgs e)
         {
-            if (!UserSessionManager.getInstance().IsGuestUser())
-            {
-                this.NavigationService.Navigate(new HomePage());
-
-            } else
-            {
-                this.NavigationService.Navigate(new GameOptionsWindow());
-            }
+            this.NavigationService.Navigate(new GameOptionsWindow());
         }
     }
 }

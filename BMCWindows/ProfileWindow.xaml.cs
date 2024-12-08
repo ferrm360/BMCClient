@@ -72,8 +72,16 @@ namespace BMCWindows
             openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.png)|*.jpg;*.jpeg;*.png";
             if (openFileDialog.ShowDialog() == true)
             {
-                BitmapImage bitmap = new BitmapImage(new Uri(openFileDialog.FileName));
                 string urlImage = openFileDialog.FileName;
+
+                if (!IsFileSizeValid(urlImage, 1))
+                {
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("ImageTooLarge");
+                    return;
+                }
+
+                BitmapImage bitmap = new BitmapImage(new Uri(openFileDialog.FileName));
                 ProfileImageBrush.ImageSource = bitmap;
                 byte[] byteImage = ConvertImageToByteArray(urlImage);
                 ProfileServer.ProfileServiceClient proxy = new ProfileServer.ProfileServiceClient();
@@ -87,11 +95,15 @@ namespace BMCWindows
                 {
                     MessageBox.Show(result.ErrorKey);
                 }
-
-
-            
             }
 
+        }
+
+        private bool IsFileSizeValid(string filePath, int maxSizeInMB)
+        {
+            FileInfo fileInfo = new FileInfo(filePath);
+            long maxSizeInBytes = maxSizeInMB * 1024 * 1024;
+            return fileInfo.Length <= maxSizeInBytes;
         }
 
         private void InitializeScores()

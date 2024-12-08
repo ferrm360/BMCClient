@@ -48,10 +48,12 @@ namespace BMCWindows.VerificationCode
             {
                 _isProcessing = true;
 
-                LoadingProgressBar.Visibility = Visibility.Visible;
-                string infoText = Properties.Resources.Info_SendingCode.ToString();
-                DynamicMessageTextBlock.Text = infoText;
-                DynamicMessageTextBlock.Foreground = new SolidColorBrush(Colors.Orange);
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    LoadingProgressBar.Visibility = Visibility.Visible;
+                    DynamicMessageTextBlock.Text = Properties.Resources.Info_SendingCode.ToString();
+                    DynamicMessageTextBlock.Foreground = new SolidColorBrush(Colors.Orange);
+                });
 
                 await Task.Run(() =>
                 {
@@ -70,47 +72,65 @@ namespace BMCWindows.VerificationCode
                             var result = proxy.SendEmail(emailDTO);
                             if (!result.IsSuccess)
                             {
-                               
+                                Application.Current.Dispatcher.Invoke(() =>
+                                {
                                     ErrorMessages errorMessages = new ErrorMessages();
                                     errorMessages.ShowErrorMessage(result.ErrorKey);
+                                });
                             }
                         }
                         catch (CommunicationException commEx)
                         {
-
-                            ErrorMessages errorMessages = new ErrorMessages();
-                            errorMessages.ShowErrorMessage("Error.CommunicationError");
-
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                ErrorMessages errorMessages = new ErrorMessages();
+                                errorMessages.ShowErrorMessage("Error.CommunicationError");
+                            });
                         }
                         catch (TimeoutException timeoutEx)
                         {
-
-                            ErrorMessages errorMessages = new ErrorMessages();
-                            errorMessages.ShowErrorMessage("Error.TimeOutError");
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                ErrorMessages errorMessages = new ErrorMessages();
+                                errorMessages.ShowErrorMessage("Error.TimeOutError");
+                            });
                         }
                         catch (Exception ex)
                         {
-                            ErrorMessages errorMessages = new ErrorMessages();
-                            errorMessages.ShowErrorMessage("Error.GeneralException");
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                ErrorMessages errorMessages = new ErrorMessages();
+                                errorMessages.ShowErrorMessage("Error.GeneralException");
+                            });
                         }
                     }
                 });
 
-                string codeSent = Properties.Resources.Info_CodeSentSuccesfully.ToString(); 
-                DynamicMessageTextBlock.Text = codeSent;
-                DynamicMessageTextBlock.Foreground = new SolidColorBrush(Colors.Green);
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    DynamicMessageTextBlock.Text = Properties.Resources.Info_CodeSentSuccesfully.ToString();
+                    DynamicMessageTextBlock.Foreground = new SolidColorBrush(Colors.Green);
+                });
             }
             catch (Exception ex)
             {
-                ErrorMessages errorMessages = new ErrorMessages();
-                errorMessages.ShowErrorMessage("Error.SendCodeFailed");
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.SendCodeFailed");
+                });
             }
             finally
             {
-                LoadingProgressBar.Visibility = Visibility.Collapsed;
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    LoadingProgressBar.Visibility = Visibility.Collapsed;
+                });
+
                 _isProcessing = false;
             }
         }
+
 
         private void VerificationCodeTextBox(object sender, TextChangedEventArgs e)
         {
@@ -130,8 +150,8 @@ namespace BMCWindows.VerificationCode
             }
             else if (textBoxVerificationCode.Text.Length == _currentCode.Length)
             {
-                string errorText = Properties.Resources.Error_InvalidValidationCode.ToString();
-                DynamicMessageTextBlock.Text = "Código de verificación incorrecto.";
+                string errorText = Properties.Resources.ResourceManager.GetString("Error.InvalidValidationCode");
+                DynamicMessageTextBlock.Text = errorText;
                 DynamicMessageTextBlock.Foreground = new SolidColorBrush(Colors.Red);
             }
         }
