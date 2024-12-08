@@ -65,21 +65,28 @@ namespace BMCWindows
             }
             else
             {
-                BitmapImage image = ImageConvertor.ConvertByteArrayToImage(imageUrl.ImageData);
-                if (image == null)
+                try
                 {
-                     
-                    ErrorMessages errorMessages = new ErrorMessages();
-                    errorMessages.ShowErrorMessage("Error.ImageNotFound");
-                }
-                else
-                {
-                    Application.Current.Dispatcher.Invoke(() =>
+                    BitmapImage image = ImageConvertor.ConvertByteArrayToImage(imageUrl.ImageData);
+                    if (image == null)
                     {
-                        ProfileImageBrush.ImageSource = image;
-                    });
 
+                        ErrorMessages errorMessages = new ErrorMessages();
+                        errorMessages.ShowErrorMessage("Error.ImageNotFound");
+                    }
+                    else
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            ProfileImageBrush.ImageSource = image;
+                        });
+
+                    }
+                } catch(Exception ex)
+                {
+                    ErrorMessages errorMessages = new ErrorMessages();
                 }
+                
             }
 
             InitializeScores();
@@ -166,11 +173,14 @@ namespace BMCWindows
             }
             catch (CommunicationException commEx)
             {
+                
                 ErrorMessages errorMessages = new ErrorMessages();
                 errorMessages.ShowErrorMessage("Error.CommunicationError");
+               
             }
             catch (TimeoutException timeoutEx)
             {
+
                 ErrorMessages errorMessages = new ErrorMessages();
                 errorMessages.ShowErrorMessage("Error.TimeOutError");
             }
@@ -316,8 +326,8 @@ namespace BMCWindows
                 {
                     if (response.Scores != null)
                     {
-                        textBlockCurrentPlayerWins.Text = response.Scores.Wins.ToString();
-                        textBlockCurrentPlayerLosses.Text = response.Scores.Losses.ToString();
+                        //textBlockCurrentPlayerWins.Text = response.Scores.Wins.ToString();
+                        //textBlockCurrentPlayerLosses.Text = response.Scores.Losses.ToString();
 
                     }
                 }

@@ -39,25 +39,28 @@
                 <ColumnDefinition Width="253*"/>
                 <ColumnDefinition Width="426*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="buttonCreateGame" Grid.Column="2" Grid.Row="2" Background="Transparent" BorderBrush="Transparent" Margin="0,0,0,18" Grid.RowSpan="2" Click="GoToCreateLobbyWindow"/>
-            <Image Source="Images/BrownGreenButton.png" Grid.Column="2" Grid.Row="2" Stretch="Fill" Margin="0,0,0,18" Grid.RowSpan="2" IsHitTestVisible="False"/>
-            <TextBlock Text="{x:Static p:Resources.MatchButtonCreateMatch}" Grid.Column="2" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,17,0,0" Height="16" Width="68"/>
-            <Button x:Name="buttonJoinGame" Grid.Column="2" Grid.Row="4" Background="Transparent" BorderBrush="Transparent" Click="GoToJoinLobbyWindow"/>
-            <Image Source="Images/BrownGreenButton.png" Grid.Column="2" Grid.Row="4" Stretch="Fill" IsHitTestVisible="False"/>
-            <TextBlock Text="{x:Static p:Resources.MatchButtonJoinMatch}" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="4" Margin="0,15,0,0" Height="16" Width="56"/>
+            <Button x:Name="buttonCreateGame" Content="{x:Static p:Resources.MatchButtonCreateMatch}" Grid.Column="2" Grid.Row="2" BorderBrush="Transparent" Margin="0,0,0,18" Click="GoToCreateLobbyWindow" Padding="0,0,0,30"> 
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/BrownGreenButton.png" />
+                </Button.Background>
+            </Button>
+            <Button x:Name="buttonJoinGame" Content="{x:Static p:Resources.MatchButtonJoinMatch}" Grid.Column="2" Grid.Row="4" BorderBrush="Transparent" Click="GoToJoinLobbyWindow" Padding="0,0,0,30"> 
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/BrownGreenButton.png" />
+                </Button.Background>
+            </Button>
 
             <Grid Grid.Row="0" Grid.Column="0">
-                <Button x:Name="buttonCancel" Background="Transparent" BorderBrush="Transparent" Click="Cancel" Visibility="Visible">
-                    <Grid>
-                        <Image Source="Images/BrownButton.png" IsHitTestVisible="False"/>
-                        <TextBlock x:Name="textBlockCancel" Text="{x:Static p:Resources.GloblalButtonCancel}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Height="20" FontFamily="Press Start 2P Normal" FontSize="9"/>
-                    </Grid>
+                <Button x:Name="buttonCancel" Content="{x:Static p:Resources.GloblalButtonCancel}" BorderBrush="Transparent" Click="Cancel" Visibility="Visible">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Images/BrownButton.png"/>
+                    </Button.Background>
                 </Button>
 
                 <Button x:Name="buttonLogout" Background="Transparent" BorderBrush="Transparent" Click="Logout" Visibility="Collapsed">
                     <Grid>
                         <Image Source="pack://application:,,,/Images/BrownButton.png" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5"/>
-                        <TextBlock Text="Logout" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" Height="20" FontFamily="Press Start 2P Normal" FontSize="8"/>
+                        <TextBlock Text="{x:Static p:Resources.GuestLogout}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" Height="20"  FontSize="8"/>
                     </Grid>
                 </Button>
             </Grid>

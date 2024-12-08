@@ -29,7 +29,7 @@ namespace BMCWindows
     {
         public ObservableCollection<LobbyDTO> gameSessions { get; set; }
         public ObservableCollection<LobbyDTO> FilteredGameSessions { get; set; } = new ObservableCollection<LobbyDTO>();
-        private LobbyDTO selectedLobby;
+        private LobbyDTO _selectedLobby;
         private LobbyCallbackHandler _callbackHandler;
         private LobbyServiceClient _proxy;
 
@@ -76,13 +76,23 @@ namespace BMCWindows
 
                     FilterLobbies();
 
-                    listBoxLobbies.ItemsSource = gameSessions;
+                    listViewLobbies.ItemsSource = gameSessions;
                 }
-                catch (Exception ex)
-                {
-                    ErrorMessages errorMessages = new ErrorMessages();
-                    errorMessages.ShowErrorMessage("Lobby.LoadError");
-                }
+                catch (CommunicationException commEx)
+            {
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.CommunicationError");
+            }
+            catch (TimeoutException timeoutEx)
+            {
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.TimeOutError");
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Lobby.LoadError");
+            }
             }
         }
 
@@ -104,19 +114,19 @@ namespace BMCWindows
 
         private void LobbyListBoxSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            selectedLobby = (LobbyDTO)listBoxLobbies.SelectedItem;
+            _selectedLobby = (LobbyDTO)listViewLobbies.SelectedItem;
         }
 
         private void JoinLobby(object sender, RoutedEventArgs e)
         {
-            if (selectedLobby == null)
+            if (_selectedLobby == null)
             {
                 ErrorMessages errorMessages = new ErrorMessages();
                 errorMessages.ShowErrorMessage("Lobby.NotSelectedLobby");
                 return;
             }
 
-            this.NavigationService.Navigate(new LobbyWindow(selectedLobby, _proxy, _callbackHandler));
+            this.NavigationService.Navigate(new LobbyWindow(_selectedLobby, _proxy, _callbackHandler));
         }
 
         private void ApplyToggleStyle(ToggleButton button)
@@ -172,7 +182,8 @@ namespace BMCWindows
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+            
+            this.NavigationService.Navigate(new GameOptionsWindow());
         }
     }
 }

@@ -309,7 +309,7 @@
   <data name="FriendSendRequest" xml:space="preserve">
     <value>Send request</value>
   </data>
-  <data name="GameplayPlayesInLobby" xml:space="preserve">
+  <data name="GameplayPlayersInLobby" xml:space="preserve">
     <value>Players in lobby</value>
   </data>
   <data name="GlobalButtonAccept" xml:space="preserve">
@@ -430,7 +430,7 @@
     <value>Remaing cards</value>
   </data>
   <data name="MatchLabelMatchName" xml:space="preserve">
-    <value>Match name:</value>
+    <value>Match name</value>
   </data>
   <data name="MatchPropertyButtonCreateMarch" xml:space="preserve">
     <value>Create match</value>
@@ -442,7 +442,7 @@
     <value>Password</value>
   </data>
   <data name="MessageBoxEmptyFields" xml:space="preserve">
-    <value>There are empty fields, check them</value>
+    <value>There are empty or invalid fields, please check them </value>
   </data>
   <data name="MessageInformationContentAvatarUpdated" xml:space="preserve">
     <value>Avatar successfully updated</value>
@@ -608,5 +608,41 @@
   </data>
   <data name="TurnInfo" xml:space="preserve">
     <value>You don't have the first turn, wait your turn</value>
+  </data>
+  <data name="Error.GeneralException" xml:space="preserve">
+    <value>An error occurred on the server, please try again later</value>
+  </data>
+  <data name="Error.NoCardSelected" xml:space="preserve">
+    <value>You must select a card</value>
+  </data>
+  <data name="ConfirmInvitation" xml:space="preserve">
+    <value>Are you sure you want to invite {0}?</value>
+  </data>
+  <data name="ConfirmInvitationTitle" xml:space="preserve">
+    <value>Confirm invitation</value>
+  </data>
+  <data name="GuestLogout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="Lobby.LobbyName" xml:space="preserve">
+    <value>Lobby name</value>
+  </data>
+  <data name="Lobby.MaxPlayers" xml:space="preserve">
+    <value>Max players</value>
+  </data>
+  <data name="Lobby.JoinLobby" xml:space="preserve">
+    <value>Join lobby</value>
+  </data>
+  <data name="Lobby.CurrentPlayers" xml:space="preserve">
+    <value>Current players</value>
+  </data>
+  <data name="GameOver" xml:space="preserve">
+    <value>Game over</value>
+  </data>
+  <data name="Match.Winner" xml:space="preserve">
+    <value>Winner</value>
+  </data>
+  <data name="Match.Loser" xml:space="preserve">
+    <value>Loser</value>
   </data>
 </root>

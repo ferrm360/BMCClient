@@ -14,27 +14,24 @@
 
 
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/Background/PurpleBackground.jpg"/>
+        </Grid.Background>
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 0, 0 ,0 ">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="300" />
             </Grid.ColumnDefinitions>
-            <Button x:Name="ButtonLogIn" Grid.Column="0"  Background="#FFFEE0" Height="91" Width="301" BorderBrush="#FFFEE0" FocusVisualStyle="{x:Null}" Focusable="False" Click="GoToLogInPage">
-                <Grid>
-                    <Image Source="Images/GreenButton.png" Height="90" Width="300"/>
-                    <TextBlock Text="{x:Static p:Resources.LoginButtonLogin}" HorizontalAlignment="Center" VerticalAlignment="Top"   FontSize="9" Margin="0,24,0,0" />
-                </Grid>
+            <Button x:Name="ButtonLogIn" Grid.Column="0"  Content="{x:Static p:Resources.LoginButtonLogin}"  BorderBrush="Transparent" FocusVisualStyle="{x:Null}" Focusable="False" Click="GoToLogInPage" Margin="30,0,30,0" Padding="0,0,0,25">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/GreenButton.png"/>
+                </Button.Background>
 
             </Button>
-            <Button x:Name="ButtonSignUp"  Grid.Column="1"  Background="#FFFEE0" Height="91" Width="301" BorderBrush="#FFFEE0" FocusVisualStyle="{x:Null}" Focusable="False" Margin="5,0,0,0" Click="GoToSignUpPage">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="44*"/>
-                        <ColumnDefinition Width="9*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Source="Images/BrownGreenButton.png" Height="90" Width="300" Grid.ColumnSpan="2" Margin="0,0,-2,0"/>
-                    <TextBlock HorizontalAlignment="Left"  VerticalAlignment="Top"  FontSize="9" Margin="118,10,0,0"><Run/><LineBreak/><Run Text="{x:Static p:Resources.SignUpButtonSignUp}"/></TextBlock>
-                </Grid>
+            <Button x:Name="ButtonSignUp" Content="{x:Static p:Resources.SignUpButtonSignUp}" Grid.Column="1" Height="70" BorderBrush="Transparent" FocusVisualStyle="{x:Null}" Focusable="False" Margin="30,0,30,0" Click="GoToSignUpPage" Padding="0,0,0,25">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/BrownGreenButton.png" />
+                </Button.Background>
                 
                 
 
@@ -57,7 +54,7 @@
         </Grid>
 
         <Grid HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0, 50, 0, 0">
-            <Button x:Name="ButtonGuestLogin" Background="#FFFEE0" Height="91" Width="301" BorderBrush="#FFFEE0" FocusVisualStyle="{x:Null}" Focusable="False" Click="LoginAsGuest">
+            <Button x:Name="ButtonGuestLogin" Background="Transparent" Height="91" Width="301" BorderBrush="Transparent" FocusVisualStyle="{x:Null}" Focusable="False" Click="LoginAsGuest">
                 <Grid>
                     <Image Source="Images/BrownButton.png" Height="90" Width="300" />
                     <TextBlock Text="{x:Static p:Resources.LogInButtonLogInAsGuest}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" Height="20" FontFamily="Press Start 2P Normal" FontSize="9" />

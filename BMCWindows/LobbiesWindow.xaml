@@ -11,6 +11,9 @@
       Background="#FEFFDB">
 
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/Background/NoPetsBackground.jpg"/>
+        </Grid.Background>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="87*"/>
@@ -42,25 +45,50 @@
                 <RowDefinition Height="283*"/>
                 <RowDefinition Height="62*"/>
             </Grid.RowDefinitions>
-            <ListBox x:Name="listBoxLobbies" Grid.Column="1" Grid.Row="2" ItemsSource="{Binding GameSessions}" Margin="10,10,10,10" SelectionMode="Single" SelectionChanged="LobbyListBoxSelectionChanged">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal" Margin="5">
-                            <TextBlock Text="{Binding Name}" Width="200"/>
-                            <TextBlock Text="{Binding CurrentPlayers}" Width="100" />
-                            <TextBlock Text="{Binding MaxPlayers}" Width="50" />
-                            <Button Content="{x:Static p:Resources.LobbyJoinLobby}"  Margin="5,0,0,0" Click="JoinLobby"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+            
+            <ListView x:Name="listViewLobbies" Grid.Row="2" Grid.Column="1" SelectionMode="Single" SelectionChanged="LobbyListBoxSelectionChanged" ItemsSource="{Binding GameSessions}">
+                <ListView.Background>
+                    <ImageBrush ImageSource="Images/GreenRectangle.png"/>
+                </ListView.Background>
+                <ListView.View>
+                    <GridView >
+                        <GridViewColumn Header="{x:Static p:Resources.Lobby_LobbyName}" DisplayMemberBinding="{Binding Name}" Width="Auto"/> 
+                        <GridViewColumn Header="{x:Static p:Resources.Lobby_CurrentPlayers}" DisplayMemberBinding="{Binding CurrentPlayers}" Width="Auto"/>
+                        <GridViewColumn Header="{x:Static p:Resources.Lobby_MaxPlayers}" DisplayMemberBinding="{Binding MaxPlayers}" Width="Auto"/>
+                        <GridViewColumn Header="{x:Static p:Resources.Lobby_JoinLobby}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="{x:Static p:Resources.Lobby_JoinLobby}" Click="JoinLobby" >
+                                        <Button.Background>
+                                            <ImageBrush ImageSource="Images/BrownButton.png"/>
+                                        </Button.Background>
+                                    </Button>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    
+                    </GridView>
+                </ListView.View>
+                
+            </ListView>
 
             <Popup x:Name="passwordPopup" StaysOpen="False" Placement="Mouse" AllowsTransparency="True" PopupAnimation="Slide">
-                <Border Background="White" BorderBrush="Gray" BorderThickness="1" Padding="10">
+                <Border  BorderBrush="Transparent" BorderThickness="1" Padding="10">
+                    <Border.Background>
+                        <ImageBrush ImageSource="Images/GreenRectangle.png"/>
+                    </Border.Background>
                     <StackPanel>
                         <Label Content="{x:Static p:Resources.LoginLaberlPassword}"/>
-                        <PasswordBox x:Name="passwordBox" Margin="0,5,0,10"/>
-                        <Button Content="{x:Static p:Resources.GlobalButtonAccept}"  />
+                        <PasswordBox x:Name="passwordBox" Margin="0,5,0,10">
+                            <PasswordBox.Background>
+                                <ImageBrush ImageSource="Images/LongTextBox.png"/>
+                            </PasswordBox.Background>
+                        </PasswordBox>
+                        <Button Content="{x:Static p:Resources.GlobalButtonAccept}">
+                            <Button.Background>
+                                <ImageBrush ImageSource="Images/BrownButton.png"/>
+                            </Button.Background>
+                        </Button>
                     </StackPanel>
                 </Border>
             </Popup>
@@ -77,11 +105,11 @@
                 <ColumnDefinition Width="16*"/>
                 <ColumnDefinition Width="141*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="buttonCancel" Grid.Column="1" Grid.Row="0" Background="Transparent" BorderBrush="Transparent" Click="Cancel"/>
-            <Image Source="Images/BrownButton.png"  Grid.Column="1" Grid.Row="0" IsHitTestVisible="False"/>
-            <TextBlock Text="{x:Static p:Resources.GloblalButtonCancel}" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False"/>
-
-
+            <Button x:Name="buttonCancel" Grid.Column="1" Grid.Row="0" Content="{x:Static p:Resources.GloblalButtonCancel}" BorderBrush="Transparent" Click="Cancel">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/BrownButton.png"/>
+                </Button.Background>
+            </Button>
         </Grid>
 
 

@@ -22,13 +22,13 @@
     <MetadataSource Address="http://localhost:8092/PlayerScoresService" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="PlayerScoresService.xsd" MetadataType="Schema" ID="6c5c589e-e6cc-4662-9c05-267f195f2935" SourceId="1" SourceUrl="http://localhost:8092/PlayerScoresService?xsd=xsd0" />
-    <MetadataFile FileName="PlayerScoresService1.xsd" MetadataType="Schema" ID="060ee579-fc95-432f-a382-9d08da6fd962" SourceId="1" SourceUrl="http://localhost:8092/PlayerScoresService?xsd=xsd1" />
-    <MetadataFile FileName="PlayerScoresService.disco" MetadataType="Disco" ID="21aaf7a1-b7c7-4f45-9098-2db95d141e2e" SourceId="1" SourceUrl="http://localhost:8092/PlayerScoresService?disco" />
-    <MetadataFile FileName="PlayerScoresService.wsdl" MetadataType="Wsdl" ID="541e690e-9595-492e-81cb-e2097da5bb97" SourceId="1" SourceUrl="http://localhost:8092/PlayerScoresService?wsdl" />
-    <MetadataFile FileName="PlayerScoresService2.xsd" MetadataType="Schema" ID="2c779844-bd6b-421b-aa59-004e906e8bf0" SourceId="1" SourceUrl="http://localhost:8092/PlayerScoresService?xsd=xsd4" />
-    <MetadataFile FileName="PlayerScoresService3.xsd" MetadataType="Schema" ID="adcd3d2c-a232-472a-90a5-f3ac770a64ce" SourceId="1" SourceUrl="http://localhost:8092/PlayerScoresService?xsd=xsd2" />
-    <MetadataFile FileName="PlayerScoresService4.xsd" MetadataType="Schema" ID="7af4d94f-30f9-4bad-bd5f-1f4145fc1a61" SourceId="1" SourceUrl="http://localhost:8092/PlayerScoresService?xsd=xsd3" />
+    <MetadataFile FileName="PlayerScoresService.xsd" MetadataType="Schema" ID="0ab84d87-30bd-4d99-8c12-d85dedbb0657" SourceId="1" SourceUrl="http://localhost:8092/PlayerScoresService?xsd=xsd0" />
+    <MetadataFile FileName="PlayerScoresService1.xsd" MetadataType="Schema" ID="593e6014-96d2-4820-aa6e-933485e6e9d5" SourceId="1" SourceUrl="http://localhost:8092/PlayerScoresService?xsd=xsd1" />
+    <MetadataFile FileName="PlayerScoresService.disco" MetadataType="Disco" ID="46f1b33b-5613-45e4-9d79-bdddc4405d0b" SourceId="1" SourceUrl="http://localhost:8092/PlayerScoresService?disco" />
+    <MetadataFile FileName="PlayerScoresService.wsdl" MetadataType="Wsdl" ID="d703a4bc-a852-4a54-a8f8-3969922d76b2" SourceId="1" SourceUrl="http://localhost:8092/PlayerScoresService?wsdl" />
+    <MetadataFile FileName="PlayerScoresService2.xsd" MetadataType="Schema" ID="e7477acc-c46c-4e0d-a750-25c2272a3bd8" SourceId="1" SourceUrl="http://localhost:8092/PlayerScoresService?xsd=xsd4" />
+    <MetadataFile FileName="PlayerScoresService3.xsd" MetadataType="Schema" ID="7ec8d062-0c67-4c80-9934-3926f82dcd0b" SourceId="1" SourceUrl="http://localhost:8092/PlayerScoresService?xsd=xsd2" />
+    <MetadataFile FileName="PlayerScoresService4.xsd" MetadataType="Schema" ID="9787ee68-65e4-434f-b4b4-aa02d3cbb249" SourceId="1" SourceUrl="http://localhost:8092/PlayerScoresService?xsd=xsd3" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

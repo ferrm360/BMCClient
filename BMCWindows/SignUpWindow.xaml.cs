@@ -26,7 +26,7 @@ namespace BMCWindows
     public partial class SignUpWindow : Page
     {
 
-        private int maxPasswordLength = 255;
+        private int _maxPasswordLength = 255;
         public SignUpWindow()
         {
             InitializeComponent();
@@ -39,7 +39,7 @@ namespace BMCWindows
             player.Username = textBoxUser.Text;
             player.Email = textBoxEmail.Text;
             player.Password = passwordBoxPassword.Password;
-            if(!FieldValidator.AreFieldsEmpty(textBoxUser.Text, textBoxEmail.Text, passwordBoxPassword.Password, passwordBoxConfirmPassword.Password) && FieldValidator.ValidatePassword(passwordBoxPassword.Password) && passwordBoxPassword.Password == passwordBoxConfirmPassword.Password )
+            if(!FieldValidator.AreFieldsEmpty(textBoxUser.Text, textBoxEmail.Text, passwordBoxPassword.Password, passwordBoxConfirmPassword.Password) && FieldValidator.ValidatePassword(passwordBoxPassword.Password) && passwordBoxPassword.Password == passwordBoxConfirmPassword.Password && FieldValidator.ValidateEmail(textBoxEmail.Text))
             {
                 try
                 {
@@ -51,7 +51,8 @@ namespace BMCWindows
                     }
                     else
                     {
-                        MessageBox.Show(result.ErrorKey);
+                        ErrorMessages errorMessages = new ErrorMessages();
+                        errorMessages.ShowErrorMessage(result.ErrorKey);
                     }
                 }
                 catch (EndpointNotFoundException)
@@ -103,7 +104,7 @@ namespace BMCWindows
             PasswordBox passwordBox = sender as PasswordBox;
             string password = passwordBox.Password;
 
-            if (password.Length >= maxPasswordLength)
+            if (password.Length >= _maxPasswordLength)
             {
                 passwordBox.IsEnabled = false;
             }

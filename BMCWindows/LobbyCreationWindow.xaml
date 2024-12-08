@@ -12,6 +12,9 @@
       Background="#FEFFDB">
 
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/Background/NoPetsBackground.jpg"/>
+        </Grid.Background>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100*"/>
@@ -58,9 +61,9 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <ToggleButton x:Name="publicToggleButton" Grid.Column="0" IsChecked="True" Content="{x:Static p:Resources.MarchPropertyButtonPrivate}" FontWeight="Bold" Style="{StaticResource SelectorToggleButtonStyle}" />
+                <ToggleButton x:Name="publicToggleButton" Grid.Column="0" IsChecked="True" Content="{x:Static p:Resources.MarchPropertyButtonPublic}" FontWeight="Bold" Style="{StaticResource SelectorToggleButtonStyle}" />
 
-                <ToggleButton x:Name="privateToggleButton" IsChecked="False" Grid.Column="1" Content="Private" FontWeight="Bold" Style="{StaticResource SelectorToggleButtonStyle}" />
+                <ToggleButton x:Name="privateToggleButton" IsChecked="False" Grid.Column="1" Content="{x:Static p:Resources.MarchPropertyButtonPrivate}" FontWeight="Bold" Style="{StaticResource SelectorToggleButtonStyle}" />
             </Grid>
 
         </Grid>
@@ -89,12 +92,16 @@
             <Image x:Name="imageTextBoxGameName" Source="Images/LongTextbox.png" Grid.Column="2" Grid.Row="4" Stretch="Fill"/>
             <Label x:Name="labelLobbyPassword" Content="{x:Static p:Resources.LoginLaberlPassword}" Grid.Column="2" Grid.Row="6" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
             <Image x:Name="imageTextBoxLobbyPassword" Source="Images/LongTextbox.png" Grid.Column="2" Grid.Row="8" Stretch="Fill"/>
-            <Button x:Name="buttonCreateLobby" Grid.Column="2" Grid.Row="9" Margin="10,10,10,10" Background="Transparent" BorderBrush="Transparent" Click="CreateLobby"/>
-            <Image x:Name="imageButtonCreateLobby" Source="Images/BrownButton.png" Grid.Column="2" Grid.Row="9" Stretch="Fill" Margin="10,10,10,10" IsHitTestVisible="False"/>
-            <TextBlock x:Name="textBlockCreateLobby" Grid.Column="2" Grid.Row="9" Text="{x:Static p:Resources.MatchButtonCreateMatch}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,16,0,0" Height="12" Width="144"/>
-            <Button x:Name="buttonCancel" Grid.Column="0" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="CancelLobbyCreation" Margin="10,10,10,10" Background="Transparent" BorderBrush="Transparent"/>
-            <Image x:Name="imageButtonCancelLobbyCreation" Source="Images/BrownButton.png" Grid.Column="0" Grid.Row="0"  Stretch="Fill" Margin="10,10,10,5" IsHitTestVisible="False"/>
-            <TextBlock x:Name="textBlockCancelLobbyCreation" Text="{x:Static p:Resources.GloblalButtonCancel}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" IsHitTestVisible="False"/>
+            <Button x:Name="buttonCreateLobby" Content="{x:Static p:Resources.MatchButtonCreateMatch}" Grid.Column="2" Grid.Row="9" Margin="10,10,10,10" BorderBrush="Transparent" Click="CreateLobby">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/BrownButton.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="buttonCancel" Content="{x:Static p:Resources.GloblalButtonCancel}" Grid.Column="0" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="CancelLobbyCreation" Margin="10,10,10,10"  BorderBrush="Transparent">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/BrownButton.png"/>
+                </Button.Background>
+            </Button>
         </Grid>
 
         <Grid>
@@ -111,8 +118,8 @@
                 <RowDefinition Height="125*"/>
             </Grid.RowDefinitions>
 
-            <TextBox x:Name="textBoxLobbyName" Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" MaxLength="256" TextChanged="CheckLimit" Tag="256"/>
-            <TextBox x:Name="textBoxLobbyPassword" Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" MaxLength="256" TextChanged="CheckLimit" Tag="256"/>
+            <TextBox x:Name="textBoxLobbyName" Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" MaxLength="256" TextChanged="CheckLimit" Tag="256" TextAlignment="Center"/>
+            <TextBox x:Name="textBoxLobbyPassword" Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" MaxLength="256" TextChanged="CheckLimit" Tag="256" TextAlignment="Center"/>
 
         </Grid>
 

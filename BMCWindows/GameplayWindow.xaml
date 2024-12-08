@@ -36,6 +36,9 @@
     </Page.Resources>
 
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/BackGround/NoPetsBackground.jpg"/>
+        </Grid.Background>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -90,7 +93,7 @@
             </ItemsControl>
         </StackPanel>
 
-        
+
         <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10">
             <ItemsControl x:Name="Player2Cards" Margin="5" Background="#43224D">
                 <ItemsControl.ItemTemplate>
@@ -191,23 +194,16 @@
             </Grid.ColumnDefinitions>
 
             <Button x:Name="buttonAcceptCardsPosition" 
+            Content="{x:Static p:Resources.GlobalButtonAccept}"
             Grid.Row="1" 
-            Grid.Column="1" 
-            Background="Transparent" 
+            Grid.Column="1"  
             BorderBrush="Transparent" 
             Click="AcceptCardsPosition"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch">
-                <Grid>
-                    <Image Source="Images/BrownButton.png" Stretch="Fill"/>
-
-                    <TextBlock Text="{x:Static p:Resources.GlobalButtonAccept}" 
-                       VerticalAlignment="Center" 
-                       HorizontalAlignment="Center" 
-                       FontSize="16" 
-                       FontWeight="Bold" 
-                       Foreground="Black"/>
-                </Grid>
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/BrownButton.png" />
+                </Button.Background>
             </Button>
         </Grid>
 

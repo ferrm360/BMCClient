@@ -22,13 +22,13 @@
     <MetadataSource Address="http://localhost:8088/LobbyService?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="LobbyService.wsdl" MetadataType="Wsdl" ID="12093758-182f-4780-a08e-10080b43e8fb" SourceId="1" SourceUrl="http://localhost:8088/LobbyService?wsdl" />
-    <MetadataFile FileName="LobbyService.xsd" MetadataType="Schema" ID="1aceeb00-3226-4749-9f79-5f2ed34f29ce" SourceId="1" SourceUrl="http://localhost:8088/LobbyService?xsd=xsd1" />
-    <MetadataFile FileName="LobbyService1.xsd" MetadataType="Schema" ID="254ffb8a-ce0f-4495-ac6c-082dd4a8dda9" SourceId="1" SourceUrl="http://localhost:8088/LobbyService?xsd=xsd0" />
-    <MetadataFile FileName="LobbyService2.xsd" MetadataType="Schema" ID="418c7cbf-ca1f-4a20-a5bd-1d54939f4364" SourceId="1" SourceUrl="http://localhost:8088/LobbyService?xsd=xsd3" />
-    <MetadataFile FileName="LobbyService3.xsd" MetadataType="Schema" ID="83362599-6989-46aa-ad53-d56e41b30c7a" SourceId="1" SourceUrl="http://localhost:8088/LobbyService?xsd=xsd2" />
-    <MetadataFile FileName="LobbyService5.xsd" MetadataType="Schema" ID="1675e965-ece9-4c57-a631-5e7172984580" SourceId="1" SourceUrl="http://localhost:8088/LobbyService?xsd=xsd5" />
-    <MetadataFile FileName="LobbyService4.xsd" MetadataType="Schema" ID="fca30227-0026-4b1c-922c-bfe47f3173f7" SourceId="1" SourceUrl="http://localhost:8088/LobbyService?xsd=xsd4" />
+    <MetadataFile FileName="LobbyService.wsdl" MetadataType="Wsdl" ID="58e04f36-be86-4ec0-943c-0db8aabfa881" SourceId="1" SourceUrl="http://localhost:8088/LobbyService?wsdl" />
+    <MetadataFile FileName="LobbyService.xsd" MetadataType="Schema" ID="f37996e1-8b27-42b0-b1d7-d1d64ea6a092" SourceId="1" SourceUrl="http://localhost:8088/LobbyService?xsd=xsd1" />
+    <MetadataFile FileName="LobbyService1.xsd" MetadataType="Schema" ID="1aaa71be-840f-44cb-aa1b-88cbbe7765e6" SourceId="1" SourceUrl="http://localhost:8088/LobbyService?xsd=xsd0" />
+    <MetadataFile FileName="LobbyService2.xsd" MetadataType="Schema" ID="55658e1b-9f74-46ce-a259-57795b7f2ff4" SourceId="1" SourceUrl="http://localhost:8088/LobbyService?xsd=xsd3" />
+    <MetadataFile FileName="LobbyService3.xsd" MetadataType="Schema" ID="8da4d770-0e20-4aab-af5e-361a42e9a4b7" SourceId="1" SourceUrl="http://localhost:8088/LobbyService?xsd=xsd2" />
+    <MetadataFile FileName="LobbyService4.xsd" MetadataType="Schema" ID="d2f1f38f-65fb-4990-a01c-c29e577c1f31" SourceId="1" SourceUrl="http://localhost:8088/LobbyService?xsd=xsd5" />
+    <MetadataFile FileName="LobbyService5.xsd" MetadataType="Schema" ID="8b61924f-94df-495c-9971-5ebfd7d0a5b6" SourceId="1" SourceUrl="http://localhost:8088/LobbyService?xsd=xsd4" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

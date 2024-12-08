@@ -11,6 +11,9 @@
       Background="#FEFFDB">
 
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/Background/Purplebackground.jpg"/>
+        </Grid.Background>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*"/>
@@ -35,6 +38,7 @@
                 <RowDefinition Height="11*"/>
                 <RowDefinition Height="79*"/>
             </Grid.RowDefinitions>
+            
             <Grid x:Name="gridCardGames" Grid.Column="0" Grid.Row="1">
                 <ScrollViewer Grid.Row="1" Grid.Column="1" Margin="5,25,10,0" >
                     <ItemsControl x:Name="cardsControl" ItemsSource="{Binding cardData}">
@@ -46,7 +50,6 @@
 
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <!-- Representación visual de la carta -->
                                 <Border BorderBrush="Black" BorderThickness="1" Margin="5">
                                     <StackPanel>
                                         <Image Source="{Binding CardImage}" Width="150" Height="200" />

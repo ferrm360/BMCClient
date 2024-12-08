@@ -11,6 +11,9 @@
       Background="#FEFFDB">
 
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/Background/NoPetsBackground.jpg"/>
+        </Grid.Background>
         <Grid Margin="0,25,0,10">
             <Grid.Background>
                 <ImageBrush ImageSource="Images/GreenRectangle.png" Stretch="Uniform" />
@@ -44,21 +47,13 @@
                     <Label Content="{x:Static p:Resources.LoginLaberlPassword}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Grid.Row="3" FontFamily="Press Start 2P Regular" Foreground="#43224D" Margin="0,5,0,0" Height="22" Width="106"/>
                     <Image Source="Images/LongTextbox.png" Stretch="Uniform" Grid.Column="1" Grid.Row="4" Margin="0,15,0,0"/>
                     <Label Content="{x:Static p:Resources.SignUpLabelConfirmPassword}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Grid.Row="4" FontFamily="Press Start 2P Regular" Foreground="#43224D" Margin="0,5,0,0" Height="22" Width="196"/>
-                    <Button x:Name="buttonLogIn"  Background="Transparent" BorderBrush="Transparent" Grid.Row="5" Grid.Column="1" Click="SignUp">
-                        <Grid>
-                            <Image Source="Images/BrownButton.png" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10,10,10,10"/>
-                            <TextBlock Text="{x:Static p:Resources.SignUpButtonSignUp}" HorizontalAlignment="Center" VerticalAlignment="Center"  Foreground="Black" Height="20" FontFamily="Press Start 2P Normal" FontSize="9" Grid.Row="3" Grid.Column="1"/>
-                        </Grid>
+                    <Button x:Name="buttonLogIn"  Content="{x:Static p:Resources.SignUpButtonSignUp}"  BorderBrush="Transparent" Grid.Row="5" Grid.Column="1" Click="SignUp" Margin="20,5,20,5">
+                        <Button.Background>
+                            <ImageBrush ImageSource="Images/BrownButton.png"  />
+                        </Button.Background>
                     </Button>
 
                 </Grid>
-
-
-
-
-
-
-
 
             </Grid>
 
@@ -80,10 +75,13 @@
                     <RowDefinition Height="27*"/>
                     <RowDefinition Height="89*"/>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="textBoxUser" Grid.Row="1" Grid.Column="1"  Background="Transparent" BorderBrush="Transparent" TextAlignment="Center"  MaxLength="255" />
-                <TextBox x:Name="textBoxEmail" Grid.Column="1" Grid.Row="3"  Background="Transparent" BorderBrush="Transparent" TextAlignment="Center"  MaxLength="255" />
-                <PasswordBox x:Name="passwordBoxPassword" Grid.Column="1" Grid.Row="5" Background="Transparent" BorderBrush="Transparent" PasswordChanged="CheckPasswordLimit"/>
-                <PasswordBox x:Name="passwordBoxConfirmPassword" Grid.Column="1" Grid.Row="7" Background="Transparent" BorderBrush="Transparent" PasswordChanged="CheckPasswordLimit"/>
+                    <TextBox x:Name="textBoxUser" Grid.Column="1" Grid.Row="1" Background="Transparent" BorderBrush="Transparent"  TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxLength="255" SelectionBrush="Transparent" />
+                
+                    <TextBox x:Name="textBoxEmail" Grid.Column="1" Grid.Row="3" Background="Transparent" BorderBrush="Transparent" TextAlignment="Center"  MaxLength="255" />
+
+                    <PasswordBox x:Name="passwordBoxPassword" Grid.Column="1" Grid.Row="5" Background="Transparent" BorderBrush="Transparent" PasswordChanged="CheckPasswordLimit" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+
+                    <PasswordBox x:Name="passwordBoxConfirmPassword" Grid.Column="1" Grid.Row="7" Background="Transparent" BorderBrush="Transparent" PasswordChanged="CheckPasswordLimit" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
 
 
             </Grid>
@@ -98,11 +96,11 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="7*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="ButtonGoBack" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="0,5,0,0" Background="Transparent" BorderBrush="Transparent" Click="Cancel"/>
-            <Grid>
-                <Image Source="/Images/BrownButton.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,5,0,0" IsHitTestVisible="False"/>
-                <TextBlock Text="{x:Static p:Resources.GloblalButtonCancel}" HorizontalAlignment="Center" VerticalAlignment="Center"  Foreground="Black" Height="20" FontFamily="Press Start 2P Normal" FontSize="9" Grid.Row="3" Grid.Column="1"/>
-            </Grid>
+            <Button x:Name="ButtonGoBack" Content="{x:Static p:Resources.GloblalButtonCancel}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="0,5,0,0" BorderBrush="Transparent" Click="Cancel">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Images/BrownButton.png"/>
+                </Button.Background>
+            </Button>
 
 
         </Grid>

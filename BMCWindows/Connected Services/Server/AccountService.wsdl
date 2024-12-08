@@ -14,6 +14,7 @@
       <xsd:import schemaLocation="http://localhost:8080/AccountService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:8080/AccountService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Service.DTO" />
       <xsd:import schemaLocation="http://localhost:8080/AccountService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Service.Results" />
+      <xsd:import schemaLocation="http://localhost:8080/AccountService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Service.Utilities.Results" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IAccountService_Register_InputMessage">

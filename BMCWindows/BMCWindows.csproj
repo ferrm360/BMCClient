@@ -366,6 +366,9 @@
     <None Include="Connected Services\ChatFriendServer\ChatFriendService1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ChatFriendServer\ChatFriendService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ChatFriendServer\ChatFriendService3.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -433,11 +436,34 @@
     <None Include="Connected Services\GameplayServer\BMCWindows.GameplayServer.OperationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\GameplayServer\GameService.wsdl" />
+    <None Include="Connected Services\GameplayServer\GameService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GameplayServer\GameService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GameplayServer\GameService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GameplayServer\GameService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\GameplayServer\GameService4.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\GuestPlayerServer\BMCWindows.GuestPlayerServer.OperationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\GuestPlayerServer\GuestPlayerService.wsdl" />
+    <None Include="Connected Services\GuestPlayerServer\GuestPlayerService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GuestPlayerServer\GuestPlayerService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GuestPlayerServer\GuestPlayerService2.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\LobbyServer\BMCWindows.LobbyServer.LobbyDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -511,7 +537,7 @@
     <None Include="Connected Services\ProfileServer\ProfileService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ProfileServer\ProfileService31.xsd">
+    <None Include="Connected Services\ProfileServer\ProfileService4.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\Server\AccountService.wsdl" />
@@ -521,37 +547,20 @@
     <None Include="Connected Services\Server\AccountService1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\Server\AccountService2.xsd">
+    <None Include="Connected Services\Server\AccountService11.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\Server\AccountService3.xsd">
+    <None Include="Connected Services\Server\AccountService12.xsd">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\Server\AccountService13.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\Server\BMCWindows.Server.LoginResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\Server\BMCWindows.Server.OperationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\GameplayServer\GameService.wsdl" />
-    <None Include="Connected Services\GameplayServer\GameService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\GameplayServer\GameService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\GameplayServer\GameService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\GameplayServer\GameService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\GuestPlayerServer\GuestPlayerService.wsdl" />
-    <None Include="Connected Services\GuestPlayerServer\GuestPlayerService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\GuestPlayerServer\GuestPlayerService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\GuestPlayerServer\GuestPlayerService2.xsd">
-      <SubType>Designer</SubType>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -680,9 +689,6 @@
     <Resource Include="Images\GameplayBackground.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ChatLobbyServer\ChatLobbyService.disco" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Connected Services\ChatLobbyServer\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
@@ -714,12 +720,6 @@
     <Resource Include="Images\Huahuacard.png" />
     <Resource Include="Images\IñakiCard.png" />
     <Resource Include="Images\michideltoroCard.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\PlayerScoreServer\PlayerScoresService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\GuestPlayerServer\GuestPlayerService.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\GuestPlayerServer\configuration91.svcinfo" />
@@ -823,7 +823,6 @@
     <Resource Include="Images\LossesImage.png" />
     <Resource Include="Images\WinsImage.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\catlose.png" />
     <Resource Include="Images\catWin.png" />
@@ -832,6 +831,45 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\prehispanicBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ChatLobbyServer\ChatLobbyService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GuestPlayerServer\GuestPlayerService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PlayerScoreServer\PlayerScoresService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Background\LobbyBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Background\LobbyBackground2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Background\GameBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Background\Opcion2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Background\opcion3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Background\Background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Background\BrownBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Background\PurpleBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Background\NoPetsBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\FilledTextBox.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

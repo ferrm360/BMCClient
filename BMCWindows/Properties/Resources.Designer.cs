@@ -151,6 +151,24 @@ namespace BMCWindows.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Are you sure you want to invite {0}?.
+        /// </summary>
+        public static string ConfirmInvitation {
+            get {
+                return ResourceManager.GetString("ConfirmInvitation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Confirm invitation.
+        /// </summary>
+        public static string ConfirmInvitationTitle {
+            get {
+                return ResourceManager.GetString("ConfirmInvitationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Confirm cancellation.
         /// </summary>
         public static string ConfirmMessageCancelTitle {
@@ -340,6 +358,15 @@ namespace BMCWindows.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred on the server, please try again later.
+        /// </summary>
+        public static string Error_GeneralException {
+            get {
+                return ResourceManager.GetString("Error.GeneralException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a An error occurred, please try again later..
         /// </summary>
         public static string Error_GeneralMessage {
@@ -453,6 +480,15 @@ namespace BMCWindows.Properties {
         public static string Error_LobbyNotFound {
             get {
                 return ResourceManager.GetString("Error.LobbyNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You must select a card.
+        /// </summary>
+        public static string Error_NoCardSelected {
+            get {
+                return ResourceManager.GetString("Error.NoCardSelected", resourceCulture);
             }
         }
         
@@ -718,6 +754,15 @@ namespace BMCWindows.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Game over.
+        /// </summary>
+        public static string GameOver {
+            get {
+                return ResourceManager.GetString("GameOver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a You have clicked on cell: ({0},{1}) in your own dashboard.
         /// </summary>
         public static string Gameplay_Attack {
@@ -756,9 +801,9 @@ namespace BMCWindows.Properties {
         /// <summary>
         ///   Busca una cadena traducida similar a Players in lobby.
         /// </summary>
-        public static string GameplayPlayesInLobby {
+        public static string GameplayPlayersInLobby {
             get {
-                return ResourceManager.GetString("GameplayPlayesInLobby", resourceCulture);
+                return ResourceManager.GetString("GameplayPlayersInLobby", resourceCulture);
             }
         }
         
@@ -831,6 +876,15 @@ namespace BMCWindows.Properties {
         public static string GloblalButtonCancel {
             get {
                 return ResourceManager.GetString("GloblalButtonCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Logout.
+        /// </summary>
+        public static string GuestLogout {
+            get {
+                return ResourceManager.GetString("GuestLogout", resourceCulture);
             }
         }
         
@@ -1051,11 +1105,47 @@ namespace BMCWindows.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Current players.
+        /// </summary>
+        public static string Lobby_CurrentPlayers {
+            get {
+                return ResourceManager.GetString("Lobby.CurrentPlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Join lobby.
+        /// </summary>
+        public static string Lobby_JoinLobby {
+            get {
+                return ResourceManager.GetString("Lobby.JoinLobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a An error occurred while loading the available lobbies.
         /// </summary>
         public static string Lobby_LoadError {
             get {
                 return ResourceManager.GetString("Lobby.LoadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Lobby name.
+        /// </summary>
+        public static string Lobby_LobbyName {
+            get {
+                return ResourceManager.GetString("Lobby.LobbyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Max players.
+        /// </summary>
+        public static string Lobby_MaxPlayers {
+            get {
+                return ResourceManager.GetString("Lobby.MaxPlayers", resourceCulture);
             }
         }
         
@@ -1087,7 +1177,7 @@ namespace BMCWindows.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a LogIn As guest.
+        ///   Busca una cadena traducida similar a Log in as guest.
         /// </summary>
         public static string LogInButtonLogInAsGuest {
             get {
@@ -1137,6 +1227,24 @@ namespace BMCWindows.Properties {
         public static string MarchPropertyButtonPublic {
             get {
                 return ResourceManager.GetString("MarchPropertyButtonPublic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Loser.
+        /// </summary>
+        public static string Match_Loser {
+            get {
+                return ResourceManager.GetString("Match.Loser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Winner.
+        /// </summary>
+        public static string Match_Winner {
+            get {
+                return ResourceManager.GetString("Match.Winner", resourceCulture);
             }
         }
         
@@ -1195,7 +1303,7 @@ namespace BMCWindows.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Match name:.
+        ///   Busca una cadena traducida similar a Match name.
         /// </summary>
         public static string MatchLabelMatchName {
             get {
@@ -1231,7 +1339,7 @@ namespace BMCWindows.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a There are empty fields, check them .
+        ///   Busca una cadena traducida similar a There are empty or invalid fields, please check them .
         /// </summary>
         public static string MessageBoxEmptyFields {
             get {

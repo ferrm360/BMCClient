@@ -41,6 +41,7 @@ namespace BMCWindows.GameplayPage
         private Server.PlayerDTO _currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
         private bool _isPlayerTurn;
         private GameRules _gameRules;
+        private readonly object _lockObject = new object();
 
         public GameplayAttackWindow(GameCallbackHandler gameCallbackHandler, GameServiceClient proxy, LobbyDTO lobby, int[,] playerMatrixLife, String[,] playerMatrixName)
         {
@@ -132,23 +133,26 @@ namespace BMCWindows.GameplayPage
             List<string> attackCardKeys = AvailableCards.Keys.ToList();
 
             attackCardKeys = attackCardKeys.OrderBy(x => random.Next()).ToList();
-
-            for (int i = 0; i < numCardsPerPlayer; i++)
-            {
-                string selectedAttackCardKey = attackCardKeys[i];
-                AttackCard selectedAttackCard = AvailableCards[selectedAttackCardKey];
-
-                if (!CurrentPlayerDeck.ContainsKey(selectedAttackCard.Name))
+            
+                for (int i = 0; i < numCardsPerPlayer; i++)
                 {
-                    CurrentPlayerDeck.Add(selectedAttackCard.Name, selectedAttackCard);
+                    string selectedAttackCardKey = attackCardKeys[i];
+                    AttackCard selectedAttackCard = AvailableCards[selectedAttackCardKey];
 
-                    AvailableCards.Remove(selectedAttackCardKey);
+                    if (!CurrentPlayerDeck.ContainsKey(selectedAttackCard.Name))
+                    {
+                        CurrentPlayerDeck.Add(selectedAttackCard.Name, selectedAttackCard);
+
+                        AvailableCards.Remove(selectedAttackCardKey);
+                    }
                 }
-            }
-            foreach (var attackCard in CurrentPlayerDeck)
-            {
-                Console.WriteLine(attackCard.Key);
-            }
+                foreach (var attackCard in CurrentPlayerDeck)
+                {
+                    Console.WriteLine(attackCard.Key);
+                }
+            
+
+            
         }
 
         private void ShowAssignedCards()
@@ -170,7 +174,7 @@ namespace BMCWindows.GameplayPage
                 Width = 180,
                 Height = 250,
                 CornerRadius = new CornerRadius(10),
-                Background = new SolidColorBrush(Color.FromRgb(255, 250, 250)),
+                Background = new SolidColorBrush(Color.FromRgb(128, 184, 122)),
                 Style = (Style)FindResource("ClickableCardStyle"),
                 Margin = new Thickness(-30 - (5 * cardIndex), 10, 10, 10),
                 Effect = new DropShadowEffect
@@ -194,8 +198,8 @@ namespace BMCWindows.GameplayPage
             var cardImage = new Image
             {
                 Source = attackCard.CardImage,
-                Width = 100,
-                Height = 130
+                Width = 180,
+                Height = 250
             };
 
             var textBlock = new TextBlock
@@ -231,12 +235,12 @@ namespace BMCWindows.GameplayPage
                         if (textBlock != null && textBlock.Text == cardName)
                         {
                             container.Children.Remove(border);
-                            Console.WriteLine($"Carta {cardName} eliminada.");
                             return;
                         }
                     }
                 }
             }
+        }
 
 
 
@@ -271,12 +275,6 @@ namespace BMCWindows.GameplayPage
                         selectedCardImage = cardData.CardImage;
 
                     }
-                    else
-                    {
-                    }
-                }
-                else
-                {
                 }
             }
         }
@@ -315,22 +313,67 @@ namespace BMCWindows.GameplayPage
 
         private void GetRandomCard(object sender, RoutedEventArgs e)
         {
-            Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
-            if (_lobby.Host == currentPlayer.Username)
+            lock (_lockObject)
             {
-                AssignAttackCards(RemainingHostCards, 1);
-                var hostAvailableCards = HostAvailableAttackCards.Values.ToList();
-                int numCards = hostAvailableCards.Count;
-                AddCardToPanel(numCards - 1, hostAvailableCards[numCards - 1]);
-            }
-            else
-            {
-                AssignAttackCards(RemainingGuestCards, 1);
-                var guestAvailableCards = GuestAvailableAttackCards.Values.ToList();
-                int numGuestAttackCards = guestAvailableCards.Count;
-                AddCardToPanel(numGuestAttackCards - 1, guestAvailableCards[numGuestAttackCards - 1]);
+                Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
+                Random random = new Random();
+
+                if (_lobby.Host == currentPlayer.Username)
+                {
+                    AssignAttackCards(RemainingHostCards, 1);
+                    var hostAvailableCards = RemainingHostCards.Values.ToList();
+
+                    if (hostAvailableCards.Count > 0)
+                    {
+                        int randomIndex = random.Next(hostAvailableCards.Count);
+                        AddCardToPanel(randomIndex, hostAvailableCards[randomIndex]);
+                        RemainingHostCards.Remove(RemainingHostCards.ElementAt(randomIndex).Key);
+                    }
+                    else
+                    {
+                        RefillCards(RemainingHostCards, HostAvailableAttackCards);
+                    }
+                }
+                else
+                {
+                    AssignAttackCards(RemainingGuestCards, 1);
+                    var guestAvailableCards = RemainingGuestCards.Values.ToList();
+
+                    if (guestAvailableCards.Count > 0)
+                    {
+                        int randomIndex = random.Next(guestAvailableCards.Count);
+                        AddCardToPanel(randomIndex, guestAvailableCards[randomIndex]);
+                        RemainingGuestCards.Remove(RemainingGuestCards.ElementAt(randomIndex).Key);
+                    }
+                    else
+                    {
+                        RefillCards(RemainingGuestCards, GuestAvailableAttackCards);
+                    }
+                }
             }
         }
+
+        private void RefillCards(Dictionary<string, AttackCard> remainingCards, Dictionary<string, AttackCard> availableAttackCards)
+        {
+            foreach (var card in availableAttackCards)
+            {
+                if (!remainingCards.ContainsKey(card.Key)) 
+                {
+                    remainingCards.Add(card.Key, card.Value);
+                }
+            }
+
+            if (remainingCards.Count > 0)
+            {
+                Random random = new Random();
+                var refreshedCards = remainingCards.Values.ToList();
+                int randomIndex = random.Next(refreshedCards.Count);
+                AddCardToPanel(randomIndex, refreshedCards[randomIndex]);
+                remainingCards.Remove(remainingCards.ElementAt(randomIndex).Key);
+            }
+        }
+
+
 
         private void OnCellClickOwnBoard(int row, int col)
         {
@@ -349,7 +392,8 @@ namespace BMCWindows.GameplayPage
 
             if (string.IsNullOrEmpty(selectedCardName))
             {
-                MessageBox.Show("Debes seleccionar una carta para atacar.");
+                string errorMessage = Properties.Resources.Error_NoCardSelected;
+                MessageBox.Show(errorMessage);
                 return;
             }
 

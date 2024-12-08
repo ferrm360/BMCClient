@@ -24,7 +24,7 @@ namespace BMCWindows
     /// </summary>
     public partial class SettingsWindow : Page
     {
-        private int maxPasswordLength = 255;
+        private int _maxPasswordLength = 255;
         public SettingsWindow()
         {
             InitializeComponent();
@@ -77,7 +77,7 @@ namespace BMCWindows
             PasswordBox passwordBox = sender as PasswordBox;
             string password = passwordBox.Password;
 
-            if (password.Length >= maxPasswordLength)
+            if (password.Length >= _maxPasswordLength)
             {
                 passwordBox.IsEnabled = false;
             }

@@ -24,8 +24,8 @@ namespace BMCWindows
     /// </summary>
     public partial class LogIn : Page
     {
-        private string realPassword = string.Empty;
-        private int maxPasswordLength = 255;
+        private string _realPassword = string.Empty;
+        private int _maxPasswordLength = 255;
 
         public LogIn()
         {
@@ -60,8 +60,10 @@ namespace BMCWindows
                     }
                     else
                     {
+                        
                         ErrorMessages errorMessages = new ErrorMessages();  
                         errorMessages.ShowErrorMessage(result.ErrorKey);
+                        
                     }
                 }
                 catch(EndpointNotFoundException)
@@ -81,8 +83,8 @@ namespace BMCWindows
         {
             TextBox textBox = sender as TextBox;
             
-            realPassword += e.Text;
-            textBox.Text = new string( '*', realPassword.Length);
+            _realPassword += e.Text;
+            textBox.Text = new string( '*', _realPassword.Length);
             textBox.SelectionStart = textBox.Text.Length;
             e.Handled = true;
         }
@@ -114,12 +116,12 @@ namespace BMCWindows
             PasswordBox passwordBox = sender as PasswordBox;
             string password = passwordBoxPassword.Password;
 
-            if (password.Length >= maxPasswordLength)
+            if (password.Length >= _maxPasswordLength)
             {
                 passwordBoxPassword.IsEnabled = false;
-                if (password.Length > maxPasswordLength)
+                if (password.Length > _maxPasswordLength)
                 {
-                    passwordBox.Password = password.Substring(0, maxPasswordLength);
+                    passwordBox.Password = password.Substring(0, _maxPasswordLength);
                 }
             }
             else

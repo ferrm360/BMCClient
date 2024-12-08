@@ -62,6 +62,7 @@ namespace BMCWindows
             }
             catch (CommunicationException commEx)
             {
+                MessageBox.Show(commEx.Message);
                 ErrorMessages errorMessages = new ErrorMessages();
                 errorMessages.ShowErrorMessage("Error.CommunicationError");
             }
@@ -120,6 +121,7 @@ namespace BMCWindows
             }
             catch (CommunicationException commEx)
             {
+                MessageBox.Show(commEx.Message);
                 ErrorMessages errorMessages = new ErrorMessages();
                 errorMessages.ShowErrorMessage("Error.CommunicationError");
             }
@@ -137,7 +139,7 @@ namespace BMCWindows
 
         private void GoBack(object sender, EventArgs e)
         {
-            this.NavigationService.GoBack();
+            this.NavigationService.Navigate(new HomePage());
         }
 
         private void SelectPlayer(object sender, MouseButtonEventArgs e)

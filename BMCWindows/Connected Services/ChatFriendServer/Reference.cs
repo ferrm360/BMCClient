@@ -18,6 +18,8 @@ namespace BMCWindows.ChatFriendServer {
     [System.Runtime.Serialization.DataContractAttribute(Name="OperationResponse", Namespace="http://schemas.datacontract.org/2004/07/Service.Results")]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.ChatFriendServer.ChatFriendResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.ChatFriendServer.MessageFriendDTO[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.ChatFriendServer.MessageFriendDTO))]
     public partial class OperationResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -96,6 +98,115 @@ namespace BMCWindows.ChatFriendServer {
     [System.Runtime.Serialization.DataContractAttribute(Name="ChatFriendResponse", Namespace="http://schemas.datacontract.org/2004/07/Service.Utilities.Results")]
     [System.SerializableAttribute()]
     public partial class ChatFriendResponse : BMCWindows.ChatFriendServer.OperationResponse {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private BMCWindows.ChatFriendServer.MessageFriendDTO[] MessagesField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public BMCWindows.ChatFriendServer.MessageFriendDTO[] Messages {
+            get {
+                return this.MessagesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessagesField, value) != true)) {
+                    this.MessagesField = value;
+                    this.RaisePropertyChanged("Messages");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MessageFriendDTO", Namespace="http://schemas.datacontract.org/2004/07/Service.DTO")]
+    [System.SerializableAttribute()]
+    public partial class MessageFriendDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ReceiverUsernameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SenderUsernameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime TimestampField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ReceiverUsername {
+            get {
+                return this.ReceiverUsernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReceiverUsernameField, value) != true)) {
+                    this.ReceiverUsernameField = value;
+                    this.RaisePropertyChanged("ReceiverUsername");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SenderUsername {
+            get {
+                return this.SenderUsernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SenderUsernameField, value) != true)) {
+                    this.SenderUsernameField = value;
+                    this.RaisePropertyChanged("SenderUsername");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime Timestamp {
+            get {
+                return this.TimestampField;
+            }
+            set {
+                if ((this.TimestampField.Equals(value) != true)) {
+                    this.TimestampField = value;
+                    this.RaisePropertyChanged("Timestamp");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

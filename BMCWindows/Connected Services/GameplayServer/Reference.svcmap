@@ -22,12 +22,12 @@
     <MetadataSource Address="http://localhost:8094/GameService?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="GameService.xsd" MetadataType="Schema" ID="f8d830ce-12cf-4fd9-a387-3c27f02c027d" SourceId="1" SourceUrl="http://localhost:8094/GameService?xsd=xsd1" />
-    <MetadataFile FileName="GameService1.xsd" MetadataType="Schema" ID="8c98bfff-36fd-44a6-8316-784ff7d2828b" SourceId="1" SourceUrl="http://localhost:8094/GameService?xsd=xsd3" />
-    <MetadataFile FileName="GameService2.xsd" MetadataType="Schema" ID="eb0b3942-486c-4314-ab95-6b782b6d7475" SourceId="1" SourceUrl="http://localhost:8094/GameService?xsd=xsd0" />
-    <MetadataFile FileName="GameService3.xsd" MetadataType="Schema" ID="0c319d57-22bb-47db-88eb-94809da5f365" SourceId="1" SourceUrl="http://localhost:8094/GameService?xsd=xsd2" />
-    <MetadataFile FileName="GameService4.xsd" MetadataType="Schema" ID="136498ac-51f8-42c1-a58e-ba232eaaacc4" SourceId="1" SourceUrl="http://localhost:8094/GameService?xsd=xsd4" />
-    <MetadataFile FileName="GameService.wsdl" MetadataType="Wsdl" ID="f589453d-cbf5-446e-bc67-a9affa42f981" SourceId="1" SourceUrl="http://localhost:8094/GameService?wsdl" />
+    <MetadataFile FileName="GameService.xsd" MetadataType="Schema" ID="2b33742a-67b6-46e8-8505-5db8c94023f9" SourceId="1" SourceUrl="http://localhost:8094/GameService?xsd=xsd1" />
+    <MetadataFile FileName="GameService1.xsd" MetadataType="Schema" ID="20232d8d-d604-48ca-a4e7-080d99cfcca0" SourceId="1" SourceUrl="http://localhost:8094/GameService?xsd=xsd3" />
+    <MetadataFile FileName="GameService2.xsd" MetadataType="Schema" ID="f6aed3c1-1642-412f-8644-134d142cf9e6" SourceId="1" SourceUrl="http://localhost:8094/GameService?xsd=xsd0" />
+    <MetadataFile FileName="GameService3.xsd" MetadataType="Schema" ID="fe86e7a6-cf87-4818-9cd1-15651341073a" SourceId="1" SourceUrl="http://localhost:8094/GameService?xsd=xsd2" />
+    <MetadataFile FileName="GameService4.xsd" MetadataType="Schema" ID="04105438-923c-446b-8a7e-dd8421d2e253" SourceId="1" SourceUrl="http://localhost:8094/GameService?xsd=xsd4" />
+    <MetadataFile FileName="GameService.wsdl" MetadataType="Wsdl" ID="c68b5afb-07a0-4a45-a113-da62b9d1a50a" SourceId="1" SourceUrl="http://localhost:8094/GameService?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

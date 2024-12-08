@@ -472,7 +472,9 @@ namespace BMCWindows
 
                 var selectedItem = (Friend)FriendsList.SelectedItem;
 
-                var result = MessageBox.Show($"¿Desea invitar a {selectedItem.UserName}?", "Confirmar invitación", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                string messageTitle = Properties.Resources.ConfirmInvitationTitle.ToString();
+                string inviteMessage = string.Format(Properties.Resources.ConfirmInvitation, selectedItem.UserName);
+                var result = MessageBox.Show(inviteMessage, messageTitle, MessageBoxButton.YesNo, MessageBoxImage.Question);
 
                 if (result == MessageBoxResult.Yes)
                 {
