@@ -496,6 +496,9 @@
     <None Include="Connected Services\PlayerScoreServer\BMCWindows.PlayerScoreServer.OperationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\PlayerScoreServer\BMCWindows.PlayerScoreServer.PlayerScoreListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\PlayerScoreServer\BMCWindows.PlayerScoreServer.PlayerScoresResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

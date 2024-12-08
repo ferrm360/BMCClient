@@ -702,6 +702,12 @@ namespace BMCWindows.FriendServer {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendshipService/GetPlayersListByUsername", ReplyAction="http://tempuri.org/IFriendshipService/GetPlayersListByUsernameResponse")]
         System.Threading.Tasks.Task<BMCWindows.FriendServer.PlayerProfileResponse> GetPlayersListByUsernameAsync(string playerUsername, string loggedUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendshipService/DeleteFriend", ReplyAction="http://tempuri.org/IFriendshipService/DeleteFriendResponse")]
+        BMCWindows.FriendServer.OperationResponse DeleteFriend(string currentPlayer, string friend);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendshipService/DeleteFriend", ReplyAction="http://tempuri.org/IFriendshipService/DeleteFriendResponse")]
+        System.Threading.Tasks.Task<BMCWindows.FriendServer.OperationResponse> DeleteFriendAsync(string currentPlayer, string friend);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -785,6 +791,14 @@ namespace BMCWindows.FriendServer {
         
         public System.Threading.Tasks.Task<BMCWindows.FriendServer.PlayerProfileResponse> GetPlayersListByUsernameAsync(string playerUsername, string loggedUsername) {
             return base.Channel.GetPlayersListByUsernameAsync(playerUsername, loggedUsername);
+        }
+        
+        public BMCWindows.FriendServer.OperationResponse DeleteFriend(string currentPlayer, string friend) {
+            return base.Channel.DeleteFriend(currentPlayer, friend);
+        }
+        
+        public System.Threading.Tasks.Task<BMCWindows.FriendServer.OperationResponse> DeleteFriendAsync(string currentPlayer, string friend) {
+            return base.Channel.DeleteFriendAsync(currentPlayer, friend);
         }
     }
 }

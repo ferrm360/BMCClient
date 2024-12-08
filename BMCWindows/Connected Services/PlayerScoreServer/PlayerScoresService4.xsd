@@ -4,8 +4,15 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="Losses" type="xs:int" />
       <xs:element minOccurs="0" name="PlayerId" type="xs:int" />
+      <xs:element minOccurs="0" name="PlayerName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Wins" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PlayerScoresDTO" nillable="true" type="tns:PlayerScoresDTO" />
+  <xs:complexType name="ArrayOfPlayerScoresDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PlayerScoresDTO" nillable="true" type="tns:PlayerScoresDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPlayerScoresDTO" nillable="true" type="tns:ArrayOfPlayerScoresDTO" />
 </xs:schema>

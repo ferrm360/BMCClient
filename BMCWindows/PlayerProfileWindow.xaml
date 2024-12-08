@@ -156,7 +156,7 @@
                 <ColumnDefinition Width="69*"/>
                 <ColumnDefinition Width="41*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="1" Grid.Row="1" BorderBrush="Transparent" Content="{x:Static p:Resources.FriendButtonRemove}" FontSize="9" Click="DeleteFriend">
+            <Button x:Name="buttonDeleteFriend" Grid.Column="1" Grid.Row="1" BorderBrush="Transparent" Content="{x:Static p:Resources.FriendButtonRemove}" FontSize="9" Click="DeleteFriend">
                 <Button.Background >
                     <ImageBrush ImageSource="Images/BrownButton.png"/>
                 </Button.Background>

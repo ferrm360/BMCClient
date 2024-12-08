@@ -36,7 +36,7 @@ namespace BMCWindows
         private ChatServer.ChatServiceClient _proxy;
         private ObservableCollection<Message> FriendChatMessages { get; set; } = new ObservableCollection<Message>();
         private FriendChatCallBackHandler _friendChatCallbackHandler;
-
+        private ObservableCollection<Score> PlayersScore { get; set; } = new ObservableCollection<Score>();
 
 
         public HomePage()
@@ -246,7 +246,7 @@ namespace BMCWindows
                 var response = friendChatProxy.GetChatHistory(username, player.Username);
                 if (response.IsSuccess)
                 {
-
+                    
                 }
 
             }
@@ -321,13 +321,28 @@ namespace BMCWindows
                 Server.PlayerDTO player = new Server.PlayerDTO();
                 player = UserSessionManager.getInstance().GetPlayerUserData();
                 PlayerScoreServer.PlayerScoresServiceClient scoreProxy = new PlayerScoreServer.PlayerScoresServiceClient();
-                var response = scoreProxy.GetScoresByUsername(player.Username);
+                var response = scoreProxy.GetAllScores();
                 if (response.IsSuccess)
                 {
                     if (response.Scores != null)
                     {
-                        //textBlockCurrentPlayerWins.Text = response.Scores.Wins.ToString();
-                        //textBlockCurrentPlayerLosses.Text = response.Scores.Losses.ToString();
+                        if (response.Scores != null && response.Scores.Any())
+                        {
+                            ObservableCollection<Score> scoresList = new ObservableCollection<Score>(
+                                response.Scores .Select(playerScore =>
+                                {
+                                    return new Score
+                                    {
+                                        Username = playerScore.PlayerName,
+                                        Losses = playerScore.Losses,
+                                        Wins = playerScore.Wins,
+                                    };
+                                })
+                            );
+                            PlayerScoresTable.ItemsSource = scoresList;
+                        };
+                       
+                       
 
                     }
                 }

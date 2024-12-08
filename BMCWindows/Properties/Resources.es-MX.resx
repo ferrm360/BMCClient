@@ -657,4 +657,16 @@
   <data name="Error.IncorrectVerificationCode" xml:space="preserve">
     <value>Código de verificación incorrecto.</value>
   </data>
+  <data name="Friend.ConfirmationDeleteFriends" xml:space="preserve">
+    <value>¿Está seguro de que desea eliminar a {0} de su lista de amigos?</value>
+  </data>
+  <data name="Friend.DeleteFriendConfirmationTitle" xml:space="preserve">
+    <value>Eliminar amigo</value>
+  </data>
+  <data name="Friend.DeletedFriend" xml:space="preserve">
+    <value>Amigo eliminado</value>
+  </data>
+  <data name="Friend.DeletionSuccess" xml:space="preserve">
+    <value>Se ha eliminado al amigo exitosamente</value>
+  </data>
 </root>

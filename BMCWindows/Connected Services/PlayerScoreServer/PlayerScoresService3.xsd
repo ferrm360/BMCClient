@@ -9,4 +9,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PlayerScoresResponse" nillable="true" type="tns:PlayerScoresResponse" />
+  <xs:complexType name="PlayerScoreListResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErrorKey" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsSuccess" type="xs:boolean" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Service.DTO" minOccurs="0" name="Scores" nillable="true" type="q2:ArrayOfPlayerScoresDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PlayerScoreListResponse" nillable="true" type="tns:PlayerScoreListResponse" />
 </xs:schema>

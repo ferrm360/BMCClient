@@ -89,6 +89,7 @@ namespace BMCWindows
                                 {
                                     UserName = friendPlayer.Username,
                                     FriendPicture = image,
+                                    
                                 };
 
 
@@ -187,7 +188,49 @@ namespace BMCWindows
         private void DeleteFriend(object sender, RoutedEventArgs e)
         {
             FriendServer.FriendshipServiceClient friendsProxy = new FriendServer.FriendshipServiceClient();
-            
+            Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
+            string confimationMessage = string.Format(Properties.Resources.Friend_ConfirmationDeleteFriends, _username);
+            string messageTitle = Properties.Resources.Friend_DeleteFriendConfirmationTitle;
+            MessageBoxResult messageBoxResult =  MessageBox.Show(confimationMessage, messageTitle, MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            if(messageBoxResult == MessageBoxResult.OK)
+            {
+                try
+                {
+                    var response = friendsProxy.DeleteFriend(currentPlayer.Username, _username);
+                    if (response.IsSuccess == true)
+                    {
+                        string messageDeletedFriendTitle = Properties.Resources.Friend_DeletedFriend;
+                        string messageDeletedFriendMessage = Properties.Resources.Friend_DeletionSuccess;
+                        MessageBoxResult messageResult = MessageBox.Show(messageDeletedFriendMessage, messageDeletedFriendTitle, MessageBoxButton.OK, MessageBoxImage.Information);
+                        if (messageBoxResult == MessageBoxResult.OK)
+                        {
+                            buttonDeleteFriend.Visibility = Visibility.Hidden;
+                        }
+                    }
+                    else
+                    {
+                        ErrorMessages errorMessages = new ErrorMessages();
+                        errorMessages.ShowErrorMessage(response.ErrorKey);
+                    }
+                }
+                catch (CommunicationException commEx)
+                {
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.CommunicationError");
+                }
+                catch (TimeoutException timeoutEx)
+                {
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.TimeOutError");
+                }
+                catch (Exception ex)
+                {
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.GeneralException");
+                }
+
+            }
+
         }
 
         private void GoBack(object sender, EventArgs e)

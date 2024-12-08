@@ -268,13 +268,13 @@
                 <ColumnDefinition Width="113*"/>
             </Grid.ColumnDefinitions>
             
-            <ListView Grid.Row="1" Grid.Column="1">
+            <ListView x:Name="PlayerScoresTable" Grid.Row="1" Grid.Column="1" >
                 <ListView.Background>
                     <ImageBrush ImageSource="Images/GreenRectangle.png"/>
                 </ListView.Background>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Player username" DisplayMemberBinding="{Binding Username}"/>
+                        <GridViewColumn Header="{x:Static p:Resources.GlobalLabelUser}" DisplayMemberBinding="{Binding Username}"/>
                         <GridViewColumn Header="{x:Static p:Resources.PlayerWins}" DisplayMemberBinding="{Binding Wins}"/>
                         <GridViewColumn Header="{x:Static p:Resources.PlayerLosses}" DisplayMemberBinding="{Binding Losses}"/>
                     </GridView>

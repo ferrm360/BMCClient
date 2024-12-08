@@ -3,6 +3,10 @@
   <wsp:Policy wsu:Id="NetTcpBinding_IPlayerScoresService_policy">
     <wsp:ExactlyOne>
       <wsp:All>
+        <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
+          <wsrm:InactivityTimeout Milliseconds="300000" />
+          <wsrm:AcknowledgementInterval Milliseconds="200" />
+        </wsrm:RMAssertion>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
         <wsaw:UsingAddressing />
       </wsp:All>
@@ -35,6 +39,12 @@
   <wsdl:message name="IPlayerScoresService_IncrementLosses_OutputMessage">
     <wsdl:part name="parameters" element="tns:IncrementLossesResponse" />
   </wsdl:message>
+  <wsdl:message name="IPlayerScoresService_GetAllScores_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllScores" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerScoresService_GetAllScores_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllScoresResponse" />
+  </wsdl:message>
   <wsdl:portType name="IPlayerScoresService">
     <wsdl:operation name="GetScoresByUsername">
       <wsdl:input wsaw:Action="http://tempuri.org/IPlayerScoresService/GetScoresByUsername" message="tns:IPlayerScoresService_GetScoresByUsername_InputMessage" />
@@ -47,6 +57,10 @@
     <wsdl:operation name="IncrementLosses">
       <wsdl:input wsaw:Action="http://tempuri.org/IPlayerScoresService/IncrementLosses" message="tns:IPlayerScoresService_IncrementLosses_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPlayerScoresService/IncrementLossesResponse" message="tns:IPlayerScoresService_IncrementLosses_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllScores">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerScoresService/GetAllScores" message="tns:IPlayerScoresService_GetAllScores_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerScoresService/GetAllScoresResponse" message="tns:IPlayerScoresService_GetAllScores_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IPlayerScoresService" type="tns:IPlayerScoresService">
@@ -72,6 +86,15 @@
     </wsdl:operation>
     <wsdl:operation name="IncrementLosses">
       <soap12:operation soapAction="http://tempuri.org/IPlayerScoresService/IncrementLosses" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllScores">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerScoresService/GetAllScores" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

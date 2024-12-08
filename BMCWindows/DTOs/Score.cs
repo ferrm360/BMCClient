@@ -10,5 +10,6 @@ namespace BMCWindows.DTOs
     {
         public int Wins { get; set; }
         public int Losses { get; set; }
+        public string Username { get; set; }
     }
 }
