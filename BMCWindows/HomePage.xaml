@@ -11,6 +11,9 @@
       Background="#FEFFDB"
       >
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/Background/NoPetsBackground.jpg"/>
+        </Grid.Background>
 
         <Grid>
             <Grid.RowDefinitions>
@@ -25,7 +28,6 @@
                 <ColumnDefinition Width="221*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- <Image x:Name="imageProfilePicture" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Fill"/> -->
             <Ellipse VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="0">
                 <Ellipse.Fill>
                     <ImageBrush x:Name="ProfileImageBrush" Stretch="UniformToFill"/>
@@ -53,7 +55,7 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border Background="#DDD" Margin="2" CornerRadius="5" >
-                            <StackPanel Orientation="Horizontal" Margin="5" Background="#43224D">
+                            <StackPanel Orientation="Horizontal" Margin="15" Background="#43224D">
                                 <Image x:Name="myImageControl" Source="{Binding FriendPicture}"  Width="40" Height="40" Margin="5"/>
                                 <TextBlock Text="{Binding UserName}" VerticalAlignment="Center" FontSize="16" Margin="5" Foreground="#FEFFDB"/>
                             </StackPanel>
@@ -70,7 +72,7 @@
                 </DataTemplate>
             </Expander.HeaderTemplate>
 
-            <Border Background="LightGray" CornerRadius="8" Padding="10">
+            <Border Background="LightGray" CornerRadius="8" Padding="2">
                 <StackPanel>
                     <TextBox x:Name="textBoxSearchFriendsChats" Margin="5" />
 
@@ -128,7 +130,14 @@
             </ScrollViewer>
 
             <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Margin="10,10,10,10"  HorizontalAlignment="Right">
-                <TextBox x:Name="textBoxFriendMessage" Width="200" Margin="0,0,5,0"/>
+                <Viewbox>
+                    <TextBox x:Name="textBoxFriendMessage" Width="200" Margin="0,0,5,0" >
+                        <TextBox.Background>
+                            <ImageBrush ImageSource="Images/FilledTextBox.png"/>
+                        </TextBox.Background>
+                    </TextBox>
+                </Viewbox>
+                
                 <Button Content="Enviar" Click="SendMessageToFriend"/>
             </StackPanel>
             <Button Content="Cancel"  Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,5,20,0"/>
@@ -151,19 +160,21 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
-                            <!--<TextBlock Text="{Binding Sender}" FontWeight="Bold"/>-->
                             <TextBlock Text="{Binding Messages}" TextWrapping="Wrap"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
 
-            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10,10,10,10">
-                <TextBox x:Name="textboxGeneralChat" Width="350" Margin="0,0,0,0" BorderBrush="Transparent" Padding="10,5,10,5">
-                    <TextBox.Background>
-                        <ImageBrush ImageSource="Images/LongTextBox.png" Stretch="Fill" />
-                    </TextBox.Background>
-                </TextBox>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10,10,10,10"  >
+                <Viewbox Stretch="Fill" >
+                    <TextBox x:Name="textboxGeneralChat" Width="350" Margin="0,0,10,0" BorderBrush="Transparent" Padding="10,5,10,5" TextAlignment="Left">
+                        <TextBox.Background>
+                            <ImageBrush ImageSource="Images/FilledTextBox.png"/>
+                        </TextBox.Background>
+                    </TextBox>
+                </Viewbox>
+                
 
                 <Button Content="{x:Static p:Resources.FriendButtonSendMessage}" Click="SendGeneralMessage" BorderBrush="Transparent">
                     <Button.Background>
@@ -187,16 +198,19 @@
                 <ColumnDefinition Width="135*"/>
                 <ColumnDefinition Width="135*"/>
             </Grid.ColumnDefinitions>
-            <Label x:Name="labelUserName" Content="{x:Static p:Resources.GlobalLabelUser }" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" FontFamily="Press Start 2P Regular"  Margin="0,0,0,0"/>
-            <Button x:Name="buttonGames"   Background="Transparent" BorderBrush="Transparent" Grid.Column="2" Grid.Row="1"  Click="GoToGames"/>
-            <Image Source="Images/BrownButton.png" Grid.Column="2" Grid.Row="1" IsHitTestVisible="False" Stretch="Fill" Margin="2,2,2,2"/>
-            <TextBlock Text="{x:Static p:Resources.HomePageButtonMatch}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" IsHitTestVisible="False" />
-            <Button x:Name="buttonCards" Grid.Column="3" Grid.Row="1" Background="Transparent" BorderBrush="Transparent" Click="SeeCards"/>
-            <Image Source="Images/BrownButton.png" Grid.Column="3" Grid.Row="1" Stretch="Fill" IsHitTestVisible="False" Margin="2,2,2,2"/>
-            <TextBlock Text="{x:Static p:Resources.HomePageShowCards}" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False"/>
-
-
-
+            <Viewbox Grid.Row="1" Grid.Column="1" Stretch="Uniform">
+                <Label x:Name="labelUserName" Content="{x:Static p:Resources.GlobalLabelUser }" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" FontFamily="Press Start 2P Regular"  Margin="0,0,0,0"/>
+            </Viewbox>
+            <Button x:Name="buttonGames" Content="{x:Static p:Resources.HomePageButtonMatch}" BorderBrush="Transparent" Grid.Column="2" Grid.Row="1"  Click="GoToGames">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/BrownButton.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="buttonCards" Content="{x:Static p:Resources.HomePageShowCards}" Grid.Column="3" Grid.Row="1"  BorderBrush="Transparent" Click="SeeCards">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/BrownButton.png"/>
+                </Button.Background>
+            </Button>
         </Grid>
 
         <Grid>
@@ -209,10 +223,13 @@
                 <ColumnDefinition Width="625*"/>
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="buttonOpenContextMenu" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Stretch" Margin="0,5,0,0" Click="OpenContextMenu"  />
-            <Image Source="Images/ButtonSettings.png" Grid.Column="0" Grid.Row="0" IsHitTestVisible="False" VerticalAlignment="Top" Margin="0,5,0,0"/>
+            <Button x:Name="buttonOpenContextMenu" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" BorderBrush="Transparent" VerticalAlignment="Stretch" Margin="0,5,0,0" Click="OpenContextMenu">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/ButtonSettings.png"/>
+                </Button.Background>
+            </Button>
         </Grid>
-        <Menu x:Name="menuOptions" VerticalAlignment="Top" Visibility="Hidden"  HorizontalAlignment="Left" Height="14" Width="574" >
+        <Menu x:Name="menuOptions" VerticalAlignment="Top" Visibility="Hidden"  HorizontalAlignment="Left">
             <Menu.RenderTransform>
                 <TranslateTransform x:Name="translateMenu" Y="0"/>
             </Menu.RenderTransform>
@@ -250,21 +267,19 @@
                 <ColumnDefinition Width="399*"/>
                 <ColumnDefinition Width="113*"/>
             </Grid.ColumnDefinitions>
-            <Image Source="Images/GreenRectangle.png" Grid.Column="1" Grid.Row="1" Stretch="Fill"/>
-            <StackPanel Grid.Row="1" Grid.Column="1" Margin="40,20,10,0" Orientation="Vertical" >
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <Image Source="Images/WinsImage.png" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBlock Text="{x:Static p:Resources.PlayerWins}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBlock x:Name="textBlockCurrentPlayerWins" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
-                    <Image Source="Images/LossesImage.png" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBlock Text="{x:Static p:Resources.PlayerLosses}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBlock x:Name="textBlockCurrentPlayerLosses" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                </StackPanel>
-                
-                
-            </StackPanel>
+            
+            <ListView Grid.Row="1" Grid.Column="1">
+                <ListView.Background>
+                    <ImageBrush ImageSource="Images/GreenRectangle.png"/>
+                </ListView.Background>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Player username" DisplayMemberBinding="{Binding Username}"/>
+                        <GridViewColumn Header="{x:Static p:Resources.PlayerWins}" DisplayMemberBinding="{Binding Wins}"/>
+                        <GridViewColumn Header="{x:Static p:Resources.PlayerLosses}" DisplayMemberBinding="{Binding Losses}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
 
 
 

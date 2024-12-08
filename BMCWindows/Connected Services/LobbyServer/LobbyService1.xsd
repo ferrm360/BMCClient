@@ -126,4 +126,9 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="NotifyPlayerKicked">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

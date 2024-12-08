@@ -11,6 +11,9 @@
       Background="#FEFFDB">
 
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/Background/NoPetsBackGround.jpg"/>
+        </Grid.Background>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="22*"/>
@@ -45,8 +48,9 @@
                 <RowDefinition Height="23*"/>
                 <RowDefinition Height="131*"/>
             </Grid.RowDefinitions>
-
-            <Label x:Name="labelUser" Grid.Column="2" Grid.Row="1" Content="{x:Static p:Resources.GlobalLabelUser}"  FontSize="60" Grid.ColumnSpan="2"/>
+            <Viewbox Grid.Row="1" Grid.Column="2" Stretch="Uniform">
+                <Label x:Name="labelUser" Grid.Column="2" Grid.Row="1" Content="{x:Static p:Resources.GlobalLabelUser}"  FontSize="60" />
+            </Viewbox>
 
             <ListBox x:Name="FriendsList" Grid.Column="1" Grid.Row="3" Margin="10,10,10,10" Visibility="Visible" BorderBrush="Transparent">
                 <ListBox.Background>
@@ -82,28 +86,42 @@
                 <RowDefinition Height="11*"/>
             </Grid.RowDefinitions>
             <TextBlock x:Name="textBlockBio" Grid.Column="2" Grid.Row="3" Background="#B0D480" />
-            <Button x:Name="buttonCancel" Grid.Column="0" Grid.Row="0" Background="Transparent" BorderBrush="Transparent" Click="GoBack"/>
-            <Image Source="Images/BrownButton.png" IsHitTestVisible="False" Grid.Column="0" Grid.Row="0" />
-            <TextBlock Text="{x:Static p:Resources.GloblalButtonCancel}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0"/>
-
+            <Button x:Name="buttonCancel" Content="{x:Static p:Resources.GloblalButtonCancel}" Grid.Column="0" Grid.Row="0"  BorderBrush="Transparent" Click="GoBack">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/BrownButton.png"/>
+                </Button.Background>
+            </Button>
 
         </Grid>
 
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="91*"/>
-                <ColumnDefinition Width="128*"/>
-                <ColumnDefinition Width="453*"/>
-                <ColumnDefinition Width="46*"/>
-                <ColumnDefinition Width="82*"/>
+                <ColumnDefinition Width="200*"/>
+                <ColumnDefinition Width="438*"/>
+                <ColumnDefinition Width="71*"/>
+                <ColumnDefinition Width="0*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="130*"/>
                 <RowDefinition Height="28*"/>
                 <RowDefinition Height="113*"/>
-                <RowDefinition Height="22*"/>
-                <RowDefinition Height="157*"/>
+                <RowDefinition Height="45*"/>
+                <RowDefinition Height="134*"/>
             </Grid.RowDefinitions>
+            <StackPanel Grid.Row="4" Grid.Column="2" Orientation="Horizontal">
+                <StackPanel.Background>
+                    <ImageBrush ImageSource="Images/GreenRectangle.png"/>
+                </StackPanel.Background>
+                <StackPanel Background="Blue" Orientation="Vertical" Width="Auto">
+                    <TextBlock Text="{x:Static p:Resources.PlayerWins}"/>
+                    <TextBlock x:Name="textBlockPlayerWins" />
+                </StackPanel>
+                <StackPanel Background="Beige" Orientation="Vertical" Width="Auto">
+                    <TextBlock Text="{x:Static p:Resources.PlayerLosses}"/>
+                    <TextBlock x:Name="textBlockPlayerLosses"/>
+                </StackPanel>
+            </StackPanel>
 
 
 
@@ -123,7 +141,6 @@
                 <RowDefinition Height="23*"/>
                 <RowDefinition Height="288*"/>
             </Grid.RowDefinitions>
-            <Ellipse x:Name="ellipsePlayerStatus" Grid.Column="1" Grid.Row="2" Fill="White"/>
 
 
         </Grid>

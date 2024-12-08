@@ -94,8 +94,17 @@ namespace BMCWindows
                 var result = proxy.AcceptFriendRequest(selectedPlayer.RequestId);
                 if (result.IsSuccess)
                 {
-                    ErrorMessages errorMessages = new ErrorMessages();
-                    errorMessages.ShowErrorMessage("Friend.AcceptRequest");
+                    Server.PlayerDTO player = new Server.PlayerDTO();
+                    player = UserSessionManager.getInstance().GetPlayerUserData();
+                    string friendMessage = Properties.Resources.Friend_AcceptRequest.ToString();
+                    string messageTitle = Properties.Resources.FriendLabelFriends.ToString();
+                    MessageBoxResult messageResult = MessageBox.Show(friendMessage, messageTitle,MessageBoxButton.OK,MessageBoxImage.Information);
+                    
+                    if( messageResult == MessageBoxResult.OK)
+                    {
+                        LoadFriendshipRequests(player.Username);
+                    }
+                    
                 }
                 else
                 {
@@ -118,9 +127,11 @@ namespace BMCWindows
                 var result = proxy.RejectFriendResponse(selectedPlayer.RequestId);
                 if (result.IsSuccess)
                 {
-                    
-                    ErrorMessages errorMessages = new ErrorMessages();
-                    errorMessages.ShowErrorMessage("Friend.DeclinedRequest");
+
+                    string friendMessage = Properties.Resources.Friend_DeclinedRequest.ToString();
+                    string messageTitle = Properties.Resources.FriendLabelFriends.ToString();
+                    MessageBox.Show(friendMessage, messageTitle, MessageBoxButton.OK, MessageBoxImage.Information);
+
                 }
                 else 
                 {

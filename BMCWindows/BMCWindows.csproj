@@ -541,6 +541,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\Server\AccountService.wsdl" />
+    <None Include="Connected Services\Server\AccountService.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\Server\AccountService1.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -552,6 +555,9 @@
     </None>
     <None Include="Connected Services\Server\AccountService13.xsd">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\Server\BMCWindows.Server.LoginResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\Server\BMCWindows.Server.OperationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -858,6 +864,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Background\PurpleBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Background\NoPetsBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\FilledTextBox.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

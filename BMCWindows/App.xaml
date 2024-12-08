@@ -14,6 +14,7 @@
             <Setter Property="FontFamily" Value="{StaticResource CustomFont}" />
         </Style>
 
+
         <Style TargetType="Label">
             <Setter Property="FontFamily" Value="{StaticResource CustomFont}" />
         </Style>
@@ -109,6 +110,31 @@
                     </Setter>
                 </Trigger>
             </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Viewbox">
+            <Setter Property="Focusable" Value="True" />
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="FocusManager.FocusedElement" 
+                        Value="{Binding RelativeSource={RelativeSource Self}, Path=Child.Child}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="ListView">
+            <Setter Property="View">
+                <Setter.Value>
+                    <GridView>
+                        <GridView.ColumnHeaderContainerStyle>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="Background" Value="#5CA159" />
+                                <Setter Property="Foreground" Value="#43224D" />
+                            </Style>
+                        </GridView.ColumnHeaderContainerStyle>
+                    </GridView>
+                </Setter.Value>
+            </Setter>
         </Style>
 
 

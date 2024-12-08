@@ -574,6 +574,9 @@ namespace BMCWindows.LobbyServer {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyService/StartGameNotification")]
         void StartGameNotification(string lobbyId);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyService/NotifyPlayerKicked")]
+        void NotifyPlayerKicked();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

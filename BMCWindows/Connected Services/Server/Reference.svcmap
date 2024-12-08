@@ -25,6 +25,7 @@
     <MetadataFile FileName="AccountService1.xsd" MetadataType="Schema" ID="209721d9-5830-4d2e-8f38-26a01e55e934" SourceId="1" SourceUrl="http://localhost:8080/AccountService?xsd=xsd3" />
     <MetadataFile FileName="AccountService11.xsd" MetadataType="Schema" ID="b5af194b-a7b9-446d-9b2a-18bc583aba17" SourceId="1" SourceUrl="http://localhost:8080/AccountService?xsd=xsd2" />
     <MetadataFile FileName="AccountService.wsdl" MetadataType="Wsdl" ID="9f4e9c62-017f-47bf-b4fa-ba6ff40e2514" SourceId="1" SourceUrl="http://localhost:8080/AccountService?wsdl" />
+    <MetadataFile FileName="AccountService.xsd" MetadataType="Schema" ID="ef6d2180-1651-41db-bb59-807d12bfc3fc" SourceId="1" SourceUrl="http://localhost:8080/AccountService?xsd=xsd4" />
     <MetadataFile FileName="AccountService12.xsd" MetadataType="Schema" ID="375b6693-bc43-4053-840c-7045594b0dc8" SourceId="1" SourceUrl="http://localhost:8080/AccountService?xsd=xsd1" />
     <MetadataFile FileName="AccountService13.xsd" MetadataType="Schema" ID="cf51d53e-8dd2-46ba-bd29-de8b16d2fbc2" SourceId="1" SourceUrl="http://localhost:8080/AccountService?xsd=xsd0" />
   </Metadata>

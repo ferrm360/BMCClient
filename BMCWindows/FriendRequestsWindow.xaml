@@ -59,8 +59,16 @@
                                     <TextBlock Text="{Binding Status}" FontSize="12" HorizontalAlignment="Center" />
 
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-                                        <Button Content="{x:Static p:Resources.GlobalButtonAccept}" Width="80" Margin="5" Click="AcceptFriend"/>
-                                        <Button Content="{x:Static p:Resources.FriendRequestDecline}" Width="80" Margin="5" Click="RejectFriend"/>
+                                        <Button Content="{x:Static p:Resources.GlobalButtonAccept}" Width="80" Margin="5" Click="AcceptFriend">
+                                            <Button.Background>
+                                                <ImageBrush ImageSource="Images/BrownButton.png"/>
+                                            </Button.Background>
+                                        </Button>
+                                        <Button Content="{x:Static p:Resources.FriendRequestDecline}" Width="80" Margin="5" Click="RejectFriend">
+                                            <Button.Background>
+                                                <ImageBrush ImageSource="Images/BrownButton.png"/>
+                                            </Button.Background>
+                                        </Button>
                                     </StackPanel>
                                 </StackPanel>
                             </Border>

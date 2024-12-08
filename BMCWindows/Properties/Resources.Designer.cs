@@ -792,9 +792,9 @@ namespace BMCWindows.Properties {
         /// <summary>
         ///   Busca una cadena traducida similar a Players in lobby.
         /// </summary>
-        public static string GameplayPlayesInLobby {
+        public static string GameplayPlayersInLobby {
             get {
-                return ResourceManager.GetString("GameplayPlayesInLobby", resourceCulture);
+                return ResourceManager.GetString("GameplayPlayersInLobby", resourceCulture);
             }
         }
         
@@ -1096,11 +1096,47 @@ namespace BMCWindows.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Current players.
+        /// </summary>
+        public static string Lobby_CurrentPlayers {
+            get {
+                return ResourceManager.GetString("Lobby.CurrentPlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Join lobby.
+        /// </summary>
+        public static string Lobby_JoinLobby {
+            get {
+                return ResourceManager.GetString("Lobby.JoinLobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a An error occurred while loading the available lobbies.
         /// </summary>
         public static string Lobby_LoadError {
             get {
                 return ResourceManager.GetString("Lobby.LoadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Lobby name.
+        /// </summary>
+        public static string Lobby_LobbyName {
+            get {
+                return ResourceManager.GetString("Lobby.LobbyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Max players.
+        /// </summary>
+        public static string Lobby_MaxPlayers {
+            get {
+                return ResourceManager.GetString("Lobby.MaxPlayers", resourceCulture);
             }
         }
         
@@ -1240,7 +1276,7 @@ namespace BMCWindows.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Match name:.
+        ///   Busca una cadena traducida similar a Match name.
         /// </summary>
         public static string MatchLabelMatchName {
             get {

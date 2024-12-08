@@ -309,7 +309,7 @@
   <data name="FriendSendRequest" xml:space="preserve">
     <value>Send request</value>
   </data>
-  <data name="GameplayPlayesInLobby" xml:space="preserve">
+  <data name="GameplayPlayersInLobby" xml:space="preserve">
     <value>Players in lobby</value>
   </data>
   <data name="GlobalButtonAccept" xml:space="preserve">
@@ -430,7 +430,7 @@
     <value>Remaing cards</value>
   </data>
   <data name="MatchLabelMatchName" xml:space="preserve">
-    <value>Match name:</value>
+    <value>Match name</value>
   </data>
   <data name="MatchPropertyButtonCreateMarch" xml:space="preserve">
     <value>Create match</value>
@@ -623,5 +623,17 @@
   </data>
   <data name="GuestLogout" xml:space="preserve">
     <value>Logout</value>
+  </data>
+  <data name="Lobby.LobbyName" xml:space="preserve">
+    <value>Lobby name</value>
+  </data>
+  <data name="Lobby.MaxPlayers" xml:space="preserve">
+    <value>Max players</value>
+  </data>
+  <data name="Lobby.JoinLobby" xml:space="preserve">
+    <value>Join lobby</value>
+  </data>
+  <data name="Lobby.CurrentPlayers" xml:space="preserve">
+    <value>Current players</value>
   </data>
 </root>

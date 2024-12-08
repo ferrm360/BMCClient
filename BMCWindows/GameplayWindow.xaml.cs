@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -179,6 +180,19 @@ namespace BMCWindows
                     }
                 }
             }
+            catch (CommunicationException commEx)
+            {
+          
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.CommunicationError");
+
+            }
+            catch (TimeoutException timeoutEx)
+            {
+
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.TimeOutError");
+            }
             catch (Exception ex)
             {
                 ErrorMessages errorMessages = new ErrorMessages();
@@ -202,6 +216,19 @@ namespace BMCWindows
                     playerList.Add(new Player { Username = currentPlayer.Username, ProfilePicture = image });
                 }
             }
+            catch (CommunicationException commEx)
+            {
+               
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.CommunicationError");
+
+            }
+            catch (TimeoutException timeoutEx)
+            {
+
+                ErrorMessages errorMessages = new ErrorMessages();
+                errorMessages.ShowErrorMessage("Error.TimeOutError");
+            }
             catch (Exception ex)
             {
                 ErrorMessages errorMessages = new ErrorMessages();
@@ -224,12 +251,10 @@ namespace BMCWindows
                 if (textBlock != null)
                 {
                     var value = textBlock.Text;
-                    MessageBox.Show($"Seleccionaste la celda con el valor: {value}");
                 }
                 var row = Grid.GetRow(cell);
                 var column = Grid.GetColumn(cell);
 
-                MessageBox.Show($"Posición de la celda seleccionada: Fila {row}, Columna {column}");
             }
         }
 
@@ -266,8 +291,6 @@ namespace BMCWindows
             {
                 int row = Grid.GetRow(clickedButton);
                 int col = Grid.GetColumn(clickedButton);
-
-                Console.WriteLine($"Botón clickeado en Fila {row}, Columna {col}");
 
                 UpdateCardInMatrix(row, col);
 

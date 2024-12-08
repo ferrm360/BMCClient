@@ -67,7 +67,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="lobbyId" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="looser" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="loser" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -120,7 +120,9 @@
   </xs:element>
   <xs:element name="OnGameOver">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element minOccurs="0" name="loser" nillable="true" type="xs:string" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="OnCellDead">
