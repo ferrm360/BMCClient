@@ -51,7 +51,7 @@ namespace BMCWindows
 
                             })
                         );
-                        RequestsList.ItemsSource = friendsList;
+                        ListBoxRequestsList.ItemsSource = friendsList;
                     }
                 }
                 else

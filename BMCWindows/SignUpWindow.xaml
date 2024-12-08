@@ -47,7 +47,7 @@
                     <Label Content="{x:Static p:Resources.LoginLaberlPassword}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Grid.Row="3"  Foreground="#43224D" Margin="0,5,0,0" />
                     <Image Source="Images/LongTextbox.png" Stretch="Uniform" Grid.Column="1" Grid.Row="4" Margin="0,15,0,0"/>
                     <Label Content="{x:Static p:Resources.SignUpLabelConfirmPassword}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Grid.Row="4"  Foreground="#43224D" Margin="0,5,0,0" />
-                    <Button x:Name="buttonLogIn"  Content="{x:Static p:Resources.SignUpButtonSignUp}"  BorderBrush="Transparent" Grid.Row="5" Grid.Column="1" Click="SignUp" Margin="20,5,20,5">
+                    <Button x:Name="ButtonLogIn"  Content="{x:Static p:Resources.SignUpButtonSignUp}"  BorderBrush="Transparent" Grid.Row="5" Grid.Column="1" Click="SignUp" Margin="20,5,20,5">
                         <Button.Background>
                             <ImageBrush ImageSource="Images/BrownButton.png"  />
                         </Button.Background>
@@ -75,14 +75,13 @@
                     <RowDefinition Height="27*"/>
                     <RowDefinition Height="89*"/>
                 </Grid.RowDefinitions>
-                    <TextBox x:Name="textBoxUser" Grid.Column="1" Grid.Row="1" Background="Transparent" BorderBrush="Transparent"  TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxLength="255" SelectionBrush="Transparent" />
+                    <TextBox x:Name="TextBoxUser" Grid.Column="1" Grid.Row="1" Background="Transparent" BorderBrush="Transparent"  TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxLength="255" SelectionBrush="Transparent" />
                 
-                    <TextBox x:Name="textBoxEmail" Grid.Column="1" Grid.Row="3" Background="Transparent" BorderBrush="Transparent" TextAlignment="Center"  MaxLength="255" />
+                    <TextBox x:Name="TextBoxEmail" Grid.Column="1" Grid.Row="3" Background="Transparent" BorderBrush="Transparent" TextAlignment="Center"  MaxLength="255" />
 
-                    <PasswordBox x:Name="passwordBoxPassword" Grid.Column="1" Grid.Row="5" Background="Transparent" BorderBrush="Transparent" PasswordChanged="CheckPasswordLimit" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                    <PasswordBox x:Name="PasswordBoxPassword" Grid.Column="1" Grid.Row="5" Background="Transparent" BorderBrush="Transparent" PasswordChanged="CheckPasswordLimit" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
 
-                    <PasswordBox x:Name="passwordBoxConfirmPassword" Grid.Column="1" Grid.Row="7" Background="Transparent" BorderBrush="Transparent" PasswordChanged="CheckPasswordLimit" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-
+                    <PasswordBox x:Name="PasswordBoxConfirmPassword" Grid.Column="1" Grid.Row="7" Background="Transparent" BorderBrush="Transparent" PasswordChanged="CheckPasswordLimit" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
 
             </Grid>
 
@@ -104,7 +103,6 @@
 
 
         </Grid>
-
 
     </Grid>
 </Page>

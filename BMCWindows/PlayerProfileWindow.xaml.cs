@@ -32,11 +32,11 @@ namespace BMCWindows
             _username = username;
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData();
-            labelUser.Content = _username;
+            LabelUser.Content = _username;
             LoadFriendList(_username);
             ProfileServer.ProfileServiceClient proxyProfile = new ProfileServer.ProfileServiceClient();
             string bio = proxyProfile.GetBioByUsername(_username);
-            textBlockBio.Text = bio;
+            TextBlockBio.Text = bio;
             var imageUrl = proxyProfile.GetProfileImage(_username);
             if (imageUrl.ImageData == null || imageUrl.ImageData.Length == 0)
             {
@@ -45,7 +45,7 @@ namespace BMCWindows
             }
             else
             {
-                BitmapImage image = ConvertByteArrayToImage(imageUrl.ImageData);
+                BitmapImage image = ImageConvertor.ConvertByteArrayToImage(imageUrl.ImageData);
                 if (image == null)
                 {
                     ErrorMessages errorMessages = new ErrorMessages();
@@ -96,7 +96,7 @@ namespace BMCWindows
 
                             })
                         );
-                        FriendsList.ItemsSource = friendsList;
+                        ListBoxFriendsList.ItemsSource = friendsList;
                         
                     }
                 }
@@ -134,8 +134,8 @@ namespace BMCWindows
                 {
                     if (response.Scores != null)
                     {
-                         textBlockPlayerWins.Text = response.Scores.Wins.ToString();
-                        textBlockPlayerLosses.Text = response.Scores.Losses.ToString();
+                        TextBlockPlayerWins.Text = response.Scores.Wins.ToString();
+                        TextBlockPlayerLosses.Text = response.Scores.Losses.ToString();
 
                     }
                 }
@@ -167,23 +167,7 @@ namespace BMCWindows
 
 
 
-        // TODO: Pasar a utilities
-        public BitmapImage ConvertByteArrayToImage(byte[] imageData)
-        {
-            if (imageData == null || imageData.Length == 0)
-                return null;
-
-            using (var ms = new MemoryStream(imageData))
-            {
-                BitmapImage image = new BitmapImage();
-                image.BeginInit();
-                image.CacheOption = BitmapCacheOption.OnLoad;
-                image.StreamSource = ms;
-                image.EndInit();
-                image.Freeze();
-                return image;
-            }
-        }
+        
 
         private void DeleteFriend(object sender, RoutedEventArgs e)
         {
@@ -204,7 +188,7 @@ namespace BMCWindows
                         MessageBoxResult messageResult = MessageBox.Show(messageDeletedFriendMessage, messageDeletedFriendTitle, MessageBoxButton.OK, MessageBoxImage.Information);
                         if (messageBoxResult == MessageBoxResult.OK)
                         {
-                            buttonDeleteFriend.Visibility = Visibility.Hidden;
+                            ButtonDeleteFriend.Visibility = Visibility.Hidden;
                         }
                     }
                     else

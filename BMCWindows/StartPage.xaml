@@ -32,9 +32,6 @@
                 <Button.Background>
                     <ImageBrush ImageSource="Images/BrownGreenButton.png" />
                 </Button.Background>
-                
-                
-
             </Button>
             
             

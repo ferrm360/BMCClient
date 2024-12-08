@@ -31,13 +31,13 @@ namespace BMCWindows
 
             if (UserSessionManager.getInstance().IsGuestUser())
             {
-                buttonLogout.Visibility = Visibility.Visible;
-                buttonCancel.Visibility = Visibility.Collapsed;
+                ButtonLogout.Visibility = Visibility.Visible;
+                ButtonCancel.Visibility = Visibility.Collapsed;
             }
             else
             {
-                buttonCancel.Visibility = Visibility.Visible;
-                buttonLogout.Visibility = Visibility.Collapsed;
+                ButtonCancel.Visibility = Visibility.Visible;
+                ButtonLogout.Visibility = Visibility.Collapsed;
             }
         }
 

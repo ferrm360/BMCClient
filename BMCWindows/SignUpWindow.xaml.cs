@@ -36,10 +36,10 @@ namespace BMCWindows
         {
             Server.AccountServiceClient proxy = new Server.AccountServiceClient();
             Server.PlayerDTO player = new Server.PlayerDTO();
-            player.Username = textBoxUser.Text;
-            player.Email = textBoxEmail.Text;
-            player.Password = passwordBoxPassword.Password;
-            if(!FieldValidator.AreFieldsEmpty(textBoxUser.Text, textBoxEmail.Text, passwordBoxPassword.Password, passwordBoxConfirmPassword.Password) && FieldValidator.ValidatePassword(passwordBoxPassword.Password) && passwordBoxPassword.Password == passwordBoxConfirmPassword.Password && FieldValidator.ValidateEmail(textBoxEmail.Text))
+            player.Username = TextBoxUser.Text;
+            player.Email = TextBoxEmail.Text;
+            player.Password = PasswordBoxPassword.Password;
+            if(!FieldValidator.AreFieldsEmpty(TextBoxUser.Text, TextBoxEmail.Text, PasswordBoxPassword.Password, PasswordBoxConfirmPassword.Password) && FieldValidator.ValidatePassword(PasswordBoxPassword.Password) && PasswordBoxPassword.Password == PasswordBoxConfirmPassword.Password && FieldValidator.ValidateEmail(TextBoxEmail.Text))
             {
                 try
                 {

@@ -47,8 +47,8 @@
                 <ColumnDefinition Width="117*"/>
             </Grid.ColumnDefinitions>
             <Image Source="GreenRectangle.png" Grid.Column="0" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-            <Label x:Name="labelFriends" Grid.Row="1" Margin="5,5,5,5" Padding="3" Content="Friends" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-            <ListBox x:Name="FriendsList" Grid.Row="2" Margin="10,10,10,10" Visibility="Visible" SelectionChanged="SelectFriend" BorderBrush="Transparent">
+            <Label x:Name="LabelFriends" Grid.Row="1" Margin="5,5,5,5" Padding="3" Content="Friends" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <ListBox x:Name="ListBoxFriendsList" Grid.Row="2" Margin="10,10,10,10" Visibility="Visible" SelectionChanged="SelectFriend" BorderBrush="Transparent">
                 <ListBox.Background>
                     <ImageBrush ImageSource="Images/GreenRectangle.png"/>
                 </ListBox.Background>
@@ -56,7 +56,7 @@
                     <DataTemplate>
                         <Border Background="#DDD" Margin="2" CornerRadius="5" >
                             <StackPanel Orientation="Horizontal" Margin="15" Background="#43224D">
-                                <Image x:Name="myImageControl" Source="{Binding FriendPicture}"  Width="40" Height="40" Margin="5"/>
+                                <Image x:Name="ImageControl" Source="{Binding FriendPicture}"  Width="40" Height="40" Margin="5"/>
                                 <TextBlock Text="{Binding UserName}" VerticalAlignment="Center" FontSize="16" Margin="5" Foreground="#FEFFDB"/>
                             </StackPanel>
                         </Border>
@@ -74,9 +74,9 @@
 
             <Border Background="LightGray" CornerRadius="8" Padding="2">
                 <StackPanel>
-                    <TextBox x:Name="textBoxSearchFriendsChats" Margin="5" />
+                    <TextBox x:Name="TextBoxSearchFriendsChats" Margin="5" />
 
-                    <ListBox x:Name="ChatList" Margin="5" SelectionChanged="SelectFriendChat">
+                    <ListBox x:Name="ListBoxChatList" Margin="5" SelectionChanged="SelectFriendChat">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Border Background="#DDD" CornerRadius="5" Margin="5">
@@ -92,7 +92,7 @@
             </Border>
         </Expander>
 
-        <Grid x:Name="ChatGrid"  Margin="10,0,0,0" Visibility="Hidden"> 
+        <Grid x:Name="GridChat"  Margin="10,0,0,0" Visibility="Hidden"> 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="268*"/>
                 <ColumnDefinition Width="127*"/>
@@ -107,7 +107,7 @@
 
             <ScrollViewer Grid.Row="1" Grid.Column="1" Margin="5,25,10,0" >
 
-                <ItemsControl x:Name="ChatMessages" ItemsSource="{Binding FriendChatMessages}" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                <ItemsControl x:Name="ItemsControlChatMessages" ItemsSource="{Binding FriendChatMessages}" VerticalAlignment="Bottom" HorizontalAlignment="Right">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="5">
@@ -140,8 +140,8 @@
                 
                 <Button Content="Enviar" Click="SendMessageToFriend"/>
             </StackPanel>
-            <Button Content="Cancel"  Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,5,20,0"/>
-            <Label x:Name="labelFriendName" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+            <Button Content="ButtonCancel"  Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,5,20,0"/>
+            <Label x:Name="LabelFriendName" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center"/>
         </Grid>
 
         <Grid>
@@ -155,7 +155,7 @@
                 <RowDefinition Height="Auto" MinHeight="39.96"/>
             </Grid.RowDefinitions>
 
-            <ListBox x:Name="generalMessages" Grid.Row="1" Margin="10,2,10,10" Background="#B0D480" BorderBrush="#43224D" BorderThickness="2">
+            <ListBox x:Name="ListBoxGeneralMessages" Grid.Row="1" Margin="10,2,10,10" Background="#B0D480" BorderBrush="#43224D" BorderThickness="2">
 
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -168,7 +168,7 @@
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10,10,10,10"  >
                 <Viewbox Stretch="Fill" >
-                    <TextBox x:Name="textboxGeneralChat" Width="350" Margin="0,0,10,0" BorderBrush="Transparent" Padding="10,5,10,5" TextAlignment="Left">
+                    <TextBox x:Name="TextboxGeneralChat" Width="350" Margin="0,0,10,0" BorderBrush="Transparent" Padding="10,5,10,5" TextAlignment="Left">
                         <TextBox.Background>
                             <ImageBrush ImageSource="Images/FilledTextBox.png"/>
                         </TextBox.Background>
@@ -176,7 +176,7 @@
                 </Viewbox>
                 
 
-                <Button Content="{x:Static p:Resources.FriendButtonSendMessage}" Click="SendGeneralMessage" BorderBrush="Transparent">
+                <Button x:Name="ButtonSendMessage" Content="{x:Static p:Resources.FriendButtonSendMessage}" Click="SendGeneralMessage" BorderBrush="Transparent">
                     <Button.Background>
                         <ImageBrush ImageSource="Images/BrownButton.png" Stretch="Fill"/>
                     </Button.Background>
@@ -199,14 +199,14 @@
                 <ColumnDefinition Width="135*"/>
             </Grid.ColumnDefinitions>
             <Viewbox Grid.Row="1" Grid.Column="1" Stretch="Uniform">
-                <Label x:Name="labelUserName" Content="{x:Static p:Resources.GlobalLabelUser }" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" FontFamily="Press Start 2P Regular"  Margin="0,0,0,0"/>
+                <Label x:Name="LabelUserName" Content="{x:Static p:Resources.GlobalLabelUser }" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" FontFamily="Press Start 2P Regular"  Margin="0,0,0,0"/>
             </Viewbox>
-            <Button x:Name="buttonGames" Content="{x:Static p:Resources.HomePageButtonMatch}" BorderBrush="Transparent" Grid.Column="2" Grid.Row="1"  Click="GoToGames">
+            <Button x:Name="ButtonGames" Content="{x:Static p:Resources.HomePageButtonMatch}" BorderBrush="Transparent" Grid.Column="2" Grid.Row="1"  Click="GoToGames">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/BrownButton.png"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="buttonCards" Content="{x:Static p:Resources.HomePageShowCards}" Grid.Column="3" Grid.Row="1"  BorderBrush="Transparent" Click="SeeCards">
+            <Button x:Name="ButtonCards" Content="{x:Static p:Resources.HomePageShowCards}" Grid.Column="3" Grid.Row="1"  BorderBrush="Transparent" Click="SeeCards">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/BrownButton.png"/>
                 </Button.Background>
@@ -223,13 +223,13 @@
                 <ColumnDefinition Width="625*"/>
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="buttonOpenContextMenu" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" BorderBrush="Transparent" VerticalAlignment="Stretch" Margin="0,5,0,0" Click="OpenContextMenu">
+            <Button x:Name="ButtonOpenContextMenu" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" BorderBrush="Transparent" VerticalAlignment="Stretch" Margin="0,5,0,0" Click="OpenContextMenu">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/ButtonSettings.png"/>
                 </Button.Background>
             </Button>
         </Grid>
-        <Menu x:Name="menuOptions" VerticalAlignment="Top" Visibility="Hidden"  HorizontalAlignment="Left">
+        <Menu x:Name="MenuOptions" VerticalAlignment="Top" Visibility="Hidden"  HorizontalAlignment="Left">
             <Menu.RenderTransform>
                 <TranslateTransform x:Name="translateMenu" Y="0"/>
             </Menu.RenderTransform>
@@ -268,7 +268,7 @@
                 <ColumnDefinition Width="113*"/>
             </Grid.ColumnDefinitions>
             
-            <ListView x:Name="PlayerScoresTable" Grid.Row="1" Grid.Column="1" >
+            <ListView x:Name="ListViewPlayerScoresTable" Grid.Row="1" Grid.Column="1" >
                 <ListView.Background>
                     <ImageBrush ImageSource="Images/GreenRectangle.png"/>
                 </ListView.Background>
@@ -281,14 +281,9 @@
                 </ListView.View>
             </ListView>
 
-
-
-
         </Grid>
 
     </Grid>
-
-
 
 
 </Page>

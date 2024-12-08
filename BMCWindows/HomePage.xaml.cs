@@ -30,13 +30,13 @@ namespace BMCWindows
     /// </summary>
     public partial class HomePage : Page, ChatServer.IChatServiceCallback
     {
-        private ObservableCollection<Friend> Friends { get; set; }
-        private ObservableCollection<Message> Messages { get; set; }
-        private ChatService chatService = new ChatService();
+        private ObservableCollection<Friend> friends { get; set; }
+        private ObservableCollection<Message> messages { get; set; }
+        private ChatService _chatService = new ChatService();
         private ChatServer.ChatServiceClient _proxy;
-        private ObservableCollection<Message> FriendChatMessages { get; set; } = new ObservableCollection<Message>();
+        private ObservableCollection<Message> friendChatMessages { get; set; } = new ObservableCollection<Message>();
         private FriendChatCallBackHandler _friendChatCallbackHandler;
-        private ObservableCollection<Score> PlayersScore { get; set; } = new ObservableCollection<Score>();
+        private ObservableCollection<Score> playersScore { get; set; } = new ObservableCollection<Score>();
 
 
         public HomePage()
@@ -45,17 +45,17 @@ namespace BMCWindows
             DataContext = this;
             _friendChatCallbackHandler = new FriendChatCallBackHandler();
             _friendChatCallbackHandler.FriendMessageReceived += MessageReceived;
-            Messages = new ObservableCollection<Message>();
-            generalMessages.ItemsSource = Messages;
-            ChatMessages.ItemsSource = FriendChatMessages;
+            messages = new ObservableCollection<Message>();
+            ListBoxGeneralMessages.ItemsSource = messages;
+            ItemsControlChatMessages.ItemsSource = friendChatMessages;
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData();
             InstanceContext context = new InstanceContext(this);
             _proxy = new ChatServer.ChatServiceClient(context);
             _proxy.RegisterUser(player.Username);
-            labelUserName.Content = player.Username;
+            LabelUserName.Content = player.Username;
             LoadFriendList(player.Username);
-            buttonOpenContextMenu.Visibility = Visibility.Visible;
+            ButtonOpenContextMenu.Visibility = Visibility.Visible;
             ProfileServer.ProfileServiceClient proxyProfile = new ProfileServer.ProfileServiceClient();
             var imageUrl = proxyProfile.GetProfileImage(player.Username);
             if (imageUrl.ImageData == null || imageUrl.ImageData.Length == 0)
@@ -97,12 +97,12 @@ namespace BMCWindows
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData();
 
-            if (!FieldValidator.AreFieldsEmpty(textboxGeneralChat.Text))
+            if (!FieldValidator.AreFieldsEmpty(TextboxGeneralChat.Text))
             {
-                var formattedMessage = $"{player.Username}: {textboxGeneralChat.Text}";
+                var formattedMessage = $"{player.Username}: {TextboxGeneralChat.Text}";
                 _proxy.SendMessage(player.Username, formattedMessage);
-                ReceiveMessage(textboxGeneralChat.Text);
-                textboxGeneralChat.Clear();
+                ReceiveMessage(TextboxGeneralChat.Text);
+                TextboxGeneralChat.Clear();
             }
         }
 
@@ -112,7 +112,7 @@ namespace BMCWindows
 
             Application.Current.Dispatcher.Invoke(() =>
             {
-                Messages.Add(new Message { Sender = player.Username, Messages = message });
+                messages.Add(new Message { Sender = player.Username, Messages = message });
             });
 
         }
@@ -125,7 +125,7 @@ namespace BMCWindows
         public void OpenContextMenu(object sender, RoutedEventArgs e)
         {
 
-            menuOptions.Visibility = menuOptions.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
+            MenuOptions.Visibility = MenuOptions.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void GoToSearchWindow(object sender, RoutedEventArgs e)
@@ -161,8 +161,8 @@ namespace BMCWindows
 
                             })
                         );
-                        FriendsList.ItemsSource = friendsList;
-                        ChatList.ItemsSource = friendsList;
+                        ListBoxFriendsList.ItemsSource = friendsList;
+                        ListBoxChatList.ItemsSource = friendsList;
                     }
                 }
                 else
@@ -215,7 +215,7 @@ namespace BMCWindows
 
         private void SelectFriend(object sender, SelectionChangedEventArgs e)
         {
-            var selectedFriend = (Friend)FriendsList.SelectedItem;
+            var selectedFriend = (Friend)ListBoxFriendsList.SelectedItem;
 
             if (selectedFriend != null)
             {
@@ -225,14 +225,14 @@ namespace BMCWindows
 
         private void SelectFriendChat(object sender, SelectionChangedEventArgs e)
         {
-            var selectedFriend = (Friend)ChatList.SelectedItem;
+            var selectedFriend = (Friend)ListBoxChatList.SelectedItem;
 
             if (selectedFriend != null)
             {
-                ChatGrid.Visibility = Visibility.Visible;
-                FriendChatMessages.Clear();
+                GridChat.Visibility = Visibility.Visible;
+                friendChatMessages.Clear();
                 LoadFriendChatMessages(selectedFriend.UserName);
-                labelFriendName.Content = selectedFriend.UserName;
+                LabelFriendName.Content = selectedFriend.UserName;
             }
         }
 
@@ -271,12 +271,12 @@ namespace BMCWindows
                 Server.PlayerDTO player = UserSessionManager.getInstance().GetPlayerUserData();
                 var context = new InstanceContext(new FriendChatCallBackHandler());
                 ChatFriendServer.ChatFriendServiceClient friendChatProxy = new ChatFriendServer.ChatFriendServiceClient(context);
-                friendChatProxy.SendMessageToFriend(player.Username, labelFriendName.Content.ToString(), textBoxFriendMessage.Text);
+                friendChatProxy.SendMessageToFriend(player.Username, LabelFriendName.Content.ToString(), textBoxFriendMessage.Text);
                 Message friendMessage = new Message();
                 friendMessage.Sender = player.Username;
                 friendMessage.Messages = textBoxFriendMessage.Text;
                 textBoxFriendMessage.Clear();
-                MessageReceived(player.Username, labelFriendName.Content.ToString(), textBoxFriendMessage.Text);
+                MessageReceived(player.Username, LabelFriendName.Content.ToString(), textBoxFriendMessage.Text);
 
             }
             catch (CommunicationException commEx)
@@ -297,7 +297,7 @@ namespace BMCWindows
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                FriendChatMessages.Add(new Message { Sender = sender, Messages = message, Alignment = HorizontalAlignment.Left });
+                friendChatMessages.Add(new Message { Sender = sender, Messages = message, Alignment = HorizontalAlignment.Left });
             });
 
         }
@@ -339,7 +339,7 @@ namespace BMCWindows
                                     };
                                 })
                             );
-                            PlayerScoresTable.ItemsSource = scoresList;
+                            ListViewPlayerScoresTable.ItemsSource = scoresList;
                         };
                        
                        

@@ -29,7 +29,7 @@
                     <ColumnDefinition Width="78*"/>
                     <ColumnDefinition Width="119*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="buttonCancel" Grid.Column="0" Grid.Row="0"  Content="{x:Static p:Resources.GloblalButtonCancel}" BorderBrush="Transparent"  Margin="10,5,0,0" Click="GoBack">
+                <Button x:Name="ButtonCancel" Grid.Column="0" Grid.Row="0"  Content="{x:Static p:Resources.GloblalButtonCancel}" BorderBrush="Transparent"  Margin="10,5,0,0" Click="GoBack">
                     <Button.Background>
                         <ImageBrush ImageSource="Images/BrownButton.png"/>
                     </Button.Background>
@@ -41,7 +41,7 @@
                     <RowDefinition Height="83*"/>
                     <RowDefinition Height="367*"/>
                 </Grid.RowDefinitions>
-                <ListBox x:Name="RequestsList" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0" Background="Transparent" Grid.Row="1">
+                <ListBox x:Name="ListBoxRequestsList" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0" Background="Transparent" Grid.Row="1">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="5" />

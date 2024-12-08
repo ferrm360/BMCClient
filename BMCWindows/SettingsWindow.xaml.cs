@@ -41,9 +41,9 @@ namespace BMCWindows
            
             ProfileServer.ProfileServiceClient proxy = new ProfileServer.ProfileServiceClient();
             String username = player.Username;         
-            String password = passwordBoxOldPassword.Password;
-            String newPassword = passwordBoxNewPassword.Password;
-            String confirmPassword = passwordBoxPassword.Password;
+            String password = PasswordBoxOldPassword.Password;
+            String newPassword = PasswordBoxNewPassword.Password;
+            String confirmPassword = PasswordBoxPassword.Password;
             if(!FieldValidator.AreFieldsEmpty(password, newPassword, confirmPassword) && FieldValidator.ValidatePassword(newPassword) && newPassword == confirmPassword)
             {
                 var result = proxy.UpdatePassword(username, newPassword, password);

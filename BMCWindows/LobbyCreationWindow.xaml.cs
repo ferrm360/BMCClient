@@ -32,14 +32,14 @@ namespace BMCWindows
             InitializeComponent();
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData();
-            labelUser.Content = player.Username;
-            ApplyToggleStyle(publicToggleButton);
-            ApplyToggleStyle(privateToggleButton);
-            publicToggleButton.Checked += ToggleButtonsChecked;
-            privateToggleButton.Checked += ToggleButtonsChecked;
-            labelLobbyPassword.Visibility = Visibility.Hidden;
-            imageTextBoxLobbyPassword.Visibility = Visibility.Hidden;
-            textBoxLobbyPassword.Visibility = Visibility.Hidden;
+            LabelUser.Content = player.Username;
+            ApplyToggleStyle(PublicToggleButton);
+            ApplyToggleStyle(PrivateToggleButton);
+            PublicToggleButton.Checked += ToggleButtonsChecked;
+            PrivateToggleButton.Checked += ToggleButtonsChecked;
+            LabelLobbyPassword.Visibility = Visibility.Hidden;
+            ImageTextBoxLobbyPassword.Visibility = Visibility.Hidden;
+            TextBoxLobbyPassword.Visibility = Visibility.Hidden;
         }
 
        
@@ -66,19 +66,19 @@ namespace BMCWindows
 
         private void ToggleButtonsChecked(object sender, RoutedEventArgs e)
         {
-            if (sender == publicToggleButton)
+            if (sender == PublicToggleButton)
             {
-                privateToggleButton.IsChecked = false;
-                textBoxLobbyPassword.Visibility = Visibility.Hidden;
-                imageTextBoxLobbyPassword.Visibility = Visibility.Hidden;
-                labelLobbyPassword.Visibility = Visibility.Hidden;
+                PrivateToggleButton.IsChecked = false;
+                TextBoxLobbyPassword.Visibility = Visibility.Hidden;
+                ImageTextBoxLobbyPassword.Visibility = Visibility.Hidden;
+                LabelLobbyPassword.Visibility = Visibility.Hidden;
             }
-            else if (sender == privateToggleButton)
+            else if (sender == PrivateToggleButton)
             {
-                publicToggleButton.IsChecked = false;
-                textBoxLobbyPassword.Visibility = Visibility.Visible;
-                imageTextBoxLobbyPassword.Visibility = Visibility.Visible;
-                labelLobbyPassword.Visibility = Visibility.Visible;
+                PublicToggleButton.IsChecked = false;
+                TextBoxLobbyPassword.Visibility = Visibility.Visible;
+                ImageTextBoxLobbyPassword.Visibility = Visibility.Visible;
+                LabelLobbyPassword.Visibility = Visibility.Visible;
             }
         }
 
@@ -92,14 +92,14 @@ namespace BMCWindows
             var requestDTO = new LobbyServer.CreateLobbyRequestDTO
             {
                 Username = UserSessionManager.getInstance().GetPlayerUserData().Username,
-                Name = textBoxLobbyName.Text,
+                Name = TextBoxLobbyName.Text,
                 Host = UserSessionManager.getInstance().GetPlayerUserData().Username,
-                IsPrivate = privateToggleButton.IsChecked == true,
-                Password = privateToggleButton.IsChecked == true ? textBoxLobbyPassword.Text : null
+                IsPrivate = PrivateToggleButton.IsChecked == true,
+                Password = PrivateToggleButton.IsChecked == true ? TextBoxLobbyPassword.Text : null
             };
 
-            if ((privateToggleButton.IsChecked == false && !FieldValidator.AreFieldsEmpty(requestDTO.Name)) ||
-                (privateToggleButton.IsChecked == true && !FieldValidator.AreFieldsEmpty(requestDTO.Name, requestDTO.Password)))
+            if ((PrivateToggleButton.IsChecked == false && !FieldValidator.AreFieldsEmpty(requestDTO.Name)) ||
+                (PrivateToggleButton.IsChecked == true && !FieldValidator.AreFieldsEmpty(requestDTO.Name, requestDTO.Password)))
             {
                 try
                 {

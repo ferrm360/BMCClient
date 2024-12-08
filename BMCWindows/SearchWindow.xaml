@@ -29,25 +29,22 @@
                 <ColumnDefinition Width="78*"/>
                 <ColumnDefinition Width="119*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="buttonCancel" Content="{x:Static p:Resources.GloblalButtonCancel}" Grid.Column="0" Grid.Row="1"  BorderBrush="Transparent" Margin="10,5,0,0" Click="GoBack">
+            <Button x:Name="ButtonCancel" Content="{x:Static p:Resources.GloblalButtonCancel}" Grid.Column="0" Grid.Row="1"  BorderBrush="Transparent" Margin="10,5,0,0" Click="GoBack">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/BrownButton.png" />
                 </Button.Background>
             </Button>
-            <TextBox x:Name="textboxSearch" Grid.Row="1" Grid.Column="2" Padding="5,5,5,5" BorderBrush="Transparent" TextAlignment="Center">
+            <TextBox x:Name="TextboxSearch" Grid.Row="1" Grid.Column="2" Padding="5,5,5,5" BorderBrush="Transparent" TextAlignment="Center">
                 <TextBox.Background>
                     <ImageBrush ImageSource="Images/FilledTextBox.png"/>
                 </TextBox.Background>
             </TextBox>
             
-            <Button x:Name="buttonSearch" Grid.Column="4" Grid.Row="1"  BorderBrush="Transparent" Click="SearchPlayer">
+            <Button x:Name="ButtonSearch" Grid.Column="4" Grid.Row="1"  BorderBrush="Transparent" Click="SearchPlayer">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/ButtonSearch.png" />
                 </Button.Background>
             </Button>
-
-
-
 
         </Grid>
         <Grid>
@@ -55,7 +52,7 @@
                 <RowDefinition Height="83*"/>
                 <RowDefinition Height="367*"/>
             </Grid.RowDefinitions>
-            <ListBox x:Name="PlayersList" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0"  Grid.Row="1" MouseLeftButtonUp="SelectPlayer" Background="Transparent">
+            <ListBox x:Name="ListBoxPlayersList" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0"  Grid.Row="1" MouseLeftButtonUp="SelectPlayer" Background="Transparent">
                 
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -79,7 +76,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Popup x:Name="PlayerPopup" Placement="Mouse" StaysOpen="False">
+            <Popup x:Name="PopupPlayer" Placement="Mouse" StaysOpen="False">
                 <Border Background="#D3D3D3" Padding="10" CornerRadius="10">
                     <StackPanel>
                         <StackPanel.Background>
@@ -89,7 +86,7 @@
                         <TextBlock Text="{Binding UserName}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Margin="5" />
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                            
-                            <Button x:Name="buttonSendRequest" Content="{x:Static p:Resources.FriendSendRequest}" Margin="5" Click="SendRequest">
+                            <Button x:Name="ButtonSendRequest" Content="{x:Static p:Resources.FriendSendRequest}" Margin="5" Click="SendRequest">
                                 <Button.Background>
                                     <ImageBrush ImageSource="Images/BrownButton.png"/>
                                 </Button.Background>
@@ -100,10 +97,7 @@
                 </Border>
             </Popup>
 
-
-
         </Grid>
-
 
     </Grid>
 </Page>

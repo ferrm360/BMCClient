@@ -31,11 +31,11 @@ namespace BMCWindows
             InitializeComponent();
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData();
-            labelUser.Content = player.Username;
+            LabelUser.Content = player.Username;
             ProfileServer.ProfileServiceClient proxy = new ProfileServer.ProfileServiceClient();
             LoadFriendList(player.Username);
             string bio = proxy.GetBioByUsername(player.Username);
-            textBlockBio.Text = bio;
+            TextBlockBio.Text = bio;
 
             ProfileServer.ProfileServiceClient proxyProfile = new ProfileServer.ProfileServiceClient();
             var imageUrl = proxyProfile.GetProfileImage(player.Username);
@@ -118,8 +118,8 @@ namespace BMCWindows
                 {
                     if (response.Scores != null)
                     {
-                        textBlockPlayerWins.Text = response.Scores.Wins.ToString();
-                        textBlockPlayerLosses.Text = response.Scores.Losses.ToString();
+                        TextBlockPlayerWins.Text = response.Scores.Wins.ToString();
+                        TextBlockPlayerLosses.Text = response.Scores.Losses.ToString();
 
                     }
                 }
@@ -170,33 +170,33 @@ namespace BMCWindows
         {
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData();
-            labelUser.Visibility = Visibility.Hidden;
-            textBoxUser.Visibility = Visibility.Visible;
-            textBoxUser.Text = player.Username;
-            buttonAccepNewUsername.Visibility = Visibility.Visible;
-            buttonCancelNewUsername.Visibility = Visibility.Visible;
-            buttonEditUsername.Visibility = Visibility.Hidden;
+            LabelUser.Visibility = Visibility.Hidden;
+            TextBoxUser.Visibility = Visibility.Visible;
+            TextBoxUser.Text = player.Username;
+            ButtonAccepNewUsername.Visibility = Visibility.Visible;
+            ButtonCancelNewUsername.Visibility = Visibility.Visible;
+            ButtonEditUsername.Visibility = Visibility.Hidden;
         }
 
         private void AcceptUsernameChange(object sender, RoutedEventArgs e) 
         {
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData();
-            String newUsername = textBoxUser.Text;
+            String newUsername = TextBoxUser.Text;
             ProfileServer.ProfileServiceClient proxy = new ProfileServer.ProfileServiceClient();
             var result = proxy.UpdateUsername(player.Username, newUsername);
             if (result.IsSuccess) 
             {
                 Server.PlayerDTO playerUpdated = new Server.PlayerDTO();
                 playerUpdated = UserSessionManager.getInstance().GetPlayerUserData();
-                labelUser.Content = newUsername;
-                textBoxUser.Visibility= Visibility.Hidden;
-                labelUser.Visibility= Visibility.Visible;
+                LabelUser.Content = newUsername;
+                TextBoxUser.Visibility= Visibility.Hidden;
+                LabelUser.Visibility= Visibility.Visible;
                 string message = Properties.Resources.Info_UserUpdated.ToString();
                 MessageBox.Show(message);
-                buttonAccepNewUsername.Visibility = Visibility.Hidden;
-                buttonCancelNewUsername.Visibility = Visibility.Hidden;
-                buttonEditUsername.Visibility = Visibility.Visible;
+                ButtonAccepNewUsername.Visibility = Visibility.Hidden;
+                ButtonCancelNewUsername.Visibility = Visibility.Hidden;
+                ButtonEditUsername.Visibility = Visibility.Visible;
             }
             else
             {
@@ -207,44 +207,44 @@ namespace BMCWindows
 
         private void CancelUsernameEdition(object sender, RoutedEventArgs e) 
         {
-            buttonAccepNewUsername.Visibility = Visibility.Hidden;
-            buttonCancelNewUsername.Visibility = Visibility.Hidden;
-            buttonEditUsername.Visibility = Visibility.Visible;
-            labelUser.Visibility = Visibility.Visible;
-            textBoxUser.Visibility = Visibility.Hidden;
+            ButtonAccepNewUsername.Visibility = Visibility.Hidden;
+            ButtonCancelNewUsername.Visibility = Visibility.Hidden;
+            ButtonEditUsername.Visibility = Visibility.Visible;
+            LabelUser.Visibility = Visibility.Visible;
+            TextBoxUser.Visibility = Visibility.Hidden;
         }
 
         private void MakeBioEditable(object sender, RoutedEventArgs e)
         {
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData();
-            textBlockBio.Visibility = Visibility.Hidden;
-            textBoxBio.Visibility = Visibility.Visible;
-            textBoxBio.Text = textBlockBio.Text;
-            buttonAcceptNewBio.Visibility = Visibility.Visible;
-            buttonCancelNewBio.Visibility = Visibility.Visible;
-            buttonChangeBio.Visibility = Visibility.Hidden;
+            TextBlockBio.Visibility = Visibility.Hidden;
+            TextBoxBio.Visibility = Visibility.Visible;
+            TextBoxBio.Text = TextBlockBio.Text;
+            ButtonAcceptNewBio.Visibility = Visibility.Visible;
+            ButtonCancelNewBio.Visibility = Visibility.Visible;
+            ButtonChangeBio.Visibility = Visibility.Hidden;
         }
 
         private void AcceptBioUpdate(object sender, RoutedEventArgs e)
         {
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData();
-            String newBio = textBoxBio.Text;
+            String newBio = TextBoxBio.Text;
             ProfileServer.ProfileServiceClient proxy = new ProfileServer.ProfileServiceClient();
             var result = proxy.UpdateBio(newBio, player.Username);
             if (result.IsSuccess)
             {
                 Server.PlayerDTO playerUpdated = new Server.PlayerDTO();
                 playerUpdated = UserSessionManager.getInstance().GetPlayerUserData();
-                textBoxBio.Visibility = Visibility.Hidden;
-                textBlockBio.Visibility = Visibility.Visible;
-                textBlockBio.Text = newBio;
+                TextBoxBio.Visibility = Visibility.Hidden;
+                TextBlockBio.Visibility = Visibility.Visible;
+                TextBlockBio.Text = newBio;
                 string message = Properties.Resources.Info_BioUpdated.ToString();
                 MessageBox.Show(message);
-                buttonAcceptNewBio.Visibility = Visibility.Hidden;
-                buttonCancelNewBio.Visibility = Visibility.Visible;
-                buttonChangeBio.Visibility = Visibility.Visible;
+                ButtonAcceptNewBio.Visibility = Visibility.Hidden;
+                ButtonCancelNewBio.Visibility = Visibility.Visible;
+                ButtonChangeBio.Visibility = Visibility.Visible;
             }
             else
             {
@@ -254,11 +254,11 @@ namespace BMCWindows
 
         private void CancelBioUpdate(object sender, RoutedEventArgs e)
         {
-            textBoxBio.Visibility = Visibility.Hidden;
-            textBlockBio.Visibility = Visibility.Visible;
-            buttonAcceptNewBio.Visibility = Visibility.Hidden;
-            buttonCancelNewBio.Visibility = Visibility.Visible;
-            buttonChangeBio.Visibility = Visibility.Visible;
+            TextBoxBio.Visibility = Visibility.Hidden;
+            TextBlockBio.Visibility = Visibility.Visible;
+            ButtonAcceptNewBio.Visibility = Visibility.Hidden;
+            ButtonCancelNewBio.Visibility = Visibility.Visible;
+            ButtonChangeBio.Visibility = Visibility.Visible;
         }
 
         private void GoBack(object sender, RoutedEventArgs e)
@@ -295,7 +295,7 @@ namespace BMCWindows
 
                             })
                         );
-                        FriendsList.ItemsSource = friendsList;
+                        ListBoxFriendsList.ItemsSource = friendsList;
                         
                     }
                 }
@@ -346,7 +346,7 @@ namespace BMCWindows
 
         private void SelectFriend(object sender, SelectionChangedEventArgs e)
         {
-            var selectedFriend = (Friend)FriendsList.SelectedItem;
+            var selectedFriend = (Friend)ListBoxFriendsList.SelectedItem;
 
             if (selectedFriend != null)
             {

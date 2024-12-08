@@ -51,7 +51,7 @@ namespace BMCWindows
                                 
                             })
                         );
-                        PlayersList.ItemsSource = friendsList;                     
+                        ListBoxPlayersList.ItemsSource = friendsList;                     
                     }
                 }
                 else
@@ -80,7 +80,7 @@ namespace BMCWindows
 
         private void SearchPlayer(object  sender, EventArgs e)
         {
-            string searchPlayerUsername = textboxSearch.Text;
+            string searchPlayerUsername = TextboxSearch.Text;
             try
             {
                 Server.PlayerDTO player = new Server.PlayerDTO();
@@ -110,7 +110,7 @@ namespace BMCWindows
 
                             })
                         );
-                        PlayersList.ItemsSource = friendsList;
+                        ListBoxPlayersList.ItemsSource = friendsList;
                     }
                 }
                 else
@@ -144,17 +144,17 @@ namespace BMCWindows
 
         private void SelectPlayer(object sender, MouseButtonEventArgs e)
         {
-            if (PlayersList.SelectedItem is Friend selectedPlayer)
+            if (ListBoxPlayersList.SelectedItem is Friend selectedPlayer)
             {
-                PlayerPopup.DataContext = selectedPlayer;
-                PlayerPopup.Placement = PlacementMode.Mouse;
-                PlayerPopup.IsOpen = true;
+                PopupPlayer.DataContext = selectedPlayer;
+                PopupPlayer.Placement = PlacementMode.Mouse;
+                PopupPlayer.IsOpen = true;
             }
         }
 
         private void SendRequest(object sender, EventArgs e)
         {
-            if (PlayerPopup.DataContext is Friend selectedPlayer)
+            if (PopupPlayer.DataContext is Friend selectedPlayer)
             {
                 string receiverUsername = selectedPlayer.UserName;
                 FriendServer.FriendshipServiceClient proxy = new FriendServer.FriendshipServiceClient();

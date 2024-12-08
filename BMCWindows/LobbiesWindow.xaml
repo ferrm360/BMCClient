@@ -27,10 +27,6 @@
                 <RowDefinition Height="347*"/>
             </Grid.RowDefinitions>
 
-            <ToggleButton x:Name="publicToggleButton" Grid.Column="1"  Grid.Row="1" IsChecked="True" Content="Public" FontWeight="Bold" Style="{StaticResource SelectorToggleButtonStyle}"  Visibility="Hidden"/>
-
-            <ToggleButton x:Name="privateToggleButton" IsChecked="False" Grid.Column="2" Grid.Row="1" Content="Private" FontWeight="Bold" Style="{StaticResource SelectorToggleButtonStyle}"  Visibility="Hidden"/>
-
         </Grid>
 
         <Grid>
@@ -46,7 +42,7 @@
                 <RowDefinition Height="62*"/>
             </Grid.RowDefinitions>
             
-            <ListView x:Name="listViewLobbies" Grid.Row="2" Grid.Column="1" SelectionMode="Single" SelectionChanged="LobbyListBoxSelectionChanged" ItemsSource="{Binding GameSessions}">
+            <ListView x:Name="ListViewLobbies" Grid.Row="2" Grid.Column="1" SelectionMode="Single" SelectionChanged="LobbyListBoxSelectionChanged" ItemsSource="{Binding GameSessions}">
                 <ListView.Background>
                     <ImageBrush ImageSource="Images/GreenRectangle.png"/>
                 </ListView.Background>
@@ -72,7 +68,7 @@
                 
             </ListView>
 
-            <Popup x:Name="passwordPopup" StaysOpen="False" Placement="Mouse" AllowsTransparency="True" PopupAnimation="Slide">
+            <Popup x:Name="PasswordPopup" StaysOpen="False" Placement="Mouse" AllowsTransparency="True" PopupAnimation="Slide">
                 <Border  BorderBrush="Transparent" BorderThickness="1" Padding="10">
                     <Border.Background>
                         <ImageBrush ImageSource="Images/GreenRectangle.png"/>
@@ -105,7 +101,7 @@
                 <ColumnDefinition Width="16*"/>
                 <ColumnDefinition Width="141*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="buttonCancel" Grid.Column="1" Grid.Row="0" Content="{x:Static p:Resources.GloblalButtonCancel}" BorderBrush="Transparent" Click="Cancel">
+            <Button x:Name="ButtonCancel" Grid.Column="1" Grid.Row="0" Content="{x:Static p:Resources.GloblalButtonCancel}" BorderBrush="Transparent" Click="Cancel">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/BrownButton.png"/>
                 </Button.Background>

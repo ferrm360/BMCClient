@@ -17,9 +17,9 @@ namespace BMCWindows
     public partial class LobbyWindow : Page
     {
         private LobbyDTO _lobby;
-        public ObservableCollection<string> FilteredPlayers { get; set; }
-        public ObservableCollection<string> FilteredPlayersGameSession { get; set; }
-        public ObservableCollection<Message> Messages { get; set; }
+        public ObservableCollection<string> filteredPlayers { get; set; }
+        public ObservableCollection<string> filteredPlayersGameSession { get; set; }
+        public ObservableCollection<Message> messages { get; set; }
         private LobbyServiceClient _lobbyProxy;
         private IChatLobbyService _chatService;
         private ChatCallBackHandler _chatCallbackHandler;
@@ -31,12 +31,12 @@ namespace BMCWindows
             _lobby = lobby;
             _lobbyProxy = proxy;
             DataContext = this;
-            Messages = new ObservableCollection<Message>();
-            FilteredPlayers = new ObservableCollection<string>();
-            FilteredPlayersGameSession = new ObservableCollection<string>();
+            messages = new ObservableCollection<Message>();
+            filteredPlayers = new ObservableCollection<string>();
+            filteredPlayersGameSession = new ObservableCollection<string>();
 
-            generalMessages.ItemsSource = Messages;
-            listViewJoinedPlayer.ItemsSource = FilteredPlayers;
+            ListBoxGeneralMessages.ItemsSource = messages;
+            ListViewJoinedPlayer.ItemsSource = filteredPlayers;
 
             _chatCallbackHandler = new ChatCallBackHandler();
             _chatCallbackHandler.MessageReceived += OnMessageReceived;
@@ -69,7 +69,7 @@ namespace BMCWindows
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    Messages.Add(new Message { Sender = "System", Messages = message });
+                    messages.Add(new Message { Sender = "System", Messages = message });
                 });
             };
 
@@ -77,9 +77,9 @@ namespace BMCWindows
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    if (!Messages.Any(m => m.Messages == message))
+                    if (!messages.Any(m => m.Messages == message))
                     {
-                        Messages.Add(new Message { Sender = "System", Messages = message });
+                        messages.Add(new Message { Sender = "System", Messages = message });
                     }
                     
                 });
@@ -102,22 +102,22 @@ namespace BMCWindows
                 {
                     if (_lobby.LobbyId == lobbyId)
                     {
-                        this.NavigationService.Navigate(new GameplayWindow(_lobby, FilteredPlayers));
+                        this.NavigationService.Navigate(new GameplayWindow(_lobby, filteredPlayers));
                     }
                 });
             };
 
 
             var player = UserSessionManager.getInstance().GetPlayerUserData();
-            textBlockCurrentPlayerUsername.Text = player.Username;
-            labelLobbyName.Content = _lobby.Name;
+            TextBlockCurrentPlayerUsername.Text = player.Username;
+            LabelLobbyName.Content = _lobby.Name;
             LoadPlayers();
 
             RegisterUserInChat(player.Username);
 
             if (_lobby.Host == player.Username)
             {
-                FilteredPlayersGameSession.Add(player.Username);
+                filteredPlayersGameSession.Add(player.Username);
             }
             else
             {
@@ -180,13 +180,13 @@ namespace BMCWindows
 
             Application.Current.Dispatcher.Invoke(() =>
             {
-                FilteredPlayers.Clear();
+                filteredPlayers.Clear();
                 foreach (var player in _lobby.Players)
                 {
                     if (player != currentPlayer)
                     {
-                        FilteredPlayers.Add(player);
-                        FilteredPlayersGameSession.Add(player);
+                        filteredPlayers.Add(player);
+                        filteredPlayersGameSession.Add(player);
                     }
                 }
             });
@@ -194,23 +194,23 @@ namespace BMCWindows
 
         private void OnPlayerJoined(string playerUsername)
         {
-            if (!FilteredPlayersGameSession.Contains(playerUsername))
+            if (!filteredPlayersGameSession.Contains(playerUsername))
             {
-                FilteredPlayersGameSession.Add(playerUsername);
+                filteredPlayersGameSession.Add(playerUsername);
             }
 
-            if (!FilteredPlayers.Contains(playerUsername))
+            if (!filteredPlayers.Contains(playerUsername))
             {
-                FilteredPlayers.Add(playerUsername);
+                filteredPlayers.Add(playerUsername);
             }
         }
 
         private void OnPlayerLeft(string playerUsername)
         {
-            if (FilteredPlayers.Contains(playerUsername))
+            if (filteredPlayers.Contains(playerUsername))
             {
-                FilteredPlayers.Remove(playerUsername);
-                FilteredPlayersGameSession.Remove(playerUsername);
+                filteredPlayers.Remove(playerUsername);
+                filteredPlayersGameSession.Remove(playerUsername);
             }
         }
 
@@ -248,13 +248,13 @@ namespace BMCWindows
         private void SendGeneralMessage(object sender, RoutedEventArgs e)
         {
             var player = UserSessionManager.getInstance().GetPlayerUserData();
-            if (!FieldValidator.AreFieldsEmpty(textboxGeneralChat.Text))
+            if (!FieldValidator.AreFieldsEmpty(TextboxGeneralChat.Text))
             {
-                var formattedMessage = $"{player.Username}: {textboxGeneralChat.Text}";
+                var formattedMessage = $"{player.Username}: {TextboxGeneralChat.Text}";
                 try
                 {
                     _chatService.SendMessage(_lobby.LobbyId, player.Username, formattedMessage);
-                    textboxGeneralChat.Clear();
+                    TextboxGeneralChat.Clear();
                 }
                 catch (EndpointNotFoundException)
                 {
@@ -278,7 +278,7 @@ namespace BMCWindows
         {
             if (_lobby.IsPrivate)
             {
-                passwordPopup.IsOpen = true;
+                PasswordPopup.IsOpen = true;
             }
             else
             {
@@ -288,9 +288,9 @@ namespace BMCWindows
 
         private void AcceptPassword(object sender, RoutedEventArgs e)
         {
-            string password = passwordBox.Password;
+            string password = PasswordBox.Password;
             JoinGame(_lobby, password);
-            passwordPopup.IsOpen = false;
+            PasswordPopup.IsOpen = false;
         }
 
         private void JoinGame(LobbyDTO lobby, string password)
@@ -351,13 +351,13 @@ namespace BMCWindows
                     var context = new InstanceContext(new GameCallbackHandler());
                     var gameServiceClient = new GameplayServer.GameServiceClient(context);
 
-                    var players = FilteredPlayersGameSession.ToList().ToArray();
+                    var players = filteredPlayersGameSession.ToList().ToArray();
 
                     var response2 = gameServiceClient.InitializeGame(_lobby.LobbyId, players);
 
                     if (_lobby.Host == player.Username)
                     {
-                        this.NavigationService.Navigate(new GameplayWindow(_lobby, FilteredPlayersGameSession));
+                        this.NavigationService.Navigate(new GameplayWindow(_lobby, filteredPlayersGameSession));
                     }
                 }
             }
@@ -395,7 +395,7 @@ namespace BMCWindows
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                Messages.Add(new Message { Sender = username, Messages = message });
+                messages.Add(new Message { Sender = username, Messages = message });
             });
         }
 
@@ -406,7 +406,7 @@ namespace BMCWindows
                 var context = new InstanceContext(new GameCallbackHandler());
                 var gameServiceClient = new GameplayServer.GameServiceClient(context);
 
-                var players = FilteredPlayersGameSession.ToList().ToArray();
+                var players = filteredPlayersGameSession.ToList().ToArray();
 
                 var response = gameServiceClient.InitializeGame(_lobby.LobbyId, players);
 
@@ -418,7 +418,7 @@ namespace BMCWindows
 
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    this.NavigationService.Navigate(new GameplayWindow(_lobby, FilteredPlayersGameSession));
+                    this.NavigationService.Navigate(new GameplayWindow(_lobby, filteredPlayersGameSession));
                 });
             }
         }
@@ -448,7 +448,7 @@ namespace BMCWindows
                                 };
                             })
                         );
-                        FriendsList.ItemsSource = friendsList;         
+                        ListBoxFriendsList.ItemsSource = friendsList;         
                     }
                 }
                 else
@@ -479,9 +479,9 @@ namespace BMCWindows
             {
                 var player = UserSessionManager.getInstance().GetPlayerUserData();
 
-                FriendsList.Visibility = FriendsList.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
+                ListBoxFriendsList.Visibility = ListBoxFriendsList.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
 
-                if (FriendsList.Visibility == Visibility.Visible)
+                if (ListBoxFriendsList.Visibility == Visibility.Visible)
                 {
                     LoadFriendList(player.Username);
                 }
@@ -490,10 +490,10 @@ namespace BMCWindows
 
         private void SelectFriend(object sender, RoutedEventArgs e)
         {
-            if (FriendsList.SelectedItem != null)
+            if (ListBoxFriendsList.SelectedItem != null)
             {
 
-                var selectedItem = (Friend)FriendsList.SelectedItem;
+                var selectedItem = (Friend)ListBoxFriendsList.SelectedItem;
 
                 string messageTitle = Properties.Resources.ConfirmInvitationTitle.ToString();
                 string inviteMessage = string.Format(Properties.Resources.ConfirmInvitation, selectedItem.UserName);
@@ -517,7 +517,7 @@ namespace BMCWindows
                     InvitePlayerToLobby(emailDTO);
                 }
 
-                FriendsList.SelectedItem = null;
+                ListBoxFriendsList.SelectedItem = null;
             }
         }
 
@@ -587,7 +587,7 @@ namespace BMCWindows
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (listViewJoinedPlayer.SelectedItem != null)
+            if (ListViewJoinedPlayer.SelectedItem != null)
             {
                 if (UserSessionManager.getInstance().GetPlayerUserData().Username != _lobby.Host)
                 {
@@ -595,7 +595,7 @@ namespace BMCWindows
                     errorMessages.ShowErrorMessage("Error.NotLobbyHost");
                     return;
                 }
-                var playerName = listViewJoinedPlayer.SelectedItem.ToString();
+                var playerName = ListViewJoinedPlayer.SelectedItem.ToString();
 
                 string confirmationMessage = string.Format(Properties.Resources.ConfirmationBanPlayer, playerName);
                 string messageTitle = Properties.Resources.MessageTitleBanPlayer.ToString();

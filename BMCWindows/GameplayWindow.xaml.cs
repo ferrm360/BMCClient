@@ -27,14 +27,14 @@ namespace BMCWindows
     public partial class GameplayWindow : Page
     {
         private LobbyDTO _lobby;
-        private ObservableCollection<String> Players { get; set; } = new ObservableCollection<String>();
-        private string selectedCard = null;
-        private int[,] MatrixCardLife { get; set; }
-        private String[,] MatrixCardName { get; set; }
-        private ObservableCollection<Card> Player1GameCards { get; set; }
-        private ObservableCollection<Card> Player2GameCards { get; set; }
-        private string selectedCardName;
-        private int selectedCardLife;
+        private ObservableCollection<String> players { get; set; } = new ObservableCollection<String>();
+        private string _selectedCard = null;
+        private int[,] matrixCardLife { get; set; }
+        private String[,] matrixCardName { get; set; }
+        private ObservableCollection<Card> player1GameCards { get; set; }
+        private ObservableCollection<Card> player2GameCards { get; set; }
+        private string _selectedCardName;
+        private int _selectedCardLife;
         private GameCallbackHandler _callbackHandler;
         private GameServiceClient _proxy;
         private int _playersReadyCount = 0;
@@ -53,7 +53,7 @@ namespace BMCWindows
 
             InitializeComponent();
             _lobby = lobby;
-            this.Players = Players;
+            this.players = Players;
             this.DataContext = this;
             Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
             Player1Cards.ItemsSource = LoadPlayer1List();
@@ -65,13 +65,13 @@ namespace BMCWindows
             {
                 Player2Cards.ItemsSource = LoadCurrentPlayerList();
             }
-            textBlockGameName.Text = lobby.Name;
+            TextBlockGameName.Text = lobby.Name;
 
-            MatrixCardLife = new int[5, 3];
-            MatrixCardName = new String[5, 3];
+            matrixCardLife = new int[5, 3];
+            matrixCardName = new String[5, 3];
 
-            Player1GameCards = new ObservableCollection<Card>();
-            Player2GameCards = new ObservableCollection<Card>();
+            player1GameCards = new ObservableCollection<Card>();
+            player2GameCards = new ObservableCollection<Card>();
 
             InitializeBoard();
 
@@ -79,58 +79,58 @@ namespace BMCWindows
             {
                 string imagePath = "Images/IñakiCard.png";
                 BitmapImage imageOneLifeCard = new BitmapImage(new Uri(imagePath, UriKind.Relative));
-                imageCardOneLife.Source = imageOneLifeCard;
-                textBlockOneLifeCardName.Text = "Cat1Life";
-                textBlockOneLifeCardLife.Text = "1";
+                ImageCardOneLife.Source = imageOneLifeCard;
+                TextBlockOneLifeCardName.Text = "Cat1Life";
+                TextBlockOneLifeCardLife.Text = "1";
 
-                textBlockAnotherOneLifeCardName.Text = "CatAnother1Life";
-                textBlockAnotherOneLifeCardLife.Text = "1";
-                imageAnotherOneLifeCard.Source = imageOneLifeCard;
+                TextBlockAnotherOneLifeCardName.Text = "CatAnother1Life";
+                TextBlockAnotherOneLifeCardLife.Text = "1";
+                ImageAnotherOneLifeCard.Source = imageOneLifeCard;
 
-                textBlockTwoLivesCardName.Text = "Cat2Lives";
-                textBlockTwoLivesCardLives.Text = "2";
+                TextBlockTwoLivesCardName.Text = "Cat2Lives";
+                TextBlockTwoLivesCardLives.Text = "2";
                 string imagePathTwoLives = "Images/michideltoroCard.png";
                 BitmapImage imageTwoLives = new BitmapImage(new Uri(imagePathTwoLives, UriKind.Relative));
-                imageTwoLivesCard.Source = imageTwoLives;
+                ImageTwoLivesCard.Source = imageTwoLives;
 
-                textBlockAnotherTwoLivesCardName.Text = "CatAnother2Lives";
-                textBlockAnotherTwoLivesCardLives.Text = "2";
-                imageAnotherTwoLivesCard.Source = imageTwoLives;
+                TextBlockAnotherTwoLivesCardName.Text = "CatAnother2Lives";
+                TextBlockAnotherTwoLivesCardLives.Text = "2";
+                ImageAnotherTwoLivesCard.Source = imageTwoLives;
 
-                textBlockThreeLivesCardName.Text = "Cat3Lives";
-                textBlockThreeLivesCardLives.Text = "3";
+                TextBlockThreeLivesCardName.Text = "Cat3Lives";
+                TextBlockThreeLivesCardLives.Text = "3";
                 string imagePathThreeLives = "Images/coca3litrosCard.png";
                 BitmapImage imageThreeLives = new BitmapImage(new Uri(imagePathThreeLives, UriKind.Relative));
-                imageThreeLivesCard.Source = imageThreeLives;
+                ImageThreeLivesCard.Source = imageThreeLives;
             }
             else
             {
                 string imagePath = "Images/HuahuaCard.png";
                 BitmapImage imageOneLifeCard = new BitmapImage(new Uri(imagePath, UriKind.Relative));
-                imageCardOneLife.Source = imageOneLifeCard;
-                textBlockOneLifeCardName.Text = "Dog1Life";
-                textBlockOneLifeCardLife.Text = "1";
+                ImageCardOneLife.Source = imageOneLifeCard;
+                TextBlockOneLifeCardName.Text = "Dog1Life";
+                TextBlockOneLifeCardLife.Text = "1";
 
-                textBlockAnotherOneLifeCardName.Text = "DogAnother1Life";
-                textBlockAnotherOneLifeCardLife.Text = "1";
-                imageAnotherOneLifeCard.Source = imageOneLifeCard;
+                TextBlockAnotherOneLifeCardName.Text = "DogAnother1Life";
+                TextBlockAnotherOneLifeCardLife.Text = "1";
+                ImageAnotherOneLifeCard.Source = imageOneLifeCard;
 
 
-                textBlockTwoLivesCardName.Text = "Dog2Lives";
-                textBlockTwoLivesCardLives.Text = "2";
+                TextBlockTwoLivesCardName.Text = "Dog2Lives";
+                TextBlockTwoLivesCardLives.Text = "2";
                 string imagePathTwoLives = "Images/AnasofCard.png";
                 BitmapImage imageTwoLives = new BitmapImage(new Uri(imagePathTwoLives, UriKind.Relative));
-                imageTwoLivesCard.Source = imageTwoLives;
+                ImageTwoLivesCard.Source = imageTwoLives;
 
-                textBlockAnotherTwoLivesCardName.Text = "DogAnother2Lives";
-                textBlockAnotherTwoLivesCardLives.Text = "2";
-                imageAnotherTwoLivesCard.Source = imageTwoLives;
+                TextBlockAnotherTwoLivesCardName.Text = "DogAnother2Lives";
+                TextBlockAnotherTwoLivesCardLives.Text = "2";
+                ImageAnotherTwoLivesCard.Source = imageTwoLives;
 
-                textBlockThreeLivesCardName.Text = "Dog3Lives";
-                textBlockThreeLivesCardLives.Text = "3";
+                TextBlockThreeLivesCardName.Text = "Dog3Lives";
+                TextBlockThreeLivesCardLives.Text = "3";
                 string imagePathThreeLives = "Images/ChilaquilCard.png";
                 BitmapImage imageThreeLives = new BitmapImage(new Uri(imagePathThreeLives, UriKind.Relative));
-                imageThreeLivesCard.Source = imageThreeLives;
+                ImageThreeLivesCard.Source = imageThreeLives;
             }
         }
 
@@ -142,7 +142,7 @@ namespace BMCWindows
 
             try
             {
-                foreach (var player in Players)
+                foreach (var player in players)
                 {
                     if (currentPlayer.Username != player)
                     {
@@ -261,7 +261,7 @@ namespace BMCWindows
 
         private void InitializeBoard()
         {
-            BoardGrid.Children.Clear();
+            GridBoard.Children.Clear();
 
             int buttonCount = 0;
 
@@ -279,7 +279,7 @@ namespace BMCWindows
                     Grid.SetColumn(cellButton, col);
 
                     cellButton.Click += AssignOrRemoveCard;
-                    BoardGrid.Children.Add(cellButton);
+                    GridBoard.Children.Add(cellButton);
                     buttonCount++;
                 }
             }
@@ -295,7 +295,7 @@ namespace BMCWindows
 
                 UpdateCardInMatrix(row, col);
 
-                clickedButton.Content = $"{selectedCardName} - Vida: {selectedCardLife}";
+                clickedButton.Content = $"{_selectedCardName} - Vida: {_selectedCardLife}";
             }
         }
 
@@ -308,9 +308,9 @@ namespace BMCWindows
                 int row = Grid.GetRow(clickedButton);
                 int col = Grid.GetColumn(clickedButton);
 
-                if (clickedButton.Content == null && !string.IsNullOrEmpty(selectedCardName))
+                if (clickedButton.Content == null && !string.IsNullOrEmpty(_selectedCardName))
                 {
-                    var cardData = CardManager.GetCardData(selectedCard);
+                    var cardData = CardManager.GetCardData(_selectedCard);
                     var newCard = new Card { Name = cardData.Name, Life = cardData.Life, CardImage = cardData.CardImage };
                     if (cardData.Name != null)
                     {
@@ -327,16 +327,16 @@ namespace BMCWindows
                         };
 
                         clickedButton.Content = cardPanel;
-                        MatrixCardLife[row, col] = cardData.Life;
-                        MatrixCardName[row, col] = selectedCard;
+                        matrixCardLife[row, col] = cardData.Life;
+                        matrixCardName[row, col] = _selectedCard;
 
                     }
                 }
                 else
                 {
                     clickedButton.Content = null;
-                    MatrixCardLife[row, col] = 0;
-                    MatrixCardName[row, col] = null;
+                    matrixCardLife[row, col] = 0;
+                    matrixCardName[row, col] = null;
 
                 }
             }
@@ -344,7 +344,7 @@ namespace BMCWindows
 
         private void RemoveCardFromOtherButtons(Card cardToRemove)
         {
-            foreach (UIElement element in BoardGrid.Children)
+            foreach (UIElement element in GridBoard.Children)
             {
                 if (element is Button button)
                 {
@@ -378,9 +378,9 @@ namespace BMCWindows
                 }
                 else
                 {
-                    if (selectedCard != null)
+                    if (_selectedCard != null)
                     {
-                        var cardData = CardManager.GetCardData(selectedCard);
+                        var cardData = CardManager.GetCardData(_selectedCard);
                         var newCard = new Card { Name = cardData.Name, Life = cardData.Life };
 
                         clickedButton.Content = newCard;
@@ -392,9 +392,9 @@ namespace BMCWindows
 
         private void UpdateCardInMatrix(int row, int col)
         {
-            if (!string.IsNullOrEmpty(selectedCardName) && selectedCardLife > 0)
+            if (!string.IsNullOrEmpty(_selectedCardName) && _selectedCardLife > 0)
             {
-                MatrixCardLife[row, col] = selectedCardLife;
+                matrixCardLife[row, col] = _selectedCardLife;
             }
             
         }
@@ -411,10 +411,10 @@ namespace BMCWindows
                     var textBlock = stackPanel.Children.OfType<TextBlock>().FirstOrDefault();
                     if (textBlock != null)
                     {
-                        selectedCard = textBlock.Text;
-                        var cardData = CardManager.GetCardData(selectedCard);
-                        selectedCardName = cardData.Name;
-                        selectedCardLife = cardData.Life;
+                        _selectedCard = textBlock.Text;
+                        var cardData = CardManager.GetCardData(_selectedCard);
+                        _selectedCardName = cardData.Name;
+                        _selectedCardLife = cardData.Life;
 
                     }
                 }
@@ -434,7 +434,7 @@ namespace BMCWindows
         {
             int cardCount = 0;
 
-            foreach (UIElement element in BoardGrid.Children)
+            foreach (UIElement element in GridBoard.Children)
             {
                 if (element is Button button)
                 {
@@ -528,7 +528,7 @@ namespace BMCWindows
 
         private void NavigateToGameWindow()
         {
-            var gameWindow = new GameplayAttackWindow(_callbackHandler, _proxy ,_lobby, MatrixCardLife, MatrixCardName);
+            var gameWindow = new GameplayAttackWindow(_callbackHandler, _proxy ,_lobby, matrixCardLife, matrixCardName);
             NavigationService.Navigate(gameWindow);
         }
     }
