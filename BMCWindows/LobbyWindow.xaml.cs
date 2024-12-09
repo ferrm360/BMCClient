@@ -536,12 +536,13 @@ namespace BMCWindows
                 {
                     if (this.NavigationService != null)
                     {
+                        UserSessionManager.getInstance().LogoutPlayer();
+
                         this.NavigationService.Navigate(new LogIn());
                     }
                 });
             }
         }
-
 
 
         private void InvitePlayerToLobby(EmailDTO emailDTO)
