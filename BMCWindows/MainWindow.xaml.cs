@@ -52,9 +52,12 @@ namespace BMCWindows
         {
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData();
-            Console.WriteLine(player.Username);
-            _proxy.Logout(player.Username);
-            UserSessionManager.getInstance().LogoutPlayer();
+            if (player.Username != null)
+            {
+                Console.WriteLine(player.Username);
+                _proxy.Logout(player.Username);
+                UserSessionManager.getInstance().LogoutPlayer();
+            }
         }
 
         private void SetLanguage(string languageCode)

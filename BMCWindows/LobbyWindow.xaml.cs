@@ -262,10 +262,18 @@ namespace BMCWindows
                     ErrorMessages errorMessages = new ErrorMessages();
                     errorMessages.ShowErrorMessage("Error.ServerError");
                 }
-                catch (CommunicationException)
+                catch (CommunicationException ex)
                 {
                     ErrorMessages errorMessages = new ErrorMessages();
-                    errorMessages.ShowErrorMessage("Error.CommunicationError");
+                    bool shouldNavigateToLogin = errorMessages.ShowServerErrorAndNavigateToLogin("Error.EndpointException", "Error.ServerErrorTitle");
+
+                    if (shouldNavigateToLogin)
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            this.NavigationService.Navigate(new LogIn());
+                        });
+                    }
                 }
                 catch (TimeoutException)
                 {
