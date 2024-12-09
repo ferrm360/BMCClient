@@ -10,6 +10,7 @@ using BMCWindows.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -383,12 +384,6 @@ namespace BMCWindows.GameplayPage
 
         private void OnCellClickEnemyBoard(int row, int col)
         {
-            if (!_isPlayerTurn)
-            {
-                string errorTurnText = Properties.Resources.Error_WaitTurn;
-                TextBlockDynamicTurn.Text = errorTurnText;
-                return;
-            }
 
             if (string.IsNullOrEmpty(selectedCardName))
             {
@@ -405,13 +400,69 @@ namespace BMCWindows.GameplayPage
                      Y = col
                  };
 
-                 var result = _proxy.Attack(_lobby.LobbyId, _currentPlayer.Username, attackPositionDTO);
-
-                 if (!result.IsSuccess)
+                 try
                  {
-                     MessageBox.Show(result.ErrorKey);
-                 }
+                     var result = _proxy.Attack(_lobby.LobbyId, _currentPlayer.Username, attackPositionDTO);
 
+                     if (!result.IsSuccess)
+                     {
+                         MessageBox.Show(result.ErrorKey);
+                     }
+
+                 }
+                 catch (EndpointNotFoundException ex)
+                 {
+                     ErrorMessages errorMessages = new ErrorMessages();
+                     bool shouldNavigateToLogin = errorMessages.ShowServerErrorAndNavigateToLogin("Error.EndpointException", "Error.ServerErrorTitle");
+
+                     if (shouldNavigateToLogin)
+                     {
+                         Application.Current.Dispatcher.Invoke(() =>
+                         {
+                             this.NavigationService.Navigate(new LogIn());
+                         });
+                     }
+                 }
+                 catch (CommunicationException ex)
+                 {
+                     ErrorMessages errorMessages = new ErrorMessages();
+                     bool shouldNavigateToLogin = errorMessages.ShowServerErrorAndNavigateToLogin("Error.EndpointException", "Error.ServerErrorTitle");
+
+                     if (shouldNavigateToLogin)
+                     {
+                         Application.Current.Dispatcher.Invoke(() =>
+                         {
+                             this.NavigationService.Navigate(new LogIn());
+                         });
+                     }
+                 }
+                 catch (TimeoutException ex)
+                 {
+                     ErrorMessages errorMessages = new ErrorMessages();
+                     bool shouldNavigateToLogin = errorMessages.ShowServerErrorAndNavigateToLogin("Error.EndpointException", "Error.ServerErrorTitle");
+
+                     if (shouldNavigateToLogin)
+                     {
+                         Application.Current.Dispatcher.Invoke(() =>
+                         {
+                             this.NavigationService.Navigate(new LogIn());
+                         });
+                     }
+                 }
+                 catch (Exception ex)
+                 {
+                     ErrorMessages errorMessages = new ErrorMessages();
+                     bool shouldNavigateToLogin = errorMessages.ShowServerErrorAndNavigateToLogin("Error.EndpointException", "Error.ServerErrorTitle");
+
+                     if (shouldNavigateToLogin)
+                     {
+                         Application.Current.Dispatcher.Invoke(() =>
+                         {
+                             this.NavigationService.Navigate(new LogIn());
+                         });
+                     }
+                 }
+                 
                  Dispatcher.Invoke(() =>
                  {
                      RemoveCardByName(selectedCardName);
