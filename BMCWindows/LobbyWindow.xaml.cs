@@ -260,7 +260,15 @@ namespace BMCWindows
                 catch (EndpointNotFoundException)
                 {
                     ErrorMessages errorMessages = new ErrorMessages();
-                    errorMessages.ShowErrorMessage("Error.ServerError");
+                    bool shouldNavigateToLogin = errorMessages.ShowServerErrorAndNavigateToLogin("Error.EndpointException", "Error.ServerErrorTitle");
+
+                    if (shouldNavigateToLogin)
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            this.NavigationService.Navigate(new LogIn());
+                        });
+                    }
                 }
                 catch (CommunicationException ex)
                 {
@@ -278,7 +286,15 @@ namespace BMCWindows
                 catch (TimeoutException)
                 {
                     ErrorMessages errorMessages = new ErrorMessages();
-                    errorMessages.ShowErrorMessage("Error.TimeoutException");
+                    bool shouldNavigateToLogin = errorMessages.ShowServerErrorAndNavigateToLogin("Error.EndpointException", "Error.ServerErrorTitle");
+
+                    if (shouldNavigateToLogin)
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            this.NavigationService.Navigate(new LogIn());
+                        });
+                    }
                 }
             }
         }
