@@ -526,7 +526,7 @@
     <value>User</value>
   </data>
   <data name="VerificationDescription" xml:space="preserve">
-    <value>An email has been sent to [email_truncated] with a verification code. Please enter the code.</value>
+    <value>An email has been sent to you with a verification code. Please enter the code.</value>
   </data>
   <data name="ViewCardsLabelCardDescription" xml:space="preserve">
     <value>Example card</value>

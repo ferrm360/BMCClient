@@ -1708,7 +1708,7 @@ namespace BMCWindows.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a An email has been sent to [email_truncated] with a verification code. Please enter the code..
+        ///   Busca una cadena traducida similar a An email has been sent to you with a verification code. Please enter the code..
         /// </summary>
         public static string VerificationDescription {
             get {

@@ -112,7 +112,7 @@
             
             <TextBlock x:Name="TextBlockBio" Grid.Column="2" Grid.Row="3" Background="#B0D480"/>
             <TextBox x:Name="TextBoxBio" Grid.Column="2" Grid.Row="3" Visibility="Hidden"/>
-            <Button x:Name="TuttonCancel" Content="{x:Static p:Resources.GloblalButtonCancel}" Grid.Column="0" Grid.Row="0"  BorderBrush="Transparent" Click="GoBack">
+            <Button x:Name="ButtonCancel" Content="{x:Static p:Resources.GloblalButtonCancel}" Grid.Column="0" Grid.Row="0"  BorderBrush="Transparent" Click="GoBack">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/BrownButton.png"/>
                 </Button.Background>
@@ -138,10 +138,15 @@
                 <RowDefinition Height="157*"/>
             </Grid.RowDefinitions>
 
-            <Button x:Name="ButtonChangeProfilePicture" Grid.Column="1" Grid.Row="1" Click="UploadProfilePicture" Content="{x:Static p:Resources.EditProfileButtonChangeAvatar}"  BorderBrush="Transparent">
+            <Button x:Name="ButtonChangeProfilePicture" Grid.Column="1" Grid.Row="1" Click="UploadProfilePicture"   BorderBrush="Transparent">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/BrownButton.png"/>
                 </Button.Background>
+                <Button.Content>
+                    <Viewbox>
+                        <TextBlock Text="{x:Static p:Resources.EditProfileButtonChangeAvatar}"/>
+                    </Viewbox>
+                </Button.Content>
             </Button>
 
             <Button x:Name="ButtonChangeBio" Grid.Column="4" Grid.Row="3"  BorderBrush="Transparent" Click="MakeBioEditable">
@@ -180,12 +185,12 @@
                 <StackPanel.Background>
                     <ImageBrush ImageSource="Images/GreenRectangle.png"/>
                 </StackPanel.Background>
-                <StackPanel  Orientation="Vertical" Width="Auto" >
+                <StackPanel  Orientation="Vertical" Width="Auto" HorizontalAlignment="Center">
 
                     <TextBlock Text="{x:Static p:Resources.PlayerWins}" Margin="5,5,5,5"/>
                     <TextBlock x:Name="TextBlockPlayerWins" />
                 </StackPanel>
-                <StackPanel  Orientation="Vertical" Width="Auto" Margin="5,5,5,5">
+                <StackPanel  Orientation="Vertical" Width="Auto" Margin="5,5,5,5" HorizontalAlignment="Center">
                     <TextBlock Text="{x:Static p:Resources.PlayerLosses}"/>
                     <TextBlock x:Name="TextBlockPlayerLosses"/>
                 </StackPanel>

@@ -157,27 +157,48 @@ namespace BMCWindows
 
         private void SendRequest(object sender, EventArgs e)
         {
+            
             if (PopupPlayer.DataContext is Friend selectedPlayer)
             {
                 string receiverUsername = selectedPlayer.UserName;
                 FriendServer.FriendshipServiceClient proxy = new FriendServer.FriendshipServiceClient();
                 Server.PlayerDTO player = new Server.PlayerDTO();
                 player = UserSessionManager.getInstance().GetPlayerUserData();
-                var result = proxy.SendFriendRequest(player.Username, receiverUsername);
-                
-                if (result.IsSuccess) 
+                try
                 {
-                    string message = Properties.Resources.Info_RequestSentSuccesfully.ToString();
-                    MessageBox.Show(message);
+                    var result = proxy.SendFriendRequest(player.Username, receiverUsername);
 
+                    if (result.IsSuccess)
+                    {
+                        string message = Properties.Resources.Info_RequestSentSuccesfully.ToString();
+                        MessageBox.Show(message);
+
+                    }
+                    else
+                    {
+                        ErrorMessages errorMessages = new ErrorMessages();
+                        errorMessages.ShowErrorMessage("Error.GeneralException");
+                    }
                 }
-                else
+                catch (CommunicationException commEx)
+                {
+                    MessageBox.Show(commEx.Message);
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.CommunicationError");
+                }
+                catch (TimeoutException timeoutEx)
+                {
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.TimeoutError");
+                }
+                catch (Exception ex)
                 {
                     ErrorMessages errorMessages = new ErrorMessages();
                     errorMessages.ShowErrorMessage("Error.GeneralException");
                 }
 
-                
+
+
             }
             else
             {

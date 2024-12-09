@@ -50,9 +50,9 @@ namespace BMCWindows.VerificationCode
 
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    LoadingProgressBar.Visibility = Visibility.Visible;
-                    DynamicMessageTextBlock.Text = Properties.Resources.Info_SendingCode.ToString();
-                    DynamicMessageTextBlock.Foreground = new SolidColorBrush(Colors.Orange);
+                    ProgressBarLoading.Visibility = Visibility.Visible;
+                    TextBlockDynamicMessage.Text = Properties.Resources.Info_SendingCode.ToString();
+                    TextBlockDynamicMessage.Foreground = new SolidColorBrush(Colors.Orange);
                 });
 
                 await Task.Run(() =>
@@ -108,8 +108,8 @@ namespace BMCWindows.VerificationCode
 
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    DynamicMessageTextBlock.Text = Properties.Resources.Info_CodeSentSuccesfully.ToString();
-                    DynamicMessageTextBlock.Foreground = new SolidColorBrush(Colors.Green);
+                    TextBlockDynamicMessage.Text = Properties.Resources.Info_CodeSentSuccesfully.ToString();
+                    TextBlockDynamicMessage.Foreground = new SolidColorBrush(Colors.Green);
                 });
             }
             catch (Exception ex)
@@ -124,7 +124,7 @@ namespace BMCWindows.VerificationCode
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    LoadingProgressBar.Visibility = Visibility.Collapsed;
+                    ProgressBarLoading.Visibility = Visibility.Collapsed;
                 });
 
                 _isProcessing = false;
@@ -134,11 +134,11 @@ namespace BMCWindows.VerificationCode
 
         private void VerificationCodeTextBox(object sender, TextChangedEventArgs e)
         {
-            if (textBoxVerificationCode.Text.Trim().Equals(_currentCode, StringComparison.OrdinalIgnoreCase))
+            if (TextBoxVerificationCode.Text.Trim().Equals(_currentCode, StringComparison.OrdinalIgnoreCase))
             {
                 string infoText = Properties.Resources.Info_ValidationCodeCorrect.ToString();
-                DynamicMessageTextBlock.Text = infoText;
-                DynamicMessageTextBlock.Foreground = new SolidColorBrush(Colors.Green);
+                TextBlockDynamicMessage.Text = infoText;
+                TextBlockDynamicMessage.Foreground = new SolidColorBrush(Colors.Green);
 
                 Task.Delay(1000).ContinueWith(_ =>
                 {
@@ -148,11 +148,11 @@ namespace BMCWindows.VerificationCode
                     });
                 });
             }
-            else if (textBoxVerificationCode.Text.Length == _currentCode.Length)
+            else if (TextBoxVerificationCode.Text.Length == _currentCode.Length)
             {
                 string errorText = Properties.Resources.ResourceManager.GetString("Error.InvalidValidationCode");
-                DynamicMessageTextBlock.Text = errorText;
-                DynamicMessageTextBlock.Foreground = new SolidColorBrush(Colors.Red);
+                TextBlockDynamicMessage.Text = errorText;
+                TextBlockDynamicMessage.Foreground = new SolidColorBrush(Colors.Red);
             }
         }
 
@@ -171,8 +171,8 @@ namespace BMCWindows.VerificationCode
             if (_resendAttempts >= MaxResendAttempts)
             {
                 string errorText = Properties.Resources.Error_TooManyTries.ToString();
-                DynamicMessageTextBlock.Text = errorText;
-                DynamicMessageTextBlock.Foreground = new SolidColorBrush(Colors.Red);
+                TextBlockDynamicMessage.Text = errorText;
+                TextBlockDynamicMessage.Foreground = new SolidColorBrush(Colors.Red);
                 return;
             }
 

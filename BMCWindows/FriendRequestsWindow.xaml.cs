@@ -141,6 +141,7 @@ namespace BMCWindows
                     if( messageResult == MessageBoxResult.OK)
                     {
                         LoadFriendshipRequests(player.Username);
+                        this.NavigationService.Navigate(new FriendRequestsWindow());
                     }
 
                 }
