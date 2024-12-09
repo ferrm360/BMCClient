@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="JJZC6d3dGF3+jZl8kgdQj0dpXae6mgWExQA44uYctrg=">
+<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="9j8vdRSfiw0U64frcTeWs3H+PdqBAzlQcpIi/vUN6z0=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IAccountService">
       <properties>
@@ -121,10 +121,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="NetTcpBinding_IAccountService" contract="Server.IAccountService" bindingType="netTcpBinding" address="net.tcp://localhost:8081/AccountService" bindingConfiguration="NetTcpBinding_IAccountService">
+    <endpoint name="NetTcpBinding_IAccountService" contract="Server.IAccountService" bindingType="netTcpBinding" address="net.tcp://10.50.7.56:8081/AccountService" bindingConfiguration="NetTcpBinding_IAccountService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://localhost:8081/AccountService</serializedValue>
+          <serializedValue>net.tcp://10.50.7.56:8081/AccountService</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

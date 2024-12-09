@@ -19,15 +19,15 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8084/ProfileService?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://10.50.7.56:8084/ProfileService?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ProfileService.xsd" MetadataType="Schema" ID="f925a0e2-e9e4-41ec-8fe2-8d126073e182" SourceId="1" SourceUrl="http://localhost:8084/ProfileService?xsd=xsd2" />
-    <MetadataFile FileName="ProfileService1.xsd" MetadataType="Schema" ID="c50cd01c-f3b8-4561-8a76-3852023b930c" SourceId="1" SourceUrl="http://localhost:8084/ProfileService?xsd=xsd4" />
-    <MetadataFile FileName="ProfileService.wsdl" MetadataType="Wsdl" ID="d43cd9e6-bf36-4dee-9e6c-73394173e6c6" SourceId="1" SourceUrl="http://localhost:8084/ProfileService?wsdl" />
-    <MetadataFile FileName="ProfileService2.xsd" MetadataType="Schema" ID="c9490d28-d94f-4ec4-b0ce-df9ba024c9a9" SourceId="1" SourceUrl="http://localhost:8084/ProfileService?xsd=xsd1" />
-    <MetadataFile FileName="ProfileService3.xsd" MetadataType="Schema" ID="e4a57e90-07ef-4828-8e9c-9d025a347292" SourceId="1" SourceUrl="http://localhost:8084/ProfileService?xsd=xsd0" />
-    <MetadataFile FileName="ProfileService4.xsd" MetadataType="Schema" ID="5134b878-e868-4cfc-b6c9-9103e9dc2571" SourceId="1" SourceUrl="http://localhost:8084/ProfileService?xsd=xsd3" />
+    <MetadataFile FileName="ProfileService1.wsdl" MetadataType="Wsdl" ID="bc7dc773-701c-407f-bbc6-4c82c48b80be" SourceId="1" SourceUrl="http://10.50.7.56:8084/ProfileService?wsdl" />
+    <MetadataFile FileName="ProfileService5.xsd" MetadataType="Schema" ID="feb0f09d-217b-4715-8472-deb023691b20" SourceId="1" SourceUrl="http://10.50.7.56:8084/ProfileService?xsd=xsd4" />
+    <MetadataFile FileName="ProfileService51.xsd" MetadataType="Schema" ID="539ce4ab-9ed8-4318-98f4-1a493e569913" SourceId="1" SourceUrl="http://10.50.7.56:8084/ProfileService?xsd=xsd3" />
+    <MetadataFile FileName="ProfileService52.xsd" MetadataType="Schema" ID="7f8deb57-96fd-4329-99d4-9ae695c18e2b" SourceId="1" SourceUrl="http://10.50.7.56:8084/ProfileService?xsd=xsd2" />
+    <MetadataFile FileName="ProfileService53.xsd" MetadataType="Schema" ID="d1e862fa-3fd1-47b5-a9c2-6444deba8c23" SourceId="1" SourceUrl="http://10.50.7.56:8084/ProfileService?xsd=xsd0" />
+    <MetadataFile FileName="ProfileService54.xsd" MetadataType="Schema" ID="c85fd19b-c910-45b5-8f7e-f2cde1dc8daf" SourceId="1" SourceUrl="http://10.50.7.56:8084/ProfileService?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

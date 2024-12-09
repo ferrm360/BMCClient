@@ -187,10 +187,10 @@ namespace BMCWindows.PlayerScoreServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="OperationResponse", Namespace="http://schemas.datacontract.org/2004/07/Service.Results")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.PlayerScoreServer.PlayerScoresResponse))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.PlayerScoreServer.PlayerScoreListResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.PlayerScoreServer.PlayerScoresDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.PlayerScoreServer.PlayerScoresDTO[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.PlayerScoreServer.PlayerScoresResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.PlayerScoreServer.PlayerScoreListResponse))]
     public partial class OperationResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]

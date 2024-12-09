@@ -19,16 +19,16 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8088/LobbyService?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://10.50.7.56:8088/LobbyService?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="LobbyService.wsdl" MetadataType="Wsdl" ID="58e04f36-be86-4ec0-943c-0db8aabfa881" SourceId="1" SourceUrl="http://localhost:8088/LobbyService?wsdl" />
-    <MetadataFile FileName="LobbyService.xsd" MetadataType="Schema" ID="f37996e1-8b27-42b0-b1d7-d1d64ea6a092" SourceId="1" SourceUrl="http://localhost:8088/LobbyService?xsd=xsd1" />
-    <MetadataFile FileName="LobbyService1.xsd" MetadataType="Schema" ID="1aaa71be-840f-44cb-aa1b-88cbbe7765e6" SourceId="1" SourceUrl="http://localhost:8088/LobbyService?xsd=xsd0" />
-    <MetadataFile FileName="LobbyService2.xsd" MetadataType="Schema" ID="55658e1b-9f74-46ce-a259-57795b7f2ff4" SourceId="1" SourceUrl="http://localhost:8088/LobbyService?xsd=xsd3" />
-    <MetadataFile FileName="LobbyService3.xsd" MetadataType="Schema" ID="8da4d770-0e20-4aab-af5e-361a42e9a4b7" SourceId="1" SourceUrl="http://localhost:8088/LobbyService?xsd=xsd2" />
-    <MetadataFile FileName="LobbyService4.xsd" MetadataType="Schema" ID="d2f1f38f-65fb-4990-a01c-c29e577c1f31" SourceId="1" SourceUrl="http://localhost:8088/LobbyService?xsd=xsd5" />
-    <MetadataFile FileName="LobbyService5.xsd" MetadataType="Schema" ID="8b61924f-94df-495c-9971-5ebfd7d0a5b6" SourceId="1" SourceUrl="http://localhost:8088/LobbyService?xsd=xsd4" />
+    <MetadataFile FileName="LobbyService6.xsd" MetadataType="Schema" ID="01f1aea9-89f5-4f54-8c60-7c24fc88fdac" SourceId="1" SourceUrl="http://10.50.7.56:8088/LobbyService?xsd=xsd2" />
+    <MetadataFile FileName="LobbyService61.xsd" MetadataType="Schema" ID="278e72b7-8824-4bc9-a107-bbbccd3b7d6f" SourceId="1" SourceUrl="http://10.50.7.56:8088/LobbyService?xsd=xsd1" />
+    <MetadataFile FileName="LobbyService1.wsdl" MetadataType="Wsdl" ID="d95a5c8b-f365-4347-9b53-c21615cd6a06" SourceId="1" SourceUrl="http://10.50.7.56:8088/LobbyService?wsdl" />
+    <MetadataFile FileName="LobbyService62.xsd" MetadataType="Schema" ID="9ba6197b-7d60-4ccd-b78e-8f84df7e4505" SourceId="1" SourceUrl="http://10.50.7.56:8088/LobbyService?xsd=xsd4" />
+    <MetadataFile FileName="LobbyService63.xsd" MetadataType="Schema" ID="934d79cb-f6cf-40a5-91af-cdaf583916ff" SourceId="1" SourceUrl="http://10.50.7.56:8088/LobbyService?xsd=xsd0" />
+    <MetadataFile FileName="LobbyService64.xsd" MetadataType="Schema" ID="28b72ffc-06e0-4ed9-b55a-23c400df3591" SourceId="1" SourceUrl="http://10.50.7.56:8088/LobbyService?xsd=xsd5" />
+    <MetadataFile FileName="LobbyService65.xsd" MetadataType="Schema" ID="b971a463-520c-4576-a77e-935b28f6d06c" SourceId="1" SourceUrl="http://10.50.7.56:8088/LobbyService?xsd=xsd3" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

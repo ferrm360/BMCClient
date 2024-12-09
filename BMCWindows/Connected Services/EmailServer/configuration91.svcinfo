@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="bN7giti/BumQopBVJybWHYg4h+fPHUY4WFpbPyZLNI8=">
+<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="E9ti8hjN2ccUW8b4ggC4sGXznCQrzWp2Mw2irySSGng=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IEmailService">
       <properties>
@@ -121,10 +121,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="NetTcpBinding_IEmailService" contract="EmailServer.IEmailService" bindingType="netTcpBinding" address="net.tcp://localhost:8101/EmailService" bindingConfiguration="NetTcpBinding_IEmailService">
+    <endpoint name="NetTcpBinding_IEmailService" contract="EmailServer.IEmailService" bindingType="netTcpBinding" address="net.tcp://10.50.7.56:8101/EmailService" bindingConfiguration="NetTcpBinding_IEmailService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://localhost:8101/EmailService</serializedValue>
+          <serializedValue>net.tcp://10.50.7.56:8101/EmailService</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

@@ -19,14 +19,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8098/GuestPlayerService" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://10.50.7.56:8098/GuestPlayerService" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="GuestPlayerService.xsd" MetadataType="Schema" ID="226d2209-223b-42a9-bb68-e9b04cdfcbcd" SourceId="1" SourceUrl="http://localhost:8098/GuestPlayerService?xsd=xsd2" />
-    <MetadataFile FileName="GuestPlayerService1.xsd" MetadataType="Schema" ID="3c649082-1d6d-4cc2-a91a-2c229c0893d9" SourceId="1" SourceUrl="http://localhost:8098/GuestPlayerService?xsd=xsd1" />
-    <MetadataFile FileName="GuestPlayerService2.xsd" MetadataType="Schema" ID="7f24420d-bf0d-48da-89c6-3d81f3aee9b4" SourceId="1" SourceUrl="http://localhost:8098/GuestPlayerService?xsd=xsd0" />
-    <MetadataFile FileName="GuestPlayerService.wsdl" MetadataType="Wsdl" ID="cdb49467-1f59-4908-b388-30efa478ab0f" SourceId="1" SourceUrl="http://localhost:8098/GuestPlayerService?wsdl" />
-    <MetadataFile FileName="GuestPlayerService.disco" MetadataType="Disco" ID="f66468f2-9163-4c84-b982-c2e18c962c22" SourceId="1" SourceUrl="http://localhost:8098/GuestPlayerService?disco" />
+    <MetadataFile FileName="GuestPlayerService1.disco" MetadataType="Disco" ID="ae3063b7-f1b1-4ff0-9fec-1bd44f3a1c0b" SourceId="1" SourceUrl="http://10.50.7.56:8098/GuestPlayerService?disco" />
+    <MetadataFile FileName="GuestPlayerService3.xsd" MetadataType="Schema" ID="2ebd478a-9700-4f72-9aac-1cf63f8f98de" SourceId="1" SourceUrl="http://10.50.7.56:8098/GuestPlayerService?xsd=xsd1" />
+    <MetadataFile FileName="GuestPlayerService31.xsd" MetadataType="Schema" ID="0c5ca571-d70b-4f92-8f3f-4b23a8b01782" SourceId="1" SourceUrl="http://10.50.7.56:8098/GuestPlayerService?xsd=xsd0" />
+    <MetadataFile FileName="GuestPlayerService32.xsd" MetadataType="Schema" ID="662edf38-1893-45ee-abe0-41c4959329aa" SourceId="1" SourceUrl="http://10.50.7.56:8098/GuestPlayerService?xsd=xsd2" />
+    <MetadataFile FileName="GuestPlayerService1.wsdl" MetadataType="Wsdl" ID="89d9e3c7-9bfa-48e2-bccf-74ecf506cdd7" SourceId="1" SourceUrl="http://10.50.7.56:8098/GuestPlayerService?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

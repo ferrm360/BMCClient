@@ -19,14 +19,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8100/EmailService?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://10.50.7.56:8100/EmailService?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="EmailService.xsd" MetadataType="Schema" ID="7d16caa9-4474-48f5-96ce-715980688945" SourceId="1" SourceUrl="http://localhost:8100/EmailService?xsd=xsd2" />
-    <MetadataFile FileName="EmailService1.xsd" MetadataType="Schema" ID="6b359a1a-e781-4c95-9495-b6b27776c634" SourceId="1" SourceUrl="http://localhost:8100/EmailService?xsd=xsd1" />
-    <MetadataFile FileName="EmailService2.xsd" MetadataType="Schema" ID="7128b776-87ba-476e-b993-45f936652bb4" SourceId="1" SourceUrl="http://localhost:8100/EmailService?xsd=xsd0" />
-    <MetadataFile FileName="EmailService.wsdl" MetadataType="Wsdl" ID="6543b750-6a40-4b40-83bc-1b1324cb6e21" SourceId="1" SourceUrl="http://localhost:8100/EmailService?wsdl" />
-    <MetadataFile FileName="EmailService3.xsd" MetadataType="Schema" ID="c5c0c471-46d9-4e74-bcb7-e7b5e3161537" SourceId="1" SourceUrl="http://localhost:8100/EmailService?xsd=xsd3" />
+    <MetadataFile FileName="EmailService4.xsd" MetadataType="Schema" ID="6995fe07-8a74-49b9-8f64-c6560f155fa9" SourceId="1" SourceUrl="http://10.50.7.56:8100/EmailService?xsd=xsd0" />
+    <MetadataFile FileName="EmailService1.wsdl" MetadataType="Wsdl" ID="26dd45ea-714a-46e6-b1f2-69ebea4c9654" SourceId="1" SourceUrl="http://10.50.7.56:8100/EmailService?wsdl" />
+    <MetadataFile FileName="EmailService41.xsd" MetadataType="Schema" ID="bd7e2485-bd00-4689-b67b-ca14db0fdc2d" SourceId="1" SourceUrl="http://10.50.7.56:8100/EmailService?xsd=xsd3" />
+    <MetadataFile FileName="EmailService42.xsd" MetadataType="Schema" ID="7d690027-8ef7-4723-8f8a-8f213eda633c" SourceId="1" SourceUrl="http://10.50.7.56:8100/EmailService?xsd=xsd2" />
+    <MetadataFile FileName="EmailService43.xsd" MetadataType="Schema" ID="6781f4a4-9598-4643-a790-8b1126972770" SourceId="1" SourceUrl="http://10.50.7.56:8100/EmailService?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

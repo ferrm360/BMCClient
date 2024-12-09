@@ -19,15 +19,15 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8086/FriendshipService?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://10.50.7.56:8086/FriendshipService?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="FriendshipService.xsd" MetadataType="Schema" ID="49929ec6-4a8a-48ee-b506-e94a2fcb64e7" SourceId="1" SourceUrl="http://localhost:8086/FriendshipService?xsd=xsd2" />
-    <MetadataFile FileName="FriendshipService1.xsd" MetadataType="Schema" ID="5affa701-2359-4fe0-bfd0-c3f5ba9f8541" SourceId="1" SourceUrl="http://localhost:8086/FriendshipService?xsd=xsd3" />
-    <MetadataFile FileName="FriendshipService2.xsd" MetadataType="Schema" ID="ff746ed0-458c-40f8-a9fe-6e7e766df6ba" SourceId="1" SourceUrl="http://localhost:8086/FriendshipService?xsd=xsd1" />
-    <MetadataFile FileName="FriendshipService.wsdl" MetadataType="Wsdl" ID="40036154-364b-4c47-a46b-365547df2fab" SourceId="1" SourceUrl="http://localhost:8086/FriendshipService?wsdl" />
-    <MetadataFile FileName="FriendshipService3.xsd" MetadataType="Schema" ID="77f1bddf-11e7-4978-bb41-0325767fddfe" SourceId="1" SourceUrl="http://localhost:8086/FriendshipService?xsd=xsd0" />
-    <MetadataFile FileName="FriendshipService4.xsd" MetadataType="Schema" ID="ec66f804-bdc1-4320-95ee-cf91988da513" SourceId="1" SourceUrl="http://localhost:8086/FriendshipService?xsd=xsd4" />
+    <MetadataFile FileName="FriendshipService5.xsd" MetadataType="Schema" ID="1460650b-b7e7-4c7c-91fc-1e90c9d783dc" SourceId="1" SourceUrl="http://10.50.7.56:8086/FriendshipService?xsd=xsd1" />
+    <MetadataFile FileName="FriendshipService51.xsd" MetadataType="Schema" ID="1b94147b-c946-47da-9054-388a429c4c3a" SourceId="1" SourceUrl="http://10.50.7.56:8086/FriendshipService?xsd=xsd2" />
+    <MetadataFile FileName="FriendshipService52.xsd" MetadataType="Schema" ID="778f0627-3c01-47b1-89d2-52ee4659f159" SourceId="1" SourceUrl="http://10.50.7.56:8086/FriendshipService?xsd=xsd4" />
+    <MetadataFile FileName="FriendshipService1.wsdl" MetadataType="Wsdl" ID="85ffd08f-b725-4601-b548-f0e4d929addf" SourceId="1" SourceUrl="http://10.50.7.56:8086/FriendshipService?wsdl" />
+    <MetadataFile FileName="FriendshipService53.xsd" MetadataType="Schema" ID="5726848b-cb78-4316-b077-f05a13eb2498" SourceId="1" SourceUrl="http://10.50.7.56:8086/FriendshipService?xsd=xsd3" />
+    <MetadataFile FileName="FriendshipService54.xsd" MetadataType="Schema" ID="49839f44-ba73-4284-81a9-591d3ffa0099" SourceId="1" SourceUrl="http://10.50.7.56:8086/FriendshipService?xsd=xsd0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

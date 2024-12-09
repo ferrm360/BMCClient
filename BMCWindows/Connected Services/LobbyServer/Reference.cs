@@ -437,12 +437,12 @@ namespace BMCWindows.LobbyServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="OperationResponse", Namespace="http://schemas.datacontract.org/2004/07/Service.Results")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.LobbyServer.LobbyResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.LobbyServer.CreateLobbyRequestDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.LobbyServer.LobbyDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.LobbyServer.JoinLobbyRequestDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.LobbyServer.LobbyDTO[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(string[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.LobbyServer.LobbyResponse))]
     public partial class OperationResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]

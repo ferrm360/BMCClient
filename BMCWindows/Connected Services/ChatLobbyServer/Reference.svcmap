@@ -19,13 +19,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8096/ChatLobbyService" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://10.50.7.56:8096/ChatLobbyService" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ChatLobbyService.xsd" MetadataType="Schema" ID="baa49b36-7e23-46c9-aa72-e622e20d03bb" SourceId="1" SourceUrl="http://localhost:8096/ChatLobbyService?xsd=xsd0" />
-    <MetadataFile FileName="ChatLobbyService1.xsd" MetadataType="Schema" ID="957def24-cb5e-45ea-9592-7e30c152d5b8" SourceId="1" SourceUrl="http://localhost:8096/ChatLobbyService?xsd=xsd1" />
-    <MetadataFile FileName="ChatLobbyService.disco" MetadataType="Disco" ID="85809168-5c95-4896-bdae-fef2f93b18ac" SourceId="1" SourceUrl="http://localhost:8096/ChatLobbyService?disco" />
-    <MetadataFile FileName="ChatLobbyService.wsdl" MetadataType="Wsdl" ID="5e7569e3-4160-4e74-a636-2175bc01617b" SourceId="1" SourceUrl="http://localhost:8096/ChatLobbyService?wsdl" />
+    <MetadataFile FileName="ChatLobbyService2.xsd" MetadataType="Schema" ID="a3948c12-806a-49c2-8650-ff4c2c0a92ff" SourceId="1" SourceUrl="http://10.50.7.56:8096/ChatLobbyService?xsd=xsd1" />
+    <MetadataFile FileName="ChatLobbyService21.xsd" MetadataType="Schema" ID="554709c8-e659-48d1-97cb-d3d9d9bd1f47" SourceId="1" SourceUrl="http://10.50.7.56:8096/ChatLobbyService?xsd=xsd0" />
+    <MetadataFile FileName="ChatLobbyService1.wsdl" MetadataType="Wsdl" ID="869a8415-743a-4ca6-803d-aba26b640401" SourceId="1" SourceUrl="http://10.50.7.56:8096/ChatLobbyService?wsdl" />
+    <MetadataFile FileName="ChatLobbyService1.disco" MetadataType="Disco" ID="e40e4dba-6f29-4428-a416-d72bbf7d82d0" SourceId="1" SourceUrl="http://10.50.7.56:8096/ChatLobbyService?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

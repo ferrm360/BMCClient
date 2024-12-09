@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="iXb19UPt4o/L68XkeZ58YdRQxSksDtwlgqK7kuM6sbU=">
+<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="vQS9qYKw6YmpZf0zmOG378x9zA9Eg39WkxC7yYXp7W0=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IChatFriendService">
       <properties>
@@ -121,10 +121,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="NetTcpBinding_IChatFriendService" contract="ChatFriendServer.IChatFriendService" bindingType="netTcpBinding" address="net.tcp://localhost:8091/" bindingConfiguration="NetTcpBinding_IChatFriendService">
+    <endpoint name="NetTcpBinding_IChatFriendService" contract="ChatFriendServer.IChatFriendService" bindingType="netTcpBinding" address="net.tcp://10.50.7.56:8091/" bindingConfiguration="NetTcpBinding_IChatFriendService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://localhost:8091/</serializedValue>
+          <serializedValue>net.tcp://10.50.7.56:8091/</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
