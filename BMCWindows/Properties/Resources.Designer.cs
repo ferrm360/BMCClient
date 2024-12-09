@@ -223,6 +223,15 @@ namespace BMCWindows.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Cannot send request, you are already friends.
+        /// </summary>
+        public static string Error_AlreadyFriends {
+            get {
+                return ResourceManager.GetString("Error.AlreadyFriends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a An error occurred while trying to add the player to the game, please try again.
         /// </summary>
         public static string Error_CantAddingPlayer {

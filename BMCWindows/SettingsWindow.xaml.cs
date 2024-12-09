@@ -25,9 +25,12 @@ namespace BMCWindows
     public partial class SettingsWindow : Page
     {
         private int _maxPasswordLength = 255;
+        private ChatServer.ChatServiceClient _proxy;
+
         public SettingsWindow()
         {
             InitializeComponent();
+            _proxy = ChatServiceManager.ChatClient;
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData(); 
            

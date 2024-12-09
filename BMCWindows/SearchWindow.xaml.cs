@@ -26,9 +26,11 @@ namespace BMCWindows
     /// </summary>
     public partial class SearchWindow : Page
     {
+        private ChatServer.ChatServiceClient _proxy;
         public SearchWindow()
         {
             InitializeComponent();
+            _proxy = ChatServiceManager.ChatClient;
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData();
             LoadPlayerList(player.Username);

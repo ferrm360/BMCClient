@@ -14,6 +14,7 @@ namespace BMCWindows.GameOver
     {
         private LobbyDTO _lobby;
         private string _loser;
+        private ChatServer.ChatServiceClient _proxy;
         private string _name = UserSessionManager.getInstance().GetPlayerUserData().Username;
 
         public string PlayerImageLeft { get; set; }
@@ -25,6 +26,7 @@ namespace BMCWindows.GameOver
         {
             _lobby = lobby;
             _loser = loser;
+            _proxy = ChatServiceManager.ChatClient;
             InitializeComponent();
             this.DataContext = this;
             UpdatePlayerInfo();

@@ -50,7 +50,8 @@ namespace BMCWindows
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData();
             InstanceContext context = new InstanceContext(this);
-            _proxy = new ChatServer.ChatServiceClient(context);
+            ChatServiceManager.InitializeChatClient(context);
+            _proxy = ChatServiceManager.ChatClient;
             _proxy.RegisterUser(player.Username);
             LabelUserName.Content = player.Username;
             LoadFriendList(player.Username);
@@ -414,9 +415,12 @@ namespace BMCWindows
             {
                 currentPage.Language = System.Windows.Markup.XmlLanguage.GetLanguage(cultureInfo.Name);
             }
-            
-            
-            
+            var player = UserSessionManager.getInstance().GetPlayerUserData();
+            UserSessionManager.getInstance().LoginPlayer(player, false);
+            this.NavigationService.Navigate(new HomePage());
+
+
+
         }
     }
 

@@ -27,9 +27,11 @@ namespace BMCWindows
     /// </summary>
     public partial class ProfileWindow : Page
     {
+        private ChatServer.ChatServiceClient _proxy;
         public ProfileWindow()
         {
             InitializeComponent();
+            _proxy = ChatServiceManager.ChatClient;
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData();
             LabelUser.Content = player.Username;

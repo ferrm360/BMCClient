@@ -25,9 +25,11 @@ namespace BMCWindows
     /// </summary>
     public partial class FriendRequestsWindow : Page
     {
+        private ChatServer.ChatServiceClient _proxy;
         public FriendRequestsWindow()
         {
             InitializeComponent();
+            _proxy = ChatServiceManager.ChatClient;
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData();
             LoadFriendshipRequests(player.Username);
@@ -81,7 +83,7 @@ namespace BMCWindows
 
         private void GoBack(object sender, EventArgs e)
         {
-            this.NavigationService.GoBack();
+            this.NavigationService.Navigate(new HomePage());
         }
 
         private void AcceptFriend(object sender, EventArgs e)

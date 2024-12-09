@@ -26,10 +26,12 @@ namespace BMCWindows
         private List<AttackCard> _dogCardData {  get; set; }
         private List<AttackCard> _catCardData { get; set; }
         private List<AttackCard> _cardData { get; set; }
+        private ChatServer.ChatServiceClient _proxy;
 
         public CardWindow()
         {
             InitializeComponent();
+            _proxy = ChatServiceManager.ChatClient;
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData();
             _dogCardData = new List<AttackCard>();

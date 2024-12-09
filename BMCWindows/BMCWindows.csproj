@@ -184,6 +184,7 @@
     <Compile Include="LobbyWindow.xaml.cs">
       <DependentUpon>LobbyWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Patterns\Singleton\ChatServiceManager.cs" />
     <Compile Include="Patterns\Singleton\UserSessionManager.cs" />
     <Compile Include="PlayerProfileWindow.xaml.cs">
       <DependentUpon>PlayerProfileWindow.xaml</DependentUpon>

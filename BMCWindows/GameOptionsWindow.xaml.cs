@@ -23,11 +23,13 @@ namespace BMCWindows
     /// </summary>
     public partial class GameOptionsWindow : Page
     {
+        //private ChatServer.ChatServiceClient _proxy;
         public GameOptionsWindow()
         {
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData();
             InitializeComponent();
+            var _proxy = ChatServiceManager.ChatClient;
 
             if (UserSessionManager.getInstance().IsGuestUser())
             {
@@ -44,7 +46,7 @@ namespace BMCWindows
 
         private void Cancel(object sender, EventArgs e)
         {
-            this.NavigationService.GoBack();
+            this.NavigationService.Navigate(new HomePage());
         }
 
         private void GoToCreateLobbyWindow(object sender, EventArgs e)

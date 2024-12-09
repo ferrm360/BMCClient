@@ -672,4 +672,7 @@
   <data name="Language.ChangeLanguage" xml:space="preserve">
     <value>Change language</value>
   </data>
+  <data name="Error.AlreadyFriends" xml:space="preserve">
+    <value>Cannot send request, you are already friends</value>
+  </data>
 </root>
