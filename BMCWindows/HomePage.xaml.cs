@@ -36,6 +36,7 @@ namespace BMCWindows
         private ObservableCollection<Message> friendChatMessages { get; set; } = new ObservableCollection<Message>();
         private FriendChatCallBackHandler _friendChatCallbackHandler;
         private ObservableCollection<Score> playersScore { get; set; } = new ObservableCollection<Score>();
+        private Server.AccountServiceClient _accountProxy;
 
 
         public HomePage()
@@ -51,6 +52,7 @@ namespace BMCWindows
             player = UserSessionManager.getInstance().GetPlayerUserData();
             InstanceContext context = new InstanceContext(this);
             ChatServiceManager.InitializeChatClient(context);
+            _accountProxy = new Server.AccountServiceClient();
             _proxy = ChatServiceManager.ChatClient;
             _proxy.RegisterUser(player.Username);
             LabelUserName.Content = player.Username;
@@ -202,6 +204,8 @@ namespace BMCWindows
             UserSessionManager.getInstance().LogoutPlayer();
             this.NavigationService.Navigate(new StartPage());
             _proxy.DisconnectUser(player.Username);
+            _accountProxy.Logout(player.Username);
+
 
         }
 
