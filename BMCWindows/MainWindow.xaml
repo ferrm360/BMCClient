@@ -12,6 +12,7 @@
         WindowStyle="None"
         KeyDown="MinimizeWindow"
         Closing="CloseWindow">
+    
     <Grid>
     <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
     </Grid>

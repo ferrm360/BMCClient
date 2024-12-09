@@ -30,7 +30,7 @@ namespace BMCWindows.GuestPlayer
 
         private void LoginAsGuest(object sender, RoutedEventArgs e)
         {
-            string username = textBoxUsername.Text;
+            string username = TextBoxUsername.Text;
 
             if (string.IsNullOrWhiteSpace(username))
             {

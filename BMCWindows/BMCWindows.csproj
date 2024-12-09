@@ -877,5 +877,8 @@
   <ItemGroup>
     <Resource Include="Images\FilledTextBox.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Cursor\BMCCursos.cur" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
