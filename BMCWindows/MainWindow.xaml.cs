@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BMCWindows.Patterns.Singleton;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,13 +21,14 @@ namespace BMCWindows
     /// </summary>
     public partial class MainWindow : Window
     {
+        Server.AccountServiceClient _proxy;
         public MainWindow()
         {
             InitializeComponent();
 
             MainFrame.NavigationService.Navigate(new StartPage());
             string savedLanguage = Properties.Settings.Default.languageCode;
-
+            _proxy = new Server.AccountServiceClient();
             if (string.IsNullOrEmpty(savedLanguage))
             {
                 savedLanguage = "en-US"; 
@@ -46,9 +48,15 @@ namespace BMCWindows
             }
         }
 
-        private void CloseWindow(Object sender, EventArgs e)
-        { 
+        private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Server.PlayerDTO player = new Server.PlayerDTO();
+            player = UserSessionManager.getInstance().GetPlayerUserData();
+            Console.WriteLine(player.Username);
+            _proxy.Logout(player.Username);
+            UserSessionManager.getInstance().LogoutPlayer();
         }
+
         private void SetLanguage(string languageCode)
         {
             var cultureInfo = new System.Globalization.CultureInfo(languageCode);
