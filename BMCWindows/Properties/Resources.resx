@@ -675,4 +675,7 @@
   <data name="Error.AlreadyFriends" xml:space="preserve">
     <value>Cannot send request, you are already friends</value>
   </data>
+  <data name="Error.DatabaseError" xml:space="preserve">
+    <value>A problem occurred in the database, please try again later</value>
+  </data>
 </root>

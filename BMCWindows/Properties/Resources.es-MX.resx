@@ -675,4 +675,7 @@
   <data name="Error.AlreadyFriends" xml:space="preserve">
     <value>No se puede enviar la solicitud, ya son amigos</value>
   </data>
+  <data name="Error.DatabaseError" xml:space="preserve">
+    <value>Ocurrió un problema enn la base de datos, intente de nuevo más tarde</value>
+  </data>
 </root>

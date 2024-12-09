@@ -268,6 +268,15 @@ namespace BMCWindows.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a A problem occurred in the database, please try again later.
+        /// </summary>
+        public static string Error_DatabaseError {
+            get {
+                return ResourceManager.GetString("Error.DatabaseError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Passwords are different, check them.
         /// </summary>
         public static string Error_DifferentPassword {
