@@ -55,6 +55,8 @@ namespace BMCWindows
             Console.WriteLine(player.Username);
             _proxy.Logout(player.Username);
             UserSessionManager.getInstance().LogoutPlayer();
+        }
+
         private void SetLanguage(string languageCode)
         {
             var cultureInfo = new System.Globalization.CultureInfo(languageCode);
