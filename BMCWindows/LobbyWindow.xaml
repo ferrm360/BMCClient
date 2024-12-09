@@ -32,7 +32,7 @@
             </Grid.ColumnDefinitions>
             <Image x:Name="ImagePlayer1Background" Source="Images/GreenRectangle.png" Grid.Column="1" Grid.Row="2" Stretch="Fill"/>
             <Viewbox Grid.Column="1" Grid.Row="2" Stretch="Uniform" HorizontalAlignment="Center">
-                <StackPanel Margin="25,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Margin="25,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" >
                     <Viewbox Stretch="Uniform">
                         <TextBlock x:Name="TextBlockCurrentPlayerUsername" FontSize="20" />
                     </Viewbox>
