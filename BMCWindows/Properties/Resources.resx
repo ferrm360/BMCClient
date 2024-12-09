@@ -526,7 +526,7 @@
     <value>User</value>
   </data>
   <data name="VerificationDescription" xml:space="preserve">
-    <value>An email has been sent to [email_truncated] with a verification code. Please enter the code.</value>
+    <value>An email has been sent to you with a verification code. Please enter the code.</value>
   </data>
   <data name="ViewCardsLabelCardDescription" xml:space="preserve">
     <value>Example card</value>
@@ -656,5 +656,23 @@
   </data>
   <data name="Error.IncorrectVerificationCode" xml:space="preserve">
     <value>Incorrect verification code.</value>
+  </data>
+  <data name="Friend.ConfirmationDeleteFriends" xml:space="preserve">
+    <value>Are you sure you want to delete {0} from your friend list?</value>
+  </data>
+  <data name="Friend.DeleteFriendConfirmationTitle" xml:space="preserve">
+    <value>Delete friend</value>
+  </data>
+  <data name="Friend.DeletedFriend" xml:space="preserve">
+    <value>Friend deleted</value>
+  </data>
+  <data name="Friend.DeletionSuccess" xml:space="preserve">
+    <value>Friend has been successfully removed</value>
+  </data>
+  <data name="Language.ChangeLanguage" xml:space="preserve">
+    <value>Change language</value>
+  </data>
+  <data name="Error.AlreadyFriends" xml:space="preserve">
+    <value>Cannot send request, you are already friends</value>
   </data>
 </root>

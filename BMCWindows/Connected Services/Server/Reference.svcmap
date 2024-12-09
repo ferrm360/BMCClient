@@ -19,15 +19,15 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8080/AccountService?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://10.50.7.56:8080/AccountService?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="AccountService1.xsd" MetadataType="Schema" ID="209721d9-5830-4d2e-8f38-26a01e55e934" SourceId="1" SourceUrl="http://localhost:8080/AccountService?xsd=xsd3" />
-    <MetadataFile FileName="AccountService11.xsd" MetadataType="Schema" ID="b5af194b-a7b9-446d-9b2a-18bc583aba17" SourceId="1" SourceUrl="http://localhost:8080/AccountService?xsd=xsd2" />
-    <MetadataFile FileName="AccountService.wsdl" MetadataType="Wsdl" ID="9f4e9c62-017f-47bf-b4fa-ba6ff40e2514" SourceId="1" SourceUrl="http://localhost:8080/AccountService?wsdl" />
-    <MetadataFile FileName="AccountService.xsd" MetadataType="Schema" ID="ef6d2180-1651-41db-bb59-807d12bfc3fc" SourceId="1" SourceUrl="http://localhost:8080/AccountService?xsd=xsd4" />
-    <MetadataFile FileName="AccountService12.xsd" MetadataType="Schema" ID="375b6693-bc43-4053-840c-7045594b0dc8" SourceId="1" SourceUrl="http://localhost:8080/AccountService?xsd=xsd1" />
-    <MetadataFile FileName="AccountService13.xsd" MetadataType="Schema" ID="cf51d53e-8dd2-46ba-bd29-de8b16d2fbc2" SourceId="1" SourceUrl="http://localhost:8080/AccountService?xsd=xsd0" />
+    <MetadataFile FileName="AccountService2.xsd" MetadataType="Schema" ID="8786f0b3-5b39-4bdf-9720-24571799c4a0" SourceId="1" SourceUrl="http://10.50.7.56:8080/AccountService?xsd=xsd1" />
+    <MetadataFile FileName="AccountService21.xsd" MetadataType="Schema" ID="289d50a9-6d13-47cd-aa41-9a180a0f84bd" SourceId="1" SourceUrl="http://10.50.7.56:8080/AccountService?xsd=xsd4" />
+    <MetadataFile FileName="AccountService22.xsd" MetadataType="Schema" ID="3d80ef2e-a470-49d7-aef7-863a7e062f59" SourceId="1" SourceUrl="http://10.50.7.56:8080/AccountService?xsd=xsd2" />
+    <MetadataFile FileName="AccountService23.xsd" MetadataType="Schema" ID="6fc194e6-66d1-4a1a-90ac-26b4b3da0c00" SourceId="1" SourceUrl="http://10.50.7.56:8080/AccountService?xsd=xsd3" />
+    <MetadataFile FileName="AccountService24.xsd" MetadataType="Schema" ID="0857d0d2-b77c-4b1b-8ac9-cdfaf8e6cebf" SourceId="1" SourceUrl="http://10.50.7.56:8080/AccountService?xsd=xsd0" />
+    <MetadataFile FileName="AccountService1.wsdl" MetadataType="Wsdl" ID="01a7eb61-81cd-4730-8d19-7456f8e13e63" SourceId="1" SourceUrl="http://10.50.7.56:8080/AccountService?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

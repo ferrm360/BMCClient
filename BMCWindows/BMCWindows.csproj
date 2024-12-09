@@ -140,7 +140,9 @@
     </Compile>
     <Compile Include="DTOs\AttackCard.cs" />
     <Compile Include="DTOs\Card.cs" />
+    <Compile Include="DTOs\Friend.cs" />
     <Compile Include="DTOs\Lobby.cs" />
+    <Compile Include="DTOs\Message.cs" />
     <Compile Include="DTOs\Player.cs" />
     <Compile Include="DTOs\Score.cs" />
     <Compile Include="FriendRequestsWindow.xaml.cs">
@@ -172,6 +174,7 @@
       <DependentUpon>GuestPlayerLogin.xaml</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IPage.cs" />
+    <Compile Include="Laguage\LocalizationManager.cs" />
     <Compile Include="LobbiesWindow.xaml.cs">
       <DependentUpon>LobbiesWindow.xaml</DependentUpon>
     </Compile>
@@ -181,6 +184,7 @@
     <Compile Include="LobbyWindow.xaml.cs">
       <DependentUpon>LobbyWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Patterns\Singleton\ChatServiceManager.cs" />
     <Compile Include="Patterns\Singleton\UserSessionManager.cs" />
     <Compile Include="PlayerProfileWindow.xaml.cs">
       <DependentUpon>PlayerProfileWindow.xaml</DependentUpon>
@@ -292,7 +296,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ChatService.cs" />
     <Compile Include="HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
@@ -359,50 +362,50 @@
     <None Include="Connected Services\ChatFriendServer\BMCWindows.ChatFriendServer.OperationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ChatFriendServer\ChatFriendService.wsdl" />
-    <None Include="Connected Services\ChatFriendServer\ChatFriendService.xsd">
+    <None Include="Connected Services\ChatFriendServer\ChatFriendService1.wsdl" />
+    <None Include="Connected Services\ChatFriendServer\ChatFriendService5.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ChatFriendServer\ChatFriendService1.xsd">
+    <None Include="Connected Services\ChatFriendServer\ChatFriendService51.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ChatFriendServer\ChatFriendService2.xsd">
+    <None Include="Connected Services\ChatFriendServer\ChatFriendService52.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ChatFriendServer\ChatFriendService3.xsd">
+    <None Include="Connected Services\ChatFriendServer\ChatFriendService53.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ChatFriendServer\ChatFriendService4.xsd">
+    <None Include="Connected Services\ChatFriendServer\ChatFriendService54.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ChatLobbyServer\ChatLobbyService.wsdl" />
-    <None Include="Connected Services\ChatLobbyServer\ChatLobbyService.xsd">
+    <None Include="Connected Services\ChatLobbyServer\ChatLobbyService1.wsdl" />
+    <None Include="Connected Services\ChatLobbyServer\ChatLobbyService2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ChatLobbyServer\ChatLobbyService1.xsd">
+    <None Include="Connected Services\ChatLobbyServer\ChatLobbyService21.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ChatServer\ChatService.wsdl" />
-    <None Include="Connected Services\ChatServer\ChatService.xsd">
+    <None Include="Connected Services\ChatServer\ChatService1.wsdl" />
+    <None Include="Connected Services\ChatServer\ChatService2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ChatServer\ChatService1.xsd">
+    <None Include="Connected Services\ChatServer\ChatService21.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\EmailServer\BMCWindows.EmailServer.OperationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\EmailServer\EmailService.wsdl" />
-    <None Include="Connected Services\EmailServer\EmailService.xsd">
+    <None Include="Connected Services\EmailServer\EmailService1.wsdl" />
+    <None Include="Connected Services\EmailServer\EmailService4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\EmailServer\EmailService1.xsd">
+    <None Include="Connected Services\EmailServer\EmailService41.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\EmailServer\EmailService2.xsd">
+    <None Include="Connected Services\EmailServer\EmailService42.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\EmailServer\EmailService3.xsd">
+    <None Include="Connected Services\EmailServer\EmailService43.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\FriendServer\BMCWindows.FriendServer.FriendListResponse.datasource">
@@ -417,52 +420,52 @@
     <None Include="Connected Services\FriendServer\BMCWindows.FriendServer.PlayerProfileResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\FriendServer\FriendshipService.wsdl" />
-    <None Include="Connected Services\FriendServer\FriendshipService.xsd">
+    <None Include="Connected Services\FriendServer\FriendshipService1.wsdl" />
+    <None Include="Connected Services\FriendServer\FriendshipService5.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\FriendServer\FriendshipService1.xsd">
+    <None Include="Connected Services\FriendServer\FriendshipService51.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\FriendServer\FriendshipService2.xsd">
+    <None Include="Connected Services\FriendServer\FriendshipService52.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\FriendServer\FriendshipService3.xsd">
+    <None Include="Connected Services\FriendServer\FriendshipService53.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\FriendServer\FriendshipService4.xsd">
+    <None Include="Connected Services\FriendServer\FriendshipService54.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\GameplayServer\BMCWindows.GameplayServer.OperationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\GameplayServer\GameService.wsdl" />
-    <None Include="Connected Services\GameplayServer\GameService.xsd">
+    <None Include="Connected Services\GameplayServer\GameService1.wsdl" />
+    <None Include="Connected Services\GameplayServer\GameService5.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\GameplayServer\GameService1.xsd">
+    <None Include="Connected Services\GameplayServer\GameService51.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\GameplayServer\GameService2.xsd">
+    <None Include="Connected Services\GameplayServer\GameService52.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\GameplayServer\GameService3.xsd">
+    <None Include="Connected Services\GameplayServer\GameService53.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\GameplayServer\GameService4.xsd">
+    <None Include="Connected Services\GameplayServer\GameService54.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\GuestPlayerServer\BMCWindows.GuestPlayerServer.OperationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\GuestPlayerServer\GuestPlayerService.wsdl" />
-    <None Include="Connected Services\GuestPlayerServer\GuestPlayerService.xsd">
+    <None Include="Connected Services\GuestPlayerServer\GuestPlayerService1.wsdl" />
+    <None Include="Connected Services\GuestPlayerServer\GuestPlayerService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\GuestPlayerServer\GuestPlayerService1.xsd">
+    <None Include="Connected Services\GuestPlayerServer\GuestPlayerService31.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\GuestPlayerServer\GuestPlayerService2.xsd">
+    <None Include="Connected Services\GuestPlayerServer\GuestPlayerService32.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\LobbyServer\BMCWindows.LobbyServer.LobbyDTO.datasource">
@@ -474,45 +477,48 @@
     <None Include="Connected Services\LobbyServer\BMCWindows.LobbyServer.OperationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\LobbyServer\LobbyService.wsdl" />
-    <None Include="Connected Services\LobbyServer\LobbyService.xsd">
+    <None Include="Connected Services\LobbyServer\LobbyService1.wsdl" />
+    <None Include="Connected Services\LobbyServer\LobbyService6.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\LobbyServer\LobbyService1.xsd">
+    <None Include="Connected Services\LobbyServer\LobbyService61.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\LobbyServer\LobbyService2.xsd">
+    <None Include="Connected Services\LobbyServer\LobbyService62.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\LobbyServer\LobbyService3.xsd">
+    <None Include="Connected Services\LobbyServer\LobbyService63.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\LobbyServer\LobbyService4.xsd">
+    <None Include="Connected Services\LobbyServer\LobbyService64.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\LobbyServer\LobbyService5.xsd">
+    <None Include="Connected Services\LobbyServer\LobbyService65.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\PlayerScoreServer\BMCWindows.PlayerScoreServer.OperationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\PlayerScoreServer\BMCWindows.PlayerScoreServer.PlayerScoreListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\PlayerScoreServer\BMCWindows.PlayerScoreServer.PlayerScoresResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\PlayerScoreServer\PlayerScoresService.wsdl" />
-    <None Include="Connected Services\PlayerScoreServer\PlayerScoresService.xsd">
+    <None Include="Connected Services\PlayerScoreServer\PlayerScoresService1.wsdl" />
+    <None Include="Connected Services\PlayerScoreServer\PlayerScoresService5.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PlayerScoreServer\PlayerScoresService1.xsd">
+    <None Include="Connected Services\PlayerScoreServer\PlayerScoresService51.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PlayerScoreServer\PlayerScoresService2.xsd">
+    <None Include="Connected Services\PlayerScoreServer\PlayerScoresService52.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PlayerScoreServer\PlayerScoresService3.xsd">
+    <None Include="Connected Services\PlayerScoreServer\PlayerScoresService53.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\PlayerScoreServer\PlayerScoresService4.xsd">
+    <None Include="Connected Services\PlayerScoreServer\PlayerScoresService54.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ProfileServer\BMCWindows.ProfileServer.ImageResponse.datasource">
@@ -524,36 +530,36 @@
     <None Include="Connected Services\ProfileServer\BMCWindows.ProfileServer.ProfileResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ProfileServer\ProfileService.wsdl" />
-    <None Include="Connected Services\ProfileServer\ProfileService.xsd">
+    <None Include="Connected Services\ProfileServer\ProfileService1.wsdl" />
+    <None Include="Connected Services\ProfileServer\ProfileService5.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ProfileServer\ProfileService1.xsd">
+    <None Include="Connected Services\ProfileServer\ProfileService51.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ProfileServer\ProfileService2.xsd">
+    <None Include="Connected Services\ProfileServer\ProfileService52.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ProfileServer\ProfileService3.xsd">
+    <None Include="Connected Services\ProfileServer\ProfileService53.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ProfileServer\ProfileService4.xsd">
+    <None Include="Connected Services\ProfileServer\ProfileService54.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\Server\AccountService.wsdl" />
-    <None Include="Connected Services\Server\AccountService.xsd">
+    <None Include="Connected Services\Server\AccountService1.wsdl" />
+    <None Include="Connected Services\Server\AccountService2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\Server\AccountService1.xsd">
+    <None Include="Connected Services\Server\AccountService21.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\Server\AccountService11.xsd">
+    <None Include="Connected Services\Server\AccountService22.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\Server\AccountService12.xsd">
+    <None Include="Connected Services\Server\AccountService23.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\Server\AccountService13.xsd">
+    <None Include="Connected Services\Server\AccountService24.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\Server\BMCWindows.Server.LoginResponse.datasource">
@@ -563,7 +569,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
@@ -833,15 +839,6 @@
     <Resource Include="Images\prehispanicBackground.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ChatLobbyServer\ChatLobbyService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\GuestPlayerServer\GuestPlayerService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\PlayerScoreServer\PlayerScoresService.disco" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Background\LobbyBackground.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -870,6 +867,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\FilledTextBox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Cursor\BMCCursos.cur" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ChatLobbyServer\ChatLobbyService1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GuestPlayerServer\GuestPlayerService1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PlayerScoreServer\PlayerScoresService1.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

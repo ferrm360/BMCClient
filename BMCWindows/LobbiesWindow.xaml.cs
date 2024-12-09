@@ -28,7 +28,7 @@ namespace BMCWindows
     public partial class LobbiesWindow : Page
     {
         public ObservableCollection<LobbyDTO> gameSessions { get; set; }
-        public ObservableCollection<LobbyDTO> FilteredGameSessions { get; set; } = new ObservableCollection<LobbyDTO>();
+        public ObservableCollection<LobbyDTO> filteredGameSessions { get; set; } = new ObservableCollection<LobbyDTO>();
         private LobbyDTO _selectedLobby;
         private LobbyCallbackHandler _callbackHandler;
         private LobbyServiceClient _proxy;
@@ -40,13 +40,8 @@ namespace BMCWindows
             _callbackHandler = new LobbyCallbackHandler();
             var callbackContext = new InstanceContext(_callbackHandler);
             _proxy = new LobbyServiceClient(callbackContext);
-            publicToggleButton.Checked += ToggleButtonsChecked;
-            privateToggleButton.Checked += ToggleButtonsChecked;
             gameSessions = new ObservableCollection<LobbyDTO>();
             DataContext = this;
-            ApplyToggleStyle(publicToggleButton);
-            ApplyToggleStyle(privateToggleButton);
-           
 
            LoadLobbiesList();
         }
@@ -74,9 +69,9 @@ namespace BMCWindows
                         gameSessions.Add(lobby);
                     }
 
-                    FilterLobbies();
+                    
 
-                    listViewLobbies.ItemsSource = gameSessions;
+                    ListViewLobbies.ItemsSource = gameSessions;
                 }
                 catch (CommunicationException commEx)
             {
@@ -96,25 +91,11 @@ namespace BMCWindows
             }
         }
 
-        private void FilterLobbies()
-        {
-            FilteredGameSessions.Clear();
-            foreach (var lobby in gameSessions)
-            {
-                if (privateToggleButton.IsChecked == true && lobby.IsPrivate)
-                {
-                    FilteredGameSessions.Add(lobby);
-                }
-                else if (publicToggleButton.IsChecked == true && !lobby.IsPrivate)
-                {
-                    FilteredGameSessions.Add(lobby);
-                }
-            }
-        }
+        
 
         private void LobbyListBoxSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            _selectedLobby = (LobbyDTO)listViewLobbies.SelectedItem;
+            _selectedLobby = (LobbyDTO)ListViewLobbies.SelectedItem;
         }
 
         private void JoinLobby(object sender, RoutedEventArgs e)
@@ -129,55 +110,8 @@ namespace BMCWindows
             this.NavigationService.Navigate(new LobbyWindow(_selectedLobby, _proxy, _callbackHandler));
         }
 
-        private void ApplyToggleStyle(ToggleButton button)
-        {
-            var toggleToColorConverter = new BMCWindows.Utilities.ToggleToColorConverter();
-            var toggleToForegroundConverter = new BMCWindows.Utilities.ToggleToForegroundConverter();
-
-            var backgroundBinding = new Binding("IsChecked")
-            {
-                Source = button,
-                Converter = toggleToColorConverter
-            };
-            button.SetBinding(ToggleButton.BackgroundProperty, backgroundBinding);
-
-            var foregroundBinding = new Binding("IsChecked")
-            {
-                Source = button,
-                Converter = toggleToForegroundConverter
-            };
-            button.SetBinding(ToggleButton.ForegroundProperty, foregroundBinding);
-        }
-
-        private void ToggleButtonsChecked(object sender, RoutedEventArgs e)
-        {
-            FilteredGameSessions.Clear();
-
-            if (sender == publicToggleButton)
-            {
-                FilteredGameSessions.Clear();
-                privateToggleButton.IsChecked = false; 
-                foreach (var lobby in gameSessions)
-                {
-                    if (!lobby.IsPrivate)
-                    {
-                        FilteredGameSessions.Add(lobby);
-                    }
-                }
-            }
-            else if (sender == privateToggleButton)
-            {
-                FilteredGameSessions.Clear();
-                publicToggleButton.IsChecked = false; 
-                foreach (var lobby in gameSessions)
-                {
-                    if (lobby.IsPrivate)
-                    {
-                        FilteredGameSessions.Add(lobby);
-                    }
-                }
-            }
-        }
+        
+       
 
 
         private void Cancel(object sender, RoutedEventArgs e)

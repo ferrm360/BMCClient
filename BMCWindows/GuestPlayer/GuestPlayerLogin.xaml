@@ -41,7 +41,6 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <!-- Logo -->
             <Image Source="pack://application:,,,/Images/LogoBMC.png" Grid.Column="1" Grid.Row="0" Margin="1,20,0,0"/>
 
             <Label Content="{x:Static p:Resources.GlobalLabelUser}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1"  Foreground="#43224D" Height="22" Grid.Row="1" />
@@ -49,10 +48,10 @@
             <Grid Grid.Row="1" Grid.Column="1" Margin="0,5,0,0">
                 <Image Source="pack://application:,,,/Images/LongTextbox.png" Stretch="Uniform" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
-                <TextBox x:Name="textBoxUsername" Background="Transparent" BorderBrush="Transparent" TextAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="0,23,0,22" TextChanged="CheckLimit" MaxLength="255" Tag="255"/>
+                <TextBox x:Name="TextBoxUsername" Background="Transparent" BorderBrush="Transparent" TextAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="0,23,0,22" TextChanged="CheckLimit" MaxLength="255" Tag="255"/>
             </Grid>
 
-            <Button x:Name="buttonLoginAsGuest" Grid.Row="2" Grid.Column="1" Click="LoginAsGuest"  BorderBrush="Transparent" FocusVisualStyle="{x:Null}" Focusable="False" Margin="40,0,40,0">
+            <Button x:Name="ButtonLoginAsGuest" Grid.Row="2" Grid.Column="1" Click="LoginAsGuest"  BorderBrush="Transparent" FocusVisualStyle="{x:Null}" Focusable="False" Margin="50,10,50,10">
                 <Button.Background>
                     <ImageBrush ImageSource="/Images/BrownButton.png" />
                 </Button.Background>
@@ -63,7 +62,7 @@
                 </Button.Content>
             </Button>
 
-            <Button x:Name="buttonCancel" Grid.Row="0" Grid.Column="0" Click="Cancel" BorderBrush="Transparent" Margin="20,10,100,40" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Button x:Name="ButtonCancel" Grid.Row="0" Grid.Column="0" Click="Cancel" BorderBrush="Transparent" Margin="20,5,130,50" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <Button.Background>
                     <ImageBrush ImageSource="/Images/BrownButton.png"/>
                 </Button.Background>

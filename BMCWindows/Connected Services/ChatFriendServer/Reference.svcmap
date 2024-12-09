@@ -19,15 +19,15 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8090/ChatFriendService?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://10.50.7.56:8090/ChatFriendService?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ChatFriendService.wsdl" MetadataType="Wsdl" ID="8e08955a-8481-4181-8232-40030107da1f" SourceId="1" SourceUrl="http://localhost:8090/ChatFriendService?wsdl" />
-    <MetadataFile FileName="ChatFriendService.xsd" MetadataType="Schema" ID="0d7fb6f6-149d-48d3-8527-403611ddebdd" SourceId="1" SourceUrl="http://localhost:8090/ChatFriendService?xsd=xsd0" />
-    <MetadataFile FileName="ChatFriendService1.xsd" MetadataType="Schema" ID="02041226-8ef8-4a38-95e6-9edb14cd029c" SourceId="1" SourceUrl="http://localhost:8090/ChatFriendService?xsd=xsd1" />
-    <MetadataFile FileName="ChatFriendService2.xsd" MetadataType="Schema" ID="6c732224-2a02-443b-bcc4-06d99fd469ec" SourceId="1" SourceUrl="http://localhost:8090/ChatFriendService?xsd=xsd4" />
-    <MetadataFile FileName="ChatFriendService3.xsd" MetadataType="Schema" ID="e06e719b-9bbb-4c1f-b8e5-7c78c3b41e7a" SourceId="1" SourceUrl="http://localhost:8090/ChatFriendService?xsd=xsd2" />
-    <MetadataFile FileName="ChatFriendService4.xsd" MetadataType="Schema" ID="70aa4462-8ca0-48c1-acba-b181472259d0" SourceId="1" SourceUrl="http://localhost:8090/ChatFriendService?xsd=xsd3" />
+    <MetadataFile FileName="ChatFriendService5.xsd" MetadataType="Schema" ID="db0be21d-97b0-4cb8-984c-996db5e4a042" SourceId="1" SourceUrl="http://10.50.7.56:8090/ChatFriendService?xsd=xsd2" />
+    <MetadataFile FileName="ChatFriendService51.xsd" MetadataType="Schema" ID="90725f93-9c9d-48d9-a893-862f3023483a" SourceId="1" SourceUrl="http://10.50.7.56:8090/ChatFriendService?xsd=xsd1" />
+    <MetadataFile FileName="ChatFriendService52.xsd" MetadataType="Schema" ID="a2e0fc44-1d42-46ef-8667-6fecfa9d5bff" SourceId="1" SourceUrl="http://10.50.7.56:8090/ChatFriendService?xsd=xsd0" />
+    <MetadataFile FileName="ChatFriendService53.xsd" MetadataType="Schema" ID="414cea95-7f89-42ad-96e5-e9a8c88784d6" SourceId="1" SourceUrl="http://10.50.7.56:8090/ChatFriendService?xsd=xsd4" />
+    <MetadataFile FileName="ChatFriendService1.wsdl" MetadataType="Wsdl" ID="734b7a86-1e0f-4b89-bbcf-2865674dd645" SourceId="1" SourceUrl="http://10.50.7.56:8090/ChatFriendService?wsdl" />
+    <MetadataFile FileName="ChatFriendService54.xsd" MetadataType="Schema" ID="f628fb39-3232-49b0-af62-f9e46ab91fa2" SourceId="1" SourceUrl="http://10.50.7.56:8090/ChatFriendService?xsd=xsd3" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -17,15 +17,15 @@ namespace BMCWindows.FriendServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="OperationResponse", Namespace="http://schemas.datacontract.org/2004/07/Service.Results")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.FriendServer.FriendListResponse))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.FriendServer.FriendRequestListReponse))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.FriendServer.PlayerProfileResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.FriendServer.PlayerDTO[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.FriendServer.PlayerDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.FriendServer.FriendRequestDTO[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.FriendServer.FriendRequestDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.FriendServer.PlayerProfileDTO[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.FriendServer.PlayerProfileDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.FriendServer.FriendListResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.FriendServer.FriendRequestListReponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.FriendServer.PlayerProfileResponse))]
     public partial class OperationResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -85,253 +85,6 @@ namespace BMCWindows.FriendServer {
                 if ((this.IsSuccessField.Equals(value) != true)) {
                     this.IsSuccessField = value;
                     this.RaisePropertyChanged("IsSuccess");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="FriendListResponse", Namespace="http://schemas.datacontract.org/2004/07/Service.Utilities.Results")]
-    [System.SerializableAttribute()]
-    public partial class FriendListResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ErrorKeyField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private BMCWindows.FriendServer.PlayerDTO[] FriendsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsSuccessField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ErrorKey {
-            get {
-                return this.ErrorKeyField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ErrorKeyField, value) != true)) {
-                    this.ErrorKeyField = value;
-                    this.RaisePropertyChanged("ErrorKey");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public BMCWindows.FriendServer.PlayerDTO[] Friends {
-            get {
-                return this.FriendsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FriendsField, value) != true)) {
-                    this.FriendsField = value;
-                    this.RaisePropertyChanged("Friends");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsSuccess {
-            get {
-                return this.IsSuccessField;
-            }
-            set {
-                if ((this.IsSuccessField.Equals(value) != true)) {
-                    this.IsSuccessField = value;
-                    this.RaisePropertyChanged("IsSuccess");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="FriendRequestListReponse", Namespace="http://schemas.datacontract.org/2004/07/Service.Utilities.Results")]
-    [System.SerializableAttribute()]
-    public partial class FriendRequestListReponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ErrorKeyField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private BMCWindows.FriendServer.FriendRequestDTO[] FriendRequestsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsSuccessField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ErrorKey {
-            get {
-                return this.ErrorKeyField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ErrorKeyField, value) != true)) {
-                    this.ErrorKeyField = value;
-                    this.RaisePropertyChanged("ErrorKey");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public BMCWindows.FriendServer.FriendRequestDTO[] FriendRequests {
-            get {
-                return this.FriendRequestsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FriendRequestsField, value) != true)) {
-                    this.FriendRequestsField = value;
-                    this.RaisePropertyChanged("FriendRequests");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsSuccess {
-            get {
-                return this.IsSuccessField;
-            }
-            set {
-                if ((this.IsSuccessField.Equals(value) != true)) {
-                    this.IsSuccessField = value;
-                    this.RaisePropertyChanged("IsSuccess");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="PlayerProfileResponse", Namespace="http://schemas.datacontract.org/2004/07/Service.Utilities.Results")]
-    [System.SerializableAttribute()]
-    public partial class PlayerProfileResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ErrorKeyField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsSuccessField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private BMCWindows.FriendServer.PlayerDTO[] PlayerField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private BMCWindows.FriendServer.PlayerProfileDTO[] ProfileField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ErrorKey {
-            get {
-                return this.ErrorKeyField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ErrorKeyField, value) != true)) {
-                    this.ErrorKeyField = value;
-                    this.RaisePropertyChanged("ErrorKey");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsSuccess {
-            get {
-                return this.IsSuccessField;
-            }
-            set {
-                if ((this.IsSuccessField.Equals(value) != true)) {
-                    this.IsSuccessField = value;
-                    this.RaisePropertyChanged("IsSuccess");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public BMCWindows.FriendServer.PlayerDTO[] Player {
-            get {
-                return this.PlayerField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PlayerField, value) != true)) {
-                    this.PlayerField = value;
-                    this.RaisePropertyChanged("Player");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public BMCWindows.FriendServer.PlayerProfileDTO[] Profile {
-            get {
-                return this.ProfileField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ProfileField, value) != true)) {
-                    this.ProfileField = value;
-                    this.RaisePropertyChanged("Profile");
                 }
             }
         }
@@ -657,6 +410,253 @@ namespace BMCWindows.FriendServer {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FriendListResponse", Namespace="http://schemas.datacontract.org/2004/07/Service.Utilities.Results")]
+    [System.SerializableAttribute()]
+    public partial class FriendListResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorKeyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private BMCWindows.FriendServer.PlayerDTO[] FriendsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsSuccessField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorKey {
+            get {
+                return this.ErrorKeyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorKeyField, value) != true)) {
+                    this.ErrorKeyField = value;
+                    this.RaisePropertyChanged("ErrorKey");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public BMCWindows.FriendServer.PlayerDTO[] Friends {
+            get {
+                return this.FriendsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FriendsField, value) != true)) {
+                    this.FriendsField = value;
+                    this.RaisePropertyChanged("Friends");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsSuccess {
+            get {
+                return this.IsSuccessField;
+            }
+            set {
+                if ((this.IsSuccessField.Equals(value) != true)) {
+                    this.IsSuccessField = value;
+                    this.RaisePropertyChanged("IsSuccess");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FriendRequestListReponse", Namespace="http://schemas.datacontract.org/2004/07/Service.Utilities.Results")]
+    [System.SerializableAttribute()]
+    public partial class FriendRequestListReponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorKeyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private BMCWindows.FriendServer.FriendRequestDTO[] FriendRequestsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsSuccessField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorKey {
+            get {
+                return this.ErrorKeyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorKeyField, value) != true)) {
+                    this.ErrorKeyField = value;
+                    this.RaisePropertyChanged("ErrorKey");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public BMCWindows.FriendServer.FriendRequestDTO[] FriendRequests {
+            get {
+                return this.FriendRequestsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FriendRequestsField, value) != true)) {
+                    this.FriendRequestsField = value;
+                    this.RaisePropertyChanged("FriendRequests");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsSuccess {
+            get {
+                return this.IsSuccessField;
+            }
+            set {
+                if ((this.IsSuccessField.Equals(value) != true)) {
+                    this.IsSuccessField = value;
+                    this.RaisePropertyChanged("IsSuccess");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PlayerProfileResponse", Namespace="http://schemas.datacontract.org/2004/07/Service.Utilities.Results")]
+    [System.SerializableAttribute()]
+    public partial class PlayerProfileResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorKeyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsSuccessField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private BMCWindows.FriendServer.PlayerDTO[] PlayerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private BMCWindows.FriendServer.PlayerProfileDTO[] ProfileField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorKey {
+            get {
+                return this.ErrorKeyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorKeyField, value) != true)) {
+                    this.ErrorKeyField = value;
+                    this.RaisePropertyChanged("ErrorKey");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsSuccess {
+            get {
+                return this.IsSuccessField;
+            }
+            set {
+                if ((this.IsSuccessField.Equals(value) != true)) {
+                    this.IsSuccessField = value;
+                    this.RaisePropertyChanged("IsSuccess");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public BMCWindows.FriendServer.PlayerDTO[] Player {
+            get {
+                return this.PlayerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PlayerField, value) != true)) {
+                    this.PlayerField = value;
+                    this.RaisePropertyChanged("Player");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public BMCWindows.FriendServer.PlayerProfileDTO[] Profile {
+            get {
+                return this.ProfileField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProfileField, value) != true)) {
+                    this.ProfileField = value;
+                    this.RaisePropertyChanged("Profile");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="FriendServer.IFriendshipService")]
     public interface IFriendshipService {
@@ -702,6 +702,12 @@ namespace BMCWindows.FriendServer {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendshipService/GetPlayersListByUsername", ReplyAction="http://tempuri.org/IFriendshipService/GetPlayersListByUsernameResponse")]
         System.Threading.Tasks.Task<BMCWindows.FriendServer.PlayerProfileResponse> GetPlayersListByUsernameAsync(string playerUsername, string loggedUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendshipService/DeleteFriend", ReplyAction="http://tempuri.org/IFriendshipService/DeleteFriendResponse")]
+        BMCWindows.FriendServer.OperationResponse DeleteFriend(string currentPlayer, string friend);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendshipService/DeleteFriend", ReplyAction="http://tempuri.org/IFriendshipService/DeleteFriendResponse")]
+        System.Threading.Tasks.Task<BMCWindows.FriendServer.OperationResponse> DeleteFriendAsync(string currentPlayer, string friend);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -785,6 +791,14 @@ namespace BMCWindows.FriendServer {
         
         public System.Threading.Tasks.Task<BMCWindows.FriendServer.PlayerProfileResponse> GetPlayersListByUsernameAsync(string playerUsername, string loggedUsername) {
             return base.Channel.GetPlayersListByUsernameAsync(playerUsername, loggedUsername);
+        }
+        
+        public BMCWindows.FriendServer.OperationResponse DeleteFriend(string currentPlayer, string friend) {
+            return base.Channel.DeleteFriend(currentPlayer, friend);
+        }
+        
+        public System.Threading.Tasks.Task<BMCWindows.FriendServer.OperationResponse> DeleteFriendAsync(string currentPlayer, string friend) {
+            return base.Channel.DeleteFriendAsync(currentPlayer, friend);
         }
     }
 }

@@ -24,17 +24,17 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <TextBlock x:Name="DynamicTalkTextBlock" Text="{x:Static p:Resources.Gameplay_Play}"
+            <TextBlock x:Name="TextBlockDynamicTalk" Text="{x:Static p:Resources.Gameplay_Play}"
                 FontSize="12" FontWeight="Bold"
                 HorizontalAlignment="Center" VerticalAlignment="Top"
                 Margin="0,137,0,0" Grid.Row="1" Height="Auto" Width="Auto"
                 TextWrapping="Wrap" />
 
-            <Image x:Name="DynamicImage" Grid.Row="1" Source="pack://application:,,,/Images/Avatar_talk.png"
+            <Image x:Name="ImageDynamic" Grid.Row="1" Source="pack://application:,,,/Images/Avatar_talk.png"
                    Width="150" Height="150" Stretch="Uniform"
                    HorizontalAlignment="Center" VerticalAlignment="Top"
                    Margin="0,217,0,0" />
-            <TextBlock x:Name="DynamicTurnTextBlock" Text="{x:Static p:Resources.GameplayShifts}" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,25,0,0" Grid.Row="1" Height="Auto" Width="Auto" TextWrapping="Wrap" VerticalAlignment="Top" />
+            <TextBlock x:Name="TextBlockDynamicTurn" Text="{x:Static p:Resources.GameplayShifts}" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,25,0,0" Grid.Row="1" Height="Auto" Width="Auto" TextWrapping="Wrap" VerticalAlignment="Top" />
         </Grid>
 
         <Grid Grid.Column="1">
@@ -61,7 +61,7 @@
                                HorizontalAlignment="Center" VerticalAlignment="Center"
                                Margin="0,10" TextWrapping="Wrap" />
 
-                    <Grid x:Name="PlayerBoardGrid" Grid.Row="1" Background="Transparent"
+                    <Grid x:Name="GridPlayerBoard" Grid.Row="1" Background="Transparent"
                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
                     </Grid>
                 </Grid>
@@ -80,14 +80,14 @@
                                HorizontalAlignment="Center" VerticalAlignment="Center"
                                Margin="0,10" TextWrapping="Wrap" />
 
-                    <Grid x:Name="EnemyBoardGrid" Grid.Row="1" Background="Transparent"
+                    <Grid x:Name="GridEnemyBoard" Grid.Row="1" Background="Transparent"
                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
                     </Grid>
                 </Grid>
             </Grid>
 
             <Grid Grid.Row="1">
-                <StackPanel x:Name="stackPanelPlayerAttackCards" Orientation="Horizontal"
+                <StackPanel x:Name="StackPanelPlayerAttackCards" Orientation="Horizontal"
                             VerticalAlignment="Stretch" HorizontalAlignment="Center">
                 </StackPanel>
             </Grid>
@@ -98,7 +98,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <Button x:Name="buttonGetAttackCard" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                <Button x:Name="ButtonGetAttackCard" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
                         Margin="10" Width="100" Height="50" Click="GetRandomCard">
                     <Button.Background>
                         <ImageBrush ImageSource="/Images/CardBack.png" />

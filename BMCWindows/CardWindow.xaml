@@ -39,9 +39,9 @@
                 <RowDefinition Height="79*"/>
             </Grid.RowDefinitions>
             
-            <Grid x:Name="gridCardGames" Grid.Column="0" Grid.Row="1">
+            <Grid x:Name="GridCardGames" Grid.Column="0" Grid.Row="1">
                 <ScrollViewer Grid.Row="1" Grid.Column="1" Margin="5,25,10,0" >
-                    <ItemsControl x:Name="cardsControl" ItemsSource="{Binding cardData}">
+                    <ItemsControl x:Name="ItemsControlCardsControl" ItemsSource="{Binding cardData}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel ItemWidth="200" ItemHeight="250" Orientation="Horizontal" />

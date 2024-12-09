@@ -1,4 +1,5 @@
-﻿using BMCWindows.Patterns.Singleton;
+﻿using BMCWindows.DTOs;
+using BMCWindows.Patterns.Singleton;
 using BMCWindows.Utilities;
 using System;
 using System.Collections.Generic;
@@ -24,9 +25,11 @@ namespace BMCWindows
     /// </summary>
     public partial class FriendRequestsWindow : Page
     {
+        private ChatServer.ChatServiceClient _proxy;
         public FriendRequestsWindow()
         {
             InitializeComponent();
+            _proxy = ChatServiceManager.ChatClient;
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData();
             LoadFriendshipRequests(player.Username);
@@ -51,7 +54,7 @@ namespace BMCWindows
 
                             })
                         );
-                        RequestsList.ItemsSource = friendsList;
+                        ListBoxRequestsList.ItemsSource = friendsList;
                     }
                 }
                 else
@@ -80,7 +83,7 @@ namespace BMCWindows
 
         private void GoBack(object sender, EventArgs e)
         {
-            this.NavigationService.GoBack();
+            this.NavigationService.Navigate(new HomePage());
         }
 
         private void AcceptFriend(object sender, EventArgs e)
@@ -92,6 +95,7 @@ namespace BMCWindows
             {
                 FriendServer.FriendshipServiceClient proxy = new FriendServer.FriendshipServiceClient();
                 var result = proxy.AcceptFriendRequest(selectedPlayer.RequestId);
+                
                 if (result.IsSuccess)
                 {
                     Server.PlayerDTO player = new Server.PlayerDTO();
@@ -103,6 +107,7 @@ namespace BMCWindows
                     if( messageResult == MessageBoxResult.OK)
                     {
                         LoadFriendshipRequests(player.Username);
+                        this.NavigationService.Navigate(new FriendRequestsWindow());
                     }
                     
                 }
@@ -127,10 +132,17 @@ namespace BMCWindows
                 var result = proxy.RejectFriendResponse(selectedPlayer.RequestId);
                 if (result.IsSuccess)
                 {
+                    Server.PlayerDTO player = new Server.PlayerDTO();
+                    player = UserSessionManager.getInstance().GetPlayerUserData();
 
                     string friendMessage = Properties.Resources.Friend_DeclinedRequest.ToString();
                     string messageTitle = Properties.Resources.FriendLabelFriends.ToString();
-                    MessageBox.Show(friendMessage, messageTitle, MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBoxResult messageResult =  MessageBox.Show(friendMessage, messageTitle, MessageBoxButton.OK, MessageBoxImage.Information);
+                    if( messageResult == MessageBoxResult.OK)
+                    {
+                        LoadFriendshipRequests(player.Username);
+                        this.NavigationService.Navigate(new FriendRequestsWindow());
+                    }
 
                 }
                 else 

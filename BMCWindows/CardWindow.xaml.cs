@@ -23,18 +23,20 @@ namespace BMCWindows
     /// </summary>
     public partial class CardWindow : Page
     {
-        private List<AttackCard> dogCardData {  get; set; }
-        private List<AttackCard> catCardData { get; set; }
-        private List<AttackCard> cardData { get; set; }
+        private List<AttackCard> _dogCardData {  get; set; }
+        private List<AttackCard> _catCardData { get; set; }
+        private List<AttackCard> _cardData { get; set; }
+        private ChatServer.ChatServiceClient _proxy;
 
         public CardWindow()
         {
             InitializeComponent();
+            _proxy = ChatServiceManager.ChatClient;
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData();
-            dogCardData = new List<AttackCard>();
-            catCardData = new List<AttackCard>();
-            cardData = new List<AttackCard>();
+            _dogCardData = new List<AttackCard>();
+            _catCardData = new List<AttackCard>();
+            _cardData = new List<AttackCard>();
             LoadCards();
 
 
@@ -45,8 +47,8 @@ namespace BMCWindows
         {
             var dogList = GetDogCardList();
             var catList = GetCatCardList();    
-            cardData = dogList.Concat(catList).ToList();
-            cardsControl.ItemsSource = cardData;
+            _cardData = dogList.Concat(catList).ToList();
+            ItemsControlCardsControl.ItemsSource = _cardData;
         }
 
         private List<AttackCard> GetDogCardList()
@@ -56,14 +58,14 @@ namespace BMCWindows
 
             foreach (var card in dogCards)
             {
-                dogCardData.Add(new AttackCard
+                _dogCardData.Add(new AttackCard
                 {
                     CardImage = card.Value.CardImage,
                     Name = card.Value.Name,
                     AttackLevel = card.Value.AttackLevel,
                 });
             }
-            return dogCardData;
+            return _dogCardData;
 
         }
 
@@ -74,14 +76,14 @@ namespace BMCWindows
 
             foreach (var card in catCards)
             {
-                catCardData.Add(new AttackCard
+                _catCardData.Add(new AttackCard
                 {
                     CardImage = card.Value.CardImage,
                     Name = card.Value.Name,
                     AttackLevel = card.Value.AttackLevel,
                 });
             }
-            return catCardData;
+            return _catCardData;
 
         }
 

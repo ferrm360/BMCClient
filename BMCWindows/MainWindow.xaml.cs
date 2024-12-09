@@ -25,6 +25,15 @@ namespace BMCWindows
             InitializeComponent();
 
             MainFrame.NavigationService.Navigate(new StartPage());
+            string savedLanguage = Properties.Settings.Default.languageCode;
+
+            if (string.IsNullOrEmpty(savedLanguage))
+            {
+                savedLanguage = "en-US"; 
+            }
+
+            SetLanguage(savedLanguage);
+
         }
 
         private void MinimizeWindow(Object sender, KeyEventArgs e)
@@ -40,8 +49,20 @@ namespace BMCWindows
         private void CloseWindow(Object sender, EventArgs e)
         { 
         }
+        private void SetLanguage(string languageCode)
+        {
+            var cultureInfo = new System.Globalization.CultureInfo(languageCode);
+            System.Threading.Thread.CurrentThread.CurrentCulture = cultureInfo;
+            System.Threading.Thread.CurrentThread.CurrentUICulture = cultureInfo;
+
+            var currentPage = Application.Current.MainWindow?.Content as Page;
+            if (currentPage != null)
+            {
+                currentPage.Language = System.Windows.Markup.XmlLanguage.GetLanguage(cultureInfo.Name);
+            }
+        }
 
 
-        
+
     }
 }

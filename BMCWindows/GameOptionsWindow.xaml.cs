@@ -23,28 +23,30 @@ namespace BMCWindows
     /// </summary>
     public partial class GameOptionsWindow : Page
     {
+        //private ChatServer.ChatServiceClient _proxy;
         public GameOptionsWindow()
         {
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData();
             InitializeComponent();
+            var _proxy = ChatServiceManager.ChatClient;
 
             if (UserSessionManager.getInstance().IsGuestUser())
             {
-                buttonLogout.Visibility = Visibility.Visible;
-                buttonCancel.Visibility = Visibility.Collapsed;
+                ButtonLogout.Visibility = Visibility.Visible;
+                ButtonCancel.Visibility = Visibility.Collapsed;
             }
             else
             {
-                buttonCancel.Visibility = Visibility.Visible;
-                buttonLogout.Visibility = Visibility.Collapsed;
+                ButtonCancel.Visibility = Visibility.Visible;
+                ButtonLogout.Visibility = Visibility.Collapsed;
             }
         }
 
 
         private void Cancel(object sender, EventArgs e)
         {
-            this.NavigationService.GoBack();
+            this.NavigationService.Navigate(new HomePage());
         }
 
         private void GoToCreateLobbyWindow(object sender, EventArgs e)

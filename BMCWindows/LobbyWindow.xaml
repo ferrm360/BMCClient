@@ -30,17 +30,19 @@
                 <ColumnDefinition Width="200*"/>
                 <ColumnDefinition Width="53*"/>
             </Grid.ColumnDefinitions>
-            <Image x:Name="imagePlayer1Background" Source="Images/GreenRectangle.png" Grid.Column="1" Grid.Row="2" Stretch="Fill"/>
+            <Image x:Name="ImagePlayer1Background" Source="Images/GreenRectangle.png" Grid.Column="1" Grid.Row="2" Stretch="Fill"/>
             <Viewbox Grid.Column="1" Grid.Row="2" Stretch="Uniform" HorizontalAlignment="Center">
-                <StackPanel Margin="25,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock x:Name="textBlockCurrentPlayerUsername" FontSize="20" />
+                <StackPanel Margin="25,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <Viewbox Stretch="Uniform">
+                        <TextBlock x:Name="TextBlockCurrentPlayerUsername" FontSize="20" />
+                    </Viewbox>
 
                 </StackPanel>
             </Viewbox>
             
 
-            <Image x:Name="imagePlayer2Background" Source="Images/GreenRectangle.png" Grid.Column="3" Grid.Row="2" Stretch="Fill"/>
-            <ListView x:Name="listViewJoinedPlayer" Grid.Column="3" Grid.Row="2" ItemsSource="{Binding FilteredPlayers}" Margin="10" Background="Transparent" SelectionChanged="ListView_SelectionChanged" >
+            <Image x:Name="ImagePlayer2Background" Source="Images/GreenRectangle.png" Grid.Column="3" Grid.Row="2" Stretch="Fill"/>
+            <ListView x:Name="ListViewJoinedPlayer" Grid.Column="3" Grid.Row="2" ItemsSource="{Binding FilteredPlayers}" Margin="10" Background="Transparent" SelectionChanged="ListView_SelectionChanged" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Border Background="#D0EAB4" Margin="5" Padding="10">
@@ -54,7 +56,7 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Button x:Name="buttonStartGame" Content="{x:Static p:Resources.MatchButtonStartMatch}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="3" Margin="0,0,0,0" BorderBrush="Transparent" Click="StartGame" Padding="0,0,0,30"> 
+            <Button x:Name="ButtonStartGame" Content="{x:Static p:Resources.MatchButtonStartMatch}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="3" Margin="0,0,0,0" BorderBrush="Transparent" Click="StartGame" Padding="0,0,0,30"> 
                 <Button.Background>
                     <ImageBrush ImageSource="Images/BrownGreenButton.png"/>
                 </Button.Background>
@@ -72,13 +74,13 @@
                 <ColumnDefinition Width="422*"/>
                 <ColumnDefinition Width="225*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="buttonCancelGame" Content="{x:Static p:Resources.GloblalButtonCancel}" Grid.Column="1" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  BorderBrush="Transparent" Click="Cancel">
+            <Button x:Name="ButtonCancelGame" Content="{x:Static p:Resources.GloblalButtonCancel}" Grid.Column="1" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  BorderBrush="Transparent" Click="Cancel">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/BrownButton.png"/>
                 </Button.Background>
             </Button>
             <Viewbox Grid.Column="2" Grid.Row="0" Stretch="Uniform">
-                <Label x:Name="labelLobbyName" />
+                <Label x:Name="LabelLobbyName" />
             </Viewbox>
         </Grid>
 
@@ -93,7 +95,7 @@
                 <RowDefinition Height="31*"/>
             </Grid.RowDefinitions>
 
-            <ListBox x:Name="generalMessages" Grid.Row="1" Margin="10,2,10,10" Background="#B0D480" BorderBrush="#43224D">
+            <ListBox x:Name="ListBoxGeneralMessages" Grid.Row="1" Margin="10,2,10,10" Background="#B0D480" BorderBrush="#43224D">
                 
                 
                 <ListBox.ItemTemplate>
@@ -106,7 +108,7 @@
             </ListBox>
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,10">
-                <TextBox x:Name="textboxGeneralChat" Width="400" Margin="0,0,5,0" TextAlignment="Left">
+                <TextBox x:Name="TextboxGeneralChat" Width="400" Margin="0,0,5,0" TextAlignment="Left">
                     <TextBox.Background>
                         <ImageBrush ImageSource="Images/FilledTextbox.png"/>
                     </TextBox.Background>
@@ -130,11 +132,11 @@
                 <ColumnDefinition Width="312*"/>
                 <ColumnDefinition Width="243*"/>
             </Grid.ColumnDefinitions>
-            <Popup x:Name="passwordPopup" StaysOpen="False" Placement="Mouse" AllowsTransparency="True" PopupAnimation="Slide" Grid.Column="1" Grid.Row="1">
+            <Popup x:Name="PasswordPopup" StaysOpen="False" Placement="Mouse" AllowsTransparency="True" PopupAnimation="Slide" Grid.Column="1" Grid.Row="1">
                 <Border Background="White" BorderBrush="Gray" BorderThickness="1" Padding="10">
                     <StackPanel>
                         <Label Content="{x:Static p:Resources.LoginLaberlPassword}"/>
-                        <PasswordBox x:Name="passwordBox" Margin="0,5,0,10"/>
+                        <PasswordBox x:Name="PasswordBox" Margin="0,5,0,10"/>
                         <Button Content="{x:Static p:Resources.GlobalButtonAccept}" Click="AcceptPassword" />
                     </StackPanel>
                 </Border>
@@ -154,20 +156,20 @@
                 <ColumnDefinition Width="313*"/>
                 <ColumnDefinition Width="245*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="buttonInviteFriend" Content="{x:Static p:Resources.MatchButtonInviteFriend}" Grid.Column="2" Grid.Row="0"  BorderBrush="Transparent" Click="LoadFriends">
+            <Button x:Name="ButtonInviteFriend" Content="{x:Static p:Resources.MatchButtonInviteFriend}" Grid.Column="2" Grid.Row="0"  BorderBrush="Transparent" Click="LoadFriends">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/BrownButton.png"/>
                 </Button.Background>
             </Button>
 
-            <ListBox x:Name="FriendsList" Grid.Row="2" Grid.Column="1" Margin="10,10,10,10" Visibility="Hidden" SelectionChanged="SelectFriend" Background="#C6EDA8">
+            <ListBox x:Name="ListBoxFriendsList" Grid.Row="2" Grid.Column="1" Margin="10,10,10,10" Visibility="Hidden" SelectionChanged="SelectFriend" Background="#C6EDA8">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border Background="#DDD" Margin="2" CornerRadius="5" >
                             <StackPanel Orientation="Horizontal" Margin="5" Background="#43224D">
-                                <Image x:Name="myImageControl" Source="{Binding FriendPicture}"  Width="40" Height="40" Margin="5"/>
+                                <Image x:Name="ImageControl" Source="{Binding FriendPicture}"  Width="40" Height="40" Margin="5"/>
                                 <TextBlock Text="{Binding UserName}" VerticalAlignment="Center" FontSize="16" Margin="5" Foreground="#FEFFDB"/>
-                                <Button x:Name="buttonInvite" Width="30" Content="{x:Static p:Resources.MatchButtonInviteFriend}">
+                                <Button x:Name="ButtonInvite" Width="30" Content="{x:Static p:Resources.MatchButtonInviteFriend}">
                                     <Button.Background>
                                         <ImageBrush ImageSource="Images/BrownButton.png"/>
                                     </Button.Background>

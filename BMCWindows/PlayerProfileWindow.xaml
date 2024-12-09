@@ -49,10 +49,10 @@
                 <RowDefinition Height="131*"/>
             </Grid.RowDefinitions>
             <Viewbox Grid.Row="1" Grid.Column="2" Stretch="Uniform">
-                <Label x:Name="labelUser" Grid.Column="2" Grid.Row="1" Content="{x:Static p:Resources.GlobalLabelUser}"  FontSize="60" />
+                <Label x:Name="LabelUser" Grid.Column="2" Grid.Row="1" Content="{x:Static p:Resources.GlobalLabelUser}"  FontSize="60" />
             </Viewbox>
 
-            <ListBox x:Name="FriendsList" Grid.Column="1" Grid.Row="3" Margin="10,10,10,10" Visibility="Visible" BorderBrush="Transparent">
+            <ListBox x:Name="ListBoxFriendsList" Grid.Column="1" Grid.Row="3" Margin="10,10,10,10" Visibility="Visible" BorderBrush="Transparent">
                 <ListBox.Background>
                     <ImageBrush ImageSource="Images/GreenRectangle.png"/>
                 </ListBox.Background>
@@ -85,8 +85,8 @@
                 <RowDefinition Height="121*"/>
                 <RowDefinition Height="11*"/>
             </Grid.RowDefinitions>
-            <TextBlock x:Name="textBlockBio" Grid.Column="2" Grid.Row="3" Background="#B0D480" />
-            <Button x:Name="buttonCancel" Content="{x:Static p:Resources.GloblalButtonCancel}" Grid.Column="0" Grid.Row="0"  BorderBrush="Transparent" Click="GoBack">
+            <TextBlock x:Name="TextBlockBio" Grid.Column="2" Grid.Row="3" Background="#B0D480" />
+            <Button x:Name="ButtonCancel" Content="{x:Static p:Resources.GloblalButtonCancel}" Grid.Column="0" Grid.Row="0"  BorderBrush="Transparent" Click="GoBack">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/BrownButton.png"/>
                 </Button.Background>
@@ -116,11 +116,11 @@
                 <StackPanel  Orientation="Vertical" Width="Auto" >
 
                     <TextBlock Text="{x:Static p:Resources.PlayerWins}" Margin="5,5,5,5"/>
-                    <TextBlock x:Name="textBlockPlayerWins" />
+                    <TextBlock x:Name="TextBlockPlayerWins" HorizontalAlignment="Center"/>
                 </StackPanel>
                 <StackPanel  Orientation="Vertical" Width="Auto" Margin="5,5,5,5">
                     <TextBlock Text="{x:Static p:Resources.PlayerLosses}"/>
-                    <TextBlock x:Name="textBlockPlayerLosses"/>
+                    <TextBlock x:Name="TextBlockPlayerLosses" HorizontalAlignment="Center"/>
                 </StackPanel>
             </StackPanel>
 
@@ -156,7 +156,7 @@
                 <ColumnDefinition Width="69*"/>
                 <ColumnDefinition Width="41*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="1" Grid.Row="1" BorderBrush="Transparent" Content="{x:Static p:Resources.FriendButtonRemove}" FontSize="9" Click="DeleteFriend">
+            <Button x:Name="ButtonDeleteFriend" Grid.Column="1" Grid.Row="1" BorderBrush="Transparent" Content="{x:Static p:Resources.FriendButtonRemove}" FontSize="9" Click="DeleteFriend">
                 <Button.Background >
                     <ImageBrush ImageSource="Images/BrownButton.png"/>
                 </Button.Background>

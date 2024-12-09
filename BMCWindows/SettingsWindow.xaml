@@ -52,25 +52,22 @@
                 <RowDefinition Height="30*"/>
                 <RowDefinition Height="70*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="buttonChangePassword"  Grid.Column="4" Grid.Row="4"  BorderBrush="Transparent" Click="UpdatePassword" >
+            <Button x:Name="ButtonChangePassword"  Grid.Column="4" Grid.Row="4"  BorderBrush="Transparent" Click="UpdatePassword" >
                 <Button.Background>
                     <ImageBrush ImageSource="Images/BrownButton.png"/>
                 </Button.Background>
-                <Button.Content>
+                <Button.Content> 
                     <Viewbox Stretch="Uniform">
                         <TextBlock Text="{x:Static p:Resources.ChangePasswordLabelChange}"/>
                     </Viewbox>
                 </Button.Content>
             </Button>
 
-            <Button x:Name="buttonCancel" Content="{x:Static p:Resources.GloblalButtonCancel}" Grid.Column="6" Grid.Row="4"  BorderBrush="Transparent" Click="GoBack">
+            <Button x:Name="ButtonCancel" Content="{x:Static p:Resources.GloblalButtonCancel}" Grid.Column="6" Grid.Row="4"  BorderBrush="Transparent" Click="GoBack">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/BrownButton.png"/>
                 </Button.Background>
             </Button>
-
-
-
 
         </Grid>
 
@@ -91,25 +88,25 @@
                 <RowDefinition Height="218*"/>
             </Grid.RowDefinitions>
             <Viewbox Grid.Column="1" Grid.Row="1">
-                <Label x:Name="labelOldPassword" Content="{x:Static p:Resources.ChangePasswordLabelCurrentPassword}" />
+                <Label x:Name="LabelOldPassword" Content="{x:Static p:Resources.ChangePasswordLabelCurrentPassword}" />
             </Viewbox>
-            <PasswordBox x:Name="passwordBoxOldPassword" Grid.Column="2" Grid.Row="1" PasswordChanged="CheckPasswordLimit" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+            <PasswordBox x:Name="PasswordBoxOldPassword" Grid.Column="2" Grid.Row="1" PasswordChanged="CheckPasswordLimit" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                 <PasswordBox.Background>
                     <ImageBrush ImageSource="Images/LongTextbox.png"/>
                 </PasswordBox.Background>
             </PasswordBox>
             <Viewbox Stretch="Uniform" Grid.Column="1" Grid.Row="3">
-                <Label x:Name="labelNewPassword" Content="{x:Static p:Resources.ChangePasswordLabelNewPassword}" Grid.Column="1" Grid.Row="3"/>
+                <Label x:Name="LabelNewPassword" Content="{x:Static p:Resources.ChangePasswordLabelNewPassword}" Grid.Column="1" Grid.Row="3"/>
             </Viewbox>
-            <PasswordBox x:Name="passwordBoxPassword" Grid.Column="2" Grid.Row="3" PasswordChanged="CheckPasswordLimit" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"> 
+            <PasswordBox x:Name="PasswordBoxPassword" Grid.Column="2" Grid.Row="3" PasswordChanged="CheckPasswordLimit" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"> 
                 <PasswordBox.Background>
                     <ImageBrush ImageSource="Images/LongTextbox.png"/>
                 </PasswordBox.Background>
             </PasswordBox>
             <Viewbox Grid.Column="1" Grid.Row="5" Stretch="Uniform">
-                <Label x:Name="labelConfirmPassword" Content="{x:Static p:Resources.ChangePasswordLabelConfirmPasswrod}" Grid.Column="1" Grid.Row="5"/>
+                <Label x:Name="LabelConfirmPassword" Content="{x:Static p:Resources.ChangePasswordLabelConfirmPasswrod}" Grid.Column="1" Grid.Row="5"/>
             </Viewbox>
-            <PasswordBox x:Name="passwordBoxNewPassword" Grid.Column="2" Grid.Row="5" PasswordChanged="CheckPasswordLimit" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+            <PasswordBox x:Name="PasswordBoxNewPassword" Grid.Column="2" Grid.Row="5" PasswordChanged="CheckPasswordLimit" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                 <PasswordBox.Background>
                     <ImageBrush ImageSource="Images/LongTextbox.png"/>
                 </PasswordBox.Background>

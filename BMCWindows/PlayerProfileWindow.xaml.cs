@@ -1,4 +1,5 @@
-﻿using BMCWindows.Patterns.Singleton;
+﻿using BMCWindows.DTOs;
+using BMCWindows.Patterns.Singleton;
 using BMCWindows.Utilities;
 using System;
 using System.Collections.Generic;
@@ -26,17 +27,19 @@ namespace BMCWindows
     public partial class PlayerProfileWindow : Page
     {
         private string _username;
+        private ChatServer.ChatServiceClient _proxy;
         public PlayerProfileWindow(string username)
         {
             InitializeComponent();
             _username = username;
+            _proxy = ChatServiceManager.ChatClient;
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData();
-            labelUser.Content = _username;
+            LabelUser.Content = _username;
             LoadFriendList(_username);
             ProfileServer.ProfileServiceClient proxyProfile = new ProfileServer.ProfileServiceClient();
             string bio = proxyProfile.GetBioByUsername(_username);
-            textBlockBio.Text = bio;
+            TextBlockBio.Text = bio;
             var imageUrl = proxyProfile.GetProfileImage(_username);
             if (imageUrl.ImageData == null || imageUrl.ImageData.Length == 0)
             {
@@ -45,7 +48,7 @@ namespace BMCWindows
             }
             else
             {
-                BitmapImage image = ConvertByteArrayToImage(imageUrl.ImageData);
+                BitmapImage image = ImageConvertor.ConvertByteArrayToImage(imageUrl.ImageData);
                 if (image == null)
                 {
                     ErrorMessages errorMessages = new ErrorMessages();
@@ -89,13 +92,14 @@ namespace BMCWindows
                                 {
                                     UserName = friendPlayer.Username,
                                     FriendPicture = image,
+                                    
                                 };
 
 
 
                             })
                         );
-                        FriendsList.ItemsSource = friendsList;
+                        ListBoxFriendsList.ItemsSource = friendsList;
                         
                     }
                 }
@@ -133,8 +137,8 @@ namespace BMCWindows
                 {
                     if (response.Scores != null)
                     {
-                         textBlockPlayerWins.Text = response.Scores.Wins.ToString();
-                        textBlockPlayerLosses.Text = response.Scores.Losses.ToString();
+                        TextBlockPlayerWins.Text = response.Scores.Wins.ToString();
+                        TextBlockPlayerLosses.Text = response.Scores.Losses.ToString();
 
                     }
                 }
@@ -166,28 +170,54 @@ namespace BMCWindows
 
 
 
-        // TODO: Pasar a utilities
-        public BitmapImage ConvertByteArrayToImage(byte[] imageData)
-        {
-            if (imageData == null || imageData.Length == 0)
-                return null;
-
-            using (var ms = new MemoryStream(imageData))
-            {
-                BitmapImage image = new BitmapImage();
-                image.BeginInit();
-                image.CacheOption = BitmapCacheOption.OnLoad;
-                image.StreamSource = ms;
-                image.EndInit();
-                image.Freeze();
-                return image;
-            }
-        }
+        
 
         private void DeleteFriend(object sender, RoutedEventArgs e)
         {
             FriendServer.FriendshipServiceClient friendsProxy = new FriendServer.FriendshipServiceClient();
-            
+            Server.PlayerDTO currentPlayer = UserSessionManager.getInstance().GetPlayerUserData();
+            string confimationMessage = string.Format(Properties.Resources.Friend_ConfirmationDeleteFriends, _username);
+            string messageTitle = Properties.Resources.Friend_DeleteFriendConfirmationTitle;
+            MessageBoxResult messageBoxResult =  MessageBox.Show(confimationMessage, messageTitle, MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            if(messageBoxResult == MessageBoxResult.OK)
+            {
+                try
+                {
+                    var response = friendsProxy.DeleteFriend(currentPlayer.Username, _username);
+                    if (response.IsSuccess == true)
+                    {
+                        string messageDeletedFriendTitle = Properties.Resources.Friend_DeletedFriend;
+                        string messageDeletedFriendMessage = Properties.Resources.Friend_DeletionSuccess;
+                        MessageBoxResult messageResult = MessageBox.Show(messageDeletedFriendMessage, messageDeletedFriendTitle, MessageBoxButton.OK, MessageBoxImage.Information);
+                        if (messageBoxResult == MessageBoxResult.OK)
+                        {
+                            ButtonDeleteFriend.Visibility = Visibility.Hidden;
+                        }
+                    }
+                    else
+                    {
+                        ErrorMessages errorMessages = new ErrorMessages();
+                        errorMessages.ShowErrorMessage(response.ErrorKey);
+                    }
+                }
+                catch (CommunicationException commEx)
+                {
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.CommunicationError");
+                }
+                catch (TimeoutException timeoutEx)
+                {
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.TimeOutError");
+                }
+                catch (Exception ex)
+                {
+                    ErrorMessages errorMessages = new ErrorMessages();
+                    errorMessages.ShowErrorMessage("Error.GeneralException");
+                }
+
+            }
+
         }
 
         private void GoBack(object sender, EventArgs e)

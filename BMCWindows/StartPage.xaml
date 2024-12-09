@@ -32,12 +32,9 @@
                 <Button.Background>
                     <ImageBrush ImageSource="Images/BrownGreenButton.png" />
                 </Button.Background>
-                
-                
-
             </Button>
-            
-            
+
+
         </Grid>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -60,6 +57,34 @@
                     <TextBlock Text="{x:Static p:Resources.LogInButtonLogInAsGuest}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" Height="20" FontFamily="Press Start 2P Normal" FontSize="9" />
                 </Grid>
             </Button>
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="141*"/>
+                <ColumnDefinition Width="19*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Button x:Name="ButtonChageLanguage" Grid.Column="1" Grid.Row="1" Click="OpenContextMenu">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/BrownButton.png"/>
+                </Button.Background>
+                <Button.Content>
+                    <Viewbox Stretch="Uniform">
+                        <TextBlock Text="{x:Static p:Resources.Language_ChangeLanguage}"/>
+                    </Viewbox>
+                </Button.Content>
+                <Button.ContextMenu>
+                    <ContextMenu Placement="Top" PlacementTarget="{Binding RelativeSource={RelativeSource Self}}">
+                        <MenuItem Header="Español" Click="ChangeLanguageToSpanish" Tag="es-MX"/>
+                        <MenuItem Header="Inglés" Click="ChangeLanguageToEnglish" Tag="en-US"/>
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
+
         </Grid>
 
     </Grid>

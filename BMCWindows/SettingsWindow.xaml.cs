@@ -25,9 +25,12 @@ namespace BMCWindows
     public partial class SettingsWindow : Page
     {
         private int _maxPasswordLength = 255;
+        private ChatServer.ChatServiceClient _proxy;
+
         public SettingsWindow()
         {
             InitializeComponent();
+            _proxy = ChatServiceManager.ChatClient;
             Server.PlayerDTO player = new Server.PlayerDTO();
             player = UserSessionManager.getInstance().GetPlayerUserData(); 
            
@@ -41,9 +44,9 @@ namespace BMCWindows
            
             ProfileServer.ProfileServiceClient proxy = new ProfileServer.ProfileServiceClient();
             String username = player.Username;         
-            String password = passwordBoxOldPassword.Password;
-            String newPassword = passwordBoxNewPassword.Password;
-            String confirmPassword = passwordBoxPassword.Password;
+            String password = PasswordBoxOldPassword.Password;
+            String newPassword = PasswordBoxNewPassword.Password;
+            String confirmPassword = PasswordBoxPassword.Password;
             if(!FieldValidator.AreFieldsEmpty(password, newPassword, confirmPassword) && FieldValidator.ValidatePassword(newPassword) && newPassword == confirmPassword)
             {
                 var result = proxy.UpdatePassword(username, newPassword, password);

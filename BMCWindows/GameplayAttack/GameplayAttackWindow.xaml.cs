@@ -68,12 +68,12 @@ namespace BMCWindows.GameplayPage
                     if (_isPlayerTurn)
                     {
                         string turnText = string.Format(Properties.Resources.Info_Turn, _currentPlayer.Username);
-                        DynamicTurnTextBlock.Text = turnText;
+                        TextBlockDynamicTurn.Text = turnText;
                     }
                     else
                     {
                         string errorTurnText = Properties.Resources.Error_WaitTurn;
-                        DynamicTurnTextBlock.Text = errorTurnText;
+                        TextBlockDynamicTurn.Text = errorTurnText;
                     }
                 });
             };
@@ -108,10 +108,10 @@ namespace BMCWindows.GameplayPage
 
 
             _boardPlayerManager = new BoardPlayerManager(OnCellClickOwnBoard);
-            _boardPlayerManager.InitializePlayerBoard(PlayerBoardGrid, _playerMatrixLife);
+            _boardPlayerManager.InitializePlayerBoard(GridPlayerBoard, _playerMatrixLife);
 
             _boardEnemyManager = new BoardEnemyManager(OnCellClickEnemyBoard);
-            _boardEnemyManager.InitializeEnemyBoard(EnemyBoardGrid);
+            _boardEnemyManager.InitializeEnemyBoard(GridEnemyBoard);
 
             if (_lobby.Host == _currentPlayer.Username)
             {
@@ -157,7 +157,7 @@ namespace BMCWindows.GameplayPage
 
         private void ShowAssignedCards()
         {
-            stackPanelPlayerAttackCards.Children.Clear();
+            StackPanelPlayerAttackCards.Children.Clear();
 
             int cardIndex = 0;
             foreach (var card in CurrentPlayerDeck.Values)
@@ -216,12 +216,12 @@ namespace BMCWindows.GameplayPage
 
             newCard.Child = stackPanel;
 
-            stackPanelPlayerAttackCards.Children.Add(newCard);
+            StackPanelPlayerAttackCards.Children.Add(newCard);
         }
 
         private void RemoveCardByName(string cardName)
         {
-            var container = stackPanelPlayerAttackCards;
+            var container = StackPanelPlayerAttackCards;
 
             foreach (var item in container.Children)
             {
@@ -386,7 +386,7 @@ namespace BMCWindows.GameplayPage
             if (!_isPlayerTurn)
             {
                 string errorTurnText = Properties.Resources.Error_WaitTurn;
-                DynamicTurnTextBlock.Text = errorTurnText;
+                TextBlockDynamicTurn.Text = errorTurnText;
                 return;
             }
 
@@ -422,9 +422,9 @@ namespace BMCWindows.GameplayPage
 
                      
                      string attackMessage = Properties.Resources.AttackMade.ToString();
-                     DynamicTalkTextBlock.Text = attackMessage;
+                     TextBlockDynamicTalk.Text = attackMessage;
                      string errorTurnText = Properties.Resources.Error_WaitTurn;
-                     DynamicTurnTextBlock.Text = errorTurnText;
+                     TextBlockDynamicTurn.Text = errorTurnText;
                  });
              });
         }
@@ -434,12 +434,12 @@ namespace BMCWindows.GameplayPage
             if (_playerMatrixName[attackPosition.X, attackPosition.Y] == null)
             {
                 string missedAttack = Properties.Resources.MissedAttack;
-                DynamicTalkTextBlock.Text = missedAttack;
+                TextBlockDynamicTalk.Text = missedAttack;
 
             }
             else
             {
-                DynamicTalkTextBlock.Text = "!NO! :c";
+                TextBlockDynamicTalk.Text = "!NO! :c";
                 _playerMatrixLife[attackPosition.X, attackPosition.Y] -= 1;
 
                 var deadCell = _gameRules.CheckForDeadCell();
@@ -452,7 +452,7 @@ namespace BMCWindows.GameplayPage
 
                     if (!string.IsNullOrEmpty(deadCardData.Name))
                     {
-                        _boardPlayerManager.UpdateCellToDead(PlayerBoardGrid, attackPosition.X, attackPosition.Y, deadCardData.CardImage);
+                        _boardPlayerManager.UpdateCellToDead(GridPlayerBoard, attackPosition.X, attackPosition.Y, deadCardData.CardImage);
                     }
 
 
@@ -497,13 +497,13 @@ namespace BMCWindows.GameplayPage
             if (_currentPlayer.Username == _lobby.Host)
             {
                 string turnText = Properties.Resources.FirstTurn.ToString();
-                DynamicTurnTextBlock.Text = turnText;
+                TextBlockDynamicTurn.Text = turnText;
                 _isPlayerTurn = true;
             }
             else
             {
                 string turnText = Properties.Resources.TurnInfo.ToString();
-                DynamicTurnTextBlock.Text = turnText;
+                TextBlockDynamicTurn.Text = turnText;
                 _isPlayerTurn = false;
             }
         }
@@ -514,7 +514,7 @@ namespace BMCWindows.GameplayPage
 
             if (!string.IsNullOrEmpty(deadCardData.Name))
             {
-                _boardEnemyManager.UpdateEnemyCellToDead(EnemyBoardGrid, cellDeadDTO.X, cellDeadDTO.Y, deadCardData.CardImage);
+                _boardEnemyManager.UpdateEnemyCellToDead(GridEnemyBoard, cellDeadDTO.X, cellDeadDTO.Y, deadCardData.CardImage);
             }
         }
 

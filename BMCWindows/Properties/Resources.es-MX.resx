@@ -526,7 +526,7 @@
     <value>Usuario</value>
   </data>
   <data name="VerificationDescription" xml:space="preserve">
-    <value>Se ha enviado un correo a [correo_truncado] con un código de verificación. Introduce el código.</value>
+    <value>Se te ha enviado un correo a  con un código de verificación. Introduce el código.</value>
   </data>
   <data name="ViewCardsLabelCardDescription" xml:space="preserve">
     <value>Carta de ejemplo </value>
@@ -656,5 +656,23 @@
   </data>
   <data name="Error.IncorrectVerificationCode" xml:space="preserve">
     <value>Código de verificación incorrecto.</value>
+  </data>
+  <data name="Friend.ConfirmationDeleteFriends" xml:space="preserve">
+    <value>¿Está seguro de que desea eliminar a {0} de su lista de amigos?</value>
+  </data>
+  <data name="Friend.DeleteFriendConfirmationTitle" xml:space="preserve">
+    <value>Eliminar amigo</value>
+  </data>
+  <data name="Friend.DeletedFriend" xml:space="preserve">
+    <value>Amigo eliminado</value>
+  </data>
+  <data name="Friend.DeletionSuccess" xml:space="preserve">
+    <value>Se ha eliminado al amigo exitosamente</value>
+  </data>
+  <data name="Language.ChangeLanguage" xml:space="preserve">
+    <value>Cambiar idioma</value>
+  </data>
+  <data name="Error.AlreadyFriends" xml:space="preserve">
+    <value>No se puede enviar la solicitud, ya son amigos</value>
   </data>
 </root>

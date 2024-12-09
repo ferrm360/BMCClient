@@ -29,7 +29,7 @@
                     <ColumnDefinition Width="78*"/>
                     <ColumnDefinition Width="119*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="buttonCancel" Grid.Column="0" Grid.Row="0"  Content="{x:Static p:Resources.GloblalButtonCancel}" BorderBrush="Transparent"  Margin="10,5,0,0" Click="GoBack">
+                <Button x:Name="ButtonCancel" Grid.Column="0" Grid.Row="0"  Content="{x:Static p:Resources.GloblalButtonCancel}" BorderBrush="Transparent"  Margin="10,5,0,0" Click="GoBack">
                     <Button.Background>
                         <ImageBrush ImageSource="Images/BrownButton.png"/>
                     </Button.Background>
@@ -41,7 +41,7 @@
                     <RowDefinition Height="83*"/>
                     <RowDefinition Height="367*"/>
                 </Grid.RowDefinitions>
-                <ListBox x:Name="RequestsList" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0" Background="Transparent" Grid.Row="1">
+                <ListBox x:Name="ListBoxRequestsList" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0" Background="Transparent" Grid.Row="1">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="5" />
@@ -53,24 +53,25 @@
                                 <Border.Background>
                                     <ImageBrush ImageSource="Images/GreenRectangle.png"/>
                                 </Border.Background>
-                                <StackPanel Width="80" Height="95">
+                                <StackPanel Width="180" Height="220">
                                     <Image Source="{Binding PlayerImage}" Width="50" Height="50" HorizontalAlignment="Center" />
                                     <Viewbox Stretch="Uniform">
                                         <TextBlock Text="{Binding UserName}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Margin="5" />
                                     </Viewbox>
-
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-                                        <Button Content="{x:Static p:Resources.GlobalButtonAccept}" Width="80" Margin="5" Click="AcceptFriend">
-                                            <Button.Background>
-                                                <ImageBrush ImageSource="Images/BrownButton.png"/>
-                                            </Button.Background>
-                                        </Button>
-                                        <Button Content="{x:Static p:Resources.FriendRequestDecline}" Width="80" Margin="5" Click="RejectFriend">
-                                            <Button.Background>
-                                                <ImageBrush ImageSource="Images/BrownButton.png"/>
-                                            </Button.Background>
-                                        </Button>
-                                    </StackPanel>
+                                    <Viewbox>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                                            <Button Content="{x:Static p:Resources.GlobalButtonAccept}" Width="80" Margin="5" Click="AcceptFriend">
+                                                <Button.Background>
+                                                    <ImageBrush ImageSource="Images/BrownButton.png"/>
+                                                </Button.Background>
+                                            </Button>
+                                            <Button Content="{x:Static p:Resources.FriendRequestDecline}" Width="80" Margin="5" Click="RejectFriend">
+                                                <Button.Background>
+                                                    <ImageBrush ImageSource="Images/BrownButton.png"/>
+                                                </Button.Background>
+                                            </Button>
+                                        </StackPanel>
+                                    </Viewbox>
                                 </StackPanel>
                             </Border>
                         </DataTemplate>

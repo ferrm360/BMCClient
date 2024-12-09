@@ -106,6 +106,9 @@ namespace BMCWindows.PlayerScoreServer {
         private int PlayerIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PlayerNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int WinsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -145,6 +148,19 @@ namespace BMCWindows.PlayerScoreServer {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PlayerName {
+            get {
+                return this.PlayerNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PlayerNameField, value) != true)) {
+                    this.PlayerNameField = value;
+                    this.RaisePropertyChanged("PlayerName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int Wins {
             get {
                 return this.WinsField;
@@ -171,8 +187,10 @@ namespace BMCWindows.PlayerScoreServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="OperationResponse", Namespace="http://schemas.datacontract.org/2004/07/Service.Results")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.PlayerScoreServer.PlayerScoresResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.PlayerScoreServer.PlayerScoresDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.PlayerScoreServer.PlayerScoresDTO[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.PlayerScoreServer.PlayerScoresResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BMCWindows.PlayerScoreServer.PlayerScoreListResponse))]
     public partial class OperationResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -246,6 +264,83 @@ namespace BMCWindows.PlayerScoreServer {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PlayerScoreListResponse", Namespace="http://schemas.datacontract.org/2004/07/Service.Utilities.Results")]
+    [System.SerializableAttribute()]
+    public partial class PlayerScoreListResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorKeyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsSuccessField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private BMCWindows.PlayerScoreServer.PlayerScoresDTO[] ScoresField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorKey {
+            get {
+                return this.ErrorKeyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorKeyField, value) != true)) {
+                    this.ErrorKeyField = value;
+                    this.RaisePropertyChanged("ErrorKey");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsSuccess {
+            get {
+                return this.IsSuccessField;
+            }
+            set {
+                if ((this.IsSuccessField.Equals(value) != true)) {
+                    this.IsSuccessField = value;
+                    this.RaisePropertyChanged("IsSuccess");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public BMCWindows.PlayerScoreServer.PlayerScoresDTO[] Scores {
+            get {
+                return this.ScoresField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ScoresField, value) != true)) {
+                    this.ScoresField = value;
+                    this.RaisePropertyChanged("Scores");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PlayerScoreServer.IPlayerScoresService")]
     public interface IPlayerScoresService {
@@ -267,6 +362,12 @@ namespace BMCWindows.PlayerScoreServer {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerScoresService/IncrementLosses", ReplyAction="http://tempuri.org/IPlayerScoresService/IncrementLossesResponse")]
         System.Threading.Tasks.Task<BMCWindows.PlayerScoreServer.OperationResponse> IncrementLossesAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerScoresService/GetAllScores", ReplyAction="http://tempuri.org/IPlayerScoresService/GetAllScoresResponse")]
+        BMCWindows.PlayerScoreServer.PlayerScoreListResponse GetAllScores();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerScoresService/GetAllScores", ReplyAction="http://tempuri.org/IPlayerScoresService/GetAllScoresResponse")]
+        System.Threading.Tasks.Task<BMCWindows.PlayerScoreServer.PlayerScoreListResponse> GetAllScoresAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -318,6 +419,14 @@ namespace BMCWindows.PlayerScoreServer {
         
         public System.Threading.Tasks.Task<BMCWindows.PlayerScoreServer.OperationResponse> IncrementLossesAsync(string username) {
             return base.Channel.IncrementLossesAsync(username);
+        }
+        
+        public BMCWindows.PlayerScoreServer.PlayerScoreListResponse GetAllScores() {
+            return base.Channel.GetAllScores();
+        }
+        
+        public System.Threading.Tasks.Task<BMCWindows.PlayerScoreServer.PlayerScoreListResponse> GetAllScoresAsync() {
+            return base.Channel.GetAllScoresAsync();
         }
     }
 }

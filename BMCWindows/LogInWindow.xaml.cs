@@ -34,14 +34,14 @@ namespace BMCWindows
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+            this.NavigationService.Navigate(new StartPage());
         }
 
         private void GoToHomePage(object sender, RoutedEventArgs e)
         {
             Server.AccountServiceClient proxy = new Server.AccountServiceClient();
-            String user = textBoxUser.Text;
-            String password = passwordBoxPassword.Password.ToString();
+            String user = TextBoxUser.Text;
+            String password = PasswordBoxPassword.Password.ToString();
             
 
             if (!FieldValidator.AreFieldsEmpty(user, password))
@@ -115,11 +115,11 @@ namespace BMCWindows
         private void CheckPasswordLimit(object sender,  RoutedEventArgs e)
         {
             PasswordBox passwordBox = sender as PasswordBox;
-            string password = passwordBoxPassword.Password;
+            string password = PasswordBoxPassword.Password;
 
             if (password.Length >= _maxPasswordLength)
             {
-                passwordBoxPassword.IsEnabled = false;
+                PasswordBoxPassword.IsEnabled = false;
                 if (password.Length > _maxPasswordLength)
                 {
                     passwordBox.Password = password.Substring(0, _maxPasswordLength);
@@ -127,7 +127,7 @@ namespace BMCWindows
             }
             else
             {
-                passwordBoxPassword.IsEnabled = true;
+                PasswordBoxPassword.IsEnabled = true;
             }
         }
     }
